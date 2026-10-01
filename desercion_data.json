@@ -1,0 +1,275 @@
+{
+  "institucional": {
+    "sem_2025_1": 3.46,
+    "sem_2025_2": 4.26,
+    "sem_2026_1": 4.17,
+    "promedio_hist": 3.97,
+    "max_alcanzado": 14.3
+  },
+  "carreras": [
+    {
+      "nro": 1,
+      "facultad": "FAEDCOH",
+      "carrera": "EDUCACIÓN INICIAL",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.0,
+      "promedio_hist": 0.0,
+      "max_alcanzado": 0.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 2,
+      "facultad": "FAEDCOH",
+      "carrera": "EDUCACIÓN PRIMARIA",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 3.0,
+      "promedio_hist": 1.0,
+      "max_alcanzado": 3.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 3,
+      "facultad": "FAEDCOH",
+      "carrera": "EDUCACIÓN FISICA Y DEPORTES",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.0,
+      "promedio_hist": 0.0,
+      "max_alcanzado": 0.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 4,
+      "facultad": "FAEDCOH",
+      "carrera": "CIENCIAS DE LA COMUNICACIÓN",
+      "sem_2025_1": 9.09,
+      "sem_2025_2": 8.78,
+      "sem_2026_1": 8.18,
+      "promedio_hist": 8.68,
+      "max_alcanzado": 9.09,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 5,
+      "facultad": "FAEDCOH",
+      "carrera": "PSICOLOGÍA",
+      "sem_2025_1": 14.3,
+      "sem_2025_2": 12.8,
+      "sem_2026_1": 8.6,
+      "promedio_hist": 11.9,
+      "max_alcanzado": 14.3,
+      "riesgo": "CRÍTICO"
+    },
+    {
+      "nro": 6,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA DE SISTEMAS",
+      "sem_2025_1": 4.85,
+      "sem_2025_2": 7.25,
+      "sem_2026_1": 5.0,
+      "promedio_hist": 5.7,
+      "max_alcanzado": 7.25,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 7,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA ELECTRÓNICA",
+      "sem_2025_1": 7.46,
+      "sem_2025_2": 4.55,
+      "sem_2026_1": 6.41,
+      "promedio_hist": 6.14,
+      "max_alcanzado": 7.46,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 8,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA CIVIL",
+      "sem_2025_1": 2.43,
+      "sem_2025_2": 6.91,
+      "sem_2026_1": 10.81,
+      "promedio_hist": 6.72,
+      "max_alcanzado": 10.81,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 9,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA AGROINDUSTRIAL",
+      "sem_2025_1": 7.14,
+      "sem_2025_2": 9.08,
+      "sem_2026_1": 9.09,
+      "promedio_hist": 8.44,
+      "max_alcanzado": 9.09,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 10,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA AMBIENTAL",
+      "sem_2025_1": 3.68,
+      "sem_2025_2": 3.84,
+      "sem_2026_1": 4.02,
+      "promedio_hist": 3.85,
+      "max_alcanzado": 4.02,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 11,
+      "facultad": "FAING",
+      "carrera": "INGENIERÍA INDUSTRIAL",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 7.32,
+      "sem_2026_1": 3.17,
+      "promedio_hist": 3.5,
+      "max_alcanzado": 7.32,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 12,
+      "facultad": "FADE",
+      "carrera": "DERECHO",
+      "sem_2025_1": 5.76,
+      "sem_2025_2": 7.13,
+      "sem_2026_1": 6.13,
+      "promedio_hist": 6.34,
+      "max_alcanzado": 7.13,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 13,
+      "facultad": "FACSA",
+      "carrera": "MEDICINA",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.28,
+      "promedio_hist": 0.09,
+      "max_alcanzado": 0.28,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 14,
+      "facultad": "FACSA",
+      "carrera": "ODONTOLOGÍA",
+      "sem_2025_1": 9.8,
+      "sem_2025_2": 6.8,
+      "sem_2026_1": 6.59,
+      "promedio_hist": 7.73,
+      "max_alcanzado": 9.8,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 15,
+      "facultad": "FACSA",
+      "carrera": "TECNOLOGÍA MÉDICA TERAPIA FÍSICA",
+      "sem_2025_1": 3.0,
+      "sem_2025_2": 2.0,
+      "sem_2026_1": 2.0,
+      "promedio_hist": 2.33,
+      "max_alcanzado": 3.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 16,
+      "facultad": "FACSA",
+      "carrera": "TECNOLOGÍA MÉDICA LABORATORIO CLÍNICO",
+      "sem_2025_1": 3.0,
+      "sem_2025_2": 9.0,
+      "sem_2026_1": 3.0,
+      "promedio_hist": 5.0,
+      "max_alcanzado": 9.0,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 17,
+      "facultad": "FAU",
+      "carrera": "ARQUITECTURA",
+      "sem_2025_1": 3.4,
+      "sem_2025_2": 3.24,
+      "sem_2026_1": 4.48,
+      "promedio_hist": 3.71,
+      "max_alcanzado": 4.48,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 18,
+      "facultad": "FAU",
+      "carrera": "URBANISMO",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.0,
+      "promedio_hist": 0.0,
+      "max_alcanzado": 0.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 19,
+      "facultad": "FACEM",
+      "carrera": "INGENIERÍA COMERCIAL",
+      "sem_2025_1": 3.0,
+      "sem_2025_2": 2.0,
+      "sem_2026_1": 7.0,
+      "promedio_hist": 4.0,
+      "max_alcanzado": 7.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 20,
+      "facultad": "FACEM",
+      "carrera": "CIENCIAS CONTABLES Y FINANCIERAS",
+      "sem_2025_1": 4.5,
+      "sem_2025_2": 6.7,
+      "sem_2026_1": 6.6,
+      "promedio_hist": 5.93,
+      "max_alcanzado": 6.7,
+      "riesgo": "MEDIO"
+    },
+    {
+      "nro": 21,
+      "facultad": "FACEM",
+      "carrera": "ADMINISTRACIÓN DE EMPRESAS",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.0,
+      "promedio_hist": 0.0,
+      "max_alcanzado": 0.0,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 22,
+      "facultad": "FACEM",
+      "carrera": "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES",
+      "sem_2025_1": 0.7,
+      "sem_2025_2": 1.32,
+      "sem_2026_1": 1.0,
+      "promedio_hist": 1.01,
+      "max_alcanzado": 1.32,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 23,
+      "facultad": "FACEM",
+      "carrera": "ADMINISTRACIÓN TURÍSTICA HOTELERA",
+      "sem_2025_1": 0.93,
+      "sem_2025_2": 3.57,
+      "sem_2026_1": 4.81,
+      "promedio_hist": 3.1,
+      "max_alcanzado": 4.81,
+      "riesgo": "BAJO"
+    },
+    {
+      "nro": 24,
+      "facultad": "FACEM",
+      "carrera": "ECONOMÍA",
+      "sem_2025_1": 0.0,
+      "sem_2025_2": 0.0,
+      "sem_2026_1": 0.0,
+      "promedio_hist": 0.0,
+      "max_alcanzado": 0.0,
+      "riesgo": "BAJO"
+    }
+  ]
+}
