@@ -7689,6 +7689,22 @@
       "subidoPor": "Administrador Calidad",
       "id": "evi_1790277287095",
       "fechaSubida": "2026-09-24T19:14:47.095Z"
+    },
+    {
+      "id": "evi_1790874856501",
+      "nombre": "Evidencia",
+      "descripcion": "Evidencia del medio de verificación",
+      "indicadorId": "ind_lic_1",
+      "medioId": "mv_lic_1",
+      "semestre": "2024-II",
+      "onedriveUrl": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/EmNl0JPIRG9FoYoVPBPn9bkB06SZw9ryJqBymKcRZJ4nAw?e=1kBfz5",
+      "onedriveFileId": "EVI_1790874856501",
+      "tamano": "1.5 MB",
+      "formato": "doc",
+      "estado": "cumple",
+      "noAplica": false,
+      "subidoPor": "Administrador Calidad",
+      "fechaSubida": "2026-10-01T17:14:16.501Z"
     }
   ],
   "plan_info": {
@@ -11111,6 +11127,141 @@
           {
             "Facultad": "FACSA",
             "Programa": "Medicina Humana",
+            "Cantidad": 420
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "Odontología",
+            "Cantidad": 258
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "Terapia Física y Rehabilitación",
+            "Cantidad": 182
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "Laboratorio Clínico y Anatomía Patológica",
+            "Cantidad": 123
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "Arquitectura",
+            "Cantidad": 555
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería Agroindustrial",
+            "Cantidad": 23
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería Ambiental",
+            "Cantidad": 153
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería Civil",
+            "Cantidad": 803
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería de Sistemas",
+            "Cantidad": 340
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería Electrónica",
+            "Cantidad": 78
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "Ingeniería Industrial",
+            "Cantidad": 247
+          },
+          {
+            "Facultad": "FADE",
+            "Programa": "Derecho",
+            "Cantidad": 1521
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Ciencias de la Comunicación",
+            "Cantidad": 137
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Educación Inicial",
+            "Cantidad": 178
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Educación Primaria",
+            "Cantidad": 40
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Educación Técnica",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Educación Física y Deportes",
+            "Cantidad": 90
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "Psicología",
+            "Cantidad": 787
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Administración de Negocios Internacionales",
+            "Cantidad": 463
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Administración Turístico-Hotelera",
+            "Cantidad": 93
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Ciencias Contables y Financieras",
+            "Cantidad": 348
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Economía",
+            "Cantidad": 101
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Ingeniería Comercial",
+            "Cantidad": 306
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Administración de Empresas",
+            "Cantidad": 43
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "Ingeniería de la Producción y Administración",
+            "Cantidad": 0
+          }
+        ]
+      },
+      {
+        "semestre": "2026-II",
+        "headers": [
+          "Facultad",
+          "Programa",
+          "Cantidad"
+        ],
+        "rows": [
+          {
+            "Facultad": "FACSA",
+            "Programa": "Medicina Humana",
             "Cantidad": 408
           },
           {
@@ -11227,136 +11378,6 @@
             "Facultad": "FACEM",
             "Programa": "Administración de Empresas",
             "Cantidad": 46
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Ingeniería de la Producción y Administración",
-            "Cantidad": 0
-          }
-        ]
-      },
-      {
-        "semestre": "2026-II",
-        "rows": [
-          {
-            "Facultad": "FACSA",
-            "Programa": "Medicina Humana",
-            "Cantidad": 415
-          },
-          {
-            "Facultad": "FACSA",
-            "Programa": "Odontología",
-            "Cantidad": 245
-          },
-          {
-            "Facultad": "FACSA",
-            "Programa": "Terapia Física y Rehabilitación",
-            "Cantidad": 180
-          },
-          {
-            "Facultad": "FACSA",
-            "Programa": "Laboratorio Clínico y Anatomía Patológica",
-            "Cantidad": 122
-          },
-          {
-            "Facultad": "FAU",
-            "Programa": "Arquitectura",
-            "Cantidad": 545
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería Agroindustrial",
-            "Cantidad": 22
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería Ambiental",
-            "Cantidad": 142
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería Civil",
-            "Cantidad": 765
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería de Sistemas",
-            "Cantidad": 335
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería Electrónica",
-            "Cantidad": 76
-          },
-          {
-            "Facultad": "FAING",
-            "Programa": "Ingeniería Industrial",
-            "Cantidad": 235
-          },
-          {
-            "Facultad": "FADE",
-            "Programa": "Derecho",
-            "Cantidad": 1435
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Ciencias de la Comunicación",
-            "Cantidad": 125
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Educación Inicial",
-            "Cantidad": 165
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Educación Primaria",
-            "Cantidad": 62
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Educación Técnica",
-            "Cantidad": 0
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Educación Física y Deportes",
-            "Cantidad": 112
-          },
-          {
-            "Facultad": "FAEDCOH",
-            "Programa": "Psicología",
-            "Cantidad": 755
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Administración de Negocios Internacionales",
-            "Cantidad": 415
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Administración Turístico-Hotelera",
-            "Cantidad": 90
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Ciencias Contables y Financieras",
-            "Cantidad": 340
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Economía",
-            "Cantidad": 98
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Ingeniería Comercial",
-            "Cantidad": 298
-          },
-          {
-            "Facultad": "FACEM",
-            "Programa": "Administración de Empresas",
-            "Cantidad": 48
           },
           {
             "Facultad": "FACEM",
@@ -29692,7 +29713,7 @@
         null,
         null,
         null,
-        "PUNTAJE TOTAL OBTENIDO AL 01/10/2026: 88,12 PTS (95,78%)",
+        "PUNTAJE TOTAL OBTENIDO AL 01/10/2026: 99,86 PTS (94,65%)",
         null,
         null,
         null
@@ -29876,8 +29897,8 @@
         20262,
         "Actualizado",
         1.724,
-        14.78661538,
-        95.2991453
+        14.98553846,
+        96.58119658
       ],
       [
         null,
@@ -29901,9 +29922,9 @@
         null,
         1.724,
         null,
-        20252,
+        20261,
         "Actualizar",
-        1.591384615,
+        1.657692308,
         null,
         null
       ],
@@ -29971,9 +29992,9 @@
         null,
         1.724,
         null,
-        20252,
+        20262,
         "Actualizar",
-        1.591384615,
+        1.724,
         null,
         null
       ],
@@ -29999,11 +30020,11 @@
         null,
         1.724,
         10.344,
-        20252,
+        20262,
         "Actualizar",
-        1.591384615,
-        9.680923077,
-        93.58974359
+        1.724,
+        10.344,
+        100
       ],
       [
         null,
@@ -30013,9 +30034,9 @@
         null,
         1.724,
         null,
-        20252,
+        20262,
         "Actualizar",
-        1.591384615,
+        1.724,
         null,
         null
       ],
@@ -30027,9 +30048,9 @@
         null,
         1.724,
         null,
-        20252,
+        20262,
         "Actualizar",
-        1.591384615,
+        1.724,
         null,
         null
       ],
@@ -30041,9 +30062,9 @@
         null,
         1.724,
         null,
-        20252,
+        20262,
         "Actualizar",
-        1.591384615,
+        1.724,
         null,
         null
       ],
@@ -30055,8 +30076,8 @@
         null,
         1.724,
         null,
-        20262,
-        "Actualizado",
+        20261,
+        "Vigente",
         1.724,
         null,
         null
@@ -30068,10 +30089,10 @@
         null,
         null,
         1.724,
-        15.516,
-        20252,
-        "Actualizar",
-        1.591384615,
+        20.688,
+        20262,
+        "Actualizado",
+        1.724,
         null,
         null
       ],
@@ -30082,12 +30103,12 @@
         null,
         null,
         1.724,
-        15.516,
-        20252,
+        20.688,
+        20261,
         "Actualizar",
-        1.591384615,
-        15.11815385,
-        97.43589744
+        1.657692308,
+        20.48907692,
+        99.03846154
       ],
       [
         null,
@@ -30097,9 +30118,9 @@
         null,
         1.724,
         null,
-        20252,
+        20261,
         "Actualizar",
-        1.591384615,
+        1.657692308,
         null,
         null
       ],
@@ -30111,9 +30132,9 @@
         null,
         1.724,
         null,
-        20252,
+        20261,
         "Actualizar",
-        1.591384615,
+        1.657692308,
         null,
         null
       ],
@@ -30165,11 +30186,11 @@
         "Tipo de beca de estudio en segunda especialidad",
         null,
         null,
-        0,
+        1.724,
         null,
         0,
         "Vigente",
-        0,
+        1.724,
         null,
         null
       ],
@@ -30179,11 +30200,11 @@
         "Número de becas disponibles, por tipo de beca en Segunda Especialidad",
         null,
         null,
-        0,
+        1.724,
         null,
         0,
         "Vigente",
-        0,
+        1.724,
         null,
         null
       ],
@@ -30193,11 +30214,11 @@
         "Número de becas otorgadas, por tipo de beca en Segunda Especialidad",
         null,
         null,
-        0,
+        1.724,
         null,
         0,
         "Vigente",
-        0,
+        1.724,
         null,
         null
       ],
@@ -30236,7 +30257,7 @@
         null,
         null,
         1.724,
-        6.896,
+        8.62,
         0,
         "Vigente",
         1.724,
@@ -30250,12 +30271,12 @@
         null,
         null,
         1.724,
-        5.172,
+        8.62,
         20241,
         "Actualizar",
         1.392461538,
-        4.177384615,
-        80.76923077
+        4.31,
+        50
       ],
       [
         null,
@@ -30277,7 +30298,7 @@
         "Donaciones",
         null,
         null,
-        0,
+        1.724,
         null,
         0,
         "Actualizar",
@@ -30293,9 +30314,9 @@
         null,
         1.724,
         null,
-        20241,
+        20251,
         "Actualizar",
-        1.392461538,
+        1.525076923,
         null,
         null
       ],
@@ -30305,8 +30326,8 @@
         "Recursos de diversa fuente",
         null,
         null,
-        0,
         1.724,
+        3.448,
         0,
         "Actualizar",
         0,
@@ -30321,7 +30342,7 @@
         null,
         1.724,
         3.448,
-        20261,
+        20262,
         "Vigente",
         1.724,
         3.448,
@@ -30335,7 +30356,7 @@
         null,
         1.724,
         1.724,
-        20261,
+        20262,
         "Vigente",
         1.724,
         null,
@@ -30363,11 +30384,11 @@
         null,
         1.724,
         5.172,
-        20261,
-        "Actualizar",
-        1.657692308,
-        4.973076923,
-        96.15384615
+        20262,
+        "Actualizado",
+        1.724,
+        5.039384615,
+        97.43589744
       ],
       [
         null,
@@ -30446,7 +30467,7 @@
         null,
         null,
         1.724,
-        3.017,
+        6.896,
         20261,
         "Vigente",
         1.724,
@@ -30459,13 +30480,13 @@
         "Postulantes",
         null,
         null,
-        0.431,
         1.724,
-        20252,
-        "Actualizar",
-        0.3978461538,
-        1.591384615,
-        92.30769231
+        6.896,
+        20262,
+        "Actualizado",
+        1.724,
+        6.896,
+        100
       ],
       [
         null,
@@ -30473,11 +30494,11 @@
         "Ingresantes",
         null,
         null,
-        0.431,
+        1.724,
         null,
-        20252,
-        "Actualizar",
-        0.3978461538,
+        20262,
+        "Actualizado",
+        1.724,
         null,
         null
       ],
@@ -30487,11 +30508,11 @@
         "Matriculados",
         null,
         null,
-        0.431,
+        1.724,
         null,
-        20261,
+        20262,
         "Actualizado",
-        0.4144230769,
+        1.724,
         null,
         null
       ],
@@ -30501,11 +30522,11 @@
         "Egresados",
         null,
         null,
-        0.431,
-        9.051,
-        20251,
-        "Actualizar",
-        0.3812692308,
+        1.724,
+        10.344,
+        20261,
+        "Vigente",
+        1.724,
         null,
         null
       ],
@@ -30599,13 +30620,13 @@
         "TOTAL",
         null,
         null,
-        91.372,
-        91.372,
+        105.164,
+        105.164,
         null,
         null,
         null,
-        88.12292308,
-        95.78477078
+        99.85938462,
+        94.64840715
       ],
       [
         null,
@@ -31088,6 +31109,25 @@
         0.923076923076923,
         0.9999999999999999,
         0.957847707847708,
+        "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum",
+        null
+      ],
+      [
+        "2026-10-01 00:00:00",
+        20262,
+        "01/10/2026 (Sem. 20262)",
+        1,
+        0.9658119658119659,
+        0.9999999999999999,
+        0.9903846153846154,
+        0.5000000000000001,
+        1,
+        1,
+        0.9743589743589745,
+        0.9807692307692306,
+        1,
+        0.9999999999999999,
+        0.9464840714840715,
         "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum",
         null
       ]

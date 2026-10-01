@@ -1067,6 +1067,7 @@ class DatabaseService {
   }
 
   async getTransparencia() {
+    if (this.syncPromise) await this.syncPromise;
     const raw = localStorage.getItem("sigeca_transparencia");
     if (!raw || raw === "null" || raw === "undefined") {
       return {
@@ -1092,6 +1093,7 @@ class DatabaseService {
   }
 
   async getTransparenciaCbc() {
+    if (this.syncPromise) await this.syncPromise;
     const raw = localStorage.getItem("sigeca_transparencia_cbc");
     if (!raw || raw === "null" || raw === "undefined") {
       return {
