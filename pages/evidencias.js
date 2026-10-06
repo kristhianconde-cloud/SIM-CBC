@@ -6233,7 +6233,7 @@ const getRowCantidad = (r) => {
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">TIEMPO COMPLETO (TC)</span>
               <div style="font-size: 1.85rem; font-weight: 800; color: #38bdf8; margin-top: 0.25rem;">${j.TC} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TC_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Tiempo Parcial: <strong>${j.TP} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></strong></p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Tiempo Parcial: <strong>${j.TP} <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(6,182,212,0.08); color: #06b6d4; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(6,182,212,0.15); flex-shrink: 0;">
               <i data-lucide="clock" style="width: 26px; height: 26px;"></i>
@@ -6245,7 +6245,7 @@ const getRowCantidad = (r) => {
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">DOCTORES UPT</span>
               <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${g.Doctor} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Doctor_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Maestros: <strong>${g.Maestro} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${g.Maestro_pct}%)</span></strong></p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Maestros: <strong>${g.Maestro} <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-200);">(${g.Maestro_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(168,85,247,0.08); color: #a855f7; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(168,85,247,0.15); flex-shrink: 0;">
               <i data-lucide="award" style="width: 26px; height: 26px;"></i>
@@ -6257,7 +6257,7 @@ const getRowCantidad = (r) => {
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">NOMBRADOS UPT</span>
               <div style="font-size: 1.85rem; font-weight: 800; color: #34d399; margin-top: 0.25rem;">${elif_cond.Nombrados} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${elif_cond.Nombrados_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Contratados: <strong>${elif_cond.Contratados} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${elif_cond.Contratados_pct}%)</span></strong></p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Contratados: <strong>${elif_cond.Contratados} <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-200);">(${elif_cond.Contratados_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(16,185,129,0.08); color: #10b981; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(16,185,129,0.15); flex-shrink: 0;">
               <i data-lucide="file-check" style="width: 26px; height: 26px;"></i>
@@ -6282,7 +6282,7 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Tiempo Completo (TC)</span>
-                    <strong style="color: #38bdf8;">${j.TC} docentes (${j.TC_pct}%)</strong>
+                    <span><strong style="color: #38bdf8;">${j.TC} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TC_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${j.TC_pct}%; height: 100%; background: #38bdf8; border-radius: 6px;"></div>
@@ -6292,7 +6292,7 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Tiempo Parcial (TP)</span>
-                    <strong style="color: #ec4899;">${j.TP} docentes (${j.TP_pct}%)</strong>
+                    <span><strong style="color: #ec4899;">${j.TP} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${j.TP_pct}%; height: 100%; background: #ec4899; border-radius: 6px;"></div>
@@ -6325,14 +6325,16 @@ const getRowCantidad = (r) => {
               <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 130px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); padding: 0.85rem; border-radius: 10px; text-align: center;">
                   <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 700; text-transform: uppercase;">Masculino</span>
-                  <div style="font-size: 1.5rem; font-weight: 800; color: #3b82f6; margin-top: 2px;">${gen.Masculino}</div>
-                  <span style="font-size: 0.8rem; color: var(--text-400);">${gen.Masculino_pct}% del total</span>
+                  <div style="font-size: 1.5rem; font-weight: 800; color: #3b82f6; margin-top: 2px;">
+                    ${gen.Masculino} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${gen.Masculino_pct}%)</span>
+                  </div>
                 </div>
 
                 <div style="flex: 1; min-width: 130px; background: rgba(236,72,153,0.06); border: 1px solid rgba(236,72,153,0.15); padding: 0.85rem; border-radius: 10px; text-align: center;">
                   <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 700; text-transform: uppercase;">Femenino</span>
-                  <div style="font-size: 1.5rem; font-weight: 800; color: #ec4899; margin-top: 2px;">${gen.Femenino}</div>
-                  <span style="font-size: 0.8rem; color: var(--text-400);">${gen.Femenino_pct}% del total</span>
+                  <div style="font-size: 1.5rem; font-weight: 800; color: #ec4899; margin-top: 2px;">
+                    ${gen.Femenino} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${gen.Femenino_pct}%)</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -6352,7 +6354,7 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Grado de Doctor</span>
-                    <strong style="color: #c084fc;">${g.Doctor} docentes (${g.Doctor_pct}%)</strong>
+                    <span><strong style="color: #c084fc;">${g.Doctor} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Doctor_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${g.Doctor_pct}%; height: 100%; background: #c084fc; border-radius: 6px;"></div>
@@ -6362,7 +6364,7 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Grado de Maestro</span>
-                    <strong style="color: #06b6d4;">${g.Maestro} docentes (${g.Maestro_pct}%)</strong>
+                    <span><strong style="color: #06b6d4;">${g.Maestro} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Maestro_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${g.Maestro_pct}%; height: 100%; background: #06b6d4; border-radius: 6px;"></div>
@@ -6372,7 +6374,7 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Bachiller</span>
-                    <strong style="color: #fbbf24;">${g.Bachiller} docentes (${g.Bachiller_pct}%)</strong>
+                    <span><strong style="color: #fbbf24;">${g.Bachiller} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Bachiller_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${g.Bachiller_pct}%; height: 100%; background: #fbbf24; border-radius: 6px;"></div>
