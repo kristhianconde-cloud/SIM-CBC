@@ -6232,8 +6232,8 @@ const getRowCantidad = (r) => {
           <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">TIEMPO COMPLETO (TC)</span>
-              <div style="font-size: 1.85rem; font-weight: 800; color: #38bdf8; margin-top: 0.25rem;">${j.TC} <span style="font-size: 0.95rem; color: var(--text-300);">(${j.TC_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Tiempo Parcial: <strong>${j.TP} (${j.TP_pct}%)</strong></p>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #38bdf8; margin-top: 0.25rem;">${j.TC} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TC_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Tiempo Parcial: <strong>${j.TP} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(6,182,212,0.08); color: #06b6d4; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(6,182,212,0.15); flex-shrink: 0;">
               <i data-lucide="clock" style="width: 26px; height: 26px;"></i>
@@ -6244,8 +6244,8 @@ const getRowCantidad = (r) => {
           <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">DOCTORES UPT</span>
-              <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${g.Doctor} <span style="font-size: 0.95rem; color: var(--text-300);">(${g.Doctor_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Maestros: <strong>${g.Maestro} (${g.Maestro_pct}%)</strong></p>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${g.Doctor} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Doctor_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Maestros: <strong>${g.Maestro} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${g.Maestro_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(168,85,247,0.08); color: #a855f7; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(168,85,247,0.15); flex-shrink: 0;">
               <i data-lucide="award" style="width: 26px; height: 26px;"></i>
@@ -6256,8 +6256,8 @@ const getRowCantidad = (r) => {
           <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">NOMBRADOS UPT</span>
-              <div style="font-size: 1.85rem; font-weight: 800; color: #34d399; margin-top: 0.25rem;">${elif_cond.Nombrados} <span style="font-size: 0.95rem; color: var(--text-300);">(${elif_cond.Nombrados_pct}%)</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Contratados: <strong>${elif_cond.Contratados} (${elif_cond.Contratados_pct}%)</strong></p>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #34d399; margin-top: 0.25rem;">${elif_cond.Nombrados} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${elif_cond.Nombrados_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Contratados: <strong>${elif_cond.Contratados} <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-200);">(${elif_cond.Contratados_pct}%)</span></strong></p>
             </div>
             <div style="background-color: rgba(16,185,129,0.08); color: #10b981; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(16,185,129,0.15); flex-shrink: 0;">
               <i data-lucide="file-check" style="width: 26px; height: 26px;"></i>
@@ -6392,7 +6392,7 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO PRINCIPAL</span>
                   <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
                     ${cd.Principal.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
-                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Principal.total / totalDoc) * 100).toFixed(2)}%)</span>
+                    <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200); margin-left: 4px;">(${((cd.Principal.total / totalDoc) * 100).toFixed(2)}%)</span>
                   </div>
                 </div>
 
@@ -6400,7 +6400,7 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO ASOCIADO</span>
                   <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
                     ${cd.Asociado.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
-                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Asociado.total / totalDoc) * 100).toFixed(2)}%)</span>
+                    <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200); margin-left: 4px;">(${((cd.Asociado.total / totalDoc) * 100).toFixed(2)}%)</span>
                   </div>
                 </div>
 
@@ -6408,7 +6408,7 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO AUXILIAR</span>
                   <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
                     ${cd.Auxiliar.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
-                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Auxiliar.total / totalDoc) * 100).toFixed(2)}%)</span>
+                    <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200); margin-left: 4px;">(${((cd.Auxiliar.total / totalDoc) * 100).toFixed(2)}%)</span>
                   </div>
                 </div>
 
@@ -6416,7 +6416,7 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">CONTRATADO</span>
                   <div style="font-size: 1.35rem; font-weight: 800; color: #fbbf24; margin-top: 2px;">
                     ${cd.Contratado.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
-                    <span style="font-size: 0.98rem; font-weight: 800; color: #fcd34d; margin-left: 4px;">(${((cd.Contratado.total / totalDoc) * 100).toFixed(2)}%)</span>
+                    <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200); margin-left: 4px;">(${((cd.Contratado.total / totalDoc) * 100).toFixed(2)}%)</span>
                   </div>
                 </div>
               </div>
