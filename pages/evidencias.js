@@ -6390,22 +6390,34 @@ const getRowCantidad = (r) => {
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
                 <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO PRINCIPAL</span>
-                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Principal.total} <span style="font-size: 0.78rem; color: var(--text-300); font-weight: 600;">docentes (${((cd.Principal.total / totalDoc) * 100).toFixed(2)}%)</span></div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
+                    ${cd.Principal.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
+                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Principal.total / totalDoc) * 100).toFixed(2)}%)</span>
+                  </div>
                 </div>
 
                 <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO ASOCIADO</span>
-                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Asociado.total} <span style="font-size: 0.78rem; color: var(--text-300); font-weight: 600;">docentes (${((cd.Asociado.total / totalDoc) * 100).toFixed(2)}%)</span></div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
+                    ${cd.Asociado.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
+                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Asociado.total / totalDoc) * 100).toFixed(2)}%)</span>
+                  </div>
                 </div>
 
                 <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO AUXILIAR</span>
-                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Auxiliar.total} <span style="font-size: 0.78rem; color: var(--text-300); font-weight: 600;">docentes (${((cd.Auxiliar.total / totalDoc) * 100).toFixed(2)}%)</span></div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">
+                    ${cd.Auxiliar.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
+                    <span style="font-size: 0.98rem; font-weight: 800; color: #6ee7b7; margin-left: 4px;">(${((cd.Auxiliar.total / totalDoc) * 100).toFixed(2)}%)</span>
+                  </div>
                 </div>
 
                 <div style="background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">CONTRATADO</span>
-                  <div style="font-size: 1.2rem; font-weight: 800; color: #fbbf24;">${cd.Contratado.total} <span style="font-size: 0.78rem; color: var(--text-300); font-weight: 600;">docentes (${((cd.Contratado.total / totalDoc) * 100).toFixed(2)}%)</span></div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #fbbf24; margin-top: 2px;">
+                    ${cd.Contratado.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
+                    <span style="font-size: 0.98rem; font-weight: 800; color: #fcd34d; margin-left: 4px;">(${((cd.Contratado.total / totalDoc) * 100).toFixed(2)}%)</span>
+                  </div>
                 </div>
               </div>
             </div>
