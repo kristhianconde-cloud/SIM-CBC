@@ -29709,11 +29709,11 @@
         "SEMESTRE EVALUADO:",
         20262,
         "FECHA DE REPORTE:",
-        "2026-10-01 00:00:00",
+        "2026-10-06 00:00:00",
         null,
         null,
         null,
-        "PUNTAJE TOTAL OBTENIDO AL 01/10/2026: 99,86 PTS (94,65%)",
+        "PUNTAJE TOTAL OBTENIDO AL 06/10/2026: 99,86 PTS (94,65%)",
         null,
         null,
         null
@@ -32542,7 +32542,9 @@
       "2026-07-22 00:00:00": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
       "22/07/2026 (Sem. 20261)": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
       "20261.0": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
-      "20262.0": "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum"
+      "20262.0": "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum",
+      "2026-10-01 00:00:00": "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum",
+      "01/10/2026 (Sem. 20262)": "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum"
     }
   },
   "transparencia_cbc": {
@@ -32553,8 +32555,8 @@
         20262,
         null,
         "FECHA DE REPORTE:",
-        "2026-10-01 00:00:00",
-        "PUNTAJE TOTAL OBTENIDO AL 01/10/2026: 95,37 PTS (95,37%)",
+        "2026-10-06 00:00:00",
+        "PUNTAJE TOTAL OBTENIDO AL 06/10/2026: 96,97 PTS (96,97%)",
         null,
         null
       ],
@@ -32651,20 +32653,20 @@
         "Número de postulantes e ingresantes según modalidades de ingreso de los últimos 02 años",
         "Postulantes",
         4.167,
-        20252,
-        "Actualizar",
-        3.846461538,
-        7.692923077,
-        92.30769231
+        20262,
+        "Actualizado",
+        4.167,
+        8.334,
+        100
       ],
       [
         null,
         null,
         "Ingresantes",
         4.167,
-        20252,
-        "Actualizar",
-        3.846461538,
+        20262,
+        "Actualizado",
+        4.167,
         null,
         null
       ],
@@ -32684,11 +32686,11 @@
         "Número de estudiantes por facultad y programa de estudio",
         null,
         8.333,
-        20261,
+        20262,
         "Actualizado",
-        8.0125,
-        8.0125,
-        96.15384615
+        8.333,
+        8.333,
+        100
       ],
       [
         "INDICADOR 7",
@@ -32739,11 +32741,11 @@
         "Título de proyectos de investigación, actualización al último semestre académico",
         null,
         8.333,
-        20261,
+        20262,
         "Actualizado",
-        8.0125,
-        8.0125,
-        96.15384615
+        8.333,
+        8.333,
+        100
       ],
       [
         "INDICADOR 10",
@@ -32764,17 +32766,17 @@
         20261,
         "Actualizar",
         4.006730769,
-        7.853192308,
-        94.23076923
+        8.173730769,
+        98.07692308
       ],
       [
         null,
         null,
         "Docentes Investigadores",
         4.167,
-        20252,
-        "Actualizar",
-        3.846461538,
+        20262,
+        "Actualizado",
+        4.167,
         null,
         null
       ],
@@ -33050,8 +33052,8 @@
         null,
         null,
         null,
-        95.36681571,
-        95.3659188
+        96.96943109,
+        96.96848291
       ],
       [
         "Leyenda",
@@ -33447,6 +33449,25 @@
         0.9631410256410257,
         0.9536591880341883,
         "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss"
+      ],
+      [
+        "2026-10-01 00:00:00",
+        20262,
+        "01/10/2026 (Sem. 20262)",
+        1,
+        1,
+        1,
+        1,
+        0.8461538461538463,
+        1,
+        1,
+        0.8461538461538463,
+        1,
+        1,
+        0.9807692307692306,
+        0.9631410256410257,
+        0.9696848290598291,
+        "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss"
       ]
     ],
     "historial_semestre": [
@@ -33534,6 +33555,23 @@
         20262,
         20261,
         20231
+      ],
+      [
+        "2026-10-01 00:00:00",
+        20262,
+        "01/10/2026 (Sem. 20262)",
+        20252,
+        20261,
+        20261,
+        20262,
+        20242,
+        20262,
+        20212,
+        20242,
+        20262,
+        20262,
+        20261,
+        20231
       ]
     ],
     "informes": {
@@ -33544,7 +33582,9 @@
       "2026-08-31 00:00:00": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
       "31/08/2026 (Sem. 20262)": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
       "20261.0": "https://uptpe-my.sharepoint.com/:b:/g/personal/licencia_institucional_upt_pe/IQBTbh8AlVfISqMIPAjwHitWAeOGJU2gzYF_fIu6dwFD1bg?e=LQ3pum",
-      "20262.0": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss"
+      "20262.0": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
+      "2026-10-01 00:00:00": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss",
+      "01/10/2026 (Sem. 20262)": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCtJ5T4Lf5pQbxunaO7N57zAamdMuOOsrjux12zRdqrpVw?e=v0zgss"
     }
   },
   "tablero_indicadores": [
