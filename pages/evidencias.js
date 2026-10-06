@@ -6060,292 +6060,421 @@ const getRowCantidad = (r) => {
 
 
 
+  const DOCENTES_DATOS_GENERALES = {
+    "2024-I": {
+      semestre: "2024-I",
+      total_docentes: 518,
+      jornada: { TC: 174, TC_pct: 33.59, TP: 344, TP_pct: 66.41, total: 518 },
+      grados: { Doctor: 99, Doctor_pct: 19.11, Maestro: 403, Maestro_pct: 77.80, Bachiller: 16, Bachiller_pct: 3.09, total: 518 },
+      condicion_simple: { Nombrados: 74, Nombrados_pct: 14.29, Contratados: 444, Contratados_pct: 85.71, total: 518 },
+      condicion_detalle: {
+        Principal: { Doctor: 22, Maestro: 0, Bachiller: 0, total: 22 },
+        Asociado: { Doctor: 8, Maestro: 14, Bachiller: 0, total: 22 },
+        Auxiliar: { Doctor: 10, Maestro: 20, Bachiller: 0, total: 30 },
+        Contratado: { Doctor: 59, Maestro: 369, Bachiller: 16, total: 444 }
+      },
+      genero: { Femenino: 222, Femenino_pct: 42.86, Masculino: 296, Masculino_pct: 57.14, total: 518 },
+      grado_jornada: {
+        TC: { Doctor: 55, Maestro: 114, Bachiller: 5, total: 174 },
+        TP: { Doctor: 44, Maestro: 289, Bachiller: 11, total: 344 }
+      }
+    },
+    "2024-II": {
+      semestre: "2024-II",
+      total_docentes: 548,
+      jornada: { TC: 173, TC_pct: 31.57, TP: 375, TP_pct: 68.43, total: 548 },
+      grados: { Doctor: 98, Doctor_pct: 17.88, Maestro: 438, Maestro_pct: 79.93, Bachiller: 12, Bachiller_pct: 2.19, total: 548 },
+      condicion_simple: { Nombrados: 73, Nombrados_pct: 13.32, Contratados: 475, Contratados_pct: 86.68, total: 548 },
+      condicion_detalle: {
+        Principal: { Doctor: 22, Maestro: 0, Bachiller: 0, total: 22 },
+        Asociado: { Doctor: 9, Maestro: 14, Bachiller: 0, total: 23 },
+        Auxiliar: { Doctor: 8, Maestro: 20, Bachiller: 0, total: 28 },
+        Contratado: { Doctor: 59, Maestro: 404, Bachiller: 12, total: 475 }
+      },
+      genero: { Femenino: 220, Femenino_pct: 40.15, Masculino: 328, Masculino_pct: 59.85, total: 548 },
+      grado_jornada: {
+        TC: { Doctor: 52, Maestro: 116, Bachiller: 5, total: 173 },
+        TP: { Doctor: 46, Maestro: 322, Bachiller: 7, total: 375 }
+      }
+    },
+    "2025-I": {
+      semestre: "2025-I",
+      total_docentes: 547,
+      jornada: { TC: 168, TC_pct: 30.71, TP: 379, TP_pct: 69.29, total: 547 },
+      grados: { Doctor: 117, Doctor_pct: 21.39, Maestro: 422, Maestro_pct: 77.15, Bachiller: 8, Bachiller_pct: 1.46, total: 547 },
+      condicion_simple: { Nombrados: 78, Nombrados_pct: 14.26, Contratados: 469, Contratados_pct: 85.74, total: 547 },
+      condicion_detalle: {
+        Principal: { Doctor: 22, Maestro: 0, Bachiller: 0, total: 22 },
+        Asociado: { Doctor: 12, Maestro: 11, Bachiller: 0, total: 23 },
+        Auxiliar: { Doctor: 13, Maestro: 20, Bachiller: 0, total: 33 },
+        Contratado: { Doctor: 70, Maestro: 391, Bachiller: 8, total: 469 }
+      },
+      genero: { Femenino: 223, Femenino_pct: 40.77, Masculino: 324, Masculino_pct: 59.23, total: 547 },
+      grado_jornada: {
+        TC: { Doctor: 61, Maestro: 104, Bachiller: 3, total: 168 },
+        TP: { Doctor: 56, Maestro: 318, Bachiller: 5, total: 379 }
+      }
+    },
+    "2025-II": {
+      semestre: "2025-II",
+      total_docentes: 575,
+      jornada: { TC: 169, TC_pct: 29.39, TP: 406, TP_pct: 70.61, total: 575 },
+      grados: { Doctor: 117, Doctor_pct: 20.35, Maestro: 449, Maestro_pct: 78.09, Bachiller: 9, Bachiller_pct: 1.57, total: 575 },
+      condicion_simple: { Nombrados: 78, Nombrados_pct: 13.57, Contratados: 497, Contratados_pct: 86.43, total: 575 },
+      condicion_detalle: {
+        Principal: { Doctor: 22, Maestro: 0, Bachiller: 0, total: 22 },
+        Asociado: { Doctor: 13, Maestro: 10, Bachiller: 0, total: 23 },
+        Auxiliar: { Doctor: 13, Maestro: 20, Bachiller: 0, total: 33 },
+        Contratado: { Doctor: 69, Maestro: 419, Bachiller: 9, total: 497 }
+      },
+      genero: { Femenino: 231, Femenino_pct: 40.17, Masculino: 344, Masculino_pct: 59.83, total: 575 },
+      grado_jornada: {
+        TC: { Doctor: 61, Maestro: 105, Bachiller: 3, total: 169 },
+        TP: { Doctor: 56, Maestro: 344, Bachiller: 6, total: 406 }
+      }
+    },
+    "2026-I": {
+      semestre: "2026-I",
+      total_docentes: 551,
+      jornada: { TC: 171, TC_pct: 31.03, TP: 380, TP_pct: 68.97, total: 551 },
+      grados: { Doctor: 129, Doctor_pct: 23.41, Maestro: 413, Maestro_pct: 74.95, Bachiller: 9, Bachiller_pct: 1.63, total: 551 },
+      condicion_simple: { Nombrados: 75, Nombrados_pct: 13.61, Contratados: 476, Contratados_pct: 86.39, total: 551 },
+      condicion_detalle: {
+        Principal: { Doctor: 21, Maestro: 0, Bachiller: 0, total: 21 },
+        Asociado: { Doctor: 13, Maestro: 12, Bachiller: 0, total: 25 },
+        Auxiliar: { Doctor: 14, Maestro: 15, Bachiller: 0, total: 29 },
+        Contratado: { Doctor: 81, Maestro: 386, Bachiller: 9, total: 476 }
+      },
+      genero: { Femenino: 218, Femenino_pct: 39.56, Masculino: 333, Masculino_pct: 60.44, total: 551 },
+      grado_jornada: {
+        TC: { Doctor: 63, Maestro: 105, Bachiller: 3, total: 171 },
+        TP: { Doctor: 66, Maestro: 308, Bachiller: 6, total: 380 }
+      }
+    }
+  };
+
   const drawDocentesDashboard = (subTabContent) => {
     if (!subTabContent) return;
 
-    let rawList = estadisticasInst.docentes || [];
-    let isCorrupt = false;
-    if (rawList.length > 0 && rawList[0].rows) {
-      const sample = rawList[0].rows;
-      const uptOnly = sample.every(r => getRowFacultad(r) === "UPT" || !getRowFacultad(r));
-      if (uptOnly) isCorrupt = true;
+    if (!window._docentesSelectedSemester) {
+      window._docentesSelectedSemester = "2026-I";
     }
 
-    if (rawList.length === 0 || !rawList[0].rows || rawList[0].rows.length === 0 || isCorrupt) {
-      const seedEntry = {
-        semestre: selectedSemester || "2026-I",
-        headers: ["Facultad", "Condición Laboral", "Grado Académico", "Jornada", "Género", "Cantidad"],
-        rows: DOCENTES_SHEET_DATA.rows
-      };
-      rawList = [seedEntry];
-      estadisticasInst.docentes = rawList;
-      db.saveEstadisticasInstitucionales(estadisticasInst).catch(() => {});
-    }
+    const semKeys = ["2024-I", "2024-II", "2025-I", "2025-II", "2026-I"];
+    const activeSem = semKeys.includes(window._docentesSelectedSemester) ? window._docentesSelectedSemester : "2026-I";
+    const semData = DOCENTES_DATOS_GENERALES[activeSem] || DOCENTES_DATOS_GENERALES["2026-I"];
 
-    const semKeys = ["2026-I", "2025-II", "2025-I"];
-
-    if (!window._docentesFilters) {
-      window._docentesFilters = { semestre: selectedSemester || "2026-I", facultad: "Todos", condicion: "Todos", jornada: "Todos" };
-    }
-
-    let { semestre: activeSem, facultad: selFac, condicion: selCond, jornada: selJornada } = window._docentesFilters;
-
-    const semEntry = rawList.find(x => x.semestre === activeSem) || rawList[0];
-    let semRows = (semEntry && semEntry.rows && semEntry.rows.length > 0) ? semEntry.rows : DOCENTES_SHEET_DATA.rows;
-
-    let displayRows = semRows;
-    if (selFac !== "Todos") {
-      displayRows = displayRows.filter(r => getRowFacultad(r) === selFac);
-    }
-    if (selCond !== "Todos") {
-      displayRows = displayRows.filter(r => {
-        const c = getRowCondicion(r).toLowerCase();
-        if (selCond === "Nombrados") return c.includes("nombrad") || c.includes("principal") || c.includes("asociad") || c.includes("auxiliar");
-        if (selCond === "Contratados") return c.includes("contratad");
-        return true;
-      });
-    }
-    if (selJornada !== "Todos") {
-      displayRows = displayRows.filter(r => {
-        const j = getRowJornada(r).toLowerCase();
-        if (selJornada === "Tiempo Completo") return j.includes("completo") || j === "tc";
-        if (selJornada === "Tiempo Parcial") return j.includes("parcial") || j === "tp";
-        return true;
-      });
-    }
-
-    const totalCount = displayRows.reduce((sum, r) => sum + getRowCantidad(r), 0);
-
-    let totalNombrados = 0;
-    let totalContratados = 0;
-    let totalDoctores = 0;
-    let totalMaestros = 0;
-    let totalBachilleres = 0;
-    let totalTC = 0;
-    let totalTP = 0;
-
-    displayRows.forEach(r => {
-      const qty = getRowCantidad(r);
-      const cond = getRowCondicion(r).toLowerCase();
-      const grad = getRowGrado(r).toLowerCase();
-      const jorn = getRowJornada(r).toLowerCase();
-
-      if (cond.includes("nombrad") || cond.includes("principal") || cond.includes("asociad") || cond.includes("auxiliar")) {
-        totalNombrados += qty;
-      } else {
-        totalContratados += qty;
-      }
-
-      if (grad.includes("doctor")) totalDoctores += qty;
-      else if (grad.includes("maestro")) totalMaestros += qty;
-      else if (grad.includes("bachiller")) totalBachilleres += qty;
-
-      if (jorn.includes("completo") || jorn === "tc") totalTC += qty;
-      else if (jorn.includes("parcial") || jorn === "tp") totalTP += qty;
-    });
-
-    if (!window._docentesActiveChartView) window._docentesActiveChartView = "facultades";
-    const chartView = window._docentesActiveChartView;
-
-    let chartData = [];
-    let chartTitle = "";
-
-    if (chartView === "facultades") {
-      const facMap = {};
-      const allFacs = ["FAEDCOH", "FACEM", "FADE", "FACSA", "FAING", "FAU"];
-      allFacs.forEach(f => facMap[f] = 0);
-
-      displayRows.forEach(r => {
-        const f = getRowFacultad(r);
-        if (f && facMap.hasOwnProperty(f)) {
-          facMap[f] += getRowCantidad(r);
-        } else if (f) {
-          facMap[f] = (facMap[f] || 0) + getRowCantidad(r);
-        }
-      });
-
-      const colors = ["var(--accent)", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
-      chartData = Object.keys(facMap).map((fac, idx) => ({
-        label: fac,
-        value: facMap[fac],
-        color: colors[idx % colors.length]
-      })).sort((a, b) => b.value - a.value);
-      chartTitle = `Docentes Universitarios por Facultad (${activeSem})`;
-    } else if (chartView === "condicion") {
-      chartData = [
-        { label: "Nombrados", value: totalNombrados, color: "#10b981" },
-        { label: "Contratados", value: totalContratados, color: "#3b82f6" }
-      ];
-      chartTitle = `Docentes por Condición Laboral (${activeSem})`;
-    } else if (chartView === "grado") {
-      chartData = [
-        { label: "Doctor", value: totalDoctores, color: "#8b5cf6" },
-        { label: "Maestro", value: totalMaestros, color: "#06b6d4" },
-        { label: "Bachiller", value: totalBachilleres, color: "#f59e0b" }
-      ];
-      chartTitle = `Docentes por Grado Académico (${activeSem})`;
-    } else if (chartView === "jornada") {
-      chartData = [
-        { label: "Tiempo Completo (TC)", value: totalTC, color: "#3b82f6" },
-        { label: "Tiempo Parcial (TP)", value: totalTP, color: "#ec4899" }
-      ];
-      chartTitle = `Docentes por Jornada Laboral (${activeSem})`;
-    } else if (chartView === "genero") {
-      let masc = 0, fem = 0;
-      displayRows.forEach(r => {
-        const g = (r.Género || r.genero || "").toLowerCase();
-        const q = getRowCantidad(r);
-        if (g.includes("masc")) masc += q;
-        else if (g.includes("fem")) fem += q;
-      });
-      chartData = [
-        { label: "Masculino", value: masc || 296, color: "#3b82f6" },
-        { label: "Femenino", value: fem || 222, color: "#ec4899" }
-      ];
-      chartTitle = `Paridad de Género de Docentes (${activeSem})`;
-    }
+    const totalDoc = semData.total_docentes;
+    const j = semData.jornada;
+    const g = semData.grados;
+    const elif_cond = semData.condicion_simple;
+    const cd = semData.condicion_detalle;
+    const gen = semData.genero;
+    const gj = semData.grado_jornada;
 
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
-        <!-- Filtros Superiores -->
-        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-          <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <!-- Barra Superior: Selección de Semestre Académico -->
+        <div class="card" style="padding: 1rem 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 0.88rem; color: var(--text-300); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="calendar" style="width: 18px; height: 18px; color: var(--accent-light);"></i>
+              SEMESTRE ACADÉMICO:
+            </span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="semestre-docentes-btn-group">
+              ${semKeys.map(s => `
+                <button class="btn btn-docentes-sem-btn" data-sem="${s}" style="padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; ${s === activeSem ? 'background: var(--accent); color: #ffffff; border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(59,130,246,0.3);' : 'background: rgba(255,255,255,0.05); color: var(--text-300); border: 1px solid var(--border-color);'}">
+                  ${s}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-400);">
+            <i data-lucide="check-circle-2" style="width: 16px; height: 16px; color: #10b981;"></i>
+            <span>Fuente: Google Sheets Institucional UPT</span>
+          </div>
+        </div>
+
+        <!-- Encabezado del Dashboard: DATOS GENERALES UPT -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin: 0; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="building-2" style="color: var(--accent-light); width: 26px; height: 26px;"></i>
+              <span>DATOS GENERALES UPT - DOCENTES UNIVERSITARIOS</span>
+            </h3>
+            <p style="color: var(--text-300); font-size: 0.85rem; margin: 4px 0 0 0;">
+              Consolidado estadístico institucional de la Universidad Privada de Tacna (${activeSem})
+            </p>
+          </div>
+          <div class="db-status-badge" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #38bdf8; padding: 0.4rem 0.9rem; font-weight: 700;">
+            Semestre Evaluado: ${activeSem}
+          </div>
+        </div>
+
+        <!-- 4 Tarjetas KPI Principales de Datos Generales -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+          
+          <!-- KPI 1: Total Docentes -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">TOTAL DOCENTES UPT</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #ffffff; margin-top: 0.25rem;">${totalDoc.toLocaleString()}</div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Total general institucionales</p>
+            </div>
+            <div style="background-color: rgba(59,130,246,0.08); color: var(--accent-light); padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(59,130,246,0.15); flex-shrink: 0;">
+              <i data-lucide="users" style="width: 26px; height: 26px;"></i>
+            </div>
+          </div>
+
+          <!-- KPI 2: Jornada Laboral -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">TIEMPO COMPLETO (TC)</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #38bdf8; margin-top: 0.25rem;">${j.TC} <span style="font-size: 0.95rem; color: var(--text-300);">(${j.TC_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Tiempo Parcial: <strong>${j.TP} (${j.TP_pct}%)</strong></p>
+            </div>
+            <div style="background-color: rgba(6,182,212,0.08); color: #06b6d4; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(6,182,212,0.15); flex-shrink: 0;">
+              <i data-lucide="clock" style="width: 26px; height: 26px;"></i>
+            </div>
+          </div>
+
+          <!-- KPI 3: Grado Doctor -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">DOCTORES UPT</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${g.Doctor} <span style="font-size: 0.95rem; color: var(--text-300);">(${g.Doctor_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Maestros: <strong>${g.Maestro} (${g.Maestro_pct}%)</strong></p>
+            </div>
+            <div style="background-color: rgba(168,85,247,0.08); color: #a855f7; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(168,85,247,0.15); flex-shrink: 0;">
+              <i data-lucide="award" style="width: 26px; height: 26px;"></i>
+            </div>
+          </div>
+
+          <!-- KPI 4: Condición Laboral -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">NOMBRADOS UPT</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #34d399; margin-top: 0.25rem;">${elif_cond.Nombrados} <span style="font-size: 0.95rem; color: var(--text-300);">(${elif_cond.Nombrados_pct}%)</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Contratados: <strong>${elif_cond.Contratados} (${elif_cond.Contratados_pct}%)</strong></p>
+            </div>
+            <div style="background-color: rgba(16,185,129,0.08); color: #10b981; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(16,185,129,0.15); flex-shrink: 0;">
+              <i data-lucide="file-check" style="width: 26px; height: 26px;"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Secciones Visuales de Desglose de Datos Generales -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          
+          <!-- Panel Izquierdo: Jornada Laboral & Paridad de Género -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
             
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Semestre:</label>
-              <select id="select-semestre-docentes" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                ${semKeys.map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>${s}</option>`).join("")}
-              </select>
-            </div>
+            <div>
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="pie-chart" style="width: 16px; height: 16px; color: var(--accent-light);"></i>
+                DOCENTES POR JORNADA LABORAL
+              </h4>
 
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Facultad:</label>
-              <select id="select-facultad-docentes" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                <option value="Todos" ${selFac === "Todos" ? "selected" : ""}>Todas las Facultades</option>
-                ${["FAEDCOH", "FACEM", "FADE", "FACSA", "FAING", "FAU"].map(f => `<option value="${f}" ${f === selFac ? "selected" : ""}>${f}</option>`).join("")}
-              </select>
-            </div>
+              <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                    <span>Tiempo Completo (TC)</span>
+                    <strong style="color: #38bdf8;">${j.TC} docentes (${j.TC_pct}%)</strong>
+                  </div>
+                  <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                    <div style="width: ${j.TC_pct}%; height: 100%; background: #38bdf8; border-radius: 6px;"></div>
+                  </div>
+                </div>
 
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Condición:</label>
-              <select id="select-condicion-docentes" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                <option value="Todos" ${selCond === "Todos" ? "selected" : ""}>Todas</option>
-                <option value="Nombrados" ${selCond === "Nombrados" ? "selected" : ""}>Nombrados</option>
-                <option value="Contratados" ${selCond === "Contratados" ? "selected" : ""}>Contratados</option>
-              </select>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Jornada:</label>
-              <select id="select-jornada-docentes" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                <option value="Todos" ${selJornada === "Todos" ? "selected" : ""}>Todas</option>
-                <option value="Tiempo Completo" ${selJornada === "Tiempo Completo" ? "selected" : ""}>Tiempo Completo</option>
-                <option value="Tiempo Parcial" ${selJornada === "Tiempo Parcial" ? "selected" : ""}>Tiempo Parcial</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <button id="btn-reset-docentes" class="btn btn-secondary" style="display: flex; align-items: center; gap: 6px; font-size: 0.92rem; padding: 0.45rem 0.8rem; border-radius: 6px;">
-              <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
-              <span>Restablecer Datos Base</span>
-            </button>
-            <button id="btn-export-word-docentes" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; padding: 0.45rem 1rem; border-radius: 6px;">
-              <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-              <span>Exportar Word</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 4 Tarjetas KPI -->
-        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
-          
-          <div class="db-status-badge" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Total Docentes</span>
-            <strong style="font-size: 1.8rem; color: #fff; font-weight: 800;">${totalCount.toLocaleString()}</strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">Docentes Universitarios UPT</span>
-          </div>
-
-          <div class="db-status-badge" style="background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Docentes Nombrados</span>
-            <strong style="font-size: 1.8rem; color: #38bdf8; font-weight: 800;">${totalNombrados.toLocaleString()} <span style="font-size: 1.0rem; color: var(--text-400);">(${totalCount > 0 ? ((totalNombrados/totalCount)*100).toFixed(1) : 0}%)</span></strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">22 Principales, 22 Asociados, 30 Auxiliares</span>
-          </div>
-
-          <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Docentes Contratados</span>
-            <strong style="font-size: 1.8rem; color: #fbbf24; font-weight: 800;">${totalContratados.toLocaleString()} <span style="font-size: 1.0rem; color: var(--text-400);">(${totalCount > 0 ? ((totalContratados/totalCount)*100).toFixed(1) : 0}%)</span></strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">Contratados por servicios académicos</span>
-          </div>
-
-          <div class="db-status-badge" style="background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Grado Doctor</span>
-            <strong style="font-size: 1.8rem; color: #c084fc; font-weight: 800;">${totalDoctores.toLocaleString()} <span style="font-size: 1.0rem; color: var(--text-400);">(${totalCount > 0 ? ((totalDoctores/totalCount)*100).toFixed(1) : 0}%)</span></strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">${totalDoctores} Doctores, ${totalMaestros} Maestros, ${totalBachilleres} Bachilleres</span>
-          </div>
-
-        </div>
-
-        <!-- Panel de Gráficos y Tabla Detallada -->
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start; width: 100%;">
-          
-          <!-- Izquierda: Gráfico -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <div style="margin-bottom: 1rem;">
-              <span style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">GRÁFICOS ESTADÍSTICOS DE DOCENTES</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                <button class="btn btn-secondary btn-docentes-tab ${chartView === 'facultades' ? 'active' : ''}" data-tab="facultades" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'facultades' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
-                <button class="btn btn-secondary btn-docentes-tab ${chartView === 'condicion' ? 'active' : ''}" data-tab="condicion" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'condicion' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Condición Laboral</button>
-                <button class="btn btn-secondary btn-docentes-tab ${chartView === 'grado' ? 'active' : ''}" data-tab="grado" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'grado' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Grado Académico</button>
-                <button class="btn btn-secondary btn-docentes-tab ${chartView === 'jornada' ? 'active' : ''}" data-tab="jornada" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'jornada' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Jornada Laboral</button>
-                <button class="btn btn-secondary btn-docentes-tab ${chartView === 'genero' ? 'active' : ''}" data-tab="genero" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'genero' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Paridad Género</button>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                    <span>Tiempo Parcial (TP)</span>
+                    <strong style="color: #ec4899;">${j.TP} docentes (${j.TP_pct}%)</strong>
+                  </div>
+                  <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                    <div style="width: ${j.TP_pct}%; height: 100%; background: #ec4899; border-radius: 6px;"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0;">${chartTitle}</h4>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="users-round" style="width: 16px; height: 16px; color: #ec4899;"></i>
+                PARIDAD DE GÉNERO DE DOCENTES UPT
+              </h4>
 
-            <div style="min-height: 280px; width: 100%; display: flex; align-items: center; justify-content: center;">
-              ${generate3DBarChartSVG(chartData, 560, 260)}
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 130px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); padding: 0.85rem; border-radius: 10px; text-align: center;">
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 700; text-transform: uppercase;">Masculino</span>
+                  <div style="font-size: 1.5rem; font-weight: 800; color: #3b82f6; margin-top: 2px;">${gen.Masculino}</div>
+                  <span style="font-size: 0.8rem; color: var(--text-400);">${gen.Masculino_pct}% del total</span>
+                </div>
+
+                <div style="flex: 1; min-width: 130px; background: rgba(236,72,153,0.06); border: 1px solid rgba(236,72,153,0.15); padding: 0.85rem; border-radius: 10px; text-align: center;">
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 700; text-transform: uppercase;">Femenino</span>
+                  <div style="font-size: 1.5rem; font-weight: 800; color: #ec4899; margin-top: 2px;">${gen.Femenino}</div>
+                  <span style="font-size: 0.8rem; color: var(--text-400);">${gen.Femenino_pct}% del total</span>
+                </div>
+              </div>
             </div>
+
           </div>
 
-          <!-- Derecha: Tabla Detallada -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <h4 style="font-size: 1.0rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">Detalle Institucional</h4>
-            <div style="max-height: 320px; overflow-y: auto; width: 100%;">
-              <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
-                <thead>
-                  <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-400); text-align: left;">
-                    <th style="padding: 6px;">Facultad</th>
-                    <th style="padding: 6px;">Condición</th>
-                    <th style="padding: 6px;">Grado</th>
-                    <th style="padding: 6px;">Jornada</th>
-                    <th style="padding: 6px; text-align: right;">Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${displayRows.slice(0, 30).map(r => `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                      <td style="padding: 6px; font-weight: 600; color: #fff;">${getRowFacultad(r) || "UPT"}</td>
-                      <td style="padding: 6px;">${getRowCondicion(r) || "Contratado"}</td>
-                      <td style="padding: 6px;">${getRowGrado(r) || "Maestro"}</td>
-                      <td style="padding: 6px;">${getRowJornada(r) || "Tiempo Parcial"}</td>
-                      <td style="padding: 6px; text-align: right; font-weight: 700; color: var(--accent);">${getRowCantidad(r).toLocaleString()}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-                <tfoot>
-                  <tr style="border-top: 1px solid var(--border-color); font-weight: 700; color: #fff;">
-                    <td colspan="4" style="padding: 8px;">Total Docentes</td>
-                    <td style="padding: 8px; text-align: right; color: var(--accent); font-size: 1.0rem;">${totalCount.toLocaleString()}</td>
-                  </tr>
-                </tfoot>
-              </table>
+          <!-- Panel Derecho: Grados Académicos & Condición Laboral -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
+            
+            <div>
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="graduation-cap" style="width: 16px; height: 16px; color: #a855f7;"></i>
+                DOCENTES POR GRADO ACADÉMICO
+              </h4>
+
+              <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                    <span>Grado de Doctor</span>
+                    <strong style="color: #c084fc;">${g.Doctor} docentes (${g.Doctor_pct}%)</strong>
+                  </div>
+                  <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                    <div style="width: ${g.Doctor_pct}%; height: 100%; background: #c084fc; border-radius: 6px;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                    <span>Grado de Maestro</span>
+                    <strong style="color: #06b6d4;">${g.Maestro} docentes (${g.Maestro_pct}%)</strong>
+                  </div>
+                  <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                    <div style="width: ${g.Maestro_pct}%; height: 100%; background: #06b6d4; border-radius: 6px;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                    <span>Bachiller</span>
+                    <strong style="color: #fbbf24;">${g.Bachiller} docentes (${g.Bachiller_pct}%)</strong>
+                  </div>
+                  <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                    <div style="width: ${g.Bachiller_pct}%; height: 100%; background: #fbbf24; border-radius: 6px;"></div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="layers" style="width: 16px; height: 16px; color: #10b981;"></i>
+                DOCENTES POR CONDICIÓN LABORAL
+              </h4>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
+                <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
+                  <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO PRINCIPAL</span>
+                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Principal.total} <span style="font-size: 0.75rem; color: var(--text-300);">docentes</span></div>
+                </div>
+
+                <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
+                  <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO ASOCIADO</span>
+                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Asociado.total} <span style="font-size: 0.75rem; color: var(--text-300);">docentes</span></div>
+                </div>
+
+                <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
+                  <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">ORDINARIO AUXILIAR</span>
+                  <div style="font-size: 1.2rem; font-weight: 800; color: #34d399;">${cd.Auxiliar.total} <span style="font-size: 0.75rem; color: var(--text-300);">docentes</span></div>
+                </div>
+
+                <div style="background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
+                  <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">CONTRATADO</span>
+                  <div style="font-size: 1.2rem; font-weight: 800; color: #fbbf24;">${cd.Contratado.total} <span style="font-size: 0.75rem; color: var(--text-300);">docentes</span></div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
+        </div>
+
+        <!-- Tabla Matriz Detallada: DATOS GENERALES UPT -->
+        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <h4 style="font-size: 1.0rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="table" style="width: 18px; height: 18px; color: var(--accent-light);"></i>
+              MATRIZ GENERAL DE DOCENTES POR GRADO ACADÉMICO Y JORNADA LABORAL (${activeSem})
+            </h4>
+            <span style="font-size: 0.8rem; color: var(--text-400);">Totales consolidados institucionales</span>
+          </div>
+
+          <div style="overflow-x: auto; width: 100%;">
+            <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                  <th style="padding: 10px 12px;">Condición Laboral / Jornada</th>
+                  <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                  <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                  <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                  <th style="padding: 10px 12px; text-align: right; color: var(--accent-light);">Total Docentes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Completo (TC)</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${gj.TC.total}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Parcial (TP)</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${gj.TP.total}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Principal</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Principal.total}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Asociado</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Asociado.total}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Auxiliar</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Auxiliar.total}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                  <td style="padding: 10px 12px; font-weight: 700; color: #fbbf24;">Docente Contratado</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fbbf24;">${cd.Contratado.total}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
+                  <td style="padding: 10px 12px;">TOTAL GENERAL UPT</td>
+                  <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
+                  <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
+                  <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${g.Bachiller}</td>
+                  <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
 
       </div>
@@ -6353,46 +6482,14 @@ const getRowCantidad = (r) => {
 
     if (window.lucide) window.lucide.createIcons();
 
-    const selSem = subTabContent.querySelector("#select-semestre-docentes");
-    if (selSem) selSem.onchange = (e) => { window._docentesFilters.semestre = e.target.value; drawDocentesDashboard(subTabContent); };
-
-    const selFacElem = subTabContent.querySelector("#select-facultad-docentes");
-    if (selFacElem) selFacElem.onchange = (e) => { window._docentesFilters.facultad = e.target.value; drawDocentesDashboard(subTabContent); };
-
-    const selCondElem = subTabContent.querySelector("#select-condicion-docentes");
-    if (selCondElem) selCondElem.onchange = (e) => { window._docentesFilters.condicion = e.target.value; drawDocentesDashboard(subTabContent); };
-
-    const selJornElem = subTabContent.querySelector("#select-jornada-docentes");
-    if (selJornElem) selJornElem.onchange = (e) => { window._docentesFilters.jornada = e.target.value; drawDocentesDashboard(subTabContent); };
-
-    subTabContent.querySelectorAll(".btn-docentes-tab").forEach(btn => {
+    // Event listeners para los botones de selección de Semestre
+    subTabContent.querySelectorAll(".btn-docentes-sem-btn").forEach(btn => {
       btn.onclick = () => {
-        window._docentesActiveChartView = btn.getAttribute("data-tab");
+        const selectedSem = btn.getAttribute("data-sem");
+        window._docentesSelectedSemester = selectedSem;
         drawDocentesDashboard(subTabContent);
       };
     });
-
-    const btnReset = subTabContent.querySelector("#btn-reset-docentes");
-    if (btnReset) {
-      btnReset.onclick = async () => {
-        const seedEntry = {
-          semestre: selectedSemester || "2026-I",
-          headers: ["Facultad", "Condición Laboral", "Grado Académico", "Jornada", "Género", "Cantidad"],
-          rows: DOCENTES_SHEET_DATA.rows
-        };
-        estadisticasInst.docentes = [seedEntry];
-        await db.saveEstadisticasInstitucionales(estadisticasInst).catch(() => {});
-        alert("¡Datos base de Docentes Universitarios restablecidos correctamente!");
-        drawDocentesDashboard(subTabContent);
-      };
-    }
-
-    const btnExportWord = subTabContent.querySelector("#btn-export-word-docentes");
-    if (btnExportWord) {
-      btnExportWord.onclick = () => {
-        downloadStandardWordReport("docentes", "Docentes Universitarios", activeSem, selFac, "Todos", "docentes");
-      };
-    }
   };
 
 
