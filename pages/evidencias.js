@@ -6299,6 +6299,21 @@ const getRowCantidad = (r) => {
                   </div>
                 </div>
               </div>
+
+              <!-- Indicador de Cumplimiento Ley N° 30220 (CBC V - Componente V.1) -->
+              <div style="margin-top: 1rem; display: flex; align-items: center;">
+                ${j.TC_pct >= 25 ? `
+                  <div style="background: #059669; color: #ffffff; padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; border: 1px solid #10b981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);">
+                    <i data-lucide="check-circle-2" style="width: 16px; height: 16px; color: #ffffff; flex-shrink: 0;"></i>
+                    <span>cumple Ley N°30220 (CBC V - Componente V.1)</span>
+                  </div>
+                ` : `
+                  <div style="background: #dc2626; color: #ffffff; padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; border: 1px solid #ef4444; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);">
+                    <i data-lucide="x-circle" style="width: 16px; height: 16px; color: #ffffff; flex-shrink: 0;"></i>
+                    <span>no cumple Ley N°30220 (CBC V - Componente V.1)</span>
+                  </div>
+                `}
+              </div>
             </div>
 
             <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
