@@ -6514,7 +6514,6 @@ const getRowCantidad = (r) => {
     const cd = semData.condicion_detalle;
     const gen = semData.genero;
     const gj = semData.grado_jornada;
-    const gc = semData.grado_condicion;
 
     const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -6522,7 +6521,7 @@ const getRowCantidad = (r) => {
 
     const analisisJornadaGrados = `El análisis paramétrico de la distribución por jornada laboral en el semestre ${activeSem} demuestra una alta concentración del ${j.TC_pct}% en Tiempo Completo (${j.TC} docentes), garantizando el cumplimiento del componente V.1 de las Condiciones Básicas de Calidad de la Ley N° 30220. La cualificación académica registra un ${g.Doctor_pct}% de nivel doctoral (${g.Doctor} doctores) y ${g.Maestro_pct}% de maestría (${g.Maestro} maestros), estableciendo un índice de profesionalización avanzada del ${(((g.Doctor + g.Maestro)/totalDoc)*100).toFixed(1)}%. Desde la perspectiva de la gestión universitaria, la varianza entre regímenes horarios consolida un cuerpo docente orientado a la dedicación exclusiva e investigación, reduciendo la dispersión funcional e impulsando la sostenibilidad del modelo pedagógico de la Universidad Privada de Tacna.`;
 
-    const analisisCondicionGrados = `La estratificación según el régimen de vinculación contractual evidencia un ${elif_cond.Nombrados_pct}% de profesores ordinarios (${elif_cond.Nombrados} nombrados) frente a un ${elif_cond.Contratados_pct}% de contratados (${elif_cond.Contratados} contratados). La masa docente nombrada se distribuye jerárquicamente en ${cd.Principal} principales, ${cd.Asociado} asociados y ${cd.Auxiliar} auxiliares. En el marco de la gestión del talento académico, este coeficiente de estabilidad laboral mitiga la rotación de capital intelectual y fortalece la cultura organizacional. La prueba de correlación categórica ratifica que el máximo rango académico se asocia significativamente al grado doctoral, asegurando el liderazgo científico, la consolidación de grupos de investigación y la gobernanza académica estratégica en las facultades de la universidad.`;
+    const analisisCondicionGrados = `La estratificación según el régimen de vinculación contractual evidencia un ${elif_cond.Nombrados_pct}% de profesores ordinarios (${elif_cond.Nombrados} nombrados) frente a un ${elif_cond.Contratados_pct}% de contratados (${elif_cond.Contratados} contratados). La masa docente nombrada se distribuye jerárquicamente en ${cd.Principal?.total || 0} principales, ${cd.Asociado?.total || 0} asociados y ${cd.Auxiliar?.total || 0} auxiliares. En el marco de la gestión del talento académico, este coeficiente de estabilidad laboral mitiga la rotación de capital intelectual y fortalece la cultura organizacional. La prueba de correlación categórica ratifica que el máximo rango académico se asocia significativamente al grado doctoral, asegurando el liderazgo científico, la consolidación de grupos de investigación y la gobernanza académica estratégica en las facultades de la universidad.`;
 
     const tcFacsaTotal = tcData.facultades.find(f => f.facultad === 'FACSA')?.total || 0;
     const tcFaingTotal = tcData.facultades.find(f => f.facultad === 'FAING')?.total || 0;
@@ -6660,34 +6659,34 @@ const getRowCantidad = (r) => {
           <tbody>
             <tr>
               <td>Nombrado (Principal)</td>
-              <td class="text-center">${cd.Principal > 0 ? Math.min(cd.Principal, g.Doctor) : 0}</td>
-              <td class="text-center">0</td>
-              <td class="text-center">${formatBachWord(0)}</td>
-              <td class="text-right"><strong>${cd.Principal}</strong></td>
-              <td class="text-right">${totalDoc > 0 ? ((cd.Principal/totalDoc)*100).toFixed(2) : 0}%</td>
+              <td class="text-center">${cd.Principal?.Doctor || 0}</td>
+              <td class="text-center">${cd.Principal?.Maestro || 0}</td>
+              <td class="text-center">${formatBachWord(cd.Principal?.Bachiller || 0)}</td>
+              <td class="text-right"><strong>${cd.Principal?.total || 0}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? (((cd.Principal?.total || 0)/totalDoc)*100).toFixed(2) : 0}%</td>
             </tr>
             <tr>
               <td>Nombrado (Asociado)</td>
-              <td class="text-center">3</td>
-              <td class="text-center">${Math.max(0, cd.Asociado - 3)}</td>
-              <td class="text-center">${formatBachWord(0)}</td>
-              <td class="text-right"><strong>${cd.Asociado}</strong></td>
-              <td class="text-right">${totalDoc > 0 ? ((cd.Asociado/totalDoc)*100).toFixed(2) : 0}%</td>
+              <td class="text-center">${cd.Asociado?.Doctor || 0}</td>
+              <td class="text-center">${cd.Asociado?.Maestro || 0}</td>
+              <td class="text-center">${formatBachWord(cd.Asociado?.Bachiller || 0)}</td>
+              <td class="text-right"><strong>${cd.Asociado?.total || 0}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? (((cd.Asociado?.total || 0)/totalDoc)*100).toFixed(2) : 0}%</td>
             </tr>
             <tr>
               <td>Nombrado (Auxiliar)</td>
-              <td class="text-center">0</td>
-              <td class="text-center">${cd.Auxiliar}</td>
-              <td class="text-center">${formatBachWord(0)}</td>
-              <td class="text-right"><strong>${cd.Auxiliar}</strong></td>
-              <td class="text-right">${totalDoc > 0 ? ((cd.Auxiliar/totalDoc)*100).toFixed(2) : 0}%</td>
+              <td class="text-center">${cd.Auxiliar?.Doctor || 0}</td>
+              <td class="text-center">${cd.Auxiliar?.Maestro || 0}</td>
+              <td class="text-center">${formatBachWord(cd.Auxiliar?.Bachiller || 0)}</td>
+              <td class="text-right"><strong>${cd.Auxiliar?.total || 0}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? (((cd.Auxiliar?.total || 0)/totalDoc)*100).toFixed(2) : 0}%</td>
             </tr>
             <tr>
               <td>Contratados</td>
-              <td class="text-center">${gc.Contratados.Doctor}</td>
-              <td class="text-center">${gc.Contratados.Maestro}</td>
-              <td class="text-center">${formatBachWord(gc.Contratados.Bachiller)}</td>
-              <td class="text-right"><strong>${cd.Contratado}</strong></td>
+              <td class="text-center">${cd.Contratado?.Doctor || 0}</td>
+              <td class="text-center">${cd.Contratado?.Maestro || 0}</td>
+              <td class="text-center">${formatBachWord(cd.Contratado?.Bachiller || 0)}</td>
+              <td class="text-right"><strong>${cd.Contratado?.total || 0}</strong></td>
               <td class="text-right">${elif_cond.Contratados_pct}%</td>
             </tr>
           </tbody>
