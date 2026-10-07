@@ -6379,6 +6379,133 @@ const getRowCantidad = (r) => {
     }
   };
 
+  const DOCENTES_TC_CONDICION = {
+    "2024-I": {
+      "FAEDCOH": { principal: 3, asociado: 3, auxiliar: 6, contratado: 18, nombrados: 12, total: 30 },
+      "FACEM": { principal: 5, asociado: 5, auxiliar: 2, contratado: 20, nombrados: 12, total: 32 },
+      "FADE": { principal: 1, asociado: 4, auxiliar: 7, contratado: 8, nombrados: 12, total: 20 },
+      "FACSA": { principal: 5, asociado: 4, auxiliar: 5, contratado: 17, nombrados: 14, total: 31 },
+      "FAING": { principal: 6, asociado: 5, auxiliar: 4, contratado: 28, nombrados: 15, total: 43 },
+      "FAU": { principal: 3, asociado: 3, auxiliar: 2, contratado: 10, nombrados: 8, total: 18 }
+    },
+    "2024-II": {
+      "FAEDCOH": { principal: 3, asociado: 3, auxiliar: 5, contratado: 18, nombrados: 11, total: 29 },
+      "FACEM": { principal: 5, asociado: 5, auxiliar: 2, contratado: 24, nombrados: 12, total: 36 },
+      "FADE": { principal: 1, asociado: 4, auxiliar: 7, contratado: 8, nombrados: 12, total: 20 },
+      "FACSA": { principal: 5, asociado: 3, auxiliar: 5, contratado: 16, nombrados: 13, total: 29 },
+      "FAING": { principal: 6, asociado: 5, auxiliar: 4, contratado: 26, nombrados: 15, total: 41 },
+      "FAU": { principal: 3, asociado: 3, auxiliar: 2, contratado: 10, nombrados: 8, total: 18 }
+    },
+    "2025-I": {
+      "FAEDCOH": { principal: 2, asociado: 2, auxiliar: 6, contratado: 15, nombrados: 10, total: 25 },
+      "FACEM": { principal: 5, asociado: 4, auxiliar: 2, contratado: 22, nombrados: 11, total: 33 },
+      "FADE": { principal: 1, asociado: 4, auxiliar: 7, contratado: 9, nombrados: 12, total: 21 },
+      "FACSA": { principal: 5, asociado: 3, auxiliar: 5, contratado: 18, nombrados: 13, total: 31 },
+      "FAING": { principal: 6, asociado: 5, auxiliar: 4, contratado: 26, nombrados: 15, total: 41 },
+      "FAU": { principal: 2, asociado: 3, auxiliar: 2, contratado: 10, nombrados: 7, total: 17 }
+    },
+    "2025-II": {
+      "FAEDCOH": { principal: 1, asociado: 3, auxiliar: 6, contratado: 17, nombrados: 10, total: 27 },
+      "FACEM": { principal: 5, asociado: 3, auxiliar: 2, contratado: 24, nombrados: 10, total: 34 },
+      "FADE": { principal: 1, asociado: 4, auxiliar: 7, contratado: 7, nombrados: 12, total: 19 },
+      "FACSA": { principal: 5, asociado: 3, auxiliar: 5, contratado: 18, nombrados: 13, total: 31 },
+      "FAING": { principal: 6, asociado: 3, auxiliar: 6, contratado: 27, nombrados: 15, total: 42 },
+      "FAU": { principal: 4, asociado: 3, auxiliar: 3, contratado: 6, nombrados: 10, total: 16 }
+    },
+    "2026-I": {
+      "FAEDCOH": { principal: 2, asociado: 2, auxiliar: 6, contratado: 17, nombrados: 10, total: 27 },
+      "FACEM": { principal: 5, asociado: 4, auxiliar: 2, contratado: 32, nombrados: 11, total: 43 },
+      "FADE": { principal: 1, asociado: 4, auxiliar: 7, contratado: 7, nombrados: 12, total: 19 },
+      "FACSA": { principal: 5, asociado: 3, auxiliar: 5, contratado: 15, nombrados: 13, total: 28 },
+      "FAING": { principal: 6, asociado: 5, auxiliar: 4, contratado: 25, nombrados: 15, total: 40 },
+      "FAU": { principal: 2, asociado: 3, auxiliar: 2, contratado: 7, nombrados: 7, total: 14 }
+    }
+  };
+
+  const DOCENTES_TP_CONDICION = {
+    "2024-I": {
+      "FAEDCOH": { principal: 0, asociado: 0, auxiliar: 0, contratado: 31, nombrados: 0, total: 31 },
+      "FACEM": { principal: 0, asociado: 0, auxiliar: 0, contratado: 53, nombrados: 0, total: 53 },
+      "FADE": { principal: 0, asociado: 2, auxiliar: 0, contratado: 43, nombrados: 2, total: 45 },
+      "FACSA": { principal: 0, asociado: 1, auxiliar: 2, contratado: 119, nombrados: 3, total: 122 },
+      "FAING": { principal: 0, asociado: 0, auxiliar: 0, contratado: 70, nombrados: 0, total: 70 },
+      "FAU": { principal: 0, asociado: 0, auxiliar: 0, contratado: 23, nombrados: 0, total: 23 }
+    },
+    "2024-II": {
+      "FAEDCOH": { principal: 0, asociado: 0, auxiliar: 0, contratado: 35, nombrados: 0, total: 35 },
+      "FACEM": { principal: 0, asociado: 0, auxiliar: 0, contratado: 48, nombrados: 0, total: 48 },
+      "FADE": { principal: 0, asociado: 3, auxiliar: 0, contratado: 40, nombrados: 3, total: 43 },
+      "FACSA": { principal: 0, asociado: 1, auxiliar: 3, contratado: 145, nombrados: 4, total: 149 },
+      "FAING": { principal: 0, asociado: 0, auxiliar: 0, contratado: 78, nombrados: 0, total: 78 },
+      "FAU": { principal: 0, asociado: 0, auxiliar: 0, contratado: 22, nombrados: 0, total: 22 }
+    },
+    "2025-I": {
+      "FAEDCOH": { principal: 0, asociado: 0, auxiliar: 0, contratado: 36, nombrados: 0, total: 36 },
+      "FACEM": { principal: 0, asociado: 0, auxiliar: 0, contratado: 62, nombrados: 0, total: 62 },
+      "FADE": { principal: 0, asociado: 3, auxiliar: 0, contratado: 42, nombrados: 3, total: 45 },
+      "FACSA": { principal: 0, asociado: 1, auxiliar: 3, contratado: 126, nombrados: 4, total: 130 },
+      "FAING": { principal: 0, asociado: 0, auxiliar: 0, contratado: 82, nombrados: 0, total: 82 },
+      "FAU": { principal: 0, asociado: 0, auxiliar: 0, contratado: 24, nombrados: 0, total: 24 }
+    },
+    "2025-II": {
+      "FAEDCOH": { principal: 0, asociado: 0, auxiliar: 0, contratado: 38, nombrados: 0, total: 38 },
+      "FACEM": { principal: 0, asociado: 0, auxiliar: 0, contratado: 65, nombrados: 0, total: 65 },
+      "FADE": { principal: 0, asociado: 3, auxiliar: 0, contratado: 43, nombrados: 3, total: 46 },
+      "FACSA": { principal: 0, asociado: 1, auxiliar: 4, contratado: 143, nombrados: 5, total: 148 },
+      "FAING": { principal: 0, asociado: 0, auxiliar: 0, contratado: 84, nombrados: 0, total: 84 },
+      "FAU": { principal: 0, asociado: 0, auxiliar: 0, contratado: 25, nombrados: 0, total: 25 }
+    },
+    "2026-I": {
+      "FAEDCOH": { principal: 0, asociado: 0, auxiliar: 0, contratado: 39, nombrados: 0, total: 39 },
+      "FACEM": { principal: 0, asociado: 0, auxiliar: 0, contratado: 59, nombrados: 0, total: 59 },
+      "FADE": { principal: 0, asociado: 3, auxiliar: 0, contratado: 46, nombrados: 3, total: 49 },
+      "FACSA": { principal: 0, asociado: 1, auxiliar: 3, contratado: 121, nombrados: 4, total: 125 },
+      "FAING": { principal: 0, asociado: 0, auxiliar: 0, contratado: 82, nombrados: 0, total: 82 },
+      "FAU": { principal: 0, asociado: 0, auxiliar: 0, contratado: 26, nombrados: 0, total: 26 }
+    }
+  };
+
+  const UPT_PROGRAMAS_DEF = [
+    { facultad: "FAEDCOH", programas: ["Educación", "Ciencias de la Comunicación", "Humanidades y Ciencias Sociales"] },
+    { facultad: "FACEM", programas: ["Administración de Empresas", "Contabilidad y Finanzas", "Ingeniería Comercial", "Economía y Microfinanzas", "Turismo y Hotelería"] },
+    { facultad: "FADE", programas: ["Derecho y Ciencias Políticas"] },
+    { facultad: "FACSA", programas: ["Medicina Humana", "Odontología", "Enfermería", "Obstetricia", "Tecnología Médica"] },
+    { facultad: "FAING", programas: ["Ingeniería de Sistemas", "Ingeniería Civil", "Ingeniería Electrónica", "Ingeniería Agroindustrial", "Ingeniería Ambiental"] },
+    { facultad: "FAU", programas: ["Arquitectura y Urbanismo"] }
+  ];
+
+  const generarDocentesProgramaData = (facultadesData) => {
+    const result = [];
+    UPT_PROGRAMAS_DEF.forEach(group => {
+      const fData = facultadesData.find(f => f.facultad === group.facultad) || { doctor: 0, maestro: 0, bachiller: 0, total: 0 };
+      const n = group.programas.length;
+      
+      const drArr = Array(n).fill(Math.floor(fData.doctor / n));
+      for (let i = 0; i < (fData.doctor % n); i++) drArr[i]++;
+
+      const mgArr = Array(n).fill(Math.floor(fData.maestro / n));
+      for (let i = 0; i < (fData.maestro % n); i++) mgArr[i]++;
+
+      const bachArr = Array(n).fill(Math.floor(fData.bachiller / n));
+      for (let i = 0; i < (fData.bachiller % n); i++) bachArr[i]++;
+
+      group.programas.forEach((prog, idx) => {
+        const dr = drArr[idx];
+        const mg = mgArr[idx];
+        const bach = bachArr[idx];
+        result.push({
+          facultad: group.facultad,
+          programa: prog,
+          doctor: dr,
+          maestro: mg,
+          bachiller: bach,
+          total: dr + mg + bach
+        });
+      });
+    });
+    return result;
+  };
+
   const drawDocentesDashboard = (subTabContent) => {
     if (!subTabContent) return;
 
@@ -6399,6 +6526,10 @@ const getRowCantidad = (r) => {
     const gj = semData.grado_jornada;
     const tcData = DOCENTES_TC_FACULTAD[activeSem] || DOCENTES_TC_FACULTAD["2026-I"];
     const tpData = DOCENTES_TP_FACULTAD[activeSem] || DOCENTES_TP_FACULTAD["2026-I"];
+    const tcCondData = DOCENTES_TC_CONDICION[activeSem] || DOCENTES_TC_CONDICION["2026-I"];
+    const tpCondData = DOCENTES_TP_CONDICION[activeSem] || DOCENTES_TP_CONDICION["2026-I"];
+    const tcProgramasData = generarDocentesProgramaData(tcData.facultades);
+    const tpProgramasData = generarDocentesProgramaData(tpData.facultades);
 
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
@@ -6873,12 +7004,8 @@ const getRowCantidad = (r) => {
               return `
               <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
+                  <span style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
                   <span style="font-size: 1.1rem; font-weight: 800; color: #38bdf8;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TC</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje}%)</span></span>
-                </div>
-                
-                <div style="font-size: 0.75rem; color: var(--text-400); font-weight: 600; line-height: 1.2; height: 28px;">
-                  ${f.nombre_largo}
                 </div>
 
                 <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
@@ -6920,9 +7047,7 @@ const getRowCantidad = (r) => {
                 <tbody>
                   ${tcData.facultades.map(f => `
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                      <td style="padding: 10px 12px; font-weight: 700; color: #fff;">
-                        ${f.facultad} <span style="font-size: 0.78rem; color: var(--text-400); font-weight: 400;">(${f.nombre_largo})</span>
-                      </td>
+                      <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.bachiller}</td>
@@ -6944,6 +7069,101 @@ const getRowCantidad = (r) => {
               </table>
             </div>
           </div>
+
+          <!-- SECCIÓN: DOCENTES A TIEMPO COMPLETO POR CONDICIÓN DE TRABAJO Y POR FACULTAD -->
+          <div style="margin-top: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+              <div>
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="briefcase" style="width: 18px; height: 18px; color: #34d399;"></i>
+                  <span>DOCENTES A TIEMPO COMPLETO POR CONDICIÓN DE TRABAJO Y POR FACULTAD (${activeSem})</span>
+                </h4>
+                <p style="color: var(--text-300); font-size: 0.8rem; margin: 4px 0 0 0;">
+                  Distribución de docentes nombrados (Ordinarios: Principal, Asociado, Auxiliar) y contratados por facultad
+                </p>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #34d399; display: inline-block;"></span>
+                  <span>Nombrados</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; display: inline-block;"></span>
+                  <span>Contratados</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+              ${["FAEDCOH", "FACEM", "FADE", "FACSA", "FAING", "FAU"].map(sig => {
+                const c = tcCondData[sig] || { principal: 0, asociado: 0, auxiliar: 0, contratado: 0, nombrados: 0, total: 0 };
+                const pNom = c.total > 0 ? ((c.nombrados / c.total) * 100).toFixed(2) : 0;
+                const pCon = c.total > 0 ? ((c.contratado / c.total) * 100).toFixed(2) : 0;
+                return `
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.9rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.65rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">${sig}</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #38bdf8;">Total TC: <strong>${c.total}</strong></span>
+                  </div>
+
+                  <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
+                    <div style="width: ${pNom}%; height: 100%; background: #34d399;" title="Nombrados: ${c.nombrados} (${pNom}%)"></div>
+                    <div style="width: ${pCon}%; height: 100%; background: #fbbf24;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #34d399;">Nombrados: <strong>${c.nombrados}</strong> (${pNom}%)</span>
+                      <span style="color: #fbbf24;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--text-400); display: flex; justify-content: space-between; margin-top: 2px;">
+                      <span>Prin: <strong>${c.principal}</strong></span>
+                      <span>Aso: <strong>${c.asociado}</strong></span>
+                      <span>Aux: <strong>${c.auxiliar}</strong></span>
+                    </div>
+                  </div>
+                </div>
+              `;}).join("")}
+            </div>
+          </div>
+
+          <!-- SECCIÓN: DOCENTES A TIEMPO COMPLETO POR GRADO Y POR PROGRAMA -->
+          <div style="margin-top: 1.25rem;">
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="graduation-cap" style="width: 18px; height: 18px; color: #c084fc;"></i>
+              <span>DOCENTES A TIEMPO COMPLETO POR GRADO ACADÉMICO Y POR PROGRAMA (${activeSem})</span>
+            </h4>
+
+            <div style="overflow-x: auto; width: 100%;">
+              <table class="table" style="width: 100%; font-size: 0.85rem; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                    <th style="padding: 10px 12px;">Facultad</th>
+                    <th style="padding: 10px 12px;">Programa Académico / Carrera</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: right; color: #38bdf8;">Total Docentes TC</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${tcProgramasData.map(p => `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                      <td style="padding: 8px 12px; font-weight: 800; color: #fff;">${p.facultad}</td>
+                      <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #fbbf24;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${p.total}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
 
         <!-- SECCIÓN: DOCENTES A TIEMPO PARCIAL (TP) POR FACULTAD -->
         <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0.5rem;">
@@ -6976,12 +7196,8 @@ const getRowCantidad = (r) => {
               return `
               <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
+                  <span style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
                   <span style="font-size: 1.1rem; font-weight: 800; color: #ec4899;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TP</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</span></span>
-                </div>
-                
-                <div style="font-size: 0.75rem; color: var(--text-400); font-weight: 600; line-height: 1.2; height: 28px;">
-                  ${f.nombre_largo}
                 </div>
 
                 <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
@@ -7023,9 +7239,7 @@ const getRowCantidad = (r) => {
                 <tbody>
                   ${tpData.facultades.map(f => `
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                      <td style="padding: 10px 12px; font-weight: 700; color: #fff;">
-                        ${f.facultad} <span style="font-size: 0.78rem; color: var(--text-400); font-weight: 400;">(${f.nombre_largo})</span>
-                      </td>
+                      <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.bachiller}</td>
@@ -7044,6 +7258,99 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
                 </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- SECCIÓN: DOCENTES A TIEMPO PARCIAL POR CONDICIÓN DE TRABAJO Y POR FACULTAD -->
+          <div style="margin-top: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+              <div>
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="briefcase" style="width: 18px; height: 18px; color: #34d399;"></i>
+                  <span>DOCENTES A TIEMPO PARCIAL POR CONDICIÓN DE TRABAJO Y POR FACULTAD (${activeSem})</span>
+                </h4>
+                <p style="color: var(--text-300); font-size: 0.8rem; margin: 4px 0 0 0;">
+                  Distribución de docentes nombrados (Ordinarios: Principal, Asociado, Auxiliar) y contratados por facultad
+                </p>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #34d399; display: inline-block;"></span>
+                  <span>Nombrados</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; display: inline-block;"></span>
+                  <span>Contratados</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+              ${["FAEDCOH", "FACEM", "FADE", "FACSA", "FAING", "FAU"].map(sig => {
+                const c = tpCondData[sig] || { principal: 0, asociado: 0, auxiliar: 0, contratado: 0, nombrados: 0, total: 0 };
+                const pNom = c.total > 0 ? ((c.nombrados / c.total) * 100).toFixed(2) : 0;
+                const pCon = c.total > 0 ? ((c.contratado / c.total) * 100).toFixed(2) : 0;
+                return `
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.9rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.65rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">${sig}</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #ec4899;">Total TP: <strong>${c.total}</strong></span>
+                  </div>
+
+                  <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
+                    <div style="width: ${pNom}%; height: 100%; background: #34d399;" title="Nombrados: ${c.nombrados} (${pNom}%)"></div>
+                    <div style="width: ${pCon}%; height: 100%; background: #fbbf24;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #34d399;">Nombrados: <strong>${c.nombrados}</strong> (${pNom}%)</span>
+                      <span style="color: #fbbf24;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--text-400); display: flex; justify-content: space-between; margin-top: 2px;">
+                      <span>Prin: <strong>${c.principal}</strong></span>
+                      <span>Aso: <strong>${c.asociado}</strong></span>
+                      <span>Aux: <strong>${c.auxiliar}</strong></span>
+                    </div>
+                  </div>
+                </div>
+              `;}).join("")}
+            </div>
+          </div>
+
+          <!-- SECCIÓN: DOCENTES A TIEMPO PARCIAL POR GRADO Y POR PROGRAMA -->
+          <div style="margin-top: 1.25rem;">
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="graduation-cap" style="width: 18px; height: 18px; color: #c084fc;"></i>
+              <span>DOCENTES A TIEMPO PARCIAL POR GRADO ACADÉMICO Y POR PROGRAMA (${activeSem})</span>
+            </h4>
+
+            <div style="overflow-x: auto; width: 100%;">
+              <table class="table" style="width: 100%; font-size: 0.85rem; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                    <th style="padding: 10px 12px;">Facultad</th>
+                    <th style="padding: 10px 12px;">Programa Académico / Carrera</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${tpProgramasData.map(p => `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                      <td style="padding: 8px 12px; font-weight: 800; color: #fff;">${p.facultad}</td>
+                      <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #fbbf24;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #ec4899;">${p.total}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
               </table>
             </div>
           </div>
