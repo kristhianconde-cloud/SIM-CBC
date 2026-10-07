@@ -6574,8 +6574,7 @@ const getRowCantidad = (r) => {
 
         <div class="header-title">
           <h1>UNIVERSIDAD PRIVADA DE TACNA</h1>
-          <h2>VICERRECTORADO ACADÉMICO - DIRECCIÓN DE GESTIÓN Y CALIDAD ACADÉMICA</h2>
-          <p>REPORTE ESTADÍSTICO E INSTITUCIONAL DE LA PLANA DOCENTE — SEMESTRE ACADÉMICO ${activeSem}</p>
+          <p style="font-size: 11pt; color: #2563eb; font-weight: bold; margin-top: 6px;">REPORTE ESTADÍSTICO E INSTITUCIONAL DE LA PLANA DOCENTE — SEMESTRE ACADÉMICO ${activeSem}</p>
         </div>
 
         <div class="meta-box">
@@ -6896,7 +6895,7 @@ const getRowCantidad = (r) => {
         </div>
 
         <div class="footer-text">
-          Reporte generado automáticamente por SIGECA - Sistema Integrado de Gestión de Calidad Académica UPT.<br/>
+          Reporte generado automáticamente por SIM - CBC - Sistema de información y monitoreo de las CBC UPT.<br/>
           Documento oficial emitido el ${fechaHoy}.
         </div>
 
