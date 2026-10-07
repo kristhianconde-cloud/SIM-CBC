@@ -6346,13 +6346,9 @@ const getRowCantidad = (r) => {
               <i data-lucide="calendar" style="width: 18px; height: 18px; color: var(--accent-light);"></i>
               SEMESTRE ACADÉMICO:
             </span>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="semestre-docentes-btn-group">
-              ${semKeys.map(s => `
-                <button class="btn btn-docentes-sem-btn" data-sem="${s}" style="padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; ${s === activeSem ? 'background: var(--accent); color: #ffffff; border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(59,130,246,0.3);' : 'background: rgba(255,255,255,0.05); color: var(--text-300); border: 1px solid var(--border-color);'}">
-                  ${s}
-                </button>
-              `).join("")}
-            </div>
+            <select id="select-docentes-semestre" class="form-input" style="padding: 0.45rem 2.2rem 0.45rem 1rem; font-size: 0.95rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid var(--accent); color: #ffffff; cursor: pointer; box-shadow: 0 4px 12px rgba(59,130,246,0.2);">
+              ${semKeys.map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>Semestre ${s}</option>`).join("")}
+            </select>
           </div>
 
           <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-400);">
@@ -6775,14 +6771,14 @@ const getRowCantidad = (r) => {
 
     if (window.lucide) window.lucide.createIcons();
 
-    // Event listeners para los botones de selección de Semestre
-    subTabContent.querySelectorAll(".btn-docentes-sem-btn").forEach(btn => {
-      btn.onclick = () => {
-        const selectedSem = btn.getAttribute("data-sem");
-        window._docentesSelectedSemester = selectedSem;
+    // Event listener para el selector desplegable de Semestre
+    const selSemMain = subTabContent.querySelector("#select-docentes-semestre");
+    if (selSemMain) {
+      selSemMain.onchange = (e) => {
+        window._docentesSelectedSemester = e.target.value;
         drawDocentesDashboard(subTabContent);
       };
-    });
+    }
   };
 
 
