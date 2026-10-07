@@ -6728,11 +6728,11 @@ const getRowCantidad = (r) => {
 
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
-                    <span>Bachiller</span>
-                    <span><strong style="color: #fbbf24;">${g.Bachiller} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Bachiller_pct}%)</span></span>
+                    <span>Título Profesional</span>
+                    <span><strong style="color: #94a3b8;">${g.Bachiller} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Bachiller_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
-                    <div style="width: ${g.Bachiller_pct}%; height: 100%; background: #fbbf24; border-radius: 6px;"></div>
+                    <div style="width: ${g.Bachiller_pct}%; height: 100%; background: #94a3b8; border-radius: 6px;"></div>
                   </div>
                 </div>
               </div>
@@ -6790,7 +6790,7 @@ const getRowCantidad = (r) => {
                 EVOLUCIÓN HISTÓRICA DE DOCENTES POR GRADO ACADÉMICO
               </h4>
               <p style="font-size: 0.82rem; color: var(--text-300); margin: 4px 0 0 0;">
-                Tendencia comparativa de Doctores, Maestros y Bachilleres de la UPT por semestres (2024-I a 2026-I)
+                Tendencia comparativa de Doctores, Maestros y Títulos Profesionales de la UPT por semestres (2024-I a 2026-I)
               </p>
             </div>
 
@@ -6804,8 +6804,8 @@ const getRowCantidad = (r) => {
                 <span>Maestro</span>
               </div>
               <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: #ffffff;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
-                <span>Bachiller</span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #94a3b8; display: inline-block;"></span>
+                <span>Título Profesional</span>
               </div>
             </div>
           </div>
@@ -6874,104 +6874,145 @@ const getRowCantidad = (r) => {
               <text x="805" y="230.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">129</text>
               <circle cx="805" cy="244.05" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
 
-              <!-- Lines & Dots for BACHILLER (#10b981) -->
-              <path d="M 65 306.2 L 250 308.4 L 435 310.6 L 620 310.05 L 805 310.05" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              <!-- Lines & Dots for TÍTULO PROFESIONAL (#94a3b8) -->
+              <path d="M 65 306.2 L 250 308.4 L 435 310.6 L 620 310.05 L 805 310.05" fill="none" stroke="#94a3b8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
 
-              <!-- Bachiller Values & Circles -->
+              <!-- Título Profesional Values & Circles -->
               <text x="65" y="292.2" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">16</text>
-              <circle cx="65" cy="306.2" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+              <circle cx="65" cy="306.2" r="6.5" fill="#94a3b8" stroke="#ffffff" stroke-width="2.5" />
 
               <text x="250" y="294.4" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">12</text>
-              <circle cx="250" cy="308.4" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+              <circle cx="250" cy="308.4" r="6.5" fill="#94a3b8" stroke="#ffffff" stroke-width="2.5" />
 
               <text x="435" y="296.6" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">8</text>
-              <circle cx="435" cy="310.6" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+              <circle cx="435" cy="310.6" r="6.5" fill="#94a3b8" stroke="#ffffff" stroke-width="2.5" />
 
               <text x="620" y="296.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">9</text>
-              <circle cx="620" cy="310.05" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+              <circle cx="620" cy="310.05" r="6.5" fill="#94a3b8" stroke="#ffffff" stroke-width="2.5" />
 
               <text x="805" y="296.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">9</text>
-              <circle cx="805" cy="310.05" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+              <circle cx="805" cy="310.05" r="6.5" fill="#94a3b8" stroke="#ffffff" stroke-width="2.5" />
             </svg>
           </div>
         </div>
 
-        <!-- Tabla Matriz Detallada: DATOS GENERALES UPT -->
-        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-            <h4 style="font-size: 1.0rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
-              <i data-lucide="table" style="width: 18px; height: 18px; color: var(--accent-light);"></i>
-              MATRIZ GENERAL DE DOCENTES POR GRADO ACADÉMICO Y JORNADA LABORAL (${activeSem})
-            </h4>
-            <span style="font-size: 0.8rem; color: var(--text-400);">Totales consolidados institucionales</span>
+        <!-- TABLAS MATRICES GENERALES UPT: JORNADA LABORAL Y CONDICIÓN LABORAL -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
+          
+          <!-- Tabla 1: Matriz por Jornada Laboral -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="clock" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+                MATRIZ DE DOCENTES POR JORNADA LABORAL (${activeSem})
+              </h4>
+              <span style="font-size: 0.75rem; color: var(--text-400);">Por Tipo de Jornada</span>
+            </div>
+
+            <div style="overflow-x: auto; width: 100%;">
+              <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                    <th style="padding: 10px 12px;">Jornada Laboral</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
+                    <th style="padding: 10px 12px; text-align: right; color: var(--accent-light);">Total Docentes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Completo (TC)</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TC.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TC.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TC.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${gj.TC.total}</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Parcial (TP)</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TP.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TP.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${gj.TP.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${gj.TP.total}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
+                    <td style="padding: 10px 12px;">TOTAL JORNADA UPT</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${g.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
 
-          <div style="overflow-x: auto; width: 100%;">
-            <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
-              <thead>
-                <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
-                  <th style="padding: 10px 12px;">Condición Laboral / Jornada</th>
-                  <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
-                  <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
-                  <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
-                  <th style="padding: 10px 12px; text-align: right; color: var(--accent-light);">Total Docentes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Completo (TC)</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TC.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${gj.TC.total}</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Parcial (TP)</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${gj.TP.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${gj.TP.total}</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Principal</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Principal.total}</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Asociado</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Asociado.total}</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Auxiliar</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Auxiliar.total}</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
-                  <td style="padding: 10px 12px; font-weight: 700; color: #fbbf24;">Docente Contratado</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fbbf24;">${cd.Contratado.total}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
-                  <td style="padding: 10px 12px;">TOTAL GENERAL UPT</td>
-                  <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
-                  <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
-                  <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${g.Bachiller}</td>
-                  <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
-                </tr>
-              </tfoot>
-            </table>
+          <!-- Tabla 2: Matriz por Condición Laboral -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="layers" style="width: 18px; height: 18px; color: #10b981;"></i>
+                MATRIZ DE DOCENTES POR CONDICIÓN LABORAL (${activeSem})
+              </h4>
+              <span style="font-size: 0.75rem; color: var(--text-400);">Por Condición Contractual</span>
+            </div>
+
+            <div style="overflow-x: auto; width: 100%;">
+              <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                    <th style="padding: 10px 12px;">Condición Laboral</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
+                    <th style="padding: 10px 12px; text-align: right; color: var(--accent-light);">Total Docentes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Principal</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Principal.total}</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Asociado</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Asociado.total}</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Auxiliar</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Auxiliar.total}</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
+                    <td style="padding: 10px 12px; font-weight: 700; color: #fbbf24;">Docente Contratado</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fbbf24;">${cd.Contratado.total}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
+                    <td style="padding: 10px 12px;">TOTAL CONDICIÓN UPT</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${g.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
+
         </div>
 
 
@@ -7010,18 +7051,18 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 1.1rem; font-weight: 800; color: #38bdf8;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TC</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje}%)</span></span>
                 </div>
 
-                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
+                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Título Prof.) -->
                 <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
                   <div style="width: ${pDr}%; height: 100%; background: #c084fc;" title="Doctores: ${f.doctor} (${pDr}%)"></div>
                   <div style="width: ${pMg}%; height: 100%; background: #06b6d4;" title="Maestros: ${f.maestro} (${pMg}%)"></div>
-                  <div style="width: ${pBach}%; height: 100%; background: #fbbf24;" title="Bachilleres: ${f.bachiller} (${pBach}%)"></div>
+                  <div style="width: ${pBach}%; height: 100%; background: #94a3b8;" title="Títulos Profesionales: ${f.bachiller} (${pBach}%)"></div>
                 </div>
 
                 <!-- Desglose por Grado en la Facultad -->
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; margin-top: 0.25rem;">
                   <span style="color: #c084fc;">Dr: <strong>${f.doctor}</strong></span>
                   <span style="color: #06b6d4;">Mg: <strong>${f.maestro}</strong></span>
-                  <span style="color: #fbbf24;">Bach: <strong>${f.bachiller}</strong></span>
+                  <span style="color: #94a3b8;">Título Prof.: <strong>${f.bachiller}</strong></span>
                 </div>
               </div>
             `;}).join("")}
@@ -7041,7 +7082,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px;">Facultad</th>
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
-                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
                     <th style="padding: 10px 12px; text-align: right; color: #38bdf8;">Total Docentes TC</th>
                     <th style="padding: 10px 12px; text-align: right; color: var(--text-200);">% del Total TC</th>
                   </tr>
@@ -7063,7 +7104,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO COMPLETO</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tcData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tcData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${tcData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${tcData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
                     <td style="padding: 10px 12px; text-align: right; color: #38bdf8; font-size: 1.05rem;">${tcData.total_tc}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
@@ -7145,7 +7186,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px;">Programa Académico / Carrera</th>
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
-                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
                     <th style="padding: 10px 12px; text-align: right; color: #38bdf8;">Total Docentes TC</th>
                   </tr>
                 </thead>
@@ -7156,7 +7197,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
-                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #fbbf24;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #94a3b8;">${p.bachiller}</td>
                       <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${p.total}</td>
                     </tr>
                   `).join("")}
@@ -7202,18 +7243,18 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 1.1rem; font-weight: 800; color: #ec4899;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TP</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</span></span>
                 </div>
 
-                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
+                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Título Prof.) -->
                 <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
                   <div style="width: ${pDr}%; height: 100%; background: #c084fc;" title="Doctores: ${f.doctor} (${pDr}%)"></div>
                   <div style="width: ${pMg}%; height: 100%; background: #06b6d4;" title="Maestros: ${f.maestro} (${pMg}%)"></div>
-                  <div style="width: ${pBach}%; height: 100%; background: #fbbf24;" title="Bachilleres: ${f.bachiller} (${pBach}%)"></div>
+                  <div style="width: ${pBach}%; height: 100%; background: #94a3b8;" title="Títulos Profesionales: ${f.bachiller} (${pBach}%)"></div>
                 </div>
 
                 <!-- Desglose por Grado en la Facultad -->
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; margin-top: 0.25rem;">
                   <span style="color: #c084fc;">Dr: <strong>${f.doctor}</strong></span>
                   <span style="color: #06b6d4;">Mg: <strong>${f.maestro}</strong></span>
-                  <span style="color: #fbbf24;">Bach: <strong>${f.bachiller}</strong></span>
+                  <span style="color: #94a3b8;">Título Prof.: <strong>${f.bachiller}</strong></span>
                 </div>
               </div>
             `;}).join("")}
@@ -7233,7 +7274,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px;">Facultad</th>
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
-                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
                     <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
                     <th style="padding: 10px 12px; text-align: right; color: var(--text-200);">% del Total TP</th>
                   </tr>
@@ -7255,7 +7296,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO PARCIAL</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tpData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tpData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
                     <td style="padding: 10px 12px; text-align: right; color: #ec4899; font-size: 1.05rem;">${tpData.total_tp}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
@@ -7337,7 +7378,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px;">Programa Académico / Carrera</th>
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
-                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
                     <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
                   </tr>
                 </thead>
@@ -7348,7 +7389,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
-                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #fbbf24;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #94a3b8;">${p.bachiller}</td>
                       <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #ec4899;">${p.total}</td>
                     </tr>
                   `).join("")}
