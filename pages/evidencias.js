@@ -6778,6 +6778,8 @@ const getRowCantidad = (r) => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
         <!-- Gráfico de Evolución Histórica de Docentes por Grado Académico -->
         <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
