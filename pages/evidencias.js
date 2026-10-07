@@ -6755,7 +6755,11 @@ const getRowCantidad = (r) => {
 
           <!-- Tarjetas Visuales por Facultad -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            ${tcData.facultades.map(f => `
+            ${tcData.facultades.map(f => {
+              const pDr = f.total > 0 ? ((f.doctor / f.total) * 100).toFixed(2) : 0;
+              const pMg = f.total > 0 ? ((f.maestro / f.total) * 100).toFixed(2) : 0;
+              const pBach = f.total > 0 ? ((f.bachiller / f.total) * 100).toFixed(2) : 0;
+              return `
               <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
@@ -6766,9 +6770,11 @@ const getRowCantidad = (r) => {
                   ${f.nombre_largo}
                 </div>
 
-                <!-- Barra de Progreso % del Total TC -->
-                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
-                  <div style="width: ${f.porcentaje}%; height: 100%; background: #38bdf8; border-radius: 6px;"></div>
+                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
+                  <div style="width: ${pDr}%; height: 100%; background: #c084fc;" title="Doctores: ${f.doctor} (${pDr}%)"></div>
+                  <div style="width: ${pMg}%; height: 100%; background: #06b6d4;" title="Maestros: ${f.maestro} (${pMg}%)"></div>
+                  <div style="width: ${pBach}%; height: 100%; background: #fbbf24;" title="Bachilleres: ${f.bachiller} (${pBach}%)"></div>
                 </div>
 
                 <!-- Desglose por Grado en la Facultad -->
@@ -6778,7 +6784,7 @@ const getRowCantidad = (r) => {
                   <span style="color: #fbbf24;">Bach: <strong>${f.bachiller}</strong></span>
                 </div>
               </div>
-            `).join("")}
+            `;}).join("")}
           </div>
 
           <!-- Tabla Matriz Detallada de Tiempo Completo por Facultad -->
@@ -6852,7 +6858,11 @@ const getRowCantidad = (r) => {
 
           <!-- Tarjetas Visuales por Facultad -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            ${tpData.facultades.map(f => `
+            ${tpData.facultades.map(f => {
+              const pDr = f.total > 0 ? ((f.doctor / f.total) * 100).toFixed(2) : 0;
+              const pMg = f.total > 0 ? ((f.maestro / f.total) * 100).toFixed(2) : 0;
+              const pBach = f.total > 0 ? ((f.bachiller / f.total) * 100).toFixed(2) : 0;
+              return `
               <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
@@ -6863,9 +6873,11 @@ const getRowCantidad = (r) => {
                   ${f.nombre_largo}
                 </div>
 
-                <!-- Barra de Progreso % del Total TP -->
-                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
-                  <div style="width: ${f.porcentaje}%; height: 100%; background: #ec4899; border-radius: 6px;"></div>
+                <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Bach) -->
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
+                  <div style="width: ${pDr}%; height: 100%; background: #c084fc;" title="Doctores: ${f.doctor} (${pDr}%)"></div>
+                  <div style="width: ${pMg}%; height: 100%; background: #06b6d4;" title="Maestros: ${f.maestro} (${pMg}%)"></div>
+                  <div style="width: ${pBach}%; height: 100%; background: #fbbf24;" title="Bachilleres: ${f.bachiller} (${pBach}%)"></div>
                 </div>
 
                 <!-- Desglose por Grado en la Facultad -->
@@ -6875,7 +6887,7 @@ const getRowCantidad = (r) => {
                   <span style="color: #fbbf24;">Bach: <strong>${f.bachiller}</strong></span>
                 </div>
               </div>
-            `).join("")}
+            `;}).join("")}
           </div>
 
           <!-- Tabla Matriz Detallada de Tiempo Parcial por Facultad -->
