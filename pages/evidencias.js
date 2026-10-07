@@ -8155,6 +8155,7 @@ const getRowCantidad = (r) => {
     }));
 
     const selEvoCarreraName = state.selectedEvoCarrera || "Derecho";
+    const carrerasOrdenadas = RENACYT_EXP_DATA.carrerasHist.slice().sort((a, b) => a.carrera.localeCompare(b.carrera));
     const evoCarreraObj = RENACYT_EXP_DATA.carrerasHist.find(c => c.carrera === selEvoCarreraName) || RENACYT_EXP_DATA.carrerasHist[0];
     const evoCarreraData = RENACYT_EXP_DATA.semestres.map((s, idx) => ({
       label: s,
@@ -8366,7 +8367,7 @@ const getRowCantidad = (r) => {
                 ${state.evolucionModo === 'facultad' ? `
                   <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-200); font-weight: 700;">Facultad:</span>
-                    <select id="renacyt-select-evo-fac" class="form-input" style="padding: 0.4rem 1.8rem 0.4rem 0.8rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid var(--accent); color: #ffffff; cursor: pointer;">
+                    <select id="renacyt-select-evo-fac" class="form-input" style="padding: 0.45rem 2.2rem 0.45rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid var(--accent); color: #ffffff; cursor: pointer;">
                       ${Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => `
                         <option value="${f}" ${f === selEvoFacName ? "selected" : ""}>${f} (${(RENACYT_EXP_DATA.facultadesHist[f] || [])[semIdx] || 0} docentes)</option>
                       `).join("")}
@@ -8375,8 +8376,8 @@ const getRowCantidad = (r) => {
                 ` : `
                   <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-200); font-weight: 700;">Carrera:</span>
-                    <select id="renacyt-select-evo-carrera" class="form-input" style="padding: 0.4rem 1.8rem 0.4rem 0.8rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid #fbbf24; color: #ffffff; cursor: pointer;">
-                      ${RENACYT_EXP_DATA.carrerasHist.map(c => `
+                    <select id="renacyt-select-evo-carrera" class="form-input" style="padding: 0.45rem 2.2rem 0.45rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid #fbbf24; color: #ffffff; cursor: pointer; max-width: 420px;">
+                      ${carrerasOrdenadas.map(c => `
                         <option value="${c.carrera}" ${c.carrera === selEvoCarreraName ? "selected" : ""}>${c.carrera} (${c.facultad})</option>
                       `).join("")}
                     </select>
@@ -8398,45 +8399,6 @@ const getRowCantidad = (r) => {
 
                 <div style="min-height: 260px; width: 100%; display: flex; align-items: center; justify-content: center; overflow-x: auto;">
                   ${generate3DBarChartSVG(state.evolucionModo === 'facultad' ? evoFacData : evoCarreraData, 780, 240)}
-                </div>
-              </div>
-
-              <!-- TABLA TEMPORAL MATRIZ -->
-              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
-                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
-                  MATRIZ TEMPORAL HISTÓRICA: ${state.evolucionModo === 'facultad' ? 'DOCENTES RENACYT POR FACULTAD' : 'DOCENTES RENACYT POR CARRERA PROFESIONAL'} (2017 - 2026)
-                </h4>
-
-                <div style="overflow-x: auto; width: 100%;">
-                  <table class="table" style="width: 100%; font-size: 0.82rem; border-collapse: collapse;">
-                    <thead>
-                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
-                        <th style="padding: 8px 10px;">${state.evolucionModo === 'facultad' ? 'Facultad' : 'Carrera Profesional'}</th>
-                        ${RENACYT_EXP_DATA.semestres.map(s => `<th style="padding: 8px 6px; text-align: center; font-size: 0.75rem; ${s === activeSem ? 'color: #10b981; font-weight: 800;' : ''}">${s}</th>`).join("")}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${state.evolucionModo === 'facultad' ? 
-                        Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => `
-                          <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${f === selEvoFacName ? 'background: rgba(56,189,248,0.1);' : ''} color: var(--text-200);">
-                            <td style="padding: 8px 10px; font-weight: 800; color: ${f === selEvoFacName ? '#38bdf8' : '#fff'};">${f}</td>
-                            ${RENACYT_EXP_DATA.facultadesHist[f].map((val, idx) => `
-                              <td style="padding: 8px 6px; text-align: center; font-weight: ${val > 0 ? '800' : '400'}; color: ${val > 0 ? (idx === semIdx ? '#10b981' : '#38bdf8') : 'var(--text-400)'};">${val}</td>
-                            `).join("")}
-                          </tr>
-                        `).join("")
-                        :
-                        RENACYT_EXP_DATA.carrerasHist.map(c => `
-                          <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${c.carrera === selEvoCarreraName ? 'background: rgba(251,191,36,0.1);' : ''} color: var(--text-200);">
-                            <td style="padding: 8px 10px; font-weight: 700; color: ${c.carrera === selEvoCarreraName ? '#fbbf24' : '#fff'};">${c.carrera} <span style="font-size: 0.72rem; color: var(--text-400);">(${c.facultad})</span></td>
-                            ${c.datos.map((val, idx) => `
-                              <td style="padding: 8px 6px; text-align: center; font-weight: ${val > 0 ? '800' : '400'}; color: ${val > 0 ? (idx === semIdx ? '#10b981' : '#fbbf24') : 'var(--text-400)'};">${val}</td>
-                            `).join("")}
-                          </tr>
-                        `).join("")
-                      }
-                    </tbody>
-                  </table>
                 </div>
               </div>
 
