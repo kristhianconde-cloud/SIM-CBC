@@ -6316,6 +6316,69 @@ const getRowCantidad = (r) => {
     }
   };
 
+  const DOCENTES_TP_FACULTAD = {
+    "2024-I": {
+      semestre: "2024-I",
+      total_tp: 344,
+      facultades: [
+        { facultad: "FAEDCOH", nombre_largo: "Facultad de Educación, Comunicación y Humanidades", doctor: 5, maestro: 26, bachiller: 0, total: 31, porcentaje: 9.01 },
+        { facultad: "FACEM", nombre_largo: "Facultad de Ciencias Empresariales", doctor: 10, maestro: 41, bachiller: 2, total: 53, porcentaje: 15.41 },
+        { facultad: "FADE", nombre_largo: "Facultad de Derecho y Ciencias Políticas", doctor: 9, maestro: 35, bachiller: 1, total: 45, porcentaje: 13.08 },
+        { facultad: "FACSA", nombre_largo: "Facultad de Ciencias de la Salud", doctor: 8, maestro: 114, bachiller: 0, total: 122, porcentaje: 35.47 },
+        { facultad: "FAING", nombre_largo: "Facultad de Ingeniería", doctor: 11, maestro: 57, bachiller: 2, total: 70, porcentaje: 20.35 },
+        { facultad: "FAU", nombre_largo: "Facultad de Arquitectura y Urbanismo", doctor: 1, maestro: 16, bachiller: 6, total: 23, porcentaje: 6.69 }
+      ]
+    },
+    "2024-II": {
+      semestre: "2024-II",
+      total_tp: 375,
+      facultades: [
+        { facultad: "FAEDCOH", nombre_largo: "Facultad de Educación, Comunicación y Humanidades", doctor: 6, maestro: 29, bachiller: 0, total: 35, porcentaje: 9.33 },
+        { facultad: "FACEM", nombre_largo: "Facultad de Ciencias Empresariales", doctor: 8, maestro: 38, bachiller: 2, total: 48, porcentaje: 12.80 },
+        { facultad: "FADE", nombre_largo: "Facultad de Derecho y Ciencias Políticas", doctor: 11, maestro: 31, bachiller: 1, total: 43, porcentaje: 11.47 },
+        { facultad: "FACSA", nombre_largo: "Facultad de Ciencias de la Salud", doctor: 8, maestro: 141, bachiller: 0, total: 149, porcentaje: 39.73 },
+        { facultad: "FAING", nombre_largo: "Facultad de Ingeniería", doctor: 11, maestro: 66, bachiller: 1, total: 78, porcentaje: 20.80 },
+        { facultad: "FAU", nombre_largo: "Facultad de Arquitectura y Urbanismo", doctor: 2, maestro: 17, bachiller: 3, total: 22, porcentaje: 5.87 }
+      ]
+    },
+    "2025-I": {
+      semestre: "2025-I",
+      total_tp: 379,
+      facultades: [
+        { facultad: "FAEDCOH", nombre_largo: "Facultad de Educación, Comunicación y Humanidades", doctor: 8, maestro: 28, bachiller: 0, total: 36, porcentaje: 9.50 },
+        { facultad: "FACEM", nombre_largo: "Facultad de Ciencias Empresariales", doctor: 12, maestro: 48, bachiller: 2, total: 62, porcentaje: 16.36 },
+        { facultad: "FADE", nombre_largo: "Facultad de Derecho y Ciencias Políticas", doctor: 12, maestro: 32, bachiller: 1, total: 45, porcentaje: 11.87 },
+        { facultad: "FACSA", nombre_largo: "Facultad de Ciencias de la Salud", doctor: 10, maestro: 120, bachiller: 0, total: 130, porcentaje: 34.30 },
+        { facultad: "FAING", nombre_largo: "Facultad de Ingeniería", doctor: 12, maestro: 70, bachiller: 0, total: 82, porcentaje: 21.64 },
+        { facultad: "FAU", nombre_largo: "Facultad de Arquitectura y Urbanismo", doctor: 2, maestro: 20, bachiller: 2, total: 24, porcentaje: 6.33 }
+      ]
+    },
+    "2025-II": {
+      semestre: "2025-II",
+      total_tp: 406,
+      facultades: [
+        { facultad: "FAEDCOH", nombre_largo: "Facultad de Educación, Comunicación y Humanidades", doctor: 8, maestro: 30, bachiller: 0, total: 38, porcentaje: 9.36 },
+        { facultad: "FACEM", nombre_largo: "Facultad de Ciencias Empresariales", doctor: 12, maestro: 51, bachiller: 2, total: 65, porcentaje: 16.01 },
+        { facultad: "FADE", nombre_largo: "Facultad de Derecho y Ciencias Políticas", doctor: 12, maestro: 33, bachiller: 1, total: 46, porcentaje: 11.33 },
+        { facultad: "FACSA", nombre_largo: "Facultad de Ciencias de la Salud", doctor: 11, maestro: 137, bachiller: 0, total: 148, porcentaje: 36.45 },
+        { facultad: "FAING", nombre_largo: "Facultad de Ingeniería", doctor: 11, maestro: 73, bachiller: 0, total: 84, porcentaje: 20.69 },
+        { facultad: "FAU", nombre_largo: "Facultad de Arquitectura y Urbanismo", doctor: 2, maestro: 20, bachiller: 3, total: 25, porcentaje: 6.16 }
+      ]
+    },
+    "2026-I": {
+      semestre: "2026-I",
+      total_tp: 380,
+      facultades: [
+        { facultad: "FAEDCOH", nombre_largo: "Facultad de Educación, Comunicación y Humanidades", doctor: 8, maestro: 31, bachiller: 0, total: 39, porcentaje: 10.26 },
+        { facultad: "FACEM", nombre_largo: "Facultad de Ciencias Empresariales", doctor: 13, maestro: 45, bachiller: 1, total: 59, porcentaje: 15.53 },
+        { facultad: "FADE", nombre_largo: "Facultad de Derecho y Ciencias Políticas", doctor: 14, maestro: 34, bachiller: 1, total: 49, porcentaje: 12.89 },
+        { facultad: "FACSA", nombre_largo: "Facultad de Ciencias de la Salud", doctor: 14, maestro: 111, bachiller: 0, total: 125, porcentaje: 32.89 },
+        { facultad: "FAING", nombre_largo: "Facultad de Ingeniería", doctor: 15, maestro: 66, bachiller: 1, total: 82, porcentaje: 21.58 },
+        { facultad: "FAU", nombre_largo: "Facultad de Arquitectura y Urbanismo", doctor: 2, maestro: 21, bachiller: 3, total: 26, porcentaje: 6.84 }
+      ]
+    }
+  };
+
   const drawDocentesDashboard = (subTabContent) => {
     if (!subTabContent) return;
 
@@ -6335,6 +6398,7 @@ const getRowCantidad = (r) => {
     const gen = semData.genero;
     const gj = semData.grado_jornada;
     const tcData = DOCENTES_TC_FACULTAD[activeSem] || DOCENTES_TC_FACULTAD["2026-I"];
+    const tpData = DOCENTES_TP_FACULTAD[activeSem] || DOCENTES_TP_FACULTAD["2026-I"];
 
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
@@ -6757,6 +6821,103 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tcData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${tcData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
                     <td style="padding: 10px 12px; text-align: right; color: #38bdf8; font-size: 1.05rem;">${tcData.total_tc}</td>
+                    <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+        <!-- SECCIÓN: DOCENTES A TIEMPO PARCIAL (TP) POR FACULTAD -->
+        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0.5rem;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+            <div>
+              <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="clock-3" style="color: #ec4899; width: 24px; height: 24px;"></i>
+                <span>DOCENTES A TIEMPO PARCIAL (TP) POR FACULTAD</span>
+              </h3>
+              <p style="color: var(--text-300); font-size: 0.85rem; margin: 4px 0 0 0;">
+                Distribución institucional de docentes con jornada a Tiempo Parcial según facultad y grado académico (${activeSem})
+              </p>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+              <div style="background: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.25); color: #ec4899; padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+                <span>Total TP: ${tpData.total_tp} docentes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjetas Visuales por Facultad -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            ${tpData.facultades.map(f => `
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #ec4899;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TP</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</span></span>
+                </div>
+                
+                <div style="font-size: 0.75rem; color: var(--text-400); font-weight: 600; line-height: 1.2; height: 28px;">
+                  ${f.nombre_largo}
+                </div>
+
+                <!-- Barra de Progreso % del Total TP -->
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                  <div style="width: ${f.porcentaje}%; height: 100%; background: #ec4899; border-radius: 6px;"></div>
+                </div>
+
+                <!-- Desglose por Grado en la Facultad -->
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; margin-top: 0.25rem;">
+                  <span style="color: #c084fc;">Dr: <strong>${f.doctor}</strong></span>
+                  <span style="color: #06b6d4;">Mg: <strong>${f.maestro}</strong></span>
+                  <span style="color: #fbbf24;">Bach: <strong>${f.bachiller}</strong></span>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <!-- Tabla Matriz Detallada de Tiempo Parcial por Facultad -->
+          <div style="margin-top: 0.5rem;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="table" style="width: 16px; height: 16px; color: var(--accent-light);"></i>
+              TABLA DETALLADA: DOCENTES A TIEMPO PARCIAL POR FACULTAD Y GRADO ACADÉMICO (${activeSem})
+            </h4>
+
+            <div style="overflow-x: auto; width: 100%;">
+              <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                    <th style="padding: 10px 12px;">Facultad</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #fbbf24;">Bachiller</th>
+                    <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
+                    <th style="padding: 10px 12px; text-align: right; color: var(--text-200);">% del Total TP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${tpData.facultades.map(f => `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                      <td style="padding: 10px 12px; font-weight: 700; color: #fff;">
+                        ${f.facultad} <span style="font-size: 0.78rem; color: var(--text-400); font-weight: 400;">(${f.nombre_largo})</span>
+                      </td>
+                      <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
+                      <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
+                      <td style="padding: 10px 12px; text-align: center;">${f.bachiller}</td>
+                      <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${f.total}</td>
+                      <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+                <tfoot>
+                  <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(236,72,153,0.08);">
+                    <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO PARCIAL</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tpData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tpData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center; color: #fbbf24;">${tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: right; color: #ec4899; font-size: 1.05rem;">${tpData.total_tp}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
                 </tfoot>
