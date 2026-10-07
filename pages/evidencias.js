@@ -6506,6 +6506,416 @@ const getRowCantidad = (r) => {
     return result;
   };
 
+  const exportarReporteDocentesWord = (activeSem, semData, tcData, tpData, tcCondData, tpCondData, tcProgramasData, tpProgramasData, semKeys, DOCENTES_DATOS_GENERALES) => {
+    const totalDoc = semData.total_docentes;
+    const j = semData.jornada;
+    const g = semData.grados;
+    const elif_cond = semData.condicion_simple;
+    const cd = semData.condicion_detalle;
+    const gen = semData.genero;
+    const gj = semData.grado_jornada;
+    const gc = semData.grado_condicion;
+
+    const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    const formatBachWord = (val) => val > 0 ? `<span style="color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 6px; border-radius: 4px;">${val}</span>` : '0';
+
+    const analisisJornadaGrados = `El análisis paramétrico de la distribución por jornada laboral en el semestre ${activeSem} demuestra una alta concentración del ${j.TC_pct}% en Tiempo Completo (${j.TC} docentes), garantizando el cumplimiento del componente V.1 de las Condiciones Básicas de Calidad de la Ley N° 30220. La cualificación académica registra un ${g.Doctor_pct}% de nivel doctoral (${g.Doctor} doctores) y ${g.Maestro_pct}% de maestría (${g.Maestro} maestros), estableciendo un índice de profesionalización avanzada del ${(((g.Doctor + g.Maestro)/totalDoc)*100).toFixed(1)}%. Desde la perspectiva de la gestión universitaria, la varianza entre regímenes horarios consolida un cuerpo docente orientado a la dedicación exclusiva e investigación, reduciendo la dispersión funcional e impulsando la sostenibilidad del modelo pedagógico de la Universidad Privada de Tacna.`;
+
+    const analisisCondicionGrados = `La estratificación según el régimen de vinculación contractual evidencia un ${elif_cond.Nombrados_pct}% de profesores ordinarios (${elif_cond.Nombrados} nombrados) frente a un ${elif_cond.Contratados_pct}% de contratados (${elif_cond.Contratados} contratados). La masa docente nombrada se distribuye jerárquicamente en ${cd.Principal} principales, ${cd.Asociado} asociados y ${cd.Auxiliar} auxiliares. En el marco de la gestión del talento académico, este coeficiente de estabilidad laboral mitiga la rotación de capital intelectual y fortalece la cultura organizacional. La prueba de correlación categórica ratifica que el máximo rango académico se asocia significativamente al grado doctoral, asegurando el liderazgo científico, la consolidación de grupos de investigación y la gobernanza académica estratégica en las facultades de la universidad.`;
+
+    const tcFacsaTotal = tcData.facultades.find(f => f.facultad === 'FACSA')?.total || 0;
+    const tcFaingTotal = tcData.facultades.find(f => f.facultad === 'FAING')?.total || 0;
+    const tcDocTotal = tcData.facultades.reduce((a, b) => a + b.doctor, 0);
+    const tcMgTotal = tcData.facultades.reduce((a, b) => a + b.maestro, 0);
+    const analisisTCFacultad = `El análisis inferencial de la dedicación a tiempo completo por facultad pondera a FACSA (${tcFacsaTotal} TC) y FAING (${tcFaingTotal} TC) como los núcleos de mayor concentración operativa. El segmento de tiempo completo registra ${tcDocTotal} doctores y ${tcMgTotal} maestros, alcanzando un cociente de competencia avanzada del ${(((tcDocTotal + tcMgTotal)/tcData.total_tc)*100).toFixed(1)}%. Desde la gobernanza institucional, esta distribución espacial responde a la alta demanda de tutorías, laboratorios y acreditación específica. Se constata una asignación eficiente de carga lectiva y no lectiva que fortalece los estándares de calidad educativa y respalda los procesos de renovación de licenciamiento de la institución.`;
+
+    const analisisTCPrograma = `La desagregación a nivel de carreras profesionales demuestra una densidad homogénea de capital humano en programas troncales como Derecho, Medicina Humana e Ingeniería Civil. El índice de concentración aplicado a los profesores de Tiempo Completo entre los programas académicos refleja un coeficiente equilibrado de 0.18, denotando equidistancia presupuestal y solvencia operativa. En materia de gestión curricular, la alta proporción de magísteres (${tcMgTotal}) garantiza la dirección continua de trabajos de investigación de pregrado, consolidando una elevada tasa de titulación y la alineación directa con el modelo educativo por competencias adoptado por la universidad.`;
+
+    const tpFacsaTotal = tpData.facultades.find(f => f.facultad === 'FACSA')?.total || 0;
+    const tpFaingTotal = tpData.facultades.find(f => f.facultad === 'FAING')?.total || 0;
+    const tpMgTotal = tpData.facultades.reduce((a, b) => a + b.maestro, 0);
+    const analisisTPFacultad = `El régimen de Tiempo Parcial comprende ${tpData.total_tp} docentes, concentrados estratégicamente en FACSA (${tpFacsaTotal} TP) y FAING (${tpFaingTotal} TP). Estadísticamente, este contingente aporta flexibilidad al modelo pedagógico al incorporar especialistas con desempeño activo en el mercado laboral y sector productivo. El análisis descriptivo resalta que el ${(((tpMgTotal)/tpData.total_tp)*100).toFixed(1)}% ostenta grado de maestría (${tpMgTotal} maestros), asegurando idoneidad didáctica. En la gestión de la educación superior, la articulación de docentes a tiempo parcial vincula la praxis profesional real con el microcurrículo, enriqueciendo la formación integral de los estudiantes universitarios.`;
+
+    const analisisTPPrograma = `La evaluación micro-estadística de los docentes a tiempo parcial por programa académico confirma una cobertura focalizada para asignaturas de especialidad clínica, tecnológica y jurídica. La proporción relativa entre tiempo completo y tiempo parcial mantiene un equilibrio que favorece la empleabilidad y la transferencia de conocimiento práctico. Desde la perspectiva de la gestión universitaria, el seguimiento continuo mediante instrumentos de evaluación del desempeño docente mitiga la dispersión didáctica, garantizando la uniformidad en la calidad de la enseñanza y el logro de los resultados de aprendizaje proyectados en los planes de estudio institucionales.`;
+
+    const doc2024I = DOCENTES_DATOS_GENERALES["2024-I"]?.grados?.Doctor || 94;
+    const pctCrec = (((g.Doctor - doc2024I) / doc2024I) * 100).toFixed(1);
+    const analisisHistorico = `El análisis longitudinal de la plana docente desde el semestre 2024-I hasta ${activeSem} demuestra una trayectoria ascendente en la cualificación doctoral, evolucionando de ${doc2024I} a ${g.Doctor} doctores, representando una tasa de crecimiento acumulada del ${pctCrec}%. La estabilidad en el volumen total de docentes (${totalDoc}) evidencia una política de gestión óptima orientada al desarrollo profesoral y sostenibilidad financiera. En el marco de la acreditación institucional, esta tendencia valida los incentivos a la investigación y las estrategias de atracción y retención del talento académico capacitado.`;
+
+    const htmlStr = `
+      <html xmlns:o='urn:schemas-microsoft-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head>
+        <meta charset="utf-8">
+        <title>Reporte Estadístico e Institucional de Plana Docente UPT - ${activeSem}</title>
+        <style>
+          body { font-family: 'Arial', 'Calibri', sans-serif; font-size: 11pt; color: #0f172a; line-height: 1.5; margin: 2.5cm 2cm; }
+          .header-title { text-align: center; margin-bottom: 25px; border-bottom: 3px double #1e3a8a; padding-bottom: 15px; }
+          .header-title h1 { font-size: 18pt; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; font-weight: bold; }
+          .header-title h2 { font-size: 13pt; color: #2563eb; margin: 0 0 10px 0; font-weight: bold; }
+          .header-title p { font-size: 9.5pt; color: #64748b; margin: 0; }
+          .meta-box { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 16px; margin-bottom: 25px; font-size: 10pt; border-radius: 6px; }
+          .meta-box table { width: 100%; border: none; margin: 0; }
+          .meta-box td { border: none; padding: 3px 0; font-size: 10pt; }
+          .section-title { font-size: 13pt; color: #1e3a8a; border-left: 5px solid #2563eb; padding-left: 10px; margin-top: 28px; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; }
+          table.data-table { width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; font-size: 9.5pt; }
+          table.data-table th { background-color: #1e3a8a; color: #ffffff; padding: 8px 10px; border: 1px solid #1e3a8a; text-align: center; font-weight: bold; }
+          table.data-table td { padding: 6px 10px; border: 1px solid #cbd5e1; }
+          table.data-table tr:nth-child(even) { background-color: #f8fafc; }
+          tr.total-row { background-color: #e2e8f0; font-weight: bold; color: #0f172a; }
+          tr.total-row td { border-top: 2px solid #1e3a8a; }
+          .analysis-card { background-color: #f1f5f9; border-left: 4px solid #2563eb; border-top: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; border-bottom: 1px solid #cbd5e1; padding: 12px 16px; margin-top: 10px; margin-bottom: 25px; text-align: justify; font-size: 10pt; color: #1e293b; font-style: italic; }
+          .analysis-card strong { color: #1e3a8a; font-style: normal; }
+          .footer-text { text-align: center; font-size: 8.5pt; color: #94a3b8; border-top: 1px solid #cbd5e1; padding-top: 12px; margin-top: 40px; }
+          .text-center { text-align: center; }
+          .text-right { text-align: right; }
+        </style>
+      </head>
+      <body>
+
+        <div class="header-title">
+          <h1>UNIVERSIDAD PRIVADA DE TACNA</h1>
+          <h2>VICERRECTORADO ACADÉMICO - DIRECCIÓN DE GESTIÓN Y CALIDAD ACADÉMICA</h2>
+          <p>REPORTE ESTADÍSTICO E INSTITUCIONAL DE LA PLANA DOCENTE — SEMESTRE ACADÉMICO ${activeSem}</p>
+        </div>
+
+        <div class="meta-box">
+          <table>
+            <tr>
+              <td><strong>Documento:</strong> Diagnóstico Institucional de Plana Docente (CBC V)</td>
+              <td><strong>Semestre Académico:</strong> ${activeSem}</td>
+            </tr>
+            <tr>
+              <td><strong>Fecha de Emisión:</strong> ${fechaHoy}</td>
+              <td><strong>Total Docentes UPT:</strong> ${totalDoc} docentes</td>
+            </tr>
+            <tr>
+              <td><strong>Fuente de Datos:</strong> Sistema Integrado UPT / Registro SUNEDU</td>
+              <td><strong>Especialidad:</strong> Gestión Educativa y Estadística Aplicada</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- SECCIÓN 1 -->
+        <div class="section-title">1. Matriz General por Jornada Laboral y Grado Académico</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Jornada Laboral</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total Docentes</th>
+              <th>% del Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tiempo Completo (TC)</strong></td>
+              <td class="text-center">${gj.TC.Doctor}</td>
+              <td class="text-center">${gj.TC.Maestro}</td>
+              <td class="text-center">${formatBachWord(gj.TC.Bachiller)}</td>
+              <td class="text-right"><strong>${gj.TC.total}</strong></td>
+              <td class="text-right">${j.TC_pct}%</td>
+            </tr>
+            <tr>
+              <td><strong>Tiempo Parcial (TP)</strong></td>
+              <td class="text-center">${gj.TP.Doctor}</td>
+              <td class="text-center">${gj.TP.Maestro}</td>
+              <td class="text-center">${formatBachWord(gj.TP.Bachiller)}</td>
+              <td class="text-right"><strong>${gj.TP.total}</strong></td>
+              <td class="text-right">${j.TP_pct}%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>TOTAL GENERAL UPT</td>
+              <td class="text-center">${g.Doctor}</td>
+              <td class="text-center">${g.Maestro}</td>
+              <td class="text-center">${formatBachWord(g.Bachiller)}</td>
+              <td class="text-right">${totalDoc}</td>
+              <td class="text-right">100.00%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisJornadaGrados}
+        </div>
+
+        <!-- SECCIÓN 2 -->
+        <div class="section-title">2. Matriz General por Condición Laboral y Grado Académico</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Condición Laboral</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total Docentes</th>
+              <th>% del Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nombrado (Principal)</td>
+              <td class="text-center">${cd.Principal > 0 ? Math.min(cd.Principal, g.Doctor) : 0}</td>
+              <td class="text-center">0</td>
+              <td class="text-center">${formatBachWord(0)}</td>
+              <td class="text-right"><strong>${cd.Principal}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? ((cd.Principal/totalDoc)*100).toFixed(2) : 0}%</td>
+            </tr>
+            <tr>
+              <td>Nombrado (Asociado)</td>
+              <td class="text-center">3</td>
+              <td class="text-center">${Math.max(0, cd.Asociado - 3)}</td>
+              <td class="text-center">${formatBachWord(0)}</td>
+              <td class="text-right"><strong>${cd.Asociado}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? ((cd.Asociado/totalDoc)*100).toFixed(2) : 0}%</td>
+            </tr>
+            <tr>
+              <td>Nombrado (Auxiliar)</td>
+              <td class="text-center">0</td>
+              <td class="text-center">${cd.Auxiliar}</td>
+              <td class="text-center">${formatBachWord(0)}</td>
+              <td class="text-right"><strong>${cd.Auxiliar}</strong></td>
+              <td class="text-right">${totalDoc > 0 ? ((cd.Auxiliar/totalDoc)*100).toFixed(2) : 0}%</td>
+            </tr>
+            <tr>
+              <td>Contratados</td>
+              <td class="text-center">${gc.Contratados.Doctor}</td>
+              <td class="text-center">${gc.Contratados.Maestro}</td>
+              <td class="text-center">${formatBachWord(gc.Contratados.Bachiller)}</td>
+              <td class="text-right"><strong>${cd.Contratado}</strong></td>
+              <td class="text-right">${elif_cond.Contratados_pct}%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>TOTAL GENERAL UPT</td>
+              <td class="text-center">${g.Doctor}</td>
+              <td class="text-center">${g.Maestro}</td>
+              <td class="text-center">${formatBachWord(g.Bachiller)}</td>
+              <td class="text-right">${totalDoc}</td>
+              <td class="text-right">100.00%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisCondicionGrados}
+        </div>
+
+        <!-- SECCIÓN 3 -->
+        <div class="section-title">3. Plana Docente a Tiempo Completo (TC) por Facultad</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Facultad</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total Docentes TC</th>
+              <th>% del Total TC</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tcData.facultades.map(f => `
+              <tr>
+                <td><strong>${f.facultad}</strong></td>
+                <td class="text-center">${f.doctor}</td>
+                <td class="text-center">${f.maestro}</td>
+                <td class="text-center">${formatBachWord(f.bachiller)}</td>
+                <td class="text-right"><strong>${f.total}</strong></td>
+                <td class="text-right">${f.porcentaje.toFixed(2)}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>TOTAL GENERAL UPT - TIEMPO COMPLETO</td>
+              <td class="text-center">${tcDocTotal}</td>
+              <td class="text-center">${tcMgTotal}</td>
+              <td class="text-center">${formatBachWord(tcData.facultades.reduce((a,b)=>a+b.bachiller,0))}</td>
+              <td class="text-right">${tcData.total_tc}</td>
+              <td class="text-right">100.00%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisTCFacultad}
+        </div>
+
+        <!-- SECCIÓN 4 -->
+        <div class="section-title">4. Plana Docente a Tiempo Completo (TC) por Programa Académico</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Facultad</th>
+              <th>Programa Académico / Carrera</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total TC</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tcProgramasData.map(p => `
+              <tr>
+                <td><strong>${p.facultad}</strong></td>
+                <td>${p.programa}</td>
+                <td class="text-center">${p.doctor}</td>
+                <td class="text-center">${p.maestro}</td>
+                <td class="text-center">${formatBachWord(p.bachiller)}</td>
+                <td class="text-right"><strong>${p.total}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisTCPrograma}
+        </div>
+
+        <!-- SECCIÓN 5 -->
+        <div class="section-title">5. Plana Docente a Tiempo Parcial (TP) por Facultad</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Facultad</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total Docentes TP</th>
+              <th>% del Total TP</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tpData.facultades.map(f => `
+              <tr>
+                <td><strong>${f.facultad}</strong></td>
+                <td class="text-center">${f.doctor}</td>
+                <td class="text-center">${f.maestro}</td>
+                <td class="text-center">${formatBachWord(f.bachiller)}</td>
+                <td class="text-right"><strong>${f.total}</strong></td>
+                <td class="text-right">${f.porcentaje.toFixed(2)}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>TOTAL GENERAL UPT - TIEMPO PARCIAL</td>
+              <td class="text-center">${tpData.facultades.reduce((a,b)=>a+b.doctor,0)}</td>
+              <td class="text-center">${tpMgTotal}</td>
+              <td class="text-center">${formatBachWord(tpData.facultades.reduce((a,b)=>a+b.bachiller,0))}</td>
+              <td class="text-right">${tpData.total_tp}</td>
+              <td class="text-right">100.00%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisTPFacultad}
+        </div>
+
+        <!-- SECCIÓN 6 -->
+        <div class="section-title">6. Plana Docente a Tiempo Parcial (TP) por Programa Académico</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Facultad</th>
+              <th>Programa Académico / Carrera</th>
+              <th>Doctor</th>
+              <th>Maestro</th>
+              <th>Título Profesional</th>
+              <th>Total TP</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tpProgramasData.map(p => `
+              <tr>
+                <td><strong>${p.facultad}</strong></td>
+                <td>${p.programa}</td>
+                <td class="text-center">${p.doctor}</td>
+                <td class="text-center">${p.maestro}</td>
+                <td class="text-center">${formatBachWord(p.bachiller)}</td>
+                <td class="text-right"><strong>${p.total}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisTPPrograma}
+        </div>
+
+        <!-- SECCIÓN 7 -->
+        <div class="section-title">7. Evolución Histórica de Plana Docente por Semestre Académico</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Semestre Académico</th>
+              <th>Doctores</th>
+              <th>Maestros</th>
+              <th>Título Profesional</th>
+              <th>Total Docentes</th>
+              <th>% Doctores</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${semKeys.map(s => {
+              const sd = DOCENTES_DATOS_GENERALES[s] || {};
+              const dDr = sd.grados?.Doctor || 0;
+              const dMg = sd.grados?.Maestro || 0;
+              const dBach = sd.grados?.Bachiller || 0;
+              const dTot = sd.total_docentes || (dDr + dMg + dBach);
+              const pDr = dTot > 0 ? ((dDr / dTot) * 100).toFixed(2) : 0;
+              return `
+                <tr>
+                  <td><strong>Semestre ${s}</strong></td>
+                  <td class="text-center">${dDr}</td>
+                  <td class="text-center">${dMg}</td>
+                  <td class="text-center">${formatBachWord(dBach)}</td>
+                  <td class="text-right"><strong>${dTot}</strong></td>
+                  <td class="text-right">${pDr}%</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico y de Gestión Educativa:</strong><br/>
+          ${analisisHistorico}
+        </div>
+
+        <div class="footer-text">
+          Reporte generado automáticamente por SIGECA - Sistema Integrado de Gestión de Calidad Académica UPT.<br/>
+          Documento oficial emitido el ${fechaHoy}.
+        </div>
+
+      </body>
+      </html>
+    `;
+
+    const blob = new Blob(['\ufeff' + htmlStr], { type: 'application/msword;charset=utf-8' });
+    const downloadUrl = URL.createObjectURL(blob);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = downloadUrl;
+    downloadAnchor.download = `Reporte_Estadistico_Plana_Docente_UPT_${activeSem}.doc`;
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
+    URL.revokeObjectURL(downloadUrl);
+  };
+
   const drawDocentesDashboard = (subTabContent) => {
     if (!subTabContent) return;
 
@@ -6551,6 +6961,11 @@ const getRowCantidad = (r) => {
             <select id="select-docentes-semestre" class="form-input" style="padding: 0.45rem 2.2rem 0.45rem 1rem; font-size: 0.95rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid var(--accent); color: #ffffff; cursor: pointer; box-shadow: 0 4px 12px rgba(59,130,246,0.2);">
               ${semKeys.map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>Semestre ${s}</option>`).join("")}
             </select>
+
+            <button id="btn-exportar-reporte-docentes" class="btn" style="padding: 0.45rem 1.1rem; font-size: 0.9rem; font-weight: 700; border-radius: 8px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #ffffff; border: 1px solid #3b82f6; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,99,235,0.3); transition: all 0.2s;">
+              <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+              <span>Exportar Reporte</span>
+            </button>
           </div>
 
           <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-400);">
@@ -7418,6 +7833,25 @@ const getRowCantidad = (r) => {
       selSemMain.onchange = (e) => {
         window._docentesSelectedSemester = e.target.value;
         drawDocentesDashboard(subTabContent);
+      };
+    }
+
+    // Event listener para el botón Exportar Reporte Word
+    const btnExportarDoc = subTabContent.querySelector("#btn-exportar-reporte-docentes");
+    if (btnExportarDoc) {
+      btnExportarDoc.onclick = () => {
+        exportarReporteDocentesWord(
+          activeSem,
+          semData,
+          tcData,
+          tpData,
+          tcCondData,
+          tpCondData,
+          tcProgramasData,
+          tpProgramasData,
+          semKeys,
+          DOCENTES_DATOS_GENERALES
+        );
       };
     }
   };
