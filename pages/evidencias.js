@@ -6654,10 +6654,10 @@ const getRowCantidad = (r) => {
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Tiempo Parcial (TP)</span>
-                    <span><strong style="color: #ec4899;">${j.TP} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></span>
+                    <span><strong style="color: #ffffff;">${j.TP} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${j.TP_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
-                    <div style="width: ${j.TP_pct}%; height: 100%; background: #ec4899; border-radius: 6px;"></div>
+                    <div style="width: ${j.TP_pct}%; height: 100%; background: #ffffff; border-radius: 6px;"></div>
                   </div>
                 </div>
               </div>
@@ -6940,7 +6940,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px; text-align: center;">${gj.TP.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${gj.TP.Maestro}</td>
                     <td style="padding: 10px 12px; text-align: center;">${renderTPVal(gj.TP.Bachiller)}</td>
-                    <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${gj.TP.total}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ffffff;">${gj.TP.total}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -7221,7 +7221,7 @@ const getRowCantidad = (r) => {
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
             <div>
               <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin: 0; display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="clock-3" style="color: #ec4899; width: 24px; height: 24px;"></i>
+                <i data-lucide="clock-3" style="color: #ffffff; width: 24px; height: 24px;"></i>
                 <span>DOCENTES A TIEMPO PARCIAL (TP) POR FACULTAD</span>
               </h3>
               <p style="color: var(--text-300); font-size: 0.85rem; margin: 4px 0 0 0;">
@@ -7230,7 +7230,7 @@ const getRowCantidad = (r) => {
             </div>
             
             <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-              <div style="background: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.25); color: #ec4899; padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+              <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
                 <i data-lucide="users" style="width: 16px; height: 16px;"></i>
                 <span>Total TP: ${tpData.total_tp} docentes</span>
               </div>
@@ -7247,7 +7247,7 @@ const getRowCantidad = (r) => {
               <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <span style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
-                  <span style="font-size: 1.1rem; font-weight: 800; color: #ec4899;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TP</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</span></span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">${f.total} <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 600;">TP</span> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</span></span>
                 </div>
 
                 <!-- Barra Segmentada de Grados Académicos (Dr, Mg, Título Prof.) -->
@@ -7282,7 +7282,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
                     <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
-                    <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
+                    <th style="padding: 10px 12px; text-align: right; color: #ffffff;">Total Docentes TP</th>
                     <th style="padding: 10px 12px; text-align: right; color: var(--text-200);">% del Total TP</th>
                   </tr>
                 </thead>
@@ -7293,18 +7293,18 @@ const getRowCantidad = (r) => {
                       <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
                       <td style="padding: 10px 12px; text-align: center;">${renderTPVal(f.bachiller)}</td>
-                      <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${f.total}</td>
+                      <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ffffff;">${f.total}</td>
                       <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</td>
                     </tr>
                   `).join("")}
                 </tbody>
                 <tfoot>
-                  <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(236,72,153,0.08);">
+                  <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(255,255,255,0.06);">
                     <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO PARCIAL</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tpData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tpData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center;">${renderTPVal(tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0))}</td>
-                    <td style="padding: 10px 12px; text-align: right; color: #ec4899; font-size: 1.05rem;">${tpData.total_tp}</td>
+                    <td style="padding: 10px 12px; text-align: right; color: #ffffff; font-size: 1.05rem;">${tpData.total_tp}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
                 </tfoot>
@@ -7346,7 +7346,7 @@ const getRowCantidad = (r) => {
                 <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.9rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.65rem;">
                   <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">${sig}</span>
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #ec4899;">Total TP: <strong>${c.total}</strong></span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Total TP: <strong>${c.total}</strong></span>
                   </div>
 
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
@@ -7386,7 +7386,7 @@ const getRowCantidad = (r) => {
                     <th style="padding: 10px 12px; text-align: center; color: #c084fc;">Doctor</th>
                     <th style="padding: 10px 12px; text-align: center; color: #06b6d4;">Maestro</th>
                     <th style="padding: 10px 12px; text-align: center; color: #94a3b8;">Título Profesional</th>
-                    <th style="padding: 10px 12px; text-align: right; color: #ec4899;">Total Docentes TP</th>
+                    <th style="padding: 10px 12px; text-align: right; color: #ffffff;">Total Docentes TP</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -7397,7 +7397,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
                       <td style="padding: 8px 12px; text-align: center;">${renderTPVal(p.bachiller)}</td>
-                      <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #ec4899;">${p.total}</td>
+                      <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #ffffff;">${p.total}</td>
                     </tr>
                   `).join("")}
                 </tbody>
