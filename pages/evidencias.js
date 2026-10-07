@@ -6648,8 +6648,119 @@ const getRowCantidad = (r) => {
               </div>
             </div>
 
+        <!-- Gráfico de Evolución Histórica de Docentes por Grado Académico -->
+        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.85rem;">
+            <div>
+              <h4 style="font-size: 1.0rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="trending-up" style="width: 20px; height: 20px; color: var(--accent-light);"></i>
+                EVOLUCIÓN HISTÓRICA DE DOCENTES POR GRADO ACADÉMICO
+              </h4>
+              <p style="font-size: 0.82rem; color: var(--text-300); margin: 4px 0 0 0;">
+                Tendencia comparativa de Doctores, Maestros y Bachilleres de la UPT por semestres (2024-I a 2026-I)
+              </p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: #ffffff;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #c084fc; display: inline-block;"></span>
+                <span>Doctor</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: #ffffff;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span>
+                <span>Maestro</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: #ffffff;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+                <span>Bachiller</span>
+              </div>
+            </div>
           </div>
 
+          <!-- SVG Chart Container -->
+          <div style="width: 100%; overflow-x: auto; padding-top: 0.5rem;">
+            <svg viewBox="0 0 850 360" style="width: 100%; height: auto; min-width: 650px; max-height: 380px; font-family: inherit;">
+              <!-- Grid Y lines -->
+              <line x1="65" y1="67.5" x2="805" y2="67.5" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+              <text x="50" y="71.5" fill="rgba(255,255,255,0.35)" font-size="11" text-anchor="end">450</text>
+
+              <line x1="65" y1="129.1" x2="805" y2="129.1" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+              <text x="50" y="133.1" fill="rgba(255,255,255,0.35)" font-size="11" text-anchor="end">338</text>
+
+              <line x1="65" y1="191.25" x2="805" y2="191.25" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+              <text x="50" y="195.25" fill="rgba(255,255,255,0.35)" font-size="11" text-anchor="end">225</text>
+
+              <line x1="65" y1="252.85" x2="805" y2="252.85" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+              <text x="50" y="256.85" fill="rgba(255,255,255,0.35)" font-size="11" text-anchor="end">113</text>
+
+              <line x1="65" y1="315" x2="805" y2="315" stroke="rgba(255,255,255,0.12)" />
+              <text x="50" y="319" fill="rgba(255,255,255,0.35)" font-size="11" text-anchor="end">0</text>
+
+              <!-- X-axis Labels -->
+              <text x="65" y="342" fill="var(--text-300)" font-size="13" font-weight="700" text-anchor="middle">2024-I</text>
+              <text x="250" y="342" fill="var(--text-300)" font-size="13" font-weight="700" text-anchor="middle">2024-II</text>
+              <text x="435" y="342" fill="var(--text-300)" font-size="13" font-weight="700" text-anchor="middle">2025-I</text>
+              <text x="620" y="342" fill="var(--text-300)" font-size="13" font-weight="700" text-anchor="middle">2025-II</text>
+              <text x="805" y="342" fill="var(--text-300)" font-size="13" font-weight="700" text-anchor="middle">2026-I</text>
+
+              <!-- Lines & Dots for MAESTRO (#06b6d4) -->
+              <path d="M 65 93.35 L 250 74.1 L 435 82.9 L 620 68.05 L 805 87.85" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              
+              <!-- Maestro Values & Circles -->
+              <text x="65" y="79.35" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">403</text>
+              <circle cx="65" cy="93.35" r="6.5" fill="#06b6d4" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="250" y="60.1" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">438</text>
+              <circle cx="250" cy="74.1" r="6.5" fill="#06b6d4" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="435" y="68.9" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">422</text>
+              <circle cx="435" cy="82.9" r="6.5" fill="#06b6d4" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="620" y="54.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">449</text>
+              <circle cx="620" cy="68.05" r="6.5" fill="#06b6d4" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="805" y="73.85" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">413</text>
+              <circle cx="805" cy="87.85" r="6.5" fill="#06b6d4" stroke="#ffffff" stroke-width="2.5" />
+
+              <!-- Lines & Dots for DOCTOR (#c084fc) -->
+              <path d="M 65 260.55 L 250 261.1 L 435 250.65 L 620 250.65 L 805 244.05" fill="none" stroke="#c084fc" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Doctor Values & Circles -->
+              <text x="65" y="246.55" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">99</text>
+              <circle cx="65" cy="260.55" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="250" y="247.1" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">98</text>
+              <circle cx="250" cy="261.1" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="435" y="236.65" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">117</text>
+              <circle cx="435" cy="250.65" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="620" y="236.65" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">117</text>
+              <circle cx="620" cy="250.65" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="805" y="230.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">129</text>
+              <circle cx="805" cy="244.05" r="6.5" fill="#c084fc" stroke="#ffffff" stroke-width="2.5" />
+
+              <!-- Lines & Dots for BACHILLER (#10b981) -->
+              <path d="M 65 306.2 L 250 308.4 L 435 310.6 L 620 310.05 L 805 310.05" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Bachiller Values & Circles -->
+              <text x="65" y="292.2" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">16</text>
+              <circle cx="65" cy="306.2" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="250" y="294.4" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">12</text>
+              <circle cx="250" cy="308.4" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="435" y="296.6" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">8</text>
+              <circle cx="435" cy="310.6" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="620" y="296.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">9</text>
+              <circle cx="620" cy="310.05" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+
+              <text x="805" y="296.05" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">9</text>
+              <circle cx="805" cy="310.05" r="6.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5" />
+            </svg>
+          </div>
         </div>
 
         <!-- Tabla Matriz Detallada: DATOS GENERALES UPT -->
