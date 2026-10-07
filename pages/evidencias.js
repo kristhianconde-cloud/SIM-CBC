@@ -7855,184 +7855,709 @@ const getRowCantidad = (r) => {
   };
 
 
+  // ==========================================================================
+  // DATOS Y ESTRUCTURA CONSOLIDADA DE DOCENTES RENACYT (Google Sheets)
+  // ==========================================================================
+  const RENACYT_EXP_DATA = {
+    semestres: ["2017-I", "2017-II", "2018-I", "2018-II", "2019-I", "2019-II", "2020-I", "2020-II", "2021-I", "2021-II", "2022-I", "2022-II", "2023-I", "2023-II", "2024-I", "2024-II", "2025-I", "2025-II", "2026-I"],
+    facultadesHist: {
+      "FACEM":   [0, 0, 0, 0, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 5, 5, 8, 10, 13],
+      "FACSA":   [0, 0, 1, 1, 1, 1, 2, 2, 5, 5, 5, 5, 4, 6, 7, 6, 8, 8, 9],
+      "FAEDCOH": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 4, 7, 7],
+      "FADE":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 6, 6],
+      "FAING":   [1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 3, 3, 4, 4, 1, 2, 3],
+      "FAU":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 3, 2, 2, 2]
+    },
+    totalesHist: [1, 1, 1, 1, 3, 3, 5, 5, 7, 7, 9, 10, 12, 19, 25, 24, 27, 35, 40],
+    carrerasHist: [
+      { facultad: "FADE", carrera: "Derecho", datos: [0,0,0,0,0,0,0,0,0,0,1,1,1,4,4,4,4,6,6] },
+      { facultad: "FACEM", carrera: "Administración de Negocios Internacionales", datos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,5] },
+      { facultad: "FACSA", carrera: "Medicina Humana", datos: [0,0,0,0,0,0,1,1,3,3,4,4,3,4,4,3,3,3,4] },
+      { facultad: "FACEM", carrera: "Ciencias Contables y Financieras", datos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,3,4,4] },
+      { facultad: "FACSA", carrera: "Odontología", datos: [0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3] },
+      { facultad: "FAEDCOH", carrera: "Educación Inicial", datos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3] },
+      { facultad: "FACEM", carrera: "Ingeniería Comercial", datos: [0,0,0,0,2,2,2,2,1,1,1,1,1,1,2,2,3,3,3] },
+      { facultad: "FAU", carrera: "Arquitectura", datos: [0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,2,2,2] },
+      { facultad: "FACSA", carrera: "Terapia Física y Rehabilitación", datos: [0,0,0,0,0,0,0,0,1,1,0,0,0,1,2,2,2,2,2] },
+      { facultad: "FAEDCOH", carrera: "Ciencias de la Comunicación", datos: [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2] },
+      { facultad: "FAEDCOH", carrera: "Psicología", datos: [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2] },
+      { facultad: "FAING", carrera: "Ingeniería Agroindustrial", datos: [1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1] },
+      { facultad: "FAING", carrera: "Ingeniería Ambiental", datos: [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1] },
+      { facultad: "FAING", carrera: "Ingeniería de Sistemas", datos: [0,0,0,0,0,0,1,1,1,1,2,2,1,1,0,0,0,1,1] },
+      { facultad: "FACEM", carrera: "Administración Turístico-Hotelera", datos: [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1] }
+    ],
+    rankingSur: [
+      { ps: 1, pg: 4, univ: "Universidad Nacional del Altiplano", ciudad: "Puno", tipo: "Nacional", s2025_1: 248, s2025_2: 254, s2026_1: 290 },
+      { ps: 2, pg: 12, univ: "Universidad Nacional de San Agustín de Arequipa", ciudad: "Arequipa", tipo: "Nacional", s2025_1: 132, s2025_2: 145, s2026_1: 184 },
+      { ps: 3, pg: 20, univ: "Universidad Católica de Santa María", ciudad: "Arequipa", tipo: "Privada", s2025_1: 119, s2025_2: 124, s2026_1: 132 },
+      { ps: 4, pg: 21, univ: "Universidad Nacional de San Antonio Abad del Cusco", ciudad: "Cusco", tipo: "Nacional", s2025_1: 98, s2025_2: 111, s2026_1: 122 },
+      { ps: 5, pg: 26, univ: "Universidad Nacional Jorge Basadre Grohmann", ciudad: "Tacna", tipo: "Nacional", s2025_1: 92, s2025_2: 94, s2026_1: 106 },
+      { ps: 6, pg: 42, univ: "Universidad Nacional de Juliaca", ciudad: "Puno", tipo: "Nacional", s2025_1: 53, s2025_2: 58, s2026_1: 69 },
+      { ps: 7, pg: 43, univ: "Universidad Nacional de Moquegua", ciudad: "Moquegua", tipo: "Nacional", s2025_1: 61, s2025_2: 63, s2026_1: 65 },
+      { ps: 8, pg: 45, univ: "Universidad Católica San Pablo", ciudad: "Arequipa", tipo: "Privada", s2025_1: 56, s2025_2: 58, s2026_1: 64 },
+      { ps: 9, pg: 54, univ: "Universidad Privada de Tacna", ciudad: "Tacna", tipo: "Privada", s2025_1: 36, s2025_2: 44, s2026_1: 49, isUPT: true },
+      { ps: 10, pg: 71, univ: "Universidad Andina del Cusco", ciudad: "Cusco", tipo: "Privada", s2025_1: 37, s2025_2: 39, s2026_1: 33 },
+      { ps: 11, pg: 82, univ: "Universidad Nacional Intercultural de Quillabamba", ciudad: "Cusco", tipo: "Nacional", s2025_1: 16, s2025_2: 15, s2026_1: 19 },
+      { ps: 12, pg: 88, univ: "Universidad José Carlos Mariátegui", ciudad: "Moquegua", tipo: "Privada", s2025_1: 0, s2025_2: 0, s2026_1: 8 },
+      { ps: 13, pg: 93, univ: "Universidad La Salle", ciudad: "Arequipa", tipo: "Privada", s2025_1: 6, s2025_2: 7, s2026_1: 5 }
+    ],
+    rankingNacional: [
+      { p2026: 1, p2025_2: 1, p2025_1: 1, univ: "Universidad Nacional Mayor de San Marcos", y2021: 47, y2024: 525, y2025_1: 630, y2025_2: 655, y2026_1: 701 },
+      { p2026: 2, p2025_2: 2, p2025_1: 2, univ: "Universidad César Vallejo", y2021: 22, y2024: 390, y2025_1: 458, y2025_2: 453, y2026_1: 473 },
+      { p2026: 3, p2025_2: 3, p2025_1: 3, univ: "Universidad Nacional de Trujillo", y2021: 19, y2024: 216, y2025_1: 260, y2025_2: 288, y2026_1: 323 },
+      { p2026: 4, p2025_2: 4, p2025_1: 4, univ: "Universidad Nacional del Altiplano", y2021: 14, y2024: 199, y2025_1: 248, y2025_2: 254, y2026_1: 290 },
+      { p2026: 5, p2025_2: 5, p2025_1: 5, univ: "Pontificia Universidad Católica del Perú", y2021: 13, y2024: 179, y2025_1: 227, y2025_2: 225, y2026_1: 248 },
+      { p2026: 6, p2025_2: 7, p2025_1: 8, univ: "Universidad Peruana Cayetano Heredia", y2021: 5, y2024: 156, y2025_1: 192, y2025_2: 210, y2026_1: 245 },
+      { p2026: 7, p2025_2: 6, p2025_1: 7, univ: "Universidad Nacional Agraria La Molina", y2021: 0, y2024: 175, y2025_1: 201, y2025_2: 210, y2026_1: 225 },
+      { p2026: 8, p2025_2: 9, p2025_1: 9, univ: "Universidad Nacional Toribio Rodríguez de Mendoza", y2021: 2, y2024: 132, y2025_1: 190, y2025_2: 200, y2026_1: 220 },
+      { p2026: 9, p2025_2: 8, p2025_1: 6, univ: "Universidad Privada del Norte", y2021: 5, y2024: 142, y2025_1: 207, y2025_2: 206, y2026_1: 217 },
+      { p2026: 10, p2025_2: 12, p2025_1: 13, univ: "Universidad Tecnológica del Perú", y2021: 4, y2024: 90, y2025_1: 147, y2025_2: 161, y2026_1: 189 },
+      { p2026: 11, p2025_2: 10, p2025_1: 10, univ: "Universidad Científica del Sur", y2021: 2, y2024: 127, y2025_1: 176, y2025_2: 172, y2026_1: 187 },
+      { p2026: 12, p2025_2: 14, p2025_1: 14, univ: "Universidad Nacional de San Agustín", y2021: 0, y2024: 112, y2025_1: 132, y2025_2: 145, y2026_1: 184 },
+      { p2026: 13, p2025_2: 11, p2025_1: 11, univ: "Universidad Nacional de Ingeniería", y2021: 9, y2024: 143, y2025_1: 171, y2025_2: 170, y2026_1: 181 },
+      { p2026: 14, p2025_2: 13, p2025_1: 12, univ: "Universidad Continental", y2021: 2, y2024: 104, y2025_1: 148, y2025_2: 153, y2026_1: 166 },
+      { p2026: 15, p2025_2: 15, p2025_1: 15, univ: "Universidad Nacional del Centro del Perú", y2021: 9, y2024: 108, y2025_1: 128, y2025_2: 140, y2026_1: 159 },
+      { p2026: 20, p2025_2: 18, p2025_1: 18, univ: "Universidad Católica de Santa María", y2021: 2, y2024: 55, y2025_1: 119, y2025_2: 124, y2026_1: 132 },
+      { p2026: 26, p2025_2: 28, p2025_1: 26, univ: "Universidad Nacional Jorge Basadre Grohmann", y2021: 7, y2024: 78, y2025_1: 92, y2025_2: 94, y2026_1: 106 },
+      { p2026: 43, p2025_2: 38, p2025_1: 37, univ: "Universidad Nacional de Moquegua", y2021: 10, y2024: 52, y2025_1: 61, y2025_2: 63, y2026_1: 65 },
+      { p2026: 45, p2025_2: 42, p2025_1: 41, univ: "Universidad Católica San Pablo", y2021: 6, y2024: 38, y2025_1: 56, y2025_2: 58, y2026_1: 64 },
+      { p2026: 54, p2025_2: 59, p2025_1: 63, univ: "Universidad Privada de Tacna", y2021: 9, y2024: 29, y2025_1: 36, y2025_2: 44, y2026_1: 49, isUPT: true },
+      { p2026: 71, p2025_2: 62, p2025_1: 61, univ: "Universidad Andina del Cusco", y2021: 3, y2024: 32, y2025_1: 37, y2025_2: 39, y2026_1: 33 },
+      { p2026: 81, p2025_2: 84, p2025_1: 83, univ: "Universidad Tecnológica de los Andes", y2021: 0, y2024: 11, y2025_1: 12, y2025_2: 10, y2026_1: 20 },
+      { p2026: 88, p2025_2: 88, p2025_1: 88, univ: "Universidad José Carlos Mariátegui", y2021: 0, y2024: 0, y2025_1: 0, y2025_2: 0, y2026_1: 8 }
+    ]
+  };
+
+  const exportarReporteRenacytWord = (activeSem = "2026-I") => {
+    const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
+    const idxSem = RENACYT_EXP_DATA.semestres.indexOf(activeSem);
+    const semIdx = idxSem >= 0 ? idxSem : 18;
+    const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx];
+
+    const analisisFacultad = `El análisis longitudinal de la producción investigadora adscrita a la Universidad Privada de Tacna en el semestre ${activeSem} registra un total consolidado de ${totalRenacyt} docentes calificados en el sistema RENACYT - CONCYTEC. La Facultad de Ciencias Empresariales (FACEM) se posiciona como la unidad académica líder con 13 investigadores (32.50% de la masa crítica investigadora), seguida de la Facultad de Ciencias de la Salud (FACSA) con 9 docentes (22.50%) y FAEDCOH con 7 docentes (17.50%). Desde la perspectiva de la gestión del conocimiento universitario, esta concentración estratégica en áreas biomédicas y de gestión evidencia la consolidación de líneas de investigación prioritarias y la optimización de los incentivos institucionales para la publicación en revistas indizadas.`;
+
+    const analisisHistoria = `La evaluación de series temporales de la plana investigadora RENACYT de la UPT desde el periodo 2017-I hasta ${activeSem} refleja una trayectoria exponencial sustentada en una tasa de crecimiento acumulada del +3,900%, al evolucionar de 1 docente acreditado en 2017 a ${totalRenacyt} docentes en 2026. Este incremento cuanti-cualitativo valida el impacto directo de las políticas de fomento a la investigación, los fondos concursables internos y las alianzas estratégicas interinstitucionales promovidas por la universidad en el marco del licenciamiento institucional y la acreditación de calidad.`;
+
+    const analisisRanking = `En el contexto del posicionamiento universitario competitivo, la Universidad Privada de Tacna se ubica en el Puesto #9 de la Macro Región Sur entre 13 instituciones de educación superior públicas y privadas, y en el Puesto #54 a nivel Nacional entre 88 universidades licenciadas con 49 investigadores registrados. Este ascenso progresivo (escalando desde la posición 63 en 2025-I) demuestra la consolidación de la UPT como referente científico en el sur del país, fortaleciendo el cumplimiento de la Condición Básica de Calidad IV (Investigación).`;
+
+    const htmlStr = `
+      <html xmlns:o='urn:schemas-microsoft-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head>
+        <meta charset="utf-8">
+        <title>Reporte Estadístico e Institucional de Docentes RENACYT UPT - ${activeSem}</title>
+        <style>
+          body { font-family: 'Arial', 'Calibri', sans-serif; font-size: 11pt; color: #0f172a; line-height: 1.5; margin: 2.5cm 2cm; }
+          .header-title { text-align: center; margin-bottom: 25px; border-bottom: 3px double #1e3a8a; padding-bottom: 15px; }
+          .header-title h1 { font-size: 18pt; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; font-weight: bold; }
+          .header-title p { font-size: 11pt; color: #2563eb; margin: 0; font-weight: bold; }
+          .meta-box { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 16px; margin-bottom: 25px; font-size: 10pt; border-radius: 6px; }
+          .meta-box table { width: 100%; border: none; margin: 0; }
+          .meta-box td { border: none; padding: 3px 0; font-size: 10pt; }
+          .section-title { font-size: 13pt; color: #1e3a8a; border-left: 5px solid #2563eb; padding-left: 10px; margin-top: 28px; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; }
+          table.data-table { width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; font-size: 9.5pt; }
+          table.data-table th { background-color: #1e3a8a; color: #ffffff; padding: 8px 10px; border: 1px solid #1e3a8a; text-align: center; font-weight: bold; }
+          table.data-table td { padding: 6px 10px; border: 1px solid #cbd5e1; }
+          table.data-table tr:nth-child(even) { background-color: #f8fafc; }
+          tr.total-row { background-color: #e2e8f0; font-weight: bold; color: #0f172a; }
+          .analysis-card { background-color: #f1f5f9; border-left: 4px solid #2563eb; border-top: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; border-bottom: 1px solid #cbd5e1; padding: 12px 16px; margin-top: 10px; margin-bottom: 25px; text-align: justify; font-size: 10pt; color: #1e293b; font-style: italic; }
+          .footer-text { text-align: center; font-size: 8.5pt; color: #94a3b8; border-top: 1px solid #cbd5e1; padding-top: 12px; margin-top: 40px; }
+          .text-center { text-align: center; }
+          .text-right { text-align: right; }
+          .highlight { background-color: #dbeafe; font-weight: bold; }
+        </style>
+      </head>
+      <body>
+
+        <div class="header-title">
+          <h1>UNIVERSIDAD PRIVADA DE TACNA</h1>
+          <p>REPORTE ESTADÍSTICO E INSTITUCIONAL DE DOCENTES RENACYT — SEMESTRE ACADÉMICO ${activeSem}</p>
+        </div>
+
+        <div class="meta-box">
+          <table>
+            <tr>
+              <td><strong>Documento:</strong> Informe de Investigadores RENACYT - UPT</td>
+              <td><strong>Semestre Evaluado:</strong> ${activeSem}</td>
+            </tr>
+            <tr>
+              <td><strong>Fecha de Emisión:</strong> ${fechaHoy}</td>
+              <td><strong>Total Docentes RENACYT:</strong> ${totalRenacyt} docentes</td>
+            </tr>
+            <tr>
+              <td><strong>Fuente Oficial:</strong> Registro CONCYTEC / Base Institucional UPT</td>
+              <td><strong>Posición Sur / Nacional:</strong> Puesto #9 / Puesto #54</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="section-title">1. Distribución de Docentes RENACYT por Facultad (${activeSem})</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Facultad</th>
+              <th>Docentes RENACYT</th>
+              <th>% del Total UPT</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => {
+              const cant = RENACYT_EXP_DATA.facultadesHist[f][semIdx] || 0;
+              const pct = totalRenacyt > 0 ? ((cant / totalRenacyt) * 100).toFixed(2) : '0.00';
+              return `
+                <tr>
+                  <td><strong>${f}</strong></td>
+                  <td class="text-center">${cant}</td>
+                  <td class="text-right">${pct}%</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>TOTAL UPT</td>
+              <td class="text-center">${totalRenacyt}</td>
+              <td class="text-right">100.00%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis de Gestión Educativa e Investigación:</strong><br/>
+          ${analisisFacultad}
+        </div>
+
+        <div class="section-title">2. Historial de Crecimiento Institucional (2017-I a ${activeSem})</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Semestre Académico</th>
+              <th>Docentes RENACYT</th>
+              <th>Crecimiento Acomulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${RENACYT_EXP_DATA.semestres.slice(0, semIdx + 1).map((s, idx) => {
+              const val = RENACYT_EXP_DATA.totalesHist[idx];
+              const crec = idx === 0 ? 'Base (100%)' : `+${(((val - 1) / 1) * 100).toFixed(0)}%`;
+              return `
+                <tr>
+                  <td>Semestre ${s}</td>
+                  <td class="text-center"><strong>${val}</strong></td>
+                  <td class="text-right">${crec}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis Estadístico e Histórico:</strong><br/>
+          ${analisisHistoria}
+        </div>
+
+        <div class="section-title">3. Posicionamiento en Ranking Macro-Región Sur</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Posición Sur</th>
+              <th>Universidad</th>
+              <th>Ciudad / Tipo</th>
+              <th>Investigadores 2026-I</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${RENACYT_EXP_DATA.rankingSur.map(r => `
+              <tr class="${r.isUPT ? 'highlight' : ''}">
+                <td class="text-center">#${r.ps}</td>
+                <td><strong>${r.univ}</strong> ${r.isUPT ? '★ (UPT)' : ''}</td>
+                <td>${r.ciudad} (${r.tipo})</td>
+                <td class="text-center"><strong>${r.s2026_1}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="analysis-card">
+          <strong>Análisis de Posicionamiento Institucional:</strong><br/>
+          ${analisisRanking}
+        </div>
+
+        <div class="footer-text">
+          Reporte generado automáticamente por SIM - CBC - Sistema de información y monitoreo de las CBC UPT.<br/>
+          Documento oficial emitido el ${fechaHoy}.
+        </div>
+
+      </body>
+      </html>
+    `;
+
+    const blob = new Blob(['\ufeff' + htmlStr], { type: 'application/msword;charset=utf-8' });
+    const downloadUrl = URL.createObjectURL(blob);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = downloadUrl;
+    downloadAnchor.download = `Reporte_Estadistico_Docentes_RENACYT_UPT_${activeSem}.doc`;
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
+    URL.revokeObjectURL(downloadUrl);
+  };
+
   const drawRenacytDashboard = (subTabContent) => {
     if (!subTabContent) return;
 
-    if (!window._renacytFilters) {
-      window._renacytFilters = { semestre: selectedSemester || "2026-I", facultad: "Todos", carrera: "Todos" };
+    if (!window._renacytState) {
+      window._renacytState = {
+        semestre: "2026-I",
+        activeTab: "facultad",
+        evolucionModo: "facultad",
+        selectedComparativa: ["FACEM", "FACSA", "FAEDCOH", "FADE"],
+        comparativaTipo: "facultad"
+      };
     }
 
-    let { semestre: activeSem, facultad: selFac, carrera: selCarrera } = window._renacytFilters;
+    const state = window._renacytState;
+    const activeSem = state.semestre;
+    const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
+    const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx];
 
-    const semKeys = Object.keys(RENACYT_SHEET_DATA.historialFacultad);
-    if (!semKeys.includes(activeSem)) {
-      activeSem = "2026-I";
-      window._renacytFilters.semestre = "2026-I";
-    }
+    // Datos por facultad en el semestre seleccionado
+    const facDataCur = Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => ({
+      facultad: f,
+      cantidad: RENACYT_EXP_DATA.facultadesHist[f][semIdx],
+      pct: totalRenacyt > 0 ? ((RENACYT_EXP_DATA.facultadesHist[f][semIdx] / totalRenacyt) * 100).toFixed(2) : 0
+    })).sort((a, b) => b.cantidad - a.cantidad);
 
-    const semData = RENACYT_SHEET_DATA.historialFacultad[activeSem] || RENACYT_SHEET_DATA.historialFacultad["2026-I"];
-    const totalSem = semData.total || 40;
+    const facLider = facDataCur[0] || { facultad: "FACEM", cantidad: 13, pct: 32.50 };
 
-    let displayCarreras = RENACYT_SHEET_DATA.carreras2026;
-    if (selFac !== "Todos") {
-      displayCarreras = displayCarreras.filter(c => c.facultad === selFac);
-    }
-    if (selCarrera !== "Todos") {
-      displayCarreras = displayCarreras.filter(c => c.carrera === selCarrera);
-    }
+    // Datos por carrera en el semestre seleccionado
+    const carreraDataCur = RENACYT_EXP_DATA.carrerasHist.map(c => ({
+      facultad: c.facultad,
+      carrera: c.carrera,
+      cantidad: c.datos[semIdx]
+    })).sort((a, b) => b.cantidad - a.cantidad);
 
-    const filteredTotal = selFac === "Todos" && selCarrera === "Todos" 
-      ? totalSem 
-      : displayCarreras.reduce((sum, c) => sum + c.cantidad, 0);
+    const carreraLider = carreraDataCur[0] || { carrera: "Derecho", cantidad: 6 };
 
-    if (!window._renacytActiveChartView) window._renacytActiveChartView = "facultades";
-    const chartView = window._renacytActiveChartView;
-
-    let chartData = [];
-    let chartTitle = "";
-
-    if (chartView === "facultades") {
-      const facs = ["FACEM", "FACSA", "FAEDCOH", "FADE", "FAING", "FAU"];
-      const colors = ["var(--accent)", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
-      chartData = facs.map((f, idx) => ({
-        label: f,
-        value: semData[f] || 0,
-        color: colors[idx % colors.length]
-      })).sort((a, b) => b.value - a.value);
-      chartTitle = `Docentes Renacyt por Facultad (${activeSem})`;
-    } else if (chartView === "carreras") {
-      const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "var(--accent)"];
-      chartData = displayCarreras.map((c, idx) => ({
-        label: c.carrera.length > 18 ? c.carrera.substring(0, 16) + "..." : c.carrera,
-        fullLabel: c.carrera,
-        value: c.cantidad,
-        color: colors[idx % colors.length]
-      })).sort((a, b) => b.value - a.value);
-      chartTitle = `Docentes Renacyt por Carrera - Semestre ${activeSem}`;
-    } else if (chartView === "historico") {
-      chartData = semKeys.slice(-8).map(sem => ({
-        label: sem,
-        value: (RENACYT_SHEET_DATA.historialFacultad[sem] || {}).total || 0,
-        color: "#10b981"
-      }));
-      chartTitle = `Evolución Histórica de Docentes Renacyt UPT (2020 - 2026)`;
-    }
+    // Crecimiento desde 2017
+    const crecTotal = "+3,900%";
 
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
-        <!-- Filtros Superiores -->
-        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <!-- Barra Superior de Control -->
+        <div class="card" style="padding: 1rem 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
           <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-            
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Semestre:</label>
-              <select id="select-semestre-renacyt" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                ${semKeys.slice().reverse().map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>${s}</option>`).join("")}
-              </select>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <label style="font-size: 0.95rem; color: var(--text-300); font-weight: 600;">Facultad:</label>
-              <select id="select-facultad-renacyt" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-                <option value="Todos" ${selFac === "Todos" ? "selected" : ""}>Todas las Facultades</option>
-                ${["FACEM", "FACSA", "FAEDCOH", "FADE", "FAING", "FAU"].map(f => `<option value="${f}" ${f === selFac ? "selected" : ""}>${f}</option>`).join("")}
-              </select>
-            </div>
-
+            <span style="font-size: 0.88rem; color: var(--text-300); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="award" style="width: 18px; height: 18px; color: #a855f7;"></i>
+              DOCENTES RENACYT UPT:
+            </span>
+            <select id="renacyt-select-semestre" class="form-input" style="padding: 0.45rem 2.2rem 0.45rem 1rem; font-size: 0.95rem; font-weight: 700; border-radius: 8px; background: var(--bg-dark-800); border: 1px solid var(--accent); color: #ffffff; cursor: pointer;">
+              ${RENACYT_EXP_DATA.semestres.slice().reverse().map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>Semestre ${s}</option>`).join("")}
+            </select>
           </div>
 
-          <button id="btn-export-word-renacyt" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; padding: 0.45rem 1rem; border-radius: 6px;">
-            <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-            <span>Exportar Word</span>
+          <button id="btn-export-renacyt-word" class="btn" style="padding: 0.45rem 1.1rem; font-size: 0.9rem; font-weight: 700; border-radius: 8px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #ffffff; border: 1px solid #3b82f6; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,99,235,0.3);">
+            <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+            <span>Exportar Reporte (Word)</span>
           </button>
         </div>
 
-        <!-- 4 Tarjetas KPI -->
-        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
+        <!-- 4 BOTONES / TARJETAS INFORMATIVAS (KPIs) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
           
-          <div class="db-status-badge" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Docentes Renacyt</span>
-            <strong style="font-size: 1.8rem; color: #fff; font-weight: 800;">${filteredTotal.toLocaleString()}</strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">Investigadores Calificados UPT</span>
+          <!-- KPI 1: Cantidad Docentes RENACYT -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">DOCENTES RENACYT</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #10b981; margin-top: 0.25rem;">${totalRenacyt} <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-300);">docentes</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Investigadores calificados UPT (${activeSem})</p>
+            </div>
+            <div style="background-color: rgba(16,185,129,0.08); color: #10b981; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(16,185,129,0.15); flex-shrink: 0;">
+              <i data-lucide="award" style="width: 26px; height: 26px;"></i>
+            </div>
           </div>
 
-          <div class="db-status-badge" style="background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Facultad Líder</span>
-            <strong style="font-size: 1.6rem; color: #38bdf8; font-weight: 800;">FACEM <span style="font-size: 1.0rem; color: var(--text-400);">(13 Renacyt)</span></strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">32.5% del total UPT</span>
+          <!-- KPI 2: Facultad Líder -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">FACULTAD LÍDER</span>
+              <div style="font-size: 1.6rem; font-weight: 800; color: #38bdf8; margin-top: 0.25rem;">${facLider.facultad} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${facLider.cantidad})</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">${facLider.pct}% del total UPT</p>
+            </div>
+            <div style="background-color: rgba(56,189,248,0.08); color: #38bdf8; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(56,189,248,0.15); flex-shrink: 0;">
+              <i data-lucide="building-2" style="width: 26px; height: 26px;"></i>
+            </div>
           </div>
 
-          <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Carrera Líder</span>
-            <strong style="font-size: 1.6rem; color: #fbbf24; font-weight: 800;">Derecho <span style="font-size: 1.0rem; color: var(--text-400);">(6 Renacyt)</span></strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">Seguida de Negocios (5)</span>
+          <!-- KPI 3: Carrera Líder -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">CARRERA LÍDER</span>
+              <div style="font-size: 1.5rem; font-weight: 800; color: #fbbf24; margin-top: 0.25rem;">${carreraLider.carrera} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${carreraLider.cantidad})</span></div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Seguida de Negocios (5) y Medicina (4)</p>
+            </div>
+            <div style="background-color: rgba(251,191,36,0.08); color: #fbbf24; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(251,191,36,0.15); flex-shrink: 0;">
+              <i data-lucide="graduation-cap" style="width: 26px; height: 26px;"></i>
+            </div>
           </div>
 
-          <div class="db-status-badge" style="background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.15); padding: 1rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 170px; text-align: center;">
-            <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Crecimiento Histórico</span>
-            <strong style="font-size: 1.8rem; color: #c084fc; font-weight: 800;">+3,900%</strong>
-            <span style="font-size: 0.88rem; color: var(--text-400);">De 1 (2017) a 40 (2026-I)</span>
+          <!-- KPI 4: Crecimiento Porcentual -->
+          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">CRECIMIENTO (2017-2026)</span>
+              <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${crecTotal}</div>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">De 1 (2017-I) a ${totalRenacyt} docentes (${activeSem})</p>
+            </div>
+            <div style="background-color: rgba(192,132,252,0.08); color: #c084fc; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(192,132,252,0.15); flex-shrink: 0;">
+              <i data-lucide="trending-up" style="width: 26px; height: 26px;"></i>
+            </div>
           </div>
 
         </div>
 
-        <!-- Panel de Gráficos y Tabla Detallada -->
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start; width: 100%;">
+        <!-- NAVEGACIÓN POR SECCIONES DEL DASHBOARD -->
+        <div style="display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; flex-wrap: wrap;">
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'facultad' ? 'active' : ''}" data-nav="facultad" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'facultad' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Información por Facultad</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'historial' ? 'active' : ''}" data-nav="historial" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'historial' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Historial Institucional UPT</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'evolucion' ? 'active' : ''}" data-nav="evolucion" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'evolucion' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Evolución por Facultad / Carrera</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'comparativa' ? 'active' : ''}" data-nav="comparativa" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'comparativa' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Comparativa Interactiva</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'ranking_sur' ? 'active' : ''}" data-nav="ranking_sur" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'ranking_sur' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Ranking Región Sur</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'ranking_nac' ? 'active' : ''}" data-nav="ranking_nac" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'ranking_nac' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Ranking Nacional</button>
+        </div>
+
+        <!-- CONTENIDO DINÁMICO SEGÚN LA PESTAÑA SELECCIONADA -->
+        <div id="renacyt-tab-content-container">
           
-          <!-- Izquierda: Gráfico -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <div style="margin-bottom: 1rem;">
-              <span style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">GRÁFICOS ESTADÍSTICOS DE DOCENTES RENACYT</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                <button class="btn btn-secondary btn-renacyt-tab ${chartView === 'facultades' ? 'active' : ''}" data-tab="facultades" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'facultades' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
-                <button class="btn btn-secondary btn-renacyt-tab ${chartView === 'carreras' ? 'active' : ''}" data-tab="carreras" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'carreras' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Carrera</button>
-                <button class="btn btn-secondary btn-renacyt-tab ${chartView === 'historico' ? 'active' : ''}" data-tab="historico" style="font-size: 0.92rem; padding: 0.35rem 0.75rem; border-radius: 6px; ${chartView === 'historico' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Evolución Histórica</button>
+          ${state.activeTab === 'facultad' ? `
+            <!-- VISTA 1: INFORMACIÓN POR FACULTAD -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                ${facDataCur.map(f => {
+                  const colors = { "FACEM": "#38bdf8", "FACSA": "#10b981", "FAEDCOH": "#a855f7", "FADE": "#fbbf24", "FAING": "#f43f5e", "FAU": "#06b6d4" };
+                  const color = colors[f.facultad] || "#38bdf8";
+                  return `
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.65rem;">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">${f.facultad}</span>
+                        <span style="font-size: 1.1rem; font-weight: 800; color: ${color};">${f.cantidad} <span style="font-size: 0.82rem; color: var(--text-300);">docentes</span> (${f.pct}%)</span>
+                      </div>
+                      <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                        <div style="width: ${f.pct}%; height: 100%; background: ${color}; border-radius: 6px;"></div>
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
               </div>
-            </div>
 
-            <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0;">${chartTitle}</h4>
-
-            <div style="min-height: 280px; width: 100%; display: flex; align-items: center; justify-content: center;">
-              ${generate3DBarChartSVG(chartData, 560, 260)}
-            </div>
-          </div>
-
-          <!-- Derecha: Tabla Detallada -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <h4 style="font-size: 1.0rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">Desglose por Facultad (${activeSem})</h4>
-            <div style="max-height: 320px; overflow-y: auto; width: 100%;">
-              <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
-                <thead>
-                  <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-400); text-align: left;">
-                    <th style="padding: 6px;">Facultad</th>
-                    <th style="padding: 6px; text-align: right;">Docentes Renacyt</th>
-                    <th style="padding: 6px; text-align: right;">% del Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${["FACEM", "FACSA", "FAEDCOH", "FADE", "FAING", "FAU"].map(f => {
-                    const cant = semData[f] || 0;
-                    const pct = totalSem > 0 ? ((cant / totalSem) * 100).toFixed(1) + "%" : "0%";
-                    return `
-                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                        <td style="padding: 6px; font-weight: 600; color: #fff;">${f}</td>
-                        <td style="padding: 6px; text-align: right; font-weight: 700; color: var(--accent);">${cant}</td>
-                        <td style="padding: 6px; text-align: right; color: var(--text-400);">${pct}</td>
+              <!-- TABLA DETALLADA POR FACULTAD -->
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                  TABLA DE DISTRIBUCIÓN POR FACULTAD (${activeSem})
+                </h4>
+                <div style="overflow-x: auto; width: 100%;">
+                  <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                        <th style="padding: 10px 12px;">Facultad</th>
+                        <th style="padding: 10px 12px; text-align: center;">Docentes RENACYT</th>
+                        <th style="padding: 10px 12px; text-align: right;">% del Total UPT</th>
                       </tr>
-                    `;
-                  }).join("")}
-                </tbody>
-                <tfoot>
-                  <tr style="border-top: 1px solid var(--border-color); font-weight: 700; color: #fff;">
-                    <td style="padding: 8px;">Total UPT</td>
-                    <td style="padding: 8px; text-align: right; color: var(--accent); font-size: 1.0rem;">${totalSem}</td>
-                    <td style="padding: 8px; text-align: right; color: var(--accent);">100%</td>
-                  </tr>
-                </tfoot>
-              </table>
+                    </thead>
+                    <tbody>
+                      ${facDataCur.map(f => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                          <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
+                          <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: #38bdf8;">${f.cantidad}</td>
+                          <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">${f.pct}%</td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                    <tfoot>
+                      <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
+                        <td style="padding: 10px 12px;">TOTAL GENERAL UPT</td>
+                        <td style="padding: 10px 12px; text-align: center; color: var(--accent-light); font-size: 1.05rem;">${totalRenacyt}</td>
+                        <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">100.00%</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
             </div>
-          </div>
+          ` : ''}
+
+          ${state.activeTab === 'historial' ? `
+            <!-- VISTA 2: HISTORIAL INSTITUCIONAL UPT -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                  EVOLUCIÓN INSTITUCIONAL DE DOCENTES RENACYT (2017-I a 2026-I)
+                </h4>
+                
+                <div style="overflow-x: auto; width: 100%; margin-bottom: 1.5rem;">
+                  <table class="table" style="width: 100%; font-size: 0.85rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                        <th style="padding: 10px 12px;">Semestre</th>
+                        ${RENACYT_EXP_DATA.semestres.map(s => `<th style="padding: 10px 8px; text-align: center; font-size: 0.78rem;">${s}</th>`).join("")}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                        <td style="padding: 10px 12px; font-weight: 800; color: #fff;">Docentes RENACYT</td>
+                        ${RENACYT_EXP_DATA.totalesHist.map((v, idx) => `
+                          <td style="padding: 10px 8px; text-align: center; font-weight: 800; color: ${idx === semIdx ? '#10b981' : '#38bdf8'}; ${idx === semIdx ? 'background: rgba(16,185,129,0.15);' : ''}">${v}</td>
+                        `).join("")}
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- GRÁFICO SVG DE TENDENCIA HISTÓRICA -->
+                <div style="min-height: 260px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                  ${generate3DBarChartSVG(
+                    RENACYT_EXP_DATA.semestres.map((s, idx) => ({
+                      label: s,
+                      value: RENACYT_EXP_DATA.totalesHist[idx],
+                      color: idx === semIdx ? '#10b981' : '#38bdf8'
+                    })), 780, 240
+                  )}
+                </div>
+              </div>
+
+            </div>
+          ` : ''}
+
+          ${state.activeTab === 'evolucion' ? `
+            <!-- VISTA 3: EVOLUCIÓN POR FACULTAD Y CARRERA -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                <span style="font-size: 0.9rem; color: var(--text-300); font-weight: 700;">Ver Evolución Histórica Por:</span>
+                <button class="btn btn-evo-toggle ${state.evolucionModo === 'facultad' ? 'active' : ''}" data-mode="facultad" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 700; border-radius: 6px; ${state.evolucionModo === 'facultad' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
+                <button class="btn btn-evo-toggle ${state.evolucionModo === 'carrera' ? 'active' : ''}" data-mode="carrera" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 700; border-radius: 6px; ${state.evolucionModo === 'carrera' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Carrera</button>
+              </div>
+
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                  MATRIZ TEMPORAL: ${state.evolucionModo === 'facultad' ? 'DOCENTES RENACYT POR FACULTAD' : 'DOCENTES RENACYT POR CARRERA PROFESIONAL'} (2017 - 2026)
+                </h4>
+
+                <div style="overflow-x: auto; width: 100%;">
+                  <table class="table" style="width: 100%; font-size: 0.82rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                        <th style="padding: 8px 10px;">${state.evolucionModo === 'facultad' ? 'Facultad' : 'Carrera Profesional'}</th>
+                        ${RENACYT_EXP_DATA.semestres.map(s => `<th style="padding: 8px 6px; text-align: center; font-size: 0.75rem;">${s}</th>`).join("")}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${state.evolucionModo === 'facultad' ? 
+                        Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => `
+                          <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                            <td style="padding: 8px 10px; font-weight: 800; color: #fff;">${f}</td>
+                            ${RENACYT_EXP_DATA.facultadesHist[f].map((val, idx) => `
+                              <td style="padding: 8px 6px; text-align: center; font-weight: ${val > 0 ? '800' : '400'}; color: ${val > 0 ? '#38bdf8' : 'var(--text-400)'};">${val}</td>
+                            `).join("")}
+                          </tr>
+                        `).join("")
+                        :
+                        RENACYT_EXP_DATA.carrerasHist.map(c => `
+                          <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
+                            <td style="padding: 8px 10px; font-weight: 700; color: #fff;">${c.carrera} <span style="font-size: 0.72rem; color: var(--text-400);">(${c.facultad})</span></td>
+                            ${c.datos.map((val, idx) => `
+                              <td style="padding: 8px 6px; text-align: center; font-weight: ${val > 0 ? '800' : '400'}; color: ${val > 0 ? '#fbbf24' : 'var(--text-400)'};">${val}</td>
+                            `).join("")}
+                          </tr>
+                        `).join("")
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          ` : ''}
+
+          ${state.activeTab === 'comparativa' ? `
+            <!-- VISTA 4: COMPARATIVA INTERACTIVA -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                  <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                    SELECCIONA ELEMENTOS PARA COMPARAR (${activeSem})
+                  </h4>
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'facultad' ? 'active' : ''}" data-type="facultad" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'facultad' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
+                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'carrera' ? 'active' : ''}" data-type="carrera" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'carrera' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Carrera</button>
+                  </div>
+                </div>
+
+                <!-- Chips / Checkboxes de Selección -->
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem;">
+                  ${state.comparativaTipo === 'facultad' ? 
+                    Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => {
+                      const isSel = state.selectedComparativa.includes(f);
+                      return `
+                        <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${f}" style="padding: 0.35rem 0.75rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? 'background: rgba(59,130,246,0.25); color: #38bdf8; border: 1px solid #38bdf8;' : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
+                          ${isSel ? '✓ ' : '+ '}${f} (${RENACYT_EXP_DATA.facultadesHist[f][semIdx]})
+                        </button>
+                      `;
+                    }).join("")
+                    :
+                    RENACYT_EXP_DATA.carrerasHist.map(c => {
+                      const isSel = state.selectedComparativa.includes(c.carrera);
+                      return `
+                        <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${c.carrera}" style="padding: 0.35rem 0.75rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? 'background: rgba(251,191,36,0.25); color: #fbbf24; border: 1px solid #fbbf24;' : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
+                          ${isSel ? '✓ ' : '+ '}${c.carrera} (${c.datos[semIdx]})
+                        </button>
+                      `;
+                    }).join("")
+                  }
+                </div>
+
+                <!-- GRÁFICO SVG COMPARATIVO -->
+                <div style="min-height: 260px; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
+                  ${generate3DBarChartSVG(
+                    state.selectedComparativa.map((name, idx) => {
+                      const colors = ["#38bdf8", "#10b981", "#fbbf24", "#c084fc", "#f43f5e", "#06b6d4"];
+                      let val = 0;
+                      if (state.comparativaTipo === 'facultad') {
+                        val = (RENACYT_EXP_DATA.facultadesHist[name] || [])[semIdx] || 0;
+                      } else {
+                        const item = RENACYT_EXP_DATA.carrerasHist.find(c => c.carrera === name);
+                        val = item ? item.datos[semIdx] : 0;
+                      }
+                      return { label: name.length > 16 ? name.substring(0, 14) + '...' : name, value: val, color: colors[idx % colors.length] };
+                    }), 720, 240
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+          ` : ''}
+
+          ${state.activeTab === 'ranking_sur' ? `
+            <!-- VISTA 5: RANKING REGIÓN SUR -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <!-- CARD DESTACADO UPT SUR -->
+              <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(16,185,129,0.1)); border: 1px solid #3b82f6; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                  <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">POSICIONAMIENTO MACRO REGIONAL (SUR DEL PERÚ)</span>
+                  <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin: 4px 0 0 0;">
+                    UNIVERSIDAD PRIVADA DE TACNA — <span style="color: #10b981;">PUESTO #9 EN LA REGIÓN SUR</span>
+                  </h3>
+                  <p style="color: var(--text-300); font-size: 0.85rem; margin: 4px 0 0 0;">
+                    Entre 13 universidades licenciadas del Sur del Perú (Arequipa, Puno, Cusco, Moquegua y Tacna) con 49 docentes adscritos registrados.
+                  </p>
+                </div>
+                <div style="background: #10b981; color: #ffffff; padding: 0.6rem 1.2rem; border-radius: 10px; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(16,185,129,0.3);">
+                  #9 REGIÓN SUR
+                </div>
+              </div>
+
+              <!-- TABLA RANKING REGIONAL -->
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                  TABLA DE CLASIFICACIÓN MACRO REGIÓN SUR (RENACYT 2026-I)
+                </h4>
+
+                <div style="overflow-x: auto; width: 100%;">
+                  <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                        <th style="padding: 10px 12px; text-align: center;">Pos. Sur</th>
+                        <th style="padding: 10px 12px;">Universidad</th>
+                        <th style="padding: 10px 12px; text-align: center;">Ciudad</th>
+                        <th style="padding: 10px 12px; text-align: center;">Tipo</th>
+                        <th style="padding: 10px 12px; text-align: right;">2025-I</th>
+                        <th style="padding: 10px 12px; text-align: right;">2025-II</th>
+                        <th style="padding: 10px 12px; text-align: right; color: #38bdf8;">2026-I</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${RENACYT_EXP_DATA.rankingSur.map(r => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${r.isUPT ? 'background: rgba(59,130,246,0.15); border: 1px solid #3b82f6;' : 'color: var(--text-200);'}">
+                          <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${r.isUPT ? '#10b981' : '#fff'};">#${r.ps}</td>
+                          <td style="padding: 10px 12px; font-weight: 800; color: ${r.isUPT ? '#ffffff' : '#fff'};">${r.univ} ${r.isUPT ? '★ (UPT)' : ''}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-300);">${r.ciudad}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-400);">${r.tipo}</td>
+                          <td style="padding: 10px 12px; text-align: right; color: var(--text-300);">${r.s2025_1}</td>
+                          <td style="padding: 10px 12px; text-align: right; color: var(--text-300);">${r.s2025_2}</td>
+                          <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: ${r.isUPT ? '#10b981' : '#38bdf8'}; font-size: 1.0rem;">${r.s2026_1}</td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          ` : ''}
+
+          ${state.activeTab === 'ranking_nac' ? `
+            <!-- VISTA 6: RANKING NACIONAL -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <!-- CARD DESTACADO UPT NACIONAL -->
+              <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(59,130,246,0.1)); border: 1px solid #a855f7; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                  <span style="font-size: 0.8rem; color: #c084fc; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">POSICIONAMIENTO NACIONAL EN EL PERÚ</span>
+                  <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin: 4px 0 0 0;">
+                    UNIVERSIDAD PRIVADA DE TACNA — <span style="color: #c084fc;">PUESTO #54 A NIVEL NACIONAL</span>
+                  </h3>
+                  <p style="color: var(--text-300); font-size: 0.85rem; margin: 4px 0 0 0;">
+                    Evolución en ascenso constante: Puesto 63 (2025-I) ➔ Puesto 59 (2025-II) ➔ <strong style="color:#ffffff;">Puesto 54 (2026-I)</strong> con 49 investigadores adscritos.
+                  </p>
+                </div>
+                <div style="background: #a855f7; color: #ffffff; padding: 0.6rem 1.2rem; border-radius: 10px; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(168,85,247,0.3);">
+                  #54 EN EL PERÚ
+                </div>
+              </div>
+
+              <!-- TABLA RANKING NACIONAL -->
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                  RANKING NACIONAL DE UNIVERSIDADES LICENCIADAS (RENACYT 2026-I)
+                </h4>
+
+                <div style="overflow-x: auto; width: 100%;">
+                  <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                        <th style="padding: 10px 12px; text-align: center;">Pos. 2026</th>
+                        <th style="padding: 10px 12px;">Universidad</th>
+                        <th style="padding: 10px 12px; text-align: center;">2021</th>
+                        <th style="padding: 10px 12px; text-align: center;">2024</th>
+                        <th style="padding: 10px 12px; text-align: center;">2025-I</th>
+                        <th style="padding: 10px 12px; text-align: center;">2025-II</th>
+                        <th style="padding: 10px 12px; text-align: right; color: #c084fc;">2026-I</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${RENACYT_EXP_DATA.rankingNacional.map(r => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${r.isUPT ? 'background: rgba(168,85,247,0.18); border: 1px solid #a855f7;' : 'color: var(--text-200);'}">
+                          <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${r.isUPT ? '#c084fc' : '#fff'};">#${r.p2026}</td>
+                          <td style="padding: 10px 12px; font-weight: 800; color: ${r.isUPT ? '#ffffff' : '#fff'};">${r.univ} ${r.isUPT ? '★ (UPT)' : ''}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-400);">${r.y2021}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-300);">${r.y2024}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-300);">${r.y2025_1}</td>
+                          <td style="padding: 10px 12px; text-align: center; color: var(--text-300);">${r.y2025_2}</td>
+                          <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: ${r.isUPT ? '#c084fc' : '#38bdf8'}; font-size: 1.0rem;">${r.y2026_1}</td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          ` : ''}
 
         </div>
 
@@ -8041,23 +8566,66 @@ const getRowCantidad = (r) => {
 
     if (window.lucide) window.lucide.createIcons();
 
-    const selSem = subTabContent.querySelector("#select-semestre-renacyt");
-    if (selSem) selSem.onchange = (e) => { window._renacytFilters.semestre = e.target.value; drawRenacytDashboard(subTabContent); };
+    // Event Listener Selector Semestre
+    const selSemMain = subTabContent.querySelector("#renacyt-select-semestre");
+    if (selSemMain) {
+      selSemMain.onchange = (e) => {
+        window._renacytState.semestre = e.target.value;
+        drawRenacytDashboard(subTabContent);
+      };
+    }
 
-    const selFacElem = subTabContent.querySelector("#select-facultad-renacyt");
-    if (selFacElem) selFacElem.onchange = (e) => { window._renacytFilters.facultad = e.target.value; drawRenacytDashboard(subTabContent); };
-
-    subTabContent.querySelectorAll(".btn-renacyt-tab").forEach(btn => {
+    // Event Listener Pestañas Principales RENACYT
+    subTabContent.querySelectorAll(".renacyt-nav-btn").forEach(btn => {
       btn.onclick = () => {
-        window._renacytActiveChartView = btn.getAttribute("data-tab");
+        window._renacytState.activeTab = btn.getAttribute("data-nav");
         drawRenacytDashboard(subTabContent);
       };
     });
 
-    const btnExportWord = subTabContent.querySelector("#btn-export-word-renacyt");
+    // Event Listener Toggle Evolución (Facultad vs Carrera)
+    subTabContent.querySelectorAll(".btn-evo-toggle").forEach(btn => {
+      btn.onclick = () => {
+        window._renacytState.evolucionModo = btn.getAttribute("data-mode");
+        drawRenacytDashboard(subTabContent);
+      };
+    });
+
+    // Event Listener Toggle Comparativa Tipo
+    subTabContent.querySelectorAll(".btn-comp-tipo").forEach(btn => {
+      btn.onclick = () => {
+        const type = btn.getAttribute("data-type");
+        window._renacytState.comparativaTipo = type;
+        if (type === 'facultad') {
+          window._renacytState.selectedComparativa = ["FACEM", "FACSA", "FAEDCOH", "FADE"];
+        } else {
+          window._renacytState.selectedComparativa = ["Derecho", "Administración de Negocios Internacionales", "Medicina Humana", "Ciencias Contables y Financieras"];
+        }
+        drawRenacytDashboard(subTabContent);
+      };
+    });
+
+    // Event Listener Chip Selection en Comparativa
+    subTabContent.querySelectorAll(".btn-chip-toggle").forEach(btn => {
+      btn.onclick = () => {
+        const val = btn.getAttribute("data-val");
+        const list = window._renacytState.selectedComparativa;
+        if (list.includes(val)) {
+          if (list.length > 1) {
+            window._renacytState.selectedComparativa = list.filter(x => x !== val);
+          }
+        } else {
+          window._renacytState.selectedComparativa.push(val);
+        }
+        drawRenacytDashboard(subTabContent);
+      };
+    });
+
+    // Event Listener Botón Exportar Word
+    const btnExportWord = subTabContent.querySelector("#btn-export-renacyt-word");
     if (btnExportWord) {
       btnExportWord.onclick = () => {
-        downloadStandardWordReport("renacyt", "Docentes Renacyt", activeSem, selFac, "Todos", "renacyt");
+        exportarReporteRenacytWord(activeSem);
       };
     }
   };
