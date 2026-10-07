@@ -6531,6 +6531,13 @@ const getRowCantidad = (r) => {
     const tcProgramasData = generarDocentesProgramaData(tcData.facultades);
     const tpProgramasData = generarDocentesProgramaData(tpData.facultades);
 
+    const renderTPVal = (val, isCell = true) => {
+      if (val > 0) {
+        return `<span style="background: rgba(244, 63, 94, 0.18); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.35); padding: 2px 7px; border-radius: 4px; font-weight: 800; display: inline-block;">${val}</span>`;
+      }
+      return isCell ? `<span style="color: var(--text-400);">0</span>` : `0`;
+    };
+
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
@@ -6727,9 +6734,9 @@ const getRowCantidad = (r) => {
                 </div>
 
                 <div>
-                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-200); margin-bottom: 4px;">
                     <span>Título Profesional</span>
-                    <span><strong style="color: #94a3b8;">${g.Bachiller} docentes</strong> <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Bachiller_pct}%)</span></span>
+                    <span>${g.Bachiller > 0 ? `<strong style="background: rgba(244, 63, 94, 0.18); color: #f43f5e; padding: 2px 8px; border-radius: 4px; font-weight: 800; border: 1px solid rgba(244, 63, 94, 0.35);">${g.Bachiller} docentes</strong>` : `<strong style="color: #94a3b8;">0 docentes</strong>`} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${g.Bachiller_pct}%)</span></span>
                   </div>
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
                     <div style="width: ${g.Bachiller_pct}%; height: 100%; background: #94a3b8; border-radius: 6px;"></div>
@@ -6769,9 +6776,9 @@ const getRowCantidad = (r) => {
                   </div>
                 </div>
 
-                <div style="background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.15); padding: 0.65rem 0.85rem; border-radius: 8px;">
+                <div style="background: rgba(253,224,71,0.06); border: 1px solid rgba(253,224,71,0.2); padding: 0.65rem 0.85rem; border-radius: 8px;">
                   <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700;">CONTRATADO</span>
-                  <div style="font-size: 1.35rem; font-weight: 800; color: #fbbf24; margin-top: 2px;">
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #fde047; margin-top: 2px;">
                     ${cd.Contratado.total} <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">docentes</span> 
                     <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200); margin-left: 4px;">(${((cd.Contratado.total / totalDoc) * 100).toFixed(2)}%)</span>
                   </div>
@@ -6925,14 +6932,14 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Completo (TC)</td>
                     <td style="padding: 10px 12px; text-align: center;">${gj.TC.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${gj.TC.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${gj.TC.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(gj.TC.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${gj.TC.total}</td>
                   </tr>
                   <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
                     <td style="padding: 10px 12px; font-weight: 700; color: #fff;">Tiempo Parcial (TP)</td>
                     <td style="padding: 10px 12px; text-align: center;">${gj.TP.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${gj.TP.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${gj.TP.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(gj.TP.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${gj.TP.total}</td>
                   </tr>
                 </tbody>
@@ -6941,7 +6948,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL JORNADA UPT</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${g.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(g.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
                   </tr>
                 </tfoot>
@@ -6975,29 +6982,29 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Principal</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${cd.Principal.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(cd.Principal.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Principal.total}</td>
                   </tr>
                   <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
                     <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Asociado</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${cd.Asociado.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(cd.Asociado.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Asociado.total}</td>
                   </tr>
                   <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
                     <td style="padding: 10px 12px; font-weight: 700; color: #34d399;">Ordinario Auxiliar</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${cd.Auxiliar.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(cd.Auxiliar.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #34d399;">${cd.Auxiliar.total}</td>
                   </tr>
                   <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200); background: rgba(255,255,255,0.02);">
-                    <td style="padding: 10px 12px; font-weight: 700; color: #fbbf24;">Docente Contratado</td>
+                    <td style="padding: 10px 12px; font-weight: 700; color: #fde047;">Docente Contratado</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center;">${cd.Contratado.Bachiller}</td>
-                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fbbf24;">${cd.Contratado.total}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(cd.Contratado.Bachiller)}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fde047;">${cd.Contratado.total}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -7005,7 +7012,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL CONDICIÓN UPT</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${g.Doctor}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${g.Maestro}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${g.Bachiller}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(g.Bachiller)}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--accent-light); font-size: 1.05rem;">${totalDoc}</td>
                   </tr>
                 </tfoot>
@@ -7062,7 +7069,7 @@ const getRowCantidad = (r) => {
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; margin-top: 0.25rem;">
                   <span style="color: #c084fc;">Dr: <strong>${f.doctor}</strong></span>
                   <span style="color: #06b6d4;">Mg: <strong>${f.maestro}</strong></span>
-                  <span style="color: #94a3b8;">Título Prof.: <strong>${f.bachiller}</strong></span>
+                  <span style="${f.bachiller > 0 ? 'color: #f43f5e;' : 'color: #94a3b8;'}">Título Prof.: <strong>${renderTPVal(f.bachiller, false)}</strong></span>
                 </div>
               </div>
             `;}).join("")}
@@ -7093,7 +7100,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
-                      <td style="padding: 10px 12px; text-align: center;">${f.bachiller}</td>
+                      <td style="padding: 10px 12px; text-align: center;">${renderTPVal(f.bachiller)}</td>
                       <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${f.total}</td>
                       <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">(${f.porcentaje}%)</td>
                     </tr>
@@ -7104,7 +7111,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO COMPLETO</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tcData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tcData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${tcData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(tcData.facultades.reduce((sum, f) => sum + f.bachiller, 0))}</td>
                     <td style="padding: 10px 12px; text-align: right; color: #38bdf8; font-size: 1.05rem;">${tcData.total_tc}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
@@ -7132,7 +7139,7 @@ const getRowCantidad = (r) => {
                   <span>Nombrados</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
-                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; display: inline-block;"></span>
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fde047; display: inline-block;"></span>
                   <span>Contratados</span>
                 </div>
               </div>
@@ -7152,13 +7159,13 @@ const getRowCantidad = (r) => {
 
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
                     <div style="width: ${pNom}%; height: 100%; background: #34d399;" title="Nombrados: ${c.nombrados} (${pNom}%)"></div>
-                    <div style="width: ${pCon}%; height: 100%; background: #fbbf24;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
+                    <div style="width: ${pCon}%; height: 100%; background: #fde047;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
                   </div>
 
                   <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
                     <div style="display: flex; justify-content: space-between;">
                       <span style="color: #34d399;">Nombrados: <strong>${c.nombrados}</strong> (${pNom}%)</span>
-                      <span style="color: #fbbf24;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
+                      <span style="color: #fde047;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
                     </div>
                     <div style="font-size: 0.72rem; color: var(--text-400); display: flex; justify-content: space-between; margin-top: 2px;">
                       <span>Prin: <strong>${c.principal}</strong></span>
@@ -7197,7 +7204,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
-                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #94a3b8;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: center;">${renderTPVal(p.bachiller)}</td>
                       <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #38bdf8;">${p.total}</td>
                     </tr>
                   `).join("")}
@@ -7254,7 +7261,7 @@ const getRowCantidad = (r) => {
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; margin-top: 0.25rem;">
                   <span style="color: #c084fc;">Dr: <strong>${f.doctor}</strong></span>
                   <span style="color: #06b6d4;">Mg: <strong>${f.maestro}</strong></span>
-                  <span style="color: #94a3b8;">Título Prof.: <strong>${f.bachiller}</strong></span>
+                  <span style="${f.bachiller > 0 ? 'color: #f43f5e;' : 'color: #94a3b8;'}">Título Prof.: <strong>${renderTPVal(f.bachiller, false)}</strong></span>
                 </div>
               </div>
             `;}).join("")}
@@ -7285,7 +7292,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.doctor}</td>
                       <td style="padding: 10px 12px; text-align: center;">${f.maestro}</td>
-                      <td style="padding: 10px 12px; text-align: center;">${f.bachiller}</td>
+                      <td style="padding: 10px 12px; text-align: center;">${renderTPVal(f.bachiller)}</td>
                       <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #ec4899;">${f.total}</td>
                       <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">(${f.porcentaje.toFixed(2)}%)</td>
                     </tr>
@@ -7296,7 +7303,7 @@ const getRowCantidad = (r) => {
                     <td style="padding: 10px 12px;">TOTAL GENERAL UPT - TIEMPO PARCIAL</td>
                     <td style="padding: 10px 12px; text-align: center; color: #c084fc;">${tpData.facultades.reduce((sum, f) => sum + f.doctor, 0)}</td>
                     <td style="padding: 10px 12px; text-align: center; color: #06b6d4;">${tpData.facultades.reduce((sum, f) => sum + f.maestro, 0)}</td>
-                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0)}</td>
+                    <td style="padding: 10px 12px; text-align: center;">${renderTPVal(tpData.facultades.reduce((sum, f) => sum + f.bachiller, 0))}</td>
                     <td style="padding: 10px 12px; text-align: right; color: #ec4899; font-size: 1.05rem;">${tpData.total_tp}</td>
                     <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">(100.00%)</td>
                   </tr>
@@ -7324,7 +7331,7 @@ const getRowCantidad = (r) => {
                   <span>Nombrados</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #ffffff;">
-                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; display: inline-block;"></span>
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #fde047; display: inline-block;"></span>
                   <span>Contratados</span>
                 </div>
               </div>
@@ -7344,13 +7351,13 @@ const getRowCantidad = (r) => {
 
                   <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; display: flex;">
                     <div style="width: ${pNom}%; height: 100%; background: #34d399;" title="Nombrados: ${c.nombrados} (${pNom}%)"></div>
-                    <div style="width: ${pCon}%; height: 100%; background: #fbbf24;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
+                    <div style="width: ${pCon}%; height: 100%; background: #fde047;" title="Contratados: ${c.contratado} (${pCon}%)"></div>
                   </div>
 
                   <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
                     <div style="display: flex; justify-content: space-between;">
                       <span style="color: #34d399;">Nombrados: <strong>${c.nombrados}</strong> (${pNom}%)</span>
-                      <span style="color: #fbbf24;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
+                      <span style="color: #fde047;">Contratados: <strong>${c.contratado}</strong> (${pCon}%)</span>
                     </div>
                     <div style="font-size: 0.72rem; color: var(--text-400); display: flex; justify-content: space-between; margin-top: 2px;">
                       <span>Prin: <strong>${c.principal}</strong></span>
@@ -7389,7 +7396,7 @@ const getRowCantidad = (r) => {
                       <td style="padding: 8px 12px; font-weight: 600; color: var(--text-100);">${p.programa}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #c084fc;">${p.doctor}</td>
                       <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #06b6d4;">${p.maestro}</td>
-                      <td style="padding: 8px 12px; text-align: center; font-weight: 700; color: #94a3b8;">${p.bachiller}</td>
+                      <td style="padding: 8px 12px; text-align: center;">${renderTPVal(p.bachiller)}</td>
                       <td style="padding: 8px 12px; text-align: right; font-weight: 800; color: #ec4899;">${p.total}</td>
                     </tr>
                   `).join("")}
