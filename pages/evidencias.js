@@ -8397,6 +8397,244 @@ const getRowCantidad = (r) => {
       });
     });
 
+    const renacytDocentesEstadisticasHTML = `
+      <!-- SECCIÓN ESTADÍSTICAS Y DISTRIBUCIÓN RENACYT -->
+      <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+          <div>
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="pie-chart" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+              <span>ESTADÍSTICAS Y DISTRIBUCIÓN DE INVESTIGADORES RENACYT UPT (2026-I)</span>
+            </h4>
+            <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
+              Análisis institucional del personal docente acreditado en Formato C9 y adscritos
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #10b981; padding: 0.4rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">
+              Formato C9: 40 Docentes
+            </div>
+            <div style="background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.3); color: #facc15; padding: 0.4rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">
+              Fuera de C9 (Adscritos): 9 Docentes
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          
+          <!-- TARJETA 1: DISTRIBUCIÓN POR NIVELES RENACYT -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.85rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">DISTRIBUCIÓN POR NIVELES RENACYT</span>
+              <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Máx: Nivel II</span>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                  <span style="color: #38bdf8;">Nivel II (Top UPT)</span>
+                  <span style="color: #ffffff;">2 (5.0%)</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 5%; height: 100%; background: #38bdf8; border-radius: 4px;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                  <span style="color: #10b981;">Nivel IV</span>
+                  <span style="color: #ffffff;">4 (10.0%)</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 10%; height: 100%; background: #10b981; border-radius: 4px;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                  <span style="color: #fbbf24;">Nivel V</span>
+                  <span style="color: #ffffff;">12 (30.0%)</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 30%; height: 100%; background: #fbbf24; border-radius: 4px;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                  <span style="color: #a855f7;">Nivel VI</span>
+                  <span style="color: #ffffff;">9 (22.5%)</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 22.5%; height: 100%; background: #a855f7; border-radius: 4px;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                  <span style="color: #94a3b8;">Nivel VII</span>
+                  <span style="color: #ffffff;">13 (32.5%)</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 32.5%; height: 100%; background: #94a3b8; border-radius: 4px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARJETA 2: DESGLOSE POR GRADO ACADÉMICO -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem;">
+            <div>
+              <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">GRADO ACADÉMICO (C9)</span>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Alto nivel académico del cuerpo de investigadores</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin: 0.5rem 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(192,132,252,0.08); border: 1px solid rgba(192,132,252,0.2); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="graduation-cap" style="width: 20px; height: 20px; color: #c084fc;"></i>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Doctor</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #c084fc;">24</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (60.0%)</span>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="book-open" style="width: 20px; height: 20px; color: #06b6d4;"></i>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Maestro / Magíster</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #06b6d4;">16</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (40.0%)</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; display: flex;">
+              <div style="width: 60%; height: 100%; background: #c084fc;" title="Doctores: 24 (60%)"></div>
+              <div style="width: 40%; height: 100%; background: #06b6d4;" title="Maestros: 16 (40%)"></div>
+            </div>
+          </div>
+
+          <!-- TARJETA 3: DESGLOSE POR JORNADA LABORAL -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem;">
+            <div>
+              <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">JORNADA LABORAL (C9)</span>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Predominio de dedicación institucional de Tiempo Completo</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin: 0.5rem 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="briefcase" style="width: 20px; height: 20px; color: #10b981;"></i>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Tiempo Completo (TC)</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #10b981;">32</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (80.0%)</span>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="clock" style="width: 20px; height: 20px; color: #fbbf24;"></i>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Tiempo Parcial (TP)</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #fbbf24;">8</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (20.0%)</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; display: flex;">
+              <div style="width: 80%; height: 100%; background: #10b981;" title="Tiempo Completo: 32 (80%)"></div>
+              <div style="width: 20%; height: 100%; background: #fbbf24;" title="Tiempo Parcial: 8 (20%)"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+    const top10InvestigadoresData = [
+      { pos: 1, medal: "🥇", docente: "Miguel Ángel Hueda Zavaleta", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel II", emision: "10/06/2024", cti: "P0198137", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=198137" },
+      { pos: 2, medal: "🥈", docente: "Marco Antonio Sánchez Tito", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel II", emision: "25/07/2025", cti: "P0027836", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=27836" },
+      { pos: 3, medal: "🥉", docente: "Ricardo Jiménez Palacios", grado: "Doctor", facultad: "FACEM", carrera: "Administración de Negocios Internacionales", nivel: "Nivel IV", emision: "12/03/2026", cti: "P0095533", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=95533" },
+      { pos: 4, medal: "#4", docente: "Fernando Mauricio Espada Salgado", grado: "Doctor", facultad: "FACSA", carrera: "Odontología", nivel: "Nivel IV", emision: "18/06/2026", cti: "P0364442", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=364442" },
+      { pos: 5, medal: "#5", docente: "Sam Michael Espinoza Vidaurre", grado: "Maestro", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel IV", emision: "09/01/2026", cti: "P0130249", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=130249" },
+      { pos: 6, medal: "#6", docente: "Omar Pezo Jiménez", grado: "Doctor", facultad: "FADE", carrera: "Derecho", nivel: "Nivel IV", emision: "09/01/2025", cti: "P0140347", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=140347" },
+      { pos: 7, medal: "#7", docente: "Marco Carlos Alejandro Rivarola Hidalgo", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel V", emision: "12/11/2024", cti: "P0018301", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=18301" },
+      { pos: 8, medal: "#8", docente: "Guido Palumbo Pinto", grado: "Doctor", facultad: "FACEM", carrera: "Ingeniería Comercial", nivel: "Nivel V", emision: "12/12/2024", cti: "P0022224", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=22224" },
+      { pos: 9, medal: "#9", docente: "Amelia Cristina Mamani Huanca", grado: "Doctor", facultad: "FACEM", carrera: "Contabilidad", nivel: "Nivel V", emision: "30/12/2024", cti: "P0092750", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=92750" },
+      { pos: 10, medal: "#10", docente: "Ana Noelia Martínez Valdivia", grado: "Maestro", facultad: "FAU", carrera: "Arquitectura", nivel: "Nivel V", emision: "01/02/2025", cti: "P0045000", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=45000" }
+    ];
+
+    const renacytTop10RankingHTML = `
+      <!-- SECCIÓN TOP 10 INVESTIGADORES UPT -->
+      <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+          <div>
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="trophy" style="width: 18px; height: 18px; color: #facc15;"></i>
+              <span>TOP 10 INVESTIGADORES RENACYT UPT</span>
+            </h4>
+            <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
+              Ranking de máxima jerarquía investigadora en la UPT clasificado por Nivel RENACYT (Nivel I máximo) y Fecha de Emisión
+            </p>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(250,204,21,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(250,204,21,0.3); color: #facc15; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="award" style="width: 16px; height: 16px;"></i>
+            <span>2 Investigadores Nivel II (Líderes UPT)</span>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto; width: 100%;">
+          <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                <th style="padding: 10px 12px; text-align: center;">Pos.</th>
+                <th style="padding: 10px 12px;">Docente Investigador</th>
+                <th style="padding: 10px 12px; text-align: center;">Grado</th>
+                <th style="padding: 10px 12px;">Facultad</th>
+                <th style="padding: 10px 12px;">Programa / Carrera</th>
+                <th style="padding: 10px 12px; text-align: center;">Nivel RENACYT</th>
+                <th style="padding: 10px 12px; text-align: center;">Fecha Emisión</th>
+                <th style="padding: 10px 12px; text-align: center;">Código CTI Vitae</th>
+                <th style="padding: 10px 12px; text-align: center;">Perfil CTI</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${top10InvestigadoresData.map(r => `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${r.pos <= 3 ? 'background: rgba(250,204,21,0.08);' : 'color: var(--text-200);'}">
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; font-size: 1.1rem; color: ${r.pos === 1 ? '#facc15' : (r.pos === 2 ? '#cbd5e1' : (r.pos === 3 ? '#b45309' : 'var(--text-400)'))};">${r.medal}</td>
+                  <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">${r.docente}</td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: #c084fc;">${r.grado}</td>
+                  <td style="padding: 10px 12px; font-weight: 700; color: #38bdf8;">${r.facultad}</td>
+                  <td style="padding: 10px 12px; color: var(--text-200);">${r.carrera}</td>
+                  <td style="padding: 10px 12px; text-align: center;">
+                    <span style="background: ${r.nivel === 'Nivel II' ? 'rgba(56, 189, 248, 0.2)' : (r.nivel === 'Nivel IV' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(251, 191, 36, 0.2)')}; color: ${r.nivel === 'Nivel II' ? '#38bdf8' : (r.nivel === 'Nivel IV' ? '#10b981' : '#fbbf24')}; border: 1px solid ${r.nivel === 'Nivel II' ? '#38bdf8' : (r.nivel === 'Nivel IV' ? '#10b981' : '#fbbf24')}; padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 0.8rem;">
+                      ${r.nivel}
+                    </span>
+                  </td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: #ffffff;">${r.emision}</td>
+                  <td style="padding: 10px 12px; text-align: center; color: var(--text-300); font-family: monospace;">${r.cti}</td>
+                  <td style="padding: 10px 12px; text-align: center;">
+                    <a href="${r.orcid}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
+                      <i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Ver Perfil
+                    </a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
     const relacionDocentesCardHTML = `
       <!-- SECCIÓN: RELACIÓN DE DOCENTES RENACYT -->
       <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
@@ -8956,6 +9194,8 @@ const getRowCantidad = (r) => {
           ${state.activeTab === 'relacion_docentes' ? `
             <!-- VISTA 7: RELACIÓN DE DOCENTES RENACYT UPT -->
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              ${renacytDocentesEstadisticasHTML}
+              ${renacytTop10RankingHTML}
               ${relacionDocentesCardHTML}
             </div>
           ` : ''}
