@@ -8950,8 +8950,6 @@ const getRowCantidad = (r) => {
                 </div>
               </div>
 
-              ${relacionDocentesCardHTML}
-
             </div>
           ` : ''}
 
