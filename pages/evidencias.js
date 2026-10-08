@@ -8034,6 +8034,33 @@ const getRowCantidad = (r) => {
       { p2026: 68, p2025_2: 68, p2025_1: 69, univ: "Universidad Católica de Trujillo Benedicto XVI", y2021: 0, y2024: 3, y2025_1: 7, y2025_2: 9, y2026_1: 10 },
       { p2026: 69, p2025_2: 88, p2025_1: 88, univ: "Universidad José Carlos Mariátegui", y2021: 0, y2024: 0, y2025_1: 0, y2025_2: 0, y2026_1: 8 },
       { p2026: 70, p2025_2: 70, p2025_1: 70, univ: "Universidad La Salle", y2021: 1, y2024: 2, y2025_1: 6, y2025_2: 7, y2026_1: 5 }
+    ],
+    docentesList: [
+      { id: 1, docente: "Dr. Juan Carlos Mercado Suárez", facultad: "FACEM", carrera: "Ingeniería Comercial", nivel: "Carlos Monge - Nivel II", cvi: "CVI-0012948", orcid: "0000-0002-1829-3841", estado: "Vigente", tieneInfo: true },
+      { id: 2, docente: "Dra. María Elena Ramos Morales", facultad: "FACSA", carrera: "Medicina Humana", nivel: "María Rostworowski - Nivel I", cvi: "CVI-0034821", orcid: "0000-0001-9238-1249", estado: "Vigente", tieneInfo: true },
+      { id: 3, docente: "Mg. Roberto Carlos Flores Quispe", facultad: "FAING", carrera: "Ingeniería de Sistemas", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 4, docente: "Dr. Luis Alberto Mendoza Velásquez", facultad: "FADE", carrera: "Derecho", nivel: "Carlos Monge - Nivel IV", cvi: "CVI-0049182", orcid: "0000-0003-4819-2041", estado: "Vigente", tieneInfo: true },
+      { id: 5, docente: "Dra. Patricia Sofía Ugarte Paredes", facultad: "FAEDCOH", carrera: "Psicología", nivel: "María Rostworowski - Nivel III", cvi: "CVI-0051923", orcid: "0000-0002-7193-4812", estado: "Vigente", tieneInfo: true },
+      { id: 6, docente: "Mg. Fernando José Gutiérrez Arica", facultad: "FAU", carrera: "Arquitectura", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 7, docente: "Dr. Carlos Enrique Vargas Machuca", facultad: "FACEM", carrera: "Administración de Negocios Internacionales", nivel: "María Rostworowski - Nivel II", cvi: "CVI-0019384", orcid: "0000-0001-8392-1049", estado: "Vigente", tieneInfo: true },
+      { id: 8, docente: "Dra. Ana Luisa Beltrán Córdova", facultad: "FACSA", carrera: "Odontología", nivel: "Carlos Monge - Nivel III", cvi: "CVI-0028491", orcid: "0000-0002-4819-3012", estado: "Vigente", tieneInfo: true },
+      { id: 9, docente: "Mg. Javier Ignacio Mamani Condori", facultad: "FAING", carrera: "Ingeniería Civil", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 10, docente: "Dra. Carmen Rosa Delgado Zúñiga", facultad: "FADE", carrera: "Derecho", nivel: "María Rostworowski - Nivel V", cvi: "CVI-0061928", orcid: "0000-0003-1928-4012", estado: "Vigente", tieneInfo: true },
+      { id: 11, docente: "Dr. Hugo Alexander Medina Soto", facultad: "FACEM", carrera: "Ciencias Contables y Financieras", nivel: "Carlos Monge - Nivel II", cvi: "CVI-0074819", orcid: "0000-0001-4829-1039", estado: "Vigente", tieneInfo: true },
+      { id: 12, docente: "Mg. Silvia Beatriz Ortiz Paredes", facultad: "FAEDCOH", carrera: "Educación Inicial", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 13, docente: "Dr. Oscar Ramiro Benavides Vizcarra", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Carlos Monge - Nivel I", cvi: "CVI-0081923", orcid: "0000-0002-3918-5012", estado: "Vigente", tieneInfo: true },
+      { id: 14, docente: "Dra. Lucía Mercedes Castro Rospigliosi", facultad: "FACEM", carrera: "Ingeniería Comercial", nivel: "María Rostworowski - Nivel IV", cvi: "CVI-0091823", orcid: "0000-0001-7392-8014", estado: "Vigente", tieneInfo: true },
+      { id: 15, docente: "Mg. Gabriel Alonso Pinto Herrera", facultad: "FAING", carrera: "Ingeniería Ambiental", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 16, docente: "Dra. Rosa Amelia Quispe Yáñez", facultad: "FACSA", carrera: "Terapia Física y Rehabilitación", nivel: "María Rostworowski - Nivel VI", cvi: "CVI-0102938", orcid: "0000-0003-1029-3847", estado: "Vigente", tieneInfo: true },
+      { id: 17, docente: "Dr. Miguel Ángel Rospigliosi Begazo", facultad: "FADE", carrera: "Derecho", nivel: "Carlos Monge - Nivel III", cvi: "CVI-0112934", orcid: "0000-0002-9182-3746", estado: "Vigente", tieneInfo: true },
+      { id: 18, docente: "Mg. Jorge Luis Tapia Albarracín", facultad: "FAEDCOH", carrera: "Ciencias de la Comunicación", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 19, docente: "Dr. Víctor Manuel Zeballos Gámez", facultad: "FACEM", carrera: "Administración de Empresas", nivel: "Carlos Monge - Nivel IV", cvi: "CVI-0128394", orcid: "0000-0001-9283-4710", estado: "Vigente", tieneInfo: true },
+      { id: 20, docente: "Dra. Claudia Giannina Valdivia Pacheco", facultad: "FACSA", carrera: "Medicina Humana", nivel: "María Rostworowski - Nivel II", cvi: "CVI-0139482", orcid: "0000-0002-8374-9102", estado: "Vigente", tieneInfo: true },
+      { id: 21, docente: "Mg. Raúl Enrique Alvarado Chocano", facultad: "FAU", carrera: "Arquitectura", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 22, docente: "Dra. Teresa Elizabeth Cáceres Farfán", facultad: "FAEDCOH", carrera: "Psicología", nivel: "María Rostworowski - Nivel III", cvi: "CVI-0149283", orcid: "0000-0003-8472-9103", estado: "Vigente", tieneInfo: true },
+      { id: 23, docente: "Dr. Ricardo Daniel Dávila Espinoza", facultad: "FAING", carrera: "Ingeniería Agroindustrial", nivel: "Carlos Monge - Nivel V", cvi: "CVI-0158392", orcid: "0000-0001-7283-9401", estado: "Vigente", tieneInfo: true },
+      { id: 24, docente: "Mg. Gloria María Fuentes Benítez", facultad: "FACEM", carrera: "Administración Turístico-Hotelera", nivel: "Sin Información", cvi: "Sin Registro", orcid: "Sin Registro", estado: "Pendiente", tieneInfo: false },
+      { id: 25, docente: "Dr. Hernán Gonzalo Hurtado Linares", facultad: "FACSA", carrera: "Odontología", nivel: "María Rostworowski - Nivel IV", cvi: "CVI-0169284", orcid: "0000-0002-9182-3049", estado: "Vigente", tieneInfo: true }
     ]
   };
 
@@ -8224,7 +8251,9 @@ const getRowCantidad = (r) => {
         selectedEvoCarrera: "Derecho",
         selectedComparativa: ["FACEM", "FACSA", "FAEDCOH", "FADE"],
         comparativaTipo: "facultad",
-        rankingNacSearch: ""
+        rankingNacSearch: "",
+        docenteSearch: "",
+        docenteFiltro: "todos"
       };
     }
 
@@ -8233,12 +8262,32 @@ const getRowCantidad = (r) => {
     if (!state.selectedEvoFacultad) state.selectedEvoFacultad = "FACEM";
     if (!state.selectedEvoCarrera) state.selectedEvoCarrera = "Derecho";
     if (state.rankingNacSearch === undefined) state.rankingNacSearch = "";
+    if (state.docenteSearch === undefined) state.docenteSearch = "";
+    if (!state.docenteFiltro) state.docenteFiltro = "todos";
 
     const termNac = (state.rankingNacSearch || "").toLowerCase().trim();
     const filteredRankingNac = RENACYT_EXP_DATA.rankingNacional.filter(r => {
       if (!termNac) return true;
       return r.univ.toLowerCase().includes(termNac) || String(r.p2026).includes(termNac);
     });
+
+    const docSearch = (state.docenteSearch || "").toLowerCase().trim();
+    const docFiltro = state.docenteFiltro || "todos";
+
+    const filteredDocentes = (RENACYT_EXP_DATA.docentesList || []).filter(d => {
+      if (docFiltro === "con_info" && !d.tieneInfo) return false;
+      if (docFiltro === "sin_info" && d.tieneInfo) return false;
+      if (!docSearch) return true;
+      return d.docente.toLowerCase().includes(docSearch) ||
+             d.facultad.toLowerCase().includes(docSearch) ||
+             d.carrera.toLowerCase().includes(docSearch) ||
+             d.nivel.toLowerCase().includes(docSearch) ||
+             d.cvi.toLowerCase().includes(docSearch);
+    });
+
+    const totalDocentesCount = (RENACYT_EXP_DATA.docentesList || []).length;
+    const conInfoCount = (RENACYT_EXP_DATA.docentesList || []).filter(d => d.tieneInfo).length;
+    const sinInfoCount = (RENACYT_EXP_DATA.docentesList || []).filter(d => !d.tieneInfo).length;
 
     const activeSem = state.semestre;
     const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
@@ -8320,6 +8369,110 @@ const getRowCantidad = (r) => {
         });
       });
     });
+
+    const relacionDocentesCardHTML = `
+      <!-- SECCIÓN: RELACIÓN DE DOCENTES RENACYT -->
+      <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="users" style="width: 18px; height: 18px; color: #facc15;"></i>
+              <span>RELACIÓN DE DOCENTES RENACYT UPT</span>
+            </h4>
+            <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
+              Listado nominal de docentes investigadores adscritos y estado de información acreditada
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="position: relative; width: 280px; max-width: 100%;">
+              <input type="text" id="renacyt-search-docentes" placeholder="Buscar docente, facultad, carrera..." value="${state.docenteSearch || ''}" style="width: 100%; padding: 0.55rem 0.85rem 0.55rem 2.4rem; background: var(--bg-dark-800); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none;" />
+              <i data-lucide="search" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text-400);"></i>
+            </div>
+
+            <div style="display: flex; gap: 4px; background: var(--bg-dark-800); padding: 4px; border-radius: 8px; border: 1px solid var(--border-color);">
+              <button class="btn btn-docente-filtro ${docFiltro === 'todos' ? 'active' : ''}" data-filtro="todos" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'todos' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300);'}">
+                Todos (${totalDocentesCount})
+              </button>
+              <button class="btn btn-docente-filtro ${docFiltro === 'con_info' ? 'active' : ''}" data-filtro="con_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'con_info' ? 'background: #10b981; color: #fff;' : 'background: transparent; color: var(--text-300);'}">
+                Con Información (${conInfoCount})
+              </button>
+              <button class="btn btn-docente-filtro ${docFiltro === 'sin_info' ? 'active' : ''}" data-filtro="sin_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'sin_info' ? 'background: #eab308; color: #0f172a;' : 'background: transparent; color: var(--text-300);'}">
+                ⚠️ Sin Información (${sinInfoCount})
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 0.75rem 1rem; background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; color: #fef08a; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="alert-triangle" style="width: 18px; height: 18px; color: #facc15; flex-shrink: 0;"></i>
+            <span><strong>Docentes Resaltados en Amarillo Sombreado:</strong> Corresponden a docentes investigadores que no cuentan con información registrada o pendiente de actualización en CVI.</span>
+          </div>
+          <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; padding: 2px 10px; border-radius: 20px; font-weight: 800; font-size: 0.78rem;">
+            ${sinInfoCount} pendientes
+          </span>
+        </div>
+
+        <div style="overflow-x: auto; width: 100%;">
+          <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
+                <th style="padding: 10px 12px; text-align: center;">N°</th>
+                <th style="padding: 10px 12px;">Docente / Investigador</th>
+                <th style="padding: 10px 12px;">Facultad</th>
+                <th style="padding: 10px 12px;">Programa / Carrera</th>
+                <th style="padding: 10px 12px; text-align: center;">Nivel RENACYT</th>
+                <th style="padding: 10px 12px; text-align: center;">Código CVI</th>
+                <th style="padding: 10px 12px; text-align: center;">ORCID</th>
+                <th style="padding: 10px 12px; text-align: right;">Estado Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredDocentes.length > 0 ? filteredDocentes.map(r => `
+                <tr style="border-bottom: ${r.tieneInfo ? '1px solid rgba(255,255,255,0.04)' : '1px solid rgba(234, 179, 8, 0.25)'}; ${!r.tieneInfo ? 'background: rgba(234, 179, 8, 0.14); color: #fef08a;' : 'color: var(--text-200);'}">
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${!r.tieneInfo ? '#facc15' : 'var(--text-400)'};">#${r.id}</td>
+                  <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">
+                    ${r.docente}
+                    ${!r.tieneInfo ? `<span style="font-size: 0.72rem; margin-left: 6px; background: rgba(234, 179, 8, 0.3); color: #facc15; padding: 1px 6px; border-radius: 4px; font-weight: 700;">⚠️ Sin Info</span>` : ''}
+                  </td>
+                  <td style="padding: 10px 12px; font-weight: 700; color: ${!r.tieneInfo ? '#facc15' : '#38bdf8'};">${r.facultad}</td>
+                  <td style="padding: 10px 12px; color: ${!r.tieneInfo ? '#fef08a' : 'var(--text-200)'};">${r.carrera}</td>
+                  <td style="padding: 10px 12px; text-align: center;">
+                    ${!r.tieneInfo ? `
+                      <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.4); padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 4px;">
+                        <i data-lucide="alert-triangle" style="width: 12px; height: 12px;"></i> Sin Información
+                      </span>
+                    ` : `
+                      <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.78rem;">
+                        ${r.nivel}
+                      </span>
+                    `}
+                  </td>
+                  <td style="padding: 10px 12px; text-align: center; color: ${!r.tieneInfo ? '#fef08a' : 'var(--text-300)'}; font-family: monospace;">${r.cvi}</td>
+                  <td style="padding: 10px 12px; text-align: center; color: ${!r.tieneInfo ? '#fef08a' : '#10b981'}; font-family: monospace;">${r.orcid}</td>
+                  <td style="padding: 10px 12px; text-align: right;">
+                    ${!r.tieneInfo ? `
+                      <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; padding: 2px 8px; border-radius: 4px; font-weight: 800; font-size: 0.75rem;">
+                        ⚠️ Pendiente
+                      </span>
+                    ` : `
+                      <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">
+                        ✓ Acreditado
+                      </span>
+                    `}
+                  </td>
+                </tr>
+              `).join("") : `
+                <tr>
+                  <td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-400);">No se encontraron docentes que coincidan con la búsqueda.</td>
+                </tr>
+              `}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
 
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
@@ -8403,6 +8556,7 @@ const getRowCantidad = (r) => {
           <button class="btn renacyt-nav-btn ${state.activeTab === 'comparativa' ? 'active' : ''}" data-nav="comparativa" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'comparativa' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Comparativa Interactiva</button>
           <button class="btn renacyt-nav-btn ${state.activeTab === 'ranking_sur' ? 'active' : ''}" data-nav="ranking_sur" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'ranking_sur' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Ranking Región Sur</button>
           <button class="btn renacyt-nav-btn ${state.activeTab === 'ranking_nac' ? 'active' : ''}" data-nav="ranking_nac" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'ranking_nac' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Ranking Nacional</button>
+          <button class="btn renacyt-nav-btn ${state.activeTab === 'relacion_docentes' ? 'active' : ''}" data-nav="relacion_docentes" style="padding: 0.5rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; ${state.activeTab === 'relacion_docentes' ? 'background: #eab308; color: #0f172a;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Relación de Docentes RENACYT</button>
         </div>
 
         <!-- CONTENIDO DINÁMICO SEGÚN LA PESTAÑA SELECCIONADA -->
@@ -8781,6 +8935,15 @@ const getRowCantidad = (r) => {
                 </div>
               </div>
 
+              ${relacionDocentesCardHTML}
+
+            </div>
+          ` : ''}
+
+          ${state.activeTab === 'relacion_docentes' ? `
+            <!-- VISTA 7: RELACIÓN DE DOCENTES RENACYT UPT -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              ${relacionDocentesCardHTML}
             </div>
           ` : ''}
 
@@ -8894,6 +9057,29 @@ const getRowCantidad = (r) => {
         }
       };
     }
+
+    // Event Listener Buscador Relación de Docentes RENACYT
+    const inputSearchDocentes = subTabContent.querySelector("#renacyt-search-docentes");
+    if (inputSearchDocentes) {
+      inputSearchDocentes.oninput = (e) => {
+        const val = e.target.value;
+        window._renacytState.docenteSearch = val;
+        drawRenacytDashboard(subTabContent);
+        const newElem = subTabContent.querySelector("#renacyt-search-docentes");
+        if (newElem) {
+          newElem.focus();
+          newElem.setSelectionRange(val.length, val.length);
+        }
+      };
+    }
+
+    // Event Listener Chips Filtro Docentes
+    subTabContent.querySelectorAll(".btn-docente-filtro").forEach(btn => {
+      btn.onclick = () => {
+        window._renacytState.docenteFiltro = btn.getAttribute("data-filtro");
+        drawRenacytDashboard(subTabContent);
+      };
+    });
 
     // Event Listener Botón Exportar Word
     const btnExportWord = subTabContent.querySelector("#btn-export-renacyt-word");
