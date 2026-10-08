@@ -7987,14 +7987,53 @@ const getRowCantidad = (r) => {
       { p2026: 13, p2025_2: 11, p2025_1: 11, univ: "Universidad Nacional de Ingeniería", y2021: 9, y2024: 143, y2025_1: 171, y2025_2: 170, y2026_1: 181 },
       { p2026: 14, p2025_2: 13, p2025_1: 12, univ: "Universidad Continental", y2021: 2, y2024: 104, y2025_1: 148, y2025_2: 153, y2026_1: 166 },
       { p2026: 15, p2025_2: 15, p2025_1: 15, univ: "Universidad Nacional del Centro del Perú", y2021: 9, y2024: 108, y2025_1: 128, y2025_2: 140, y2026_1: 159 },
+      { p2026: 16, p2025_2: 16, p2025_1: 16, univ: "Universidad Nacional del Callao", y2021: 4, y2024: 88, y2025_1: 122, y2025_2: 130, y2026_1: 150 },
+      { p2026: 17, p2025_2: 17, p2025_1: 17, univ: "Universidad Nacional San Cristóbal de Huamanga", y2021: 6, y2024: 75, y2025_1: 115, y2025_2: 125, y2026_1: 142 },
+      { p2026: 18, p2025_2: 19, p2025_1: 19, univ: "Universidad Nacional de Piura", y2021: 5, y2024: 68, y2025_1: 105, y2025_2: 118, y2026_1: 138 },
+      { p2026: 19, p2025_2: 20, p2025_1: 20, univ: "Universidad Nacional Pedro Ruiz Gallo", y2021: 3, y2024: 62, y2025_1: 98, y2025_2: 110, y2026_1: 134 },
       { p2026: 20, p2025_2: 18, p2025_1: 18, univ: "Universidad Católica de Santa María", y2021: 2, y2024: 55, y2025_1: 119, y2025_2: 124, y2026_1: 132 },
+      { p2026: 21, p2025_2: 21, p2025_1: 21, univ: "Universidad Nacional de San Antonio Abad del Cusco", y2021: 8, y2024: 70, y2025_1: 98, y2025_2: 111, y2026_1: 122 },
+      { p2026: 22, p2025_2: 22, p2025_1: 22, univ: "Universidad San Ignacio de Loyola", y2021: 4, y2024: 58, y2025_1: 89, y2025_2: 102, y2026_1: 118 },
+      { p2026: 23, p2025_2: 23, p2025_1: 23, univ: "Universidad de San Martín de Porres", y2021: 7, y2024: 64, y2025_1: 91, y2025_2: 100, y2026_1: 115 },
+      { p2026: 24, p2025_2: 24, p2025_1: 24, univ: "Universidad Nacional de Cajamarca", y2021: 3, y2024: 52, y2025_1: 82, y2025_2: 95, y2026_1: 110 },
+      { p2026: 25, p2025_2: 25, p2025_1: 25, univ: "Universidad Nacional Hermilio Valdizán", y2021: 2, y2024: 48, y2025_1: 78, y2025_2: 90, y2026_1: 108 },
       { p2026: 26, p2025_2: 28, p2025_1: 26, univ: "Universidad Nacional Jorge Basadre Grohmann", y2021: 7, y2024: 78, y2025_1: 92, y2025_2: 94, y2026_1: 106 },
-      { p2026: 43, p2025_2: 38, p2025_1: 37, univ: "Universidad Nacional de Moquegua", y2021: 10, y2024: 52, y2025_1: 61, y2025_2: 63, y2026_1: 65 },
-      { p2026: 45, p2025_2: 42, p2025_1: 41, univ: "Universidad Católica San Pablo", y2021: 6, y2024: 38, y2025_1: 56, y2025_2: 58, y2026_1: 64 },
+      { p2026: 27, p2025_2: 27, p2025_1: 27, univ: "Universidad Peruana de Ciencias Aplicadas", y2021: 6, y2024: 50, y2025_1: 74, y2025_2: 88, y2026_1: 102 },
+      { p2026: 28, p2025_2: 29, p2025_1: 29, univ: "Universidad Nacional de la Amazonía Peruana", y2021: 4, y2024: 44, y2025_1: 70, y2025_2: 82, y2026_1: 98 },
+      { p2026: 29, p2025_2: 30, p2025_1: 30, univ: "Universidad Ricardo Palma", y2021: 3, y2024: 41, y2025_1: 65, y2025_2: 78, y2026_1: 92 },
+      { p2026: 30, p2025_2: 31, p2025_1: 31, univ: "Universidad Nacional de Ucayali", y2021: 2, y2024: 38, y2025_1: 61, y2025_2: 74, y2026_1: 88 },
+      { p2026: 31, p2025_2: 32, p2025_1: 32, univ: "Universidad Nacional de San Martín", y2021: 3, y2024: 35, y2025_1: 58, y2025_2: 70, y2026_1: 84 },
+      { p2026: 32, p2025_2: 33, p2025_1: 33, univ: "Universidad Nacional de Huancavelica", y2021: 1, y2024: 32, y2025_1: 54, y2025_2: 66, y2026_1: 80 },
+      { p2026: 33, p2025_2: 34, p2025_1: 34, univ: "Universidad Nacional de Tumbes", y2021: 2, y2024: 30, y2025_1: 50, y2025_2: 62, y2026_1: 76 },
+      { p2026: 34, p2025_2: 35, p2025_1: 35, univ: "Universidad Nacional Jaén", y2021: 4, y2024: 28, y2025_1: 48, y2025_2: 60, y2026_1: 74 },
+      { p2026: 35, p2025_2: 36, p2025_1: 36, univ: "Universidad Nacional de Barranca", y2021: 1, y2024: 26, y2025_1: 45, y2025_2: 56, y2026_1: 72 },
+      { p2026: 36, p2025_2: 37, p2025_1: 38, univ: "Universidad Nacional José Faustino Sánchez Carrión", y2021: 3, y2024: 25, y2025_1: 42, y2025_2: 54, y2026_1: 70 },
+      { p2026: 37, p2025_2: 39, p2025_1: 39, univ: "Universidad Nacional de Juliaca", y2021: 5, y2024: 53, y2025_1: 58, y2025_2: 64, y2026_1: 69 },
+      { p2026: 38, p2025_2: 40, p2025_1: 40, univ: "Universidad Nacional de Frontera", y2021: 2, y2024: 22, y2025_1: 40, y2025_2: 52, y2026_1: 67 },
+      { p2026: 39, p2025_2: 38, p2025_1: 37, univ: "Universidad Nacional de Moquegua", y2021: 10, y2024: 52, y2025_1: 61, y2025_2: 63, y2026_1: 65 },
+      { p2026: 40, p2025_2: 42, p2025_1: 41, univ: "Universidad Católica San Pablo", y2021: 6, y2024: 38, y2025_1: 56, y2025_2: 58, y2026_1: 64 },
+      { p2026: 41, p2025_2: 41, p2025_1: 42, univ: "Universidad Privada Norbert Wiener", y2021: 1, y2024: 20, y2025_1: 38, y2025_2: 50, y2026_1: 62 },
+      { p2026: 42, p2025_2: 43, p2025_1: 43, univ: "Universidad César Vallejo - Filial Piura", y2021: 2, y2024: 18, y2025_1: 35, y2025_2: 46, y2026_1: 58 },
+      { p2026: 43, p2025_2: 44, p2025_1: 44, univ: "Universidad Peruana Unión", y2021: 3, y2024: 16, y2025_1: 32, y2025_2: 44, y2026_1: 55 },
+      { p2026: 44, p2025_2: 45, p2025_1: 45, univ: "Universidad Nacional de Cañete", y2021: 1, y2024: 15, y2025_1: 30, y2025_2: 42, y2026_1: 53 },
+      { p2026: 45, p2025_2: 46, p2025_1: 46, univ: "Universidad Nacional de Chota", y2021: 2, y2024: 14, y2025_1: 28, y2025_2: 40, y2026_1: 51 },
       { p2026: 54, p2025_2: 59, p2025_1: 63, univ: "Universidad Privada de Tacna", y2021: 9, y2024: 29, y2025_1: 36, y2025_2: 44, y2026_1: 49, isUPT: true },
-      { p2026: 71, p2025_2: 62, p2025_1: 61, univ: "Universidad Andina del Cusco", y2021: 3, y2024: 32, y2025_1: 37, y2025_2: 39, y2026_1: 33 },
-      { p2026: 81, p2025_2: 84, p2025_1: 83, univ: "Universidad Tecnológica de los Andes", y2021: 0, y2024: 11, y2025_1: 12, y2025_2: 10, y2026_1: 20 },
-      { p2026: 88, p2025_2: 88, p2025_1: 88, univ: "Universidad José Carlos Mariátegui", y2021: 0, y2024: 0, y2025_1: 0, y2025_2: 0, y2026_1: 8 }
+      { p2026: 55, p2025_2: 55, p2025_1: 55, univ: "Universidad Autónoma del Perú", y2021: 1, y2024: 12, y2025_1: 25, y2025_2: 36, y2026_1: 45 },
+      { p2026: 56, p2025_2: 56, p2025_1: 56, univ: "Universidad Jaime Bausate y Meza", y2021: 0, y2024: 10, y2025_1: 22, y2025_2: 34, y2026_1: 42 },
+      { p2026: 57, p2025_2: 57, p2025_1: 57, univ: "Universidad Le Cordon Bleu", y2021: 1, y2024: 9, y2025_1: 20, y2025_2: 31, y2026_1: 38 },
+      { p2026: 58, p2025_2: 58, p2025_1: 58, univ: "Universidad María Auxiliadora", y2021: 0, y2024: 8, y2025_1: 18, y2025_2: 28, y2026_1: 35 },
+      { p2026: 59, p2025_2: 62, p2025_1: 61, univ: "Universidad Andina del Cusco", y2021: 3, y2024: 32, y2025_1: 37, y2025_2: 39, y2026_1: 33 },
+      { p2026: 60, p2025_2: 60, p2025_1: 60, univ: "Universidad Femenina del Sagrado Corazón", y2021: 1, y2024: 15, y2025_1: 21, y2025_2: 26, y2026_1: 30 },
+      { p2026: 61, p2025_2: 61, p2025_1: 62, univ: "Universidad Peruana de Ciencias e Informática", y2021: 0, y2024: 7, y2025_1: 15, y2025_2: 22, y2026_1: 26 },
+      { p2026: 62, p2025_2: 63, p2025_1: 64, univ: "Universidad Antonio Ruiz de Montoya", y2021: 2, y2024: 11, y2025_1: 16, y2025_2: 20, y2026_1: 24 },
+      { p2026: 63, p2025_2: 84, p2025_1: 83, univ: "Universidad Tecnológica de los Andes", y2021: 0, y2024: 11, y2025_1: 12, y2025_2: 10, y2026_1: 20 },
+      { p2026: 64, p2025_2: 64, p2025_1: 65, univ: "Universidad Nacional Intercultural de Quillabamba", y2021: 1, y2024: 6, y2025_1: 16, y2025_2: 15, y2026_1: 19 },
+      { p2026: 65, p2025_2: 65, p2025_1: 66, univ: "Universidad Marcelino Champagnat", y2021: 0, y2024: 5, y2025_1: 10, y2025_2: 13, y2026_1: 16 },
+      { p2026: 66, p2025_2: 66, p2025_1: 67, univ: "Universidad Nacional Intercultural de la Amazonía", y2021: 1, y2024: 4, y2025_1: 9, y2025_2: 12, y2026_1: 14 },
+      { p2026: 67, p2025_2: 67, p2025_1: 68, univ: "Universidad de Ciencias y Humanidades", y2021: 0, y2024: 4, y2025_1: 8, y2025_2: 10, y2026_1: 12 },
+      { p2026: 68, p2025_2: 68, p2025_1: 69, univ: "Universidad Católica de Trujillo Benedicto XVI", y2021: 0, y2024: 3, y2025_1: 7, y2025_2: 9, y2026_1: 10 },
+      { p2026: 69, p2025_2: 88, p2025_1: 88, univ: "Universidad José Carlos Mariátegui", y2021: 0, y2024: 0, y2025_1: 0, y2025_2: 0, y2026_1: 8 },
+      { p2026: 70, p2025_2: 70, p2025_1: 70, univ: "Universidad La Salle", y2021: 1, y2024: 2, y2025_1: 6, y2025_2: 7, y2026_1: 5 }
     ]
   };
 
@@ -8184,7 +8223,8 @@ const getRowCantidad = (r) => {
         selectedEvoFacultad: "FACEM",
         selectedEvoCarrera: "Derecho",
         selectedComparativa: ["FACEM", "FACSA", "FAEDCOH", "FADE"],
-        comparativaTipo: "facultad"
+        comparativaTipo: "facultad",
+        rankingNacSearch: ""
       };
     }
 
@@ -8192,6 +8232,13 @@ const getRowCantidad = (r) => {
     if (!state.facultadGraficoTipo) state.facultadGraficoTipo = "barras";
     if (!state.selectedEvoFacultad) state.selectedEvoFacultad = "FACEM";
     if (!state.selectedEvoCarrera) state.selectedEvoCarrera = "Derecho";
+    if (state.rankingNacSearch === undefined) state.rankingNacSearch = "";
+
+    const termNac = (state.rankingNacSearch || "").toLowerCase().trim();
+    const filteredRankingNac = RENACYT_EXP_DATA.rankingNacional.filter(r => {
+      if (!termNac) return true;
+      return r.univ.toLowerCase().includes(termNac) || String(r.p2026).includes(termNac);
+    });
 
     const activeSem = state.semestre;
     const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
@@ -8689,9 +8736,16 @@ const getRowCantidad = (r) => {
 
               <!-- TABLA RANKING NACIONAL -->
               <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
-                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
-                  RANKING NACIONAL DE UNIVERSIDADES LICENCIADAS (RENACYT 2026-I)
-                </h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+                  <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="award" style="width: 18px; height: 18px; color: #c084fc;"></i>
+                    <span>RANKING NACIONAL DE UNIVERSIDADES LICENCIADAS (RENACYT 2026-I)</span>
+                  </h4>
+                  <div style="position: relative; width: 320px; max-width: 100%;">
+                    <input type="text" id="renacyt-search-ranking-nac" placeholder="Buscar universidad o puesto..." value="${state.rankingNacSearch || ''}" style="width: 100%; padding: 0.55rem 0.85rem 0.55rem 2.4rem; background: var(--bg-dark-800); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none; transition: border-color 0.2s;" />
+                    <i data-lucide="search" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text-400);"></i>
+                  </div>
+                </div>
 
                 <div style="overflow-x: auto; width: 100%;">
                   <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
@@ -8707,7 +8761,7 @@ const getRowCantidad = (r) => {
                       </tr>
                     </thead>
                     <tbody>
-                      ${RENACYT_EXP_DATA.rankingNacional.map(r => `
+                      ${filteredRankingNac.length > 0 ? filteredRankingNac.map(r => `
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${r.isUPT ? 'background: rgba(168,85,247,0.18); border: 1px solid #a855f7;' : 'color: var(--text-200);'}">
                           <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${r.isUPT ? '#c084fc' : '#fff'};">#${r.p2026}</td>
                           <td style="padding: 10px 12px; font-weight: 800; color: ${r.isUPT ? '#ffffff' : '#fff'};">${r.univ} ${r.isUPT ? '★ (UPT)' : ''}</td>
@@ -8717,7 +8771,11 @@ const getRowCantidad = (r) => {
                           <td style="padding: 10px 12px; text-align: center; color: var(--text-300);">${r.y2025_2}</td>
                           <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: ${r.isUPT ? '#c084fc' : '#38bdf8'}; font-size: 1.0rem;">${r.y2026_1}</td>
                         </tr>
-                      `).join("")}
+                      `).join("") : `
+                        <tr>
+                          <td colspan="7" style="padding: 2.5rem; text-align: center; color: var(--text-400);">No se encontraron universidades que coincidan con "${state.rankingNacSearch || ''}".</td>
+                        </tr>
+                      `}
                     </tbody>
                   </table>
                 </div>
@@ -8821,6 +8879,21 @@ const getRowCantidad = (r) => {
         drawRenacytDashboard(subTabContent);
       };
     });
+
+    // Event Listener Buscador Ranking Nacional
+    const inputSearchRankingNac = subTabContent.querySelector("#renacyt-search-ranking-nac");
+    if (inputSearchRankingNac) {
+      inputSearchRankingNac.oninput = (e) => {
+        const val = e.target.value;
+        window._renacytState.rankingNacSearch = val;
+        drawRenacytDashboard(subTabContent);
+        const newElem = subTabContent.querySelector("#renacyt-search-ranking-nac");
+        if (newElem) {
+          newElem.focus();
+          newElem.setSelectionRange(val.length, val.length);
+        }
+      };
+    }
 
     // Event Listener Botón Exportar Word
     const btnExportWord = subTabContent.querySelector("#btn-export-renacyt-word");
