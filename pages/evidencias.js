@@ -2928,11 +2928,11 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
   // 3. Auxiliares y Render de la pestaña de Estadísticas e Importadores Independientes
   function generate3DBarChartSVG(data, width = 420, height = 240, groupSize = 1, verticalLabels = false) {
     const top = 30;
-    const right = 20;
+    const right = 45;
     const bottom = verticalLabels ? 135 : 40;
     const left = 40;
-    const dx = 10; // Proyección 3D en X
-    const dy = 8;  // Proyección 3D en Y
+    const dx = groupSize >= 4 ? 6 : 10; // Proyección 3D en X ajustada para grupos
+    const dy = groupSize >= 4 ? 5 : 8;  // Proyección 3D en Y ajustada para grupos
     
     const drawWidth = width - left - right - dx;
     const drawHeight = height - top - bottom - dy;
@@ -2953,8 +2953,8 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     }
     
     const barCount = data.length;
-    const labelFontSize = barCount > 15 ? "8.5" : (barCount > 10 ? "10.5" : "12");
-    const valueFontSize = barCount > 15 ? "11.5" : "12";
+    const labelFontSize = groupSize > 1 ? "10" : (barCount > 15 ? "8.5" : (barCount > 10 ? "10.5" : "12"));
+    const valueFontSize = groupSize >= 4 ? "9.5" : (groupSize >= 3 ? "10.5" : (barCount > 15 ? "11" : "12"));
     let barWidth = 8;
     let barSpacing = 8;
     let innerBarSpacing = 2;
@@ -2963,8 +2963,11 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     
     if (groupSize > 1) {
       numGroups = Math.ceil(barCount / groupSize);
-      if (barCount > 24) {
+      if (barCount >= 60) {
         innerBarSpacing = 1;
+        groupSpacing = 8;
+      } else if (barCount > 24) {
+        innerBarSpacing = 1.5;
         groupSpacing = 12;
       } else if (barCount > 12) {
         innerBarSpacing = 2;
@@ -2976,7 +2979,7 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
       
       const totalInnerSpacings = numGroups * (groupSize - 1) * innerBarSpacing;
       const totalGroupSpacings = (numGroups - 1) * groupSpacing;
-      barWidth = Math.max((drawWidth - totalInnerSpacings - totalGroupSpacings) / barCount, 8);
+      barWidth = Math.max((drawWidth - totalInnerSpacings - totalGroupSpacings) / barCount, 6);
     } else {
       barSpacing = barCount > 15 ? 4 : (barCount > 10 ? 8 : (barCount > 6 ? 12 : 20));
       const totalSpacing = barSpacing * (barCount - 1);
@@ -2999,7 +3002,7 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
           barsHtml += `
             <g class="bar-3d-group" data-label="${d.label}" data-value="${d.value}">
               <polygon points="${x},${y_bottom} ${x + dx},${y_bottom - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="var(--bg-dark-600)" opacity="0.5" />
-              <text x="${x + barWidth/2}" y="${y_bottom - 4}" fill="var(--text-400)" font-size="12" font-weight="800" text-anchor="middle">0</text>
+              <text x="${x + barWidth/2}" y="${y_bottom - 4}" fill="var(--text-400)" font-size="${valueFontSize}" font-weight="800" text-anchor="middle">0</text>
             </g>
           `;
           return;
@@ -3095,7 +3098,7 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     }
     
     return `
-      <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: 100%; max-height: 100%; display: block;">
+      <svg viewBox="0 0 ${width} ${height}" style="min-width: ${groupSize > 1 ? Math.min(width, 1050) : 300}px; width: 100%; height: 100%; max-height: 100%; display: block;">
         <style>
           .bar-3d-group {
             cursor: pointer;
@@ -8596,8 +8599,8 @@ const getRowCantidad = (r) => {
                 </div>
 
                 <!-- GRÁFICO SVG COMPARATIVO HISTÓRICO EN BARRAS AGRUPADAS -->
-                <div style="min-height: 270px; width: 100%; display: flex; align-items: center; justify-content: center; overflow-x: auto; margin-top: 0.5rem;">
-                  ${generate3DBarChartSVG(compHistData, 900, 270, compGroupSize, false)}
+                <div style="min-height: 290px; width: 100%; display: flex; align-items: center; justify-content: flex-start; overflow-x: auto; margin-top: 0.5rem; padding-bottom: 0.5rem;">
+                  ${generate3DBarChartSVG(compHistData, 1150, 290, compGroupSize, false)}
                 </div>
 
               </div>
