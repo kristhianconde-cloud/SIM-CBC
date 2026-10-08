@@ -8243,6 +8243,34 @@ const getRowCantidad = (r) => {
       color: idx === semIdx ? '#10b981' : '#fbbf24'
     }));
 
+    // Datos para gráfico comparativo histórico (2 a 4 elementos seleccionados en los 19 semestres)
+    const selectedComparativaList = (state.selectedComparativa && state.selectedComparativa.length >= 2)
+      ? state.selectedComparativa.slice(0, 4)
+      : (state.comparativaTipo === 'facultad' ? ["FACEM", "FACSA", "FAEDCOH", "FADE"] : ["Derecho", "Medicina Humana", "Administración de Negocios Internacionales", "Ingeniería Comercial"]);
+    
+    state.selectedComparativa = selectedComparativaList;
+
+    const compColors = ["#38bdf8", "#10b981", "#fbbf24", "#c084fc"];
+    const compGroupSize = selectedComparativaList.length;
+
+    const compHistData = [];
+    RENACYT_EXP_DATA.semestres.forEach((sem, sIdx) => {
+      selectedComparativaList.forEach((name, itemIdx) => {
+        let val = 0;
+        if (state.comparativaTipo === 'facultad') {
+          val = (RENACYT_EXP_DATA.facultadesHist[name] || [])[sIdx] || 0;
+        } else {
+          const item = RENACYT_EXP_DATA.carrerasHist.find(c => c.carrera === name);
+          val = item ? (item.datos[sIdx] || 0) : 0;
+        }
+        compHistData.push({
+          label: sem,
+          value: val,
+          color: compColors[itemIdx % compColors.length]
+        });
+      });
+    });
+
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
@@ -8487,58 +8515,89 @@ const getRowCantidad = (r) => {
           ` : ''}
 
           ${state.activeTab === 'comparativa' ? `
-            <!-- VISTA 4: COMPARATIVA INTERACTIVA -->
+            <!-- VISTA 4: COMPARATIVA INTERACTIVA HISTÓRICA -->
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
               
               <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+                
+                <!-- Encabezado y Seleccionador de Modo -->
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                  <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">
-                    SELECCIONA ELEMENTOS PARA COMPARAR (${activeSem})
-                  </h4>
+                  <div>
+                    <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                      <i data-lucide="git-compare" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+                      COMPARATIVA HISTÓRICA LONGITUDINAL (2017 – 2026-I)
+                    </h4>
+                    <p style="font-size: 0.8rem; color: var(--text-300); margin: 4px 0 0 0;">
+                      Selecciona entre 2 y 4 ${state.comparativaTipo === 'facultad' ? 'facultades' : 'carreras profesionales'} para comparar su evolución en los 19 semestres.
+                    </p>
+                  </div>
+
                   <div style="display: flex; gap: 8px;">
-                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'facultad' ? 'active' : ''}" data-type="facultad" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'facultad' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
-                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'carrera' ? 'active' : ''}" data-type="carrera" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'carrera' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Carrera</button>
+                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'facultad' ? 'active' : ''}" data-type="facultad" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'facultad' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Facultad</button>
+                    <button class="btn btn-comp-tipo ${state.comparativaTipo === 'carrera' ? 'active' : ''}" data-type="carrera" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 700; border-radius: 6px; ${state.comparativaTipo === 'carrera' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">Por Carrera</button>
                   </div>
                 </div>
 
-                <!-- Chips / Checkboxes de Selección -->
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem;">
-                  ${state.comparativaTipo === 'facultad' ? 
-                    Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => {
-                      const isSel = state.selectedComparativa.includes(f);
-                      return `
-                        <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${f}" style="padding: 0.35rem 0.75rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? 'background: rgba(59,130,246,0.25); color: #38bdf8; border: 1px solid #38bdf8;' : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
-                          ${isSel ? '✓ ' : '+ '}${f} (${RENACYT_EXP_DATA.facultadesHist[f][semIdx]})
-                        </button>
-                      `;
-                    }).join("")
-                    :
-                    RENACYT_EXP_DATA.carrerasHist.map(c => {
-                      const isSel = state.selectedComparativa.includes(c.carrera);
-                      return `
-                        <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${c.carrera}" style="padding: 0.35rem 0.75rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? 'background: rgba(251,191,36,0.25); color: #fbbf24; border: 1px solid #fbbf24;' : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
-                          ${isSel ? '✓ ' : '+ '}${c.carrera} (${c.datos[semIdx]})
-                        </button>
-                      `;
-                    }).join("")
-                  }
+                <!-- Chips / Checkboxes de Selección con Restricción 2-4 -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <span style="font-size: 0.82rem; color: var(--text-300); font-weight: 700;">
+                      Seleccionados: <strong style="color: ${selectedComparativaList.length >= 2 && selectedComparativaList.length <= 4 ? '#10b981' : '#f43f5e'};">${selectedComparativaList.length} de 4</strong> (Mín. 2 — Máx. 4)
+                    </span>
+                  </div>
+
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    ${state.comparativaTipo === 'facultad' ? 
+                      Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => {
+                        const isSel = selectedComparativaList.includes(f);
+                        const idx = selectedComparativaList.indexOf(f);
+                        const chipColor = isSel ? compColors[idx % compColors.length] : 'var(--border-color)';
+                        return `
+                          <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${f}" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? `background: rgba(59,130,246,0.2); color: ${chipColor}; border: 1.5px solid ${chipColor}; box-shadow: 0 0 8px rgba(59,130,246,0.2);` : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
+                            ${isSel ? '✓ ' : '+ '}${f} (${RENACYT_EXP_DATA.facultadesHist[f][semIdx]})
+                          </button>
+                        `;
+                      }).join("")
+                      :
+                      carrerasOrdenadas.map(c => {
+                        const isSel = selectedComparativaList.includes(c.carrera);
+                        const idx = selectedComparativaList.indexOf(c.carrera);
+                        const chipColor = isSel ? compColors[idx % compColors.length] : 'var(--border-color)';
+                        return `
+                          <button class="btn btn-chip-toggle ${isSel ? 'active' : ''}" data-val="${c.carrera}" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 20px; cursor: pointer; transition: all 0.2s; ${isSel ? `background: rgba(251,191,36,0.2); color: ${chipColor}; border: 1.5px solid ${chipColor}; box-shadow: 0 0 8px rgba(251,191,36,0.2);` : 'background: rgba(255,255,255,0.03); color: var(--text-400); border: 1px solid var(--border-color);'}">
+                            ${isSel ? '✓ ' : '+ '}${c.carrera} (${c.datos[semIdx]})
+                          </button>
+                        `;
+                      }).join("")
+                    }
+                  </div>
                 </div>
 
-                <!-- GRÁFICO SVG COMPARATIVO -->
-                <div style="min-height: 260px; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
-                  ${generate3DBarChartSVG(
-                    state.selectedComparativa.map((name, idx) => {
-                      const colors = ["#38bdf8", "#10b981", "#fbbf24", "#c084fc", "#f43f5e", "#06b6d4"];
-                      let val = 0;
-                      if (state.comparativaTipo === 'facultad') {
-                        val = (RENACYT_EXP_DATA.facultadesHist[name] || [])[semIdx] || 0;
-                      } else {
-                        const item = RENACYT_EXP_DATA.carrerasHist.find(c => c.carrera === name);
-                        val = item ? item.datos[semIdx] : 0;
-                      }
-                      return { label: name.length > 16 ? name.substring(0, 14) + '...' : name, value: val, color: colors[idx % colors.length] };
-                    }), 720, 240
-                  )}
+                <!-- Leyenda del Gráfico Comparativo -->
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 0.25rem;">
+                  <span style="font-size: 0.78rem; color: var(--text-300); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Leyenda Comparativa:</span>
+                  ${selectedComparativaList.map((name, idx) => {
+                    const col = compColors[idx % compColors.length];
+                    let curVal = 0;
+                    if (state.comparativaTipo === 'facultad') {
+                      curVal = (RENACYT_EXP_DATA.facultadesHist[name] || [])[semIdx] || 0;
+                    } else {
+                      const item = RENACYT_EXP_DATA.carrerasHist.find(c => c.carrera === name);
+                      curVal = item ? (item.datos[semIdx] || 0) : 0;
+                    }
+                    return `
+                      <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); padding: 4px 10px; border-radius: 6px; border: 1px solid ${col};">
+                        <span style="width: 10px; height: 10px; border-radius: 2px; background: ${col}; display: inline-block;"></span>
+                        <span style="font-weight: 700; color: #ffffff; font-size: 0.85rem;">${name}</span>
+                        <span style="font-weight: 800; color: ${col}; font-size: 0.85rem;">(${curVal} en ${activeSem})</span>
+                      </div>
+                    `;
+                  }).join("")}
+                </div>
+
+                <!-- GRÁFICO SVG COMPARATIVO HISTÓRICO EN BARRAS AGRUPADAS -->
+                <div style="min-height: 270px; width: 100%; display: flex; align-items: center; justify-content: center; overflow-x: auto; margin-top: 0.5rem;">
+                  ${generate3DBarChartSVG(compHistData, 900, 270, compGroupSize, false)}
                 </div>
 
               </div>
@@ -8730,23 +8789,31 @@ const getRowCantidad = (r) => {
         if (type === 'facultad') {
           window._renacytState.selectedComparativa = ["FACEM", "FACSA", "FAEDCOH", "FADE"];
         } else {
-          window._renacytState.selectedComparativa = ["Derecho", "Administración de Negocios Internacionales", "Medicina Humana", "Ciencias Contables y Financieras"];
+          window._renacytState.selectedComparativa = ["Derecho", "Medicina Humana", "Administración de Negocios Internacionales", "Ingeniería Comercial"];
         }
         drawRenacytDashboard(subTabContent);
       };
     });
 
-    // Event Listener Chip Selection en Comparativa
+    // Event Listener Chip Selection en Comparativa (Restricción Mín. 2 — Máx. 4)
     subTabContent.querySelectorAll(".btn-chip-toggle").forEach(btn => {
       btn.onclick = () => {
         const val = btn.getAttribute("data-val");
-        const list = window._renacytState.selectedComparativa;
+        const list = window._renacytState.selectedComparativa || [];
         if (list.includes(val)) {
-          if (list.length > 1) {
+          if (list.length > 2) {
             window._renacytState.selectedComparativa = list.filter(x => x !== val);
+          } else {
+            alert("Debes mantener al menos 2 elementos seleccionados para realizar la comparativa.");
+            return;
           }
         } else {
-          window._renacytState.selectedComparativa.push(val);
+          if (list.length < 4) {
+            window._renacytState.selectedComparativa.push(val);
+          } else {
+            alert("Solo puedes seleccionar entre 2 y 4 elementos para la comparativa.");
+            return;
+          }
         }
         drawRenacytDashboard(subTabContent);
       };
