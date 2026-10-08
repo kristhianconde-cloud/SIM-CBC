@@ -3115,6 +3115,64 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     `;
   }
 
+  function generateDonutChartSVG(dataArray, totalVal = 40, width = 680, height = 250) {
+    const cx = 120;
+    const cy = 120;
+    const r = 75;
+    const strokeWidth = 32;
+    const circumference = 2 * Math.PI * r;
+    let cumulative = 0;
+
+    const circlesSVG = dataArray.map(item => {
+      const pctVal = totalVal > 0 ? (item.value / totalVal) : 0;
+      const dashLen = pctVal * circumference;
+      const dashGap = circumference - dashLen;
+      const offset = (1 - cumulative) * circumference + (circumference * 0.25);
+      cumulative += pctVal;
+
+      return `
+        <circle cx="${cx}" cy="${cy}" r="${r}" 
+                fill="none" 
+                stroke="${item.color || '#38bdf8'}" 
+                stroke-width="${strokeWidth}" 
+                stroke-dasharray="${dashLen} ${dashGap}" 
+                stroke-dashoffset="${offset}"
+                style="transition: all 0.5s ease;">
+        </circle>
+      `;
+    }).join("");
+
+    const legendItemsSVG = dataArray.map(item => `
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 7px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 12px; height: 12px; border-radius: 4px; background: ${item.color || '#38bdf8'}; display: inline-block;"></span>
+          <span style="font-weight: 800; color: #ffffff; font-size: 0.9rem;">${item.label}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span style="font-weight: 800; color: ${item.color || '#38bdf8'}; font-size: 0.95rem;">${item.value} docentes</span>
+          <span style="font-weight: 700; color: var(--text-300); font-size: 0.85rem; min-width: 55px; text-align: right;">${item.pct}%</span>
+        </div>
+      </div>
+    `).join("");
+
+    return `
+      <div style="display: flex; align-items: center; justify-content: space-around; width: 100%; max-width: 680px; flex-wrap: wrap; gap: 1.5rem; padding: 0.5rem 0;">
+        <div style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center;">
+          <svg width="240" height="240" viewBox="0 0 240 240">
+            ${circlesSVG}
+          </svg>
+          <div style="position: absolute; text-align: center; pointer-events: none;">
+            <div style="font-size: 1.6rem; font-weight: 800; color: #ffffff;">${totalVal}</div>
+            <div style="font-size: 0.75rem; color: var(--text-300); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Total UPT</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 280px;">
+          ${legendItemsSVG}
+        </div>
+      </div>
+    `;
+  }
+
   function renderSplitHistoricalCharts(chartDataI, chartDataII, titleI = "Semestre I (Año-I)", titleII = "Semestre II (Año-II)", groupSize = 1) {
     return `
       <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%;">
@@ -8118,6 +8176,7 @@ const getRowCantidad = (r) => {
       window._renacytState = {
         semestre: "2026-I",
         activeTab: "facultad",
+        facultadGraficoTipo: "barras",
         evolucionModo: "facultad",
         selectedEvoFacultad: "FACEM",
         selectedEvoCarrera: "Derecho",
@@ -8127,6 +8186,7 @@ const getRowCantidad = (r) => {
     }
 
     const state = window._renacytState;
+    if (!state.facultadGraficoTipo) state.facultadGraficoTipo = "barras";
     if (!state.selectedEvoFacultad) state.selectedEvoFacultad = "FACEM";
     if (!state.selectedEvoCarrera) state.selectedEvoCarrera = "Derecho";
 
@@ -8134,11 +8194,22 @@ const getRowCantidad = (r) => {
     const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
     const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx];
 
+    // Mapa de colores distintivos por facultad
+    const facColors = {
+      "FACEM": "#38bdf8",
+      "FACSA": "#10b981",
+      "FAEDCOH": "#a855f7",
+      "FADE": "#fbbf24",
+      "FAING": "#f43f5e",
+      "FAU": "#06b6d4"
+    };
+
     // Datos por facultad en el semestre seleccionado
     const facDataCur = Object.keys(RENACYT_EXP_DATA.facultadesHist).map(f => ({
       facultad: f,
       cantidad: RENACYT_EXP_DATA.facultadesHist[f][semIdx],
-      pct: totalRenacyt > 0 ? ((RENACYT_EXP_DATA.facultadesHist[f][semIdx] / totalRenacyt) * 100).toFixed(2) : 0
+      pct: totalRenacyt > 0 ? ((RENACYT_EXP_DATA.facultadesHist[f][semIdx] / totalRenacyt) * 100).toFixed(2) : 0,
+      color: facColors[f] || "#38bdf8"
     })).sort((a, b) => b.cantidad - a.cantidad);
 
     const facLider = facDataCur[0] || { facultad: "FACEM", cantidad: 13, pct: 32.50 };
@@ -8281,37 +8352,38 @@ const getRowCantidad = (r) => {
                 }).join("")}
               </div>
 
-              <!-- TABLA DETALLADA POR FACULTAD -->
-              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
-                <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
-                  TABLA DE DISTRIBUCIÓN POR FACULTAD (${activeSem})
-                </h4>
-                <div style="overflow-x: auto; width: 100%;">
-                  <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
-                    <thead>
-                      <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
-                        <th style="padding: 10px 12px;">Facultad</th>
-                        <th style="padding: 10px 12px; text-align: center;">Docentes RENACYT</th>
-                        <th style="padding: 10px 12px; text-align: right;">% del Total UPT</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${facDataCur.map(f => `
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-200);">
-                          <td style="padding: 10px 12px; font-weight: 800; color: #fff;">${f.facultad}</td>
-                          <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: #38bdf8;">${f.cantidad}</td>
-                          <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: var(--text-200);">${f.pct}%</td>
-                        </tr>
-                      `).join("")}
-                    </tbody>
-                    <tfoot>
-                      <tr style="border-top: 1px solid var(--border-color); font-weight: 800; color: #ffffff; background: rgba(59,130,246,0.08);">
-                        <td style="padding: 10px 12px;">TOTAL GENERAL UPT</td>
-                        <td style="padding: 10px 12px; text-align: center; color: var(--accent-light); font-size: 1.05rem;">${totalRenacyt}</td>
-                        <td style="padding: 10px 12px; text-align: right; color: var(--text-200); font-size: 1.05rem;">100.00%</td>
-                      </tr>
-                    </tfoot>
-                  </table>
+              <!-- GRÁFICO DE DISTRIBUCIÓN POR FACULTAD -->
+              <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                  <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="${state.facultadGraficoTipo === 'pastel' ? 'pie-chart' : 'bar-chart-3'}" style="width: 18px; height: 18px; color: var(--accent-light);"></i>
+                    GRÁFICO DE DISTRIBUCIÓN POR FACULTAD (${activeSem})
+                  </h4>
+                  <div style="display: flex; gap: 8px; align-items: center;">
+                    <button class="btn btn-fac-grafico-type ${state.facultadGraficoTipo === 'barras' ? 'active' : ''}" data-type="barras" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.facultadGraficoTipo === 'barras' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">
+                      📊 Barras 3D
+                    </button>
+                    <button class="btn btn-fac-grafico-type ${state.facultadGraficoTipo === 'pastel' ? 'active' : ''}" data-type="pastel" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; border-radius: 6px; ${state.facultadGraficoTipo === 'pastel' ? 'background: var(--accent); color: #fff;' : 'background: transparent; color: var(--text-300); border: 1px solid var(--border-color);'}">
+                      🍩 Pastel / Donut
+                    </button>
+                  </div>
+                </div>
+
+                <div style="min-height: 260px; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; overflow-x: auto;">
+                  ${state.facultadGraficoTipo === 'barras' ? 
+                    generate3DBarChartSVG(facDataCur.map(f => ({
+                      label: `${f.facultad} (${f.pct}%)`,
+                      value: f.cantidad,
+                      color: f.color
+                    })), 720, 240)
+                    :
+                    generateDonutChartSVG(facDataCur.map(f => ({
+                      label: f.facultad,
+                      value: f.cantidad,
+                      pct: f.pct,
+                      color: f.color
+                    })), totalRenacyt, 720, 240)
+                  }
                 </div>
               </div>
 
@@ -8612,6 +8684,14 @@ const getRowCantidad = (r) => {
     subTabContent.querySelectorAll(".renacyt-nav-btn").forEach(btn => {
       btn.onclick = () => {
         window._renacytState.activeTab = btn.getAttribute("data-nav");
+        drawRenacytDashboard(subTabContent);
+      };
+    });
+
+    // Event Listener Toggle Tipo de Gráfico por Facultad (Barras 3D vs Pastel/Donut)
+    subTabContent.querySelectorAll(".btn-fac-grafico-type").forEach(btn => {
+      btn.onclick = () => {
+        window._renacytState.facultadGraficoTipo = btn.getAttribute("data-type");
         drawRenacytDashboard(subTabContent);
       };
     });
