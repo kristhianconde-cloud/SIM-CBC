@@ -8583,15 +8583,27 @@ const getRowCantidad = (r) => {
       "P0045000": "01/02/2025"
     };
 
+    const parseFechaPE = (str) => {
+      if (!str || typeof str !== 'string') return 0;
+      const parts = str.split('/');
+      if (parts.length === 3) {
+        const d = parts[0].padStart(2, '0');
+        const m = parts[1].padStart(2, '0');
+        const y = parts[2];
+        return new Date(`${y}-${m}-${d}`).getTime();
+      }
+      return 0;
+    };
+
     const top10DocentesRaw = (RENACYT_EXP_DATA.docentesList || [])
       .filter(d => d.tieneInfo)
       .sort((a, b) => {
         const wA = nivelWeights[a.nivel] || 99;
         const wB = nivelWeights[b.nivel] || 99;
         if (wA !== wB) return wA - wB;
-        const dateA = emisionDates[a.cvi] || '';
-        const dateB = emisionDates[b.cvi] || '';
-        return dateB.localeCompare(dateA);
+        const timeA = parseFechaPE(emisionDates[a.cvi] || '');
+        const timeB = parseFechaPE(emisionDates[b.cvi] || '');
+        return timeA - timeB;
       })
       .slice(0, 10);
 
