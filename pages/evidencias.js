@@ -8036,55 +8036,55 @@ const getRowCantidad = (r) => {
       { p2026: 70, p2025_2: 70, p2025_1: 70, univ: "Universidad La Salle", y2021: 1, y2024: 2, y2025_1: 6, y2025_2: 7, y2026_1: 5 }
     ],
     docentesList: [
-      {"id": 1, "docente": "Maestro Alex Rodrigo Alberto Capellino Gambetta", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel VII", "cvi": "P0459397", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=459397", "estado": "Vigente", "tieneInfo": true},
-      {"id": 2, "docente": "Maestro Miguel angel Hueda Zavaleta", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel II", "cvi": "P0198137", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=198137", "estado": "Vigente", "tieneInfo": true},
-      {"id": 3, "docente": "Maestro Fernando Mauricio Espada Salgado", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel IV", "cvi": "P0364442", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=364442", "estado": "Vigente", "tieneInfo": true},
-      {"id": 4, "docente": "Doctor Renzi Marilu Loza Ticona", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel V", "cvi": "P0217982", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=217982", "estado": "Vigente", "tieneInfo": true},
-      {"id": 5, "docente": "Doctor Juana del Carmen Bedoya Chanove", "facultad": "FAEDCOH", "carrera": "Comunicación", "nivel": "Nivel VI", "cvi": "P0037312", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=37312", "estado": "Vigente", "tieneInfo": true},
-      {"id": 6, "docente": "Doctor Gretty Paola Rossi Esteban", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "cvi": "P0063854", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=63854", "estado": "Vigente", "tieneInfo": true},
-      {"id": 7, "docente": "Maestro Juan Oscar Mayaute Zapata", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VI", "cvi": "P0097478", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=97478", "estado": "Vigente", "tieneInfo": true},
-      {"id": 8, "docente": "Maestro Ricardo Jimenez Palacios", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel IV", "cvi": "P0095533", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0095533", "estado": "Vigente", "tieneInfo": true},
-      {"id": 9, "docente": "Doctor Amelia Cristina Mamani Huanca", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel V", "cvi": "P0092750", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0092750", "estado": "Vigente", "tieneInfo": true},
-      {"id": 10, "docente": "Maestro Jose Giancarlo Tozo Burgos", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel VI", "cvi": "P0168815", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=168815", "estado": "Vigente", "tieneInfo": true},
-      {"id": 11, "docente": "Doctor Cecilia Claudia Montesinos Valencia", "facultad": "FACSA", "carrera": "Terapia física", "nivel": "Nivel VII", "cvi": "P0079506", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=79506", "estado": "Vigente", "tieneInfo": true},
-      {"id": 12, "docente": "Doctor Sam Michael Espinoza Vidaurre", "facultad": "FACSA", "carrera": "Terapia física", "nivel": "Nivel IV", "cvi": "P0130249", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0130249", "estado": "Vigente", "tieneInfo": true},
-      {"id": 13, "docente": "Maestro Avenilda Eufema Herrera Chura", "facultad": "FAEDCOH", "carrera": "Educación inicial", "nivel": "Nivel VII", "cvi": "P0343690", "orcid": "https://servicio-renacyt.concytec.gob.pe/ficha-renacyt/?idInvestigador=343690", "estado": "Vigente", "tieneInfo": true},
-      {"id": 14, "docente": "Doctor Edgar Gonzalo Parihuana Travezaño", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VI", "cvi": "P0066022", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=66022", "estado": "Vigente", "tieneInfo": true},
-      {"id": 15, "docente": "Doctor Luis Alfredo Fernandez Vizcarra", "facultad": "FAING", "carrera": "Sistemas", "nivel": "Nivel VI", "cvi": "P0064664", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=64664", "estado": "Vigente", "tieneInfo": true},
-      {"id": 16, "docente": "Doctor Oretta Mabel Barriga Soto", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "cvi": "P0026104", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=26104", "estado": "Vigente", "tieneInfo": true},
-      {"id": 17, "docente": "Maestro Jiang Wagner Mamani Lopez", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VII", "cvi": "P0070129", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=70129", "estado": "Vigente", "tieneInfo": true},
-      {"id": 18, "docente": "Doctor Patricia Rosa Maria Nue Caballero", "facultad": "FAEDCOH", "carrera": "Educación", "nivel": "Nivel VII", "cvi": "P0037547", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=37547", "estado": "Vigente", "tieneInfo": true},
-      {"id": 19, "docente": "Doctor Ana Luz Margarita Borda Soaquita", "facultad": "FAEDCOH", "carrera": "Educación inicial", "nivel": "Nivel VII", "cvi": "P0071142", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=71142", "estado": "Vigente", "tieneInfo": true},
-      {"id": 20, "docente": "Doctor Rafael Fortunato Supo Hallasi", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "cvi": "P0269474", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=269474", "estado": "Vigente", "tieneInfo": true},
-      {"id": 21, "docente": "Doctor Carlos Alberto Cueva Quispe", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "cvi": "P0217509", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=217509", "estado": "Vigente", "tieneInfo": true},
-      {"id": 22, "docente": "Doctor Giovanna Lourdes Cuneo Quispe", "facultad": "FAEDCOH", "carrera": "Comunicación", "nivel": "Nivel VII", "cvi": "P0058424", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=58424", "estado": "Vigente", "tieneInfo": true},
-      {"id": 23, "docente": "Doctor Marco Antonio Sanchez Tito", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel II", "cvi": "P0027836", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0027836", "estado": "Vigente", "tieneInfo": true},
-      {"id": 24, "docente": "Doctor Renza Lourdes Gambetta Quelopana", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Nivel VI", "cvi": "P0044956", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=44956", "estado": "Vigente", "tieneInfo": true},
-      {"id": 25, "docente": "Doctor Alex Alfredo Valenzuela Romero", "facultad": "FAEDCOH", "carrera": "Psicología", "nivel": "Nivel VI", "cvi": "P0082957", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=82957", "estado": "Vigente", "tieneInfo": true},
-      {"id": 26, "docente": "Doctor Ana Noelia Martinez Valdivia", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Nivel V", "cvi": "P0045000", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=45000", "estado": "Vigente", "tieneInfo": true},
-      {"id": 27, "docente": "Doctor Mariela Irene Bobadilla Quispe", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "cvi": "P0064587", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=64587", "estado": "Vigente", "tieneInfo": true},
-      {"id": 28, "docente": "Doctor Omar Pezo Jimenez", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel IV", "cvi": "P0140347", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=140347", "estado": "Vigente", "tieneInfo": true},
-      {"id": 29, "docente": "Doctor Guido Palumbo Pinto", "facultad": "FACEM", "carrera": "Turismo", "nivel": "Nivel V", "cvi": "P0022224", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0022224", "estado": "Vigente", "tieneInfo": true},
-      {"id": 30, "docente": "Doctor Marco Carlos Alejandro Rivarola Hidalgo", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel V", "cvi": "P0018301", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0018301", "estado": "Vigente", "tieneInfo": true},
-      {"id": 31, "docente": "Maestro Teresa Margarita Lanchipa Ale", "facultad": "FAING", "carrera": "Ambiental", "nivel": "Nivel VII", "cvi": "P0020659", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=20659", "estado": "Vigente", "tieneInfo": true},
-      {"id": 32, "docente": "Doctor Winston Adrian Castañeda Vargas", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel VI", "cvi": "P0035958", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=35958", "estado": "Vigente", "tieneInfo": true},
-      {"id": 33, "docente": "Maestro Marly Mahly Pastor Seperak", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VII", "cvi": "P0095534", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=95534", "estado": "Vigente", "tieneInfo": true},
-      {"id": 34, "docente": "Doctor Gerardo Renato Arias Vascones", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "cvi": "P0085578", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=85578", "estado": "Vigente", "tieneInfo": true},
-      {"id": 35, "docente": "Doctor Elmer limache Sandoval", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel VI", "cvi": "P0022213", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=22213", "estado": "Vigente", "tieneInfo": true},
-      {"id": 36, "docente": "Doctor Raul Cartagena Cutipa", "facultad": "FAING", "carrera": "Agroindustrial", "nivel": "Nivel VII", "cvi": "P0017174", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=17174", "estado": "Vigente", "tieneInfo": true},
-      {"id": 37, "docente": "Maestro Anabel del Rosario Crisosto Fuster", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VII", "cvi": "P0036916", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=36916", "estado": "Vigente", "tieneInfo": true},
-      {"id": 38, "docente": "Doctor Delia Yolanda Mamani Huanca", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "cvi": "P0066529", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=66529", "estado": "Vigente", "tieneInfo": true},
-      {"id": 39, "docente": "Doctor Pedro Ronald Cardenas Rueda", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel VII", "cvi": "P0121588", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=121588", "estado": "Vigente", "tieneInfo": true},
-      {"id": 40, "docente": "Maestro Glenda Rosario Vilca Coronado", "facultad": "FAEDCOH", "carrera": "Psicología", "nivel": "Nivel VII", "cvi": "P0118756", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=118756", "estado": "Vigente", "tieneInfo": true},
-      {"id": 41, "docente": "Mg. Roberto Carlos Flores Quispe", "facultad": "FAING", "carrera": "Ingeniería de Sistemas", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 42, "docente": "Mg. Fernando José Gutiérrez Arica", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 43, "docente": "Mg. Javier Ignacio Mamani Condori", "facultad": "FAING", "carrera": "Ingeniería Civil", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 44, "docente": "Mg. Silvia Beatriz Ortiz Paredes", "facultad": "FAEDCOH", "carrera": "Educación Inicial", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 45, "docente": "Mg. Gabriel Alonso Pinto Herrera", "facultad": "FAING", "carrera": "Ingeniería Ambiental", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 46, "docente": "Mg. Jorge Luis Tapia Albarracín", "facultad": "FAEDCOH", "carrera": "Ciencias de la Comunicación", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 47, "docente": "Mg. Raúl Enrique Alvarado Chocano", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 48, "docente": "Mg. Gloria María Fuentes Benítez", "facultad": "FACEM", "carrera": "Administración Turístico-Hotelera", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false},
-      {"id": 49, "docente": "Mg. Walter Alexander Paredes Meléndez", "facultad": "FACSA", "carrera": "Medicina Humana", "nivel": "Sin Información", "cvi": "Sin Registro", "orcid": "Sin Registro", "estado": "Pendiente", "tieneInfo": false}
+      {"id": 1, "docente": "Alex Rodrigo Alberto Capellino Gambetta", "grado": "Maestro", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TP", "cvi": "P0459397", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=459397", "tieneInfo": true},
+      {"id": 2, "docente": "Miguel angel Hueda Zavaleta", "grado": "Maestro", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel II", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0198137", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=198137", "tieneInfo": true},
+      {"id": 3, "docente": "Fernando Mauricio Espada Salgado", "grado": "Maestro", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel IV", "condicion": "Contratado", "jornada": "TP", "cvi": "P0364442", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=364442", "tieneInfo": true},
+      {"id": 4, "docente": "Renzi Marilu Loza Ticona", "grado": "Doctor", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel V", "condicion": "Contratado", "jornada": "TC", "cvi": "P0217982", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=217982", "tieneInfo": true},
+      {"id": 5, "docente": "Juana del Carmen Bedoya Chanove", "grado": "Doctor", "facultad": "FAEDCOH", "carrera": "Comunicación", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0037312", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=37312", "tieneInfo": true},
+      {"id": 6, "docente": "Gretty Paola Rossi Esteban", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TC", "cvi": "P0063854", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=63854", "tieneInfo": true},
+      {"id": 7, "docente": "Juan Oscar Mayaute Zapata", "grado": "Maestro", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0097478", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=97478", "tieneInfo": true},
+      {"id": 8, "docente": "Ricardo Jimenez Palacios", "grado": "Maestro", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel IV", "condicion": "Contratado", "jornada": "TC", "cvi": "P0095533", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0095533", "tieneInfo": true},
+      {"id": 9, "docente": "Amelia Cristina Mamani Huanca", "grado": "Doctor", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel V", "condicion": "Contratado", "jornada": "TC", "cvi": "P0092750", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0092750", "tieneInfo": true},
+      {"id": 10, "docente": "Jose Giancarlo Tozo Burgos", "grado": "Maestro", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0168815", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=168815", "tieneInfo": true},
+      {"id": 11, "docente": "Cecilia Claudia Montesinos Valencia", "grado": "Doctor", "facultad": "FACSA", "carrera": "Terapia física", "nivel": "Nivel VII", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0079506", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=79506", "tieneInfo": true},
+      {"id": 12, "docente": "Sam Michael Espinoza Vidaurre", "grado": "Doctor", "facultad": "FACSA", "carrera": "Terapia física", "nivel": "Nivel IV", "condicion": "Contratado", "jornada": "TC", "cvi": "P0130249", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0130249", "tieneInfo": true},
+      {"id": 13, "docente": "Avenilda Eufema Herrera Chura", "grado": "Maestro", "facultad": "FAEDCOH", "carrera": "Educación inicial", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TP", "cvi": "P0343690", "orcid": "https://servicio-renacyt.concytec.gob.pe/ficha-renacyt/?idInvestigador=343690", "tieneInfo": true},
+      {"id": 14, "docente": "Edgar Gonzalo Parihuana Travezaño", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VI", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0066022", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=66022", "tieneInfo": true},
+      {"id": 15, "docente": "Luis Alfredo Fernandez Vizcarra", "grado": "Doctor", "facultad": "FAING", "carrera": "Sistemas", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0064664", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=64664", "tieneInfo": true},
+      {"id": 16, "docente": "Oretta Mabel Barriga Soto", "grado": "Doctor", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "condicion": "Asociado", "jornada": "TC", "cvi": "P0026104", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=26104", "tieneInfo": true},
+      {"id": 17, "docente": "Jiang Wagner Mamani Lopez", "grado": "Maestro", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TC", "cvi": "P0070129", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=70129", "tieneInfo": true},
+      {"id": 18, "docente": "Patricia Rosa Maria Nue Caballero", "grado": "Doctor", "facultad": "FAEDCOH", "carrera": "Educación", "nivel": "Nivel VII", "condicion": "Principal", "jornada": "TC", "cvi": "P0037547", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=37547", "tieneInfo": true},
+      {"id": 19, "docente": "Ana Luz Margarita Borda Soaquita", "grado": "Doctor", "facultad": "FAEDCOH", "carrera": "Educación inicial", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TP", "cvi": "P0071142", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=71142", "tieneInfo": true},
+      {"id": 20, "docente": "Rafael Fortunato Supo Hallasi", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "condicion": "Principal", "jornada": "TC", "cvi": "P0269474", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=269474", "tieneInfo": true},
+      {"id": 21, "docente": "Carlos Alberto Cueva Quispe", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "condicion": "Asociado", "jornada": "TC", "cvi": "P0217509", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=217509", "tieneInfo": true},
+      {"id": 22, "docente": "Giovanna Lourdes Cuneo Quispe", "grado": "Doctor", "facultad": "FAEDCOH", "carrera": "Comunicación", "nivel": "Nivel VII", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0058424", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=58424", "tieneInfo": true},
+      {"id": 23, "docente": "Marco Antonio Sanchez Tito", "grado": "Doctor", "facultad": "FACSA", "carrera": "Odontología", "nivel": "Nivel II", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0027836", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0027836", "tieneInfo": true},
+      {"id": 24, "docente": "Renza Lourdes Gambetta Quelopana", "grado": "Doctor", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Nivel VI", "condicion": "Asociado", "jornada": "TC", "cvi": "P0044956", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=44956", "tieneInfo": true},
+      {"id": 25, "docente": "Alex Alfredo Valenzuela Romero", "grado": "Doctor", "facultad": "FAEDCOH", "carrera": "Psicología", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0082957", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=82957", "tieneInfo": true},
+      {"id": 26, "docente": "Ana Noelia Martinez Valdivia", "grado": "Doctor", "facultad": "FAU", "carrera": "Arquitectura", "nivel": "Nivel V", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0045000", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=45000", "tieneInfo": true},
+      {"id": 27, "docente": "Mariela Irene Bobadilla Quispe", "grado": "Doctor", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "condicion": "Contratado", "jornada": "TC", "cvi": "P0064587", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=64587", "tieneInfo": true},
+      {"id": 28, "docente": "Omar Pezo Jimenez", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel IV", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0140347", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=140347", "tieneInfo": true},
+      {"id": 29, "docente": "Guido Palumbo Pinto", "grado": "Doctor", "facultad": "FACEM", "carrera": "Turismo", "nivel": "Nivel V", "condicion": "Principal", "jornada": "TC", "cvi": "P0022224", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0022224", "tieneInfo": true},
+      {"id": 30, "docente": "Marco Carlos Alejandro Rivarola Hidalgo", "grado": "Doctor", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel V", "condicion": "Principal", "jornada": "TC", "cvi": "P0018301", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=0018301", "tieneInfo": true},
+      {"id": 31, "docente": "Teresa Margarita Lanchipa Ale", "grado": "Maestro", "facultad": "FAING", "carrera": "Ambiental", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TP", "cvi": "P0020659", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=20659", "tieneInfo": true},
+      {"id": 32, "docente": "Winston Adrian Castañeda Vargas", "grado": "Doctor", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel VI", "condicion": "Principal", "jornada": "TC", "cvi": "P0035958", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=35958", "tieneInfo": true},
+      {"id": 33, "docente": "Marly Mahly Pastor Seperak", "grado": "Maestro", "facultad": "FACEM", "carrera": "Negocios internacionales", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TP", "cvi": "P0095534", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=95534", "tieneInfo": true},
+      {"id": 34, "docente": "Gerardo Renato Arias Vascones", "grado": "Doctor", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VI", "condicion": "Asociado", "jornada": "TC", "cvi": "P0085578", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=85578", "tieneInfo": true},
+      {"id": 35, "docente": "Elmer limache Sandoval", "grado": "Doctor", "facultad": "FACEM", "carrera": "Comercial", "nivel": "Nivel VI", "condicion": "Principal", "jornada": "TC", "cvi": "P0022213", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=22213", "tieneInfo": true},
+      {"id": 36, "docente": "Raul Cartagena Cutipa", "grado": "Doctor", "facultad": "FAING", "carrera": "Agroindustrial", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TC", "cvi": "P0017174", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=17174", "tieneInfo": true},
+      {"id": 37, "docente": "Anabel del Rosario Crisosto Fuster", "grado": "Maestro", "facultad": "FACEM", "carrera": "Contabilidad", "nivel": "Nivel VII", "condicion": "Contratado", "jornada": "TC", "cvi": "P0036916", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=36916", "tieneInfo": true},
+      {"id": 38, "docente": "Delia Yolanda Mamani Huanca", "grado": "Doctor", "facultad": "FADE", "carrera": "Derecho", "nivel": "Nivel VII", "condicion": "Asociado", "jornada": "TP", "cvi": "P0066529", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=66529", "tieneInfo": true},
+      {"id": 39, "docente": "Pedro Ronald Cardenas Rueda", "grado": "Doctor", "facultad": "FACSA", "carrera": "Medicina", "nivel": "Nivel VII", "condicion": "Principal", "jornada": "TC", "cvi": "P0121588", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=121588", "tieneInfo": true},
+      {"id": 40, "docente": "Glenda Rosario Vilca Coronado", "grado": "Maestro", "facultad": "FAEDCOH", "carrera": "Psicología", "nivel": "Nivel VII", "condicion": "Auxiliar", "jornada": "TC", "cvi": "P0118756", "orcid": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=118756", "tieneInfo": true},
+      {"id": 41, "docente": "Roberto Carlos Flores Quispe", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 42, "docente": "Fernando José Gutiérrez Arica", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 43, "docente": "Javier Ignacio Mamani Condori", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 44, "docente": "Silvia Beatriz Ortiz Paredes", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 45, "docente": "Gabriel Alonso Pinto Herrera", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 46, "docente": "Jorge Luis Tapia Albarracín", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 47, "docente": "Raúl Enrique Alvarado Chocano", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 48, "docente": "Gloria María Fuentes Benítez", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false},
+      {"id": 49, "docente": "Walter Alexander Paredes Meléndez", "grado": "-", "facultad": "-", "carrera": "-", "nivel": "-", "condicion": "-", "jornada": "-", "cvi": "-", "orcid": "-", "tieneInfo": false}
     ]
   };
 
@@ -8303,9 +8303,12 @@ const getRowCantidad = (r) => {
       if (docFiltro === "sin_info" && d.tieneInfo) return false;
       if (!docSearch) return true;
       return d.docente.toLowerCase().includes(docSearch) ||
+             (d.grado && d.grado.toLowerCase().includes(docSearch)) ||
              d.facultad.toLowerCase().includes(docSearch) ||
              d.carrera.toLowerCase().includes(docSearch) ||
              d.nivel.toLowerCase().includes(docSearch) ||
+             (d.condicion && d.condicion.toLowerCase().includes(docSearch)) ||
+             (d.jornada && d.jornada.toLowerCase().includes(docSearch)) ||
              d.cvi.toLowerCase().includes(docSearch);
     });
 
@@ -8410,7 +8413,7 @@ const getRowCantidad = (r) => {
 
           <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
             <div style="position: relative; width: 280px; max-width: 100%;">
-              <input type="text" id="renacyt-search-docentes" placeholder="Buscar docente, facultad, carrera..." value="${state.docenteSearch || ''}" style="width: 100%; padding: 0.55rem 0.85rem 0.55rem 2.4rem; background: var(--bg-dark-800); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none;" />
+              <input type="text" id="renacyt-search-docentes" placeholder="Buscar docente, grado, facultad, carrera..." value="${state.docenteSearch || ''}" style="width: 100%; padding: 0.55rem 0.85rem 0.55rem 2.4rem; background: var(--bg-dark-800); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none;" />
               <i data-lucide="search" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text-400);"></i>
             </div>
 
@@ -8419,23 +8422,18 @@ const getRowCantidad = (r) => {
                 Todos (${totalDocentesCount})
               </button>
               <button class="btn btn-docente-filtro ${docFiltro === 'con_info' ? 'active' : ''}" data-filtro="con_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'con_info' ? 'background: #10b981; color: #fff;' : 'background: transparent; color: var(--text-300);'}">
-                Con Información (${conInfoCount})
+                Formato C9 (${conInfoCount})
               </button>
               <button class="btn btn-docente-filtro ${docFiltro === 'sin_info' ? 'active' : ''}" data-filtro="sin_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'sin_info' ? 'background: #eab308; color: #0f172a;' : 'background: transparent; color: var(--text-300);'}">
-                ⚠️ Sin Información (${sinInfoCount})
+                ⚠️ Fuera de C9 (${sinInfoCount})
               </button>
             </div>
           </div>
         </div>
 
-        <div style="padding: 0.75rem 1rem; background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; color: #fef08a; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <i data-lucide="alert-triangle" style="width: 18px; height: 18px; color: #facc15; flex-shrink: 0;"></i>
-            <span><strong>Docentes Resaltados en Amarillo Sombreado:</strong> Corresponden a docentes investigadores que no cuentan con información registrada o pendiente de actualización en CVI.</span>
-          </div>
-          <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; padding: 2px 10px; border-radius: 20px; font-weight: 800; font-size: 0.78rem;">
-            ${sinInfoCount} pendientes
-          </span>
+        <div style="padding: 0.75rem 1rem; background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; color: #fef08a; font-size: 0.82rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;">
+          <i data-lucide="alert-triangle" style="width: 18px; height: 18px; color: #facc15; flex-shrink: 0;"></i>
+          <span><strong>Docentes resaltados en amarillo sombreado:</strong> Corresponden a docentes investigadores que no se encuentran en el formato C9 de SUNEDU pero están adscritos a la UPT.</span>
         </div>
 
         <div style="overflow-x: auto; width: 100%;">
@@ -8443,53 +8441,46 @@ const getRowCantidad = (r) => {
             <thead>
               <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-dark-800); color: var(--text-200); text-align: left;">
                 <th style="padding: 10px 12px; text-align: center;">N°</th>
-                <th style="padding: 10px 12px;">Docente / Investigador</th>
+                <th style="padding: 10px 12px;">Docente</th>
+                <th style="padding: 10px 12px; text-align: center;">Grado</th>
                 <th style="padding: 10px 12px;">Facultad</th>
                 <th style="padding: 10px 12px;">Programa / Carrera</th>
                 <th style="padding: 10px 12px; text-align: center;">Nivel RENACYT</th>
-                <th style="padding: 10px 12px; text-align: center;">Código CVI</th>
-                <th style="padding: 10px 12px; text-align: center;">ORCID</th>
-                <th style="padding: 10px 12px; text-align: right;">Estado Info</th>
+                <th style="padding: 10px 12px; text-align: center;">Condición</th>
+                <th style="padding: 10px 12px; text-align: center;">Jornada Laboral</th>
+                <th style="padding: 10px 12px; text-align: center;">Código CTI Vitae</th>
+                <th style="padding: 10px 12px; text-align: center;">Perfil CTI Vitae</th>
               </tr>
             </thead>
             <tbody>
               ${filteredDocentes.length > 0 ? filteredDocentes.map(r => `
                 <tr style="border-bottom: ${r.tieneInfo ? '1px solid rgba(255,255,255,0.04)' : '1px solid rgba(234, 179, 8, 0.25)'}; ${!r.tieneInfo ? 'background: rgba(234, 179, 8, 0.14); color: #fef08a;' : 'color: var(--text-200);'}">
                   <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${!r.tieneInfo ? '#facc15' : 'var(--text-400)'};">#${r.id}</td>
-                  <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">
-                    ${r.docente}
-                    ${!r.tieneInfo ? `<span style="font-size: 0.72rem; margin-left: 6px; background: rgba(234, 179, 8, 0.3); color: #facc15; padding: 1px 6px; border-radius: 4px; font-weight: 700;">⚠️ Sin Info</span>` : ''}
-                  </td>
-                  <td style="padding: 10px 12px; font-weight: 700; color: ${!r.tieneInfo ? '#facc15' : '#38bdf8'};">${r.facultad}</td>
+                  <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">${r.docente}</td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: ${!r.tieneInfo ? '#fef08a' : '#c084fc'};">${r.grado}</td>
+                  <td style="padding: 10px 12px; font-weight: 700; color: ${!r.tieneInfo ? '#fef08a' : '#38bdf8'};">${r.facultad}</td>
                   <td style="padding: 10px 12px; color: ${!r.tieneInfo ? '#fef08a' : 'var(--text-200)'};">${r.carrera}</td>
                   <td style="padding: 10px 12px; text-align: center;">
-                    ${!r.tieneInfo ? `
-                      <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.4); padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 4px;">
-                        <i data-lucide="alert-triangle" style="width: 12px; height: 12px;"></i> Sin Información
-                      </span>
-                    ` : `
+                    ${!r.tieneInfo ? '-' : `
                       <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.78rem;">
                         ${r.nivel}
                       </span>
                     `}
                   </td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 600; color: ${!r.tieneInfo ? '#fef08a' : 'var(--text-200)'};">${r.condicion}</td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${!r.tieneInfo ? '#fef08a' : (r.jornada === 'TC' ? '#10b981' : '#fbbf24')};">${r.jornada}</td>
                   <td style="padding: 10px 12px; text-align: center; color: ${!r.tieneInfo ? '#fef08a' : 'var(--text-300)'}; font-family: monospace;">${r.cvi}</td>
-                  <td style="padding: 10px 12px; text-align: center; color: ${!r.tieneInfo ? '#fef08a' : '#10b981'}; font-family: monospace;">${r.orcid}</td>
-                  <td style="padding: 10px 12px; text-align: right;">
-                    ${!r.tieneInfo ? `
-                      <span style="background: rgba(234, 179, 8, 0.25); color: #facc15; padding: 2px 8px; border-radius: 4px; font-weight: 800; font-size: 0.75rem;">
-                        ⚠️ Pendiente
-                      </span>
-                    ` : `
-                      <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">
-                        ✓ Acreditado
-                      </span>
-                    `}
+                  <td style="padding: 10px 12px; text-align: center;">
+                    ${r.orcid !== '-' ? `
+                      <a href="${r.orcid}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
+                        <i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Ver Perfil
+                      </a>
+                    ` : '-'}
                   </td>
                 </tr>
               `).join("") : `
                 <tr>
-                  <td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-400);">No se encontraron docentes que coincidan con la búsqueda.</td>
+                  <td colspan="10" style="padding: 2.5rem; text-align: center; color: var(--text-400);">No se encontraron docentes que coincidan con la búsqueda.</td>
                 </tr>
               `}
             </tbody>
