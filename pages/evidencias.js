@@ -8560,18 +8560,63 @@ const getRowCantidad = (r) => {
       </div>
     `;
 
-    const top10InvestigadoresData = [
-      { pos: 1, medal: "🥇", docente: "Miguel Ángel Hueda Zavaleta", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel II", emision: "10/06/2024", cti: "P0198137", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=198137" },
-      { pos: 2, medal: "🥈", docente: "Marco Antonio Sánchez Tito", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel II", emision: "25/07/2025", cti: "P0027836", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=27836" },
-      { pos: 3, medal: "🥉", docente: "Ricardo Jiménez Palacios", grado: "Doctor", facultad: "FACEM", carrera: "Administración de Negocios Internacionales", nivel: "Nivel IV", emision: "12/03/2026", cti: "P0095533", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=95533" },
-      { pos: 4, medal: "#4", docente: "Fernando Mauricio Espada Salgado", grado: "Doctor", facultad: "FACSA", carrera: "Odontología", nivel: "Nivel IV", emision: "18/06/2026", cti: "P0364442", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=364442" },
-      { pos: 5, medal: "#5", docente: "Sam Michael Espinoza Vidaurre", grado: "Maestro", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel IV", emision: "09/01/2026", cti: "P0130249", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=130249" },
-      { pos: 6, medal: "#6", docente: "Omar Pezo Jiménez", grado: "Doctor", facultad: "FADE", carrera: "Derecho", nivel: "Nivel IV", emision: "09/01/2025", cti: "P0140347", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=140347" },
-      { pos: 7, medal: "#7", docente: "Marco Carlos Alejandro Rivarola Hidalgo", grado: "Doctor", facultad: "FACSA", carrera: "Medicina Humana", nivel: "Nivel V", emision: "12/11/2024", cti: "P0018301", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=18301" },
-      { pos: 8, medal: "#8", docente: "Guido Palumbo Pinto", grado: "Doctor", facultad: "FACEM", carrera: "Ingeniería Comercial", nivel: "Nivel V", emision: "12/12/2024", cti: "P0022224", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=22224" },
-      { pos: 9, medal: "#9", docente: "Amelia Cristina Mamani Huanca", grado: "Doctor", facultad: "FACEM", carrera: "Contabilidad", nivel: "Nivel V", emision: "30/12/2024", cti: "P0092750", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=92750" },
-      { pos: 10, medal: "#10", docente: "Ana Noelia Martínez Valdivia", grado: "Maestro", facultad: "FAU", carrera: "Arquitectura", nivel: "Nivel V", emision: "01/02/2025", cti: "P0045000", orcid: "https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerPerfilTransparente.do?id_investigador=45000" }
-    ];
+    const nivelWeights = {
+      "Nivel I": 1,
+      "Nivel II": 2,
+      "Nivel III": 3,
+      "Nivel IV": 4,
+      "Nivel V": 5,
+      "Nivel VI": 6,
+      "Nivel VII": 7
+    };
+
+    const emisionDates = {
+      "P0198137": "10/06/2024",
+      "P0027836": "25/07/2025",
+      "P0095533": "12/03/2026",
+      "P0364442": "18/06/2026",
+      "P0130249": "09/01/2026",
+      "P0140347": "09/01/2025",
+      "P0018301": "12/11/2024",
+      "P0022224": "12/12/2024",
+      "P0092750": "30/12/2024",
+      "P0045000": "01/02/2025"
+    };
+
+    const top10DocentesRaw = (RENACYT_EXP_DATA.docentesList || [])
+      .filter(d => d.tieneInfo)
+      .sort((a, b) => {
+        const wA = nivelWeights[a.nivel] || 99;
+        const wB = nivelWeights[b.nivel] || 99;
+        if (wA !== wB) return wA - wB;
+        const dateA = emisionDates[a.cvi] || '';
+        const dateB = emisionDates[b.cvi] || '';
+        return dateB.localeCompare(dateA);
+      })
+      .slice(0, 10);
+
+    const top10InvestigadoresData = top10DocentesRaw.map((d, index) => {
+      const pos = index + 1;
+      let medal = `#${pos}`;
+      if (pos === 1) medal = "🥇";
+      else if (pos === 2) medal = "🥈";
+      else if (pos === 3) medal = "🥉";
+
+      const emision = emisionDates[d.cvi] || "Sin fecha";
+
+      return {
+        pos,
+        medal,
+        docente: d.docente,
+        grado: d.grado,
+        facultad: d.facultad,
+        carrera: d.carrera,
+        nivel: d.nivel,
+        emision,
+        cti: d.cvi,
+        orcid: d.orcid
+      };
+    });
 
     const renacytTop10RankingHTML = `
       <!-- SECCIÓN TOP 10 INVESTIGADORES UPT -->
