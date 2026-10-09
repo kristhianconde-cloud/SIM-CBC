@@ -955,9 +955,9 @@ const RENACYT_SHEET_DATA = {
 
 
 const getDesercionRisk = (val) => {
-  if (val >= 8.0) return { label: 'Crítico', icon: '🔴', color: '#f43f5e', badgeBg: 'rgba(244, 63, 94, 0.18)', border: 'rgba(244, 63, 94, 0.4)', text: '🔴 Crítico' };
-  if (val >= 4.0) return { label: 'Medio', icon: '🟡', color: '#f59e0b', badgeBg: 'rgba(245, 158, 11, 0.18)', border: 'rgba(245, 158, 11, 0.4)', text: '🟡 Medio' };
-  return { label: 'Bajo', icon: '🟢', color: '#10b981', badgeBg: 'rgba(16, 185, 129, 0.18)', border: 'rgba(16, 185, 129, 0.4)', text: '🟢 Bajo' };
+  if (val >= 8.0) return { label: 'Crítico', icon: '🔴', color: '#f87171', badgeBg: 'rgba(248, 113, 113, 0.15)', border: 'rgba(248, 113, 113, 0.35)', text: '🔴 Crítico' };
+  if (val >= 4.0) return { label: 'Medio', icon: '🟡', color: '#fcd34d', badgeBg: 'rgba(252, 211, 77, 0.15)', border: 'rgba(252, 211, 77, 0.35)', text: '🟡 Medio' };
+  return { label: 'Bajo', icon: '🟢', color: '#6ee7b7', badgeBg: 'rgba(110, 231, 183, 0.15)', border: 'rgba(110, 231, 183, 0.35)', text: '🟢 Bajo' };
 };
 
 const getDesercionRate = (row, sem) => {
