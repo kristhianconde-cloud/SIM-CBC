@@ -5219,7 +5219,15 @@ const drawEstadisticas = () => {
 
     let topFac = "Ninguno", topFacVal = 0;
     const facMap = {};
-    semRows.forEach(r => facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0));
+    const facCntK = {};
+    semRows.forEach(r => {
+      facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0);
+      facCntK[r.Facultad] = (facCntK[r.Facultad] || 0) + 1;
+    });
+    const isRateTab = prefix === "desercion";
+    if (isRateTab) {
+      Object.keys(facMap).forEach(f => { facMap[f] = Math.round((facMap[f] / (facCntK[f] || 1)) * 100) / 100; });
+    }
     Object.keys(facMap).forEach(f => {
       if (facMap[f] > topFacVal) { topFacVal = facMap[f]; topFac = f; }
     });
@@ -5231,17 +5239,22 @@ const drawEstadisticas = () => {
       if (carrMap[c] > topCarrVal) { topCarrVal = carrMap[c]; topCarr = c; }
     });
 
+    const kpiFacTitle = isRateTab ? "Facultad con Mayor Deserción" : "Facultad Líder";
+    const kpiCarrTitle = isRateTab ? "Carrera con Mayor Deserción" : "Carrera Líder";
+    const kpiFacSub = isRateTab ? `${topFacVal.toFixed(2)}% tasa promedio de deserción` : `${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}`;
+    const kpiCarrSub = isRateTab ? `${topCarrVal.toFixed(2)}% tasa de deserción` : `${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}`;
+
     kpisHtml += `
       <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Facultad Líder</span>
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">${kpiFacTitle}</span>
         <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topFac}">${topFac}</strong>
-        <span style="font-size: 1.05rem; color: var(--text-400);">${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
+        <span style="font-size: 1.05rem; color: var(--text-400);">${kpiFacSub}</span>
       </div>
 
       <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Carrera Líder</span>
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">${kpiCarrTitle}</span>
         <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topCarr}">${topCarr}</strong>
-        <span style="font-size: 1.05rem; color: var(--text-400);">${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
+        <span style="font-size: 1.05rem; color: var(--text-400);">${kpiCarrSub}</span>
       </div>
     `;
 
