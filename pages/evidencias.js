@@ -2925,6 +2925,93 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     // drawSemesterLinks();
   };
 
+  function generateHorizontal3DBarChartSVG(data, width = 850, rowHeight = 38) {
+    if (!data || data.length === 0) {
+      return `<div style="text-align:center; padding: 2rem; color: var(--text-400);">Sin datos</div>`;
+    }
+
+    const top = 30;
+    const left = 240;
+    const right = 80;
+    const bottom = 20;
+    const dx = 8;
+    const dy = 6;
+
+    const drawWidth = width - left - right - dx;
+    const height = top + data.length * rowHeight + bottom;
+
+    const maxVal = Math.max(...data.map(d => d.value), 1);
+    const barHeight = Math.max(rowHeight - 14, 14);
+
+    let gridHtml = "";
+    const ticks = 4;
+    for (let i = 0; i <= ticks; i++) {
+      const val = (maxVal / ticks) * i;
+      const x = left + (val / maxVal) * drawWidth;
+      gridHtml += `
+        <line x1="${x}" y1="${top - 10}" x2="${x}" y2="${height - bottom}" stroke="var(--border-color)" stroke-dasharray="3,3" opacity="0.4" />
+        <text x="${x}" y="${top - 14}" fill="var(--text-400)" font-size="11" font-weight="700" text-anchor="middle">${Math.round(val)}</text>
+      `;
+    }
+
+    let rowsHtml = "";
+
+    data.forEach((d, idx) => {
+      const y = top + idx * rowHeight + 6;
+      const w = maxVal > 0 ? (d.value / maxVal) * drawWidth : 0;
+      const color = d.color || "var(--accent)";
+      const labelText = d.fullLabel || d.label || "";
+
+      if (w <= 0) {
+        rowsHtml += `
+          <g class="bar-3d-group" data-label="${labelText}" data-value="0">
+            <text x="${left - 12}" y="${y + barHeight / 2 + 4}" fill="var(--text-300)" font-size="12.5" font-weight="600" text-anchor="end">${labelText}</text>
+            <rect x="${left}" y="${y}" width="4" height="${barHeight}" fill="var(--bg-dark-600)" opacity="0.5" rx="2" />
+            <text x="${left + 16}" y="${y + barHeight / 2 + 4}" fill="var(--text-400)" font-size="12" font-weight="800" text-anchor="start">0</text>
+          </g>
+        `;
+        return;
+      }
+
+      rowsHtml += `
+        <g class="bar-3d-group" data-label="${labelText}" data-value="${d.value}">
+          <!-- Etiqueta Nombre en Lista Vertical a la Izquierda -->
+          <text x="${left - 12}" y="${y + barHeight / 2 + 4}" fill="var(--text-200)" font-size="12.5" font-weight="600" text-anchor="end">${labelText}</text>
+
+          <!-- Cara Superior (3D Top Face) -->
+          <polygon points="${left},${y} ${left + dx},${y - dy} ${left + w + dx},${y - dy} ${left + w},${y}" fill="${color}" opacity="0.85" />
+          <polygon points="${left},${y} ${left + dx},${y - dy} ${left + w + dx},${y - dy} ${left + w},${y}" fill="rgba(255, 255, 255, 0.25)" />
+
+          <!-- Cara Lateral Derecha (3D Right Face) -->
+          <polygon points="${left + w},${y} ${left + w + dx},${y - dy} ${left + w + dx},${y + barHeight - dy} ${left + w},${y + barHeight}" fill="${color}" opacity="0.9" />
+          <polygon points="${left + w},${y} ${left + w + dx},${y - dy} ${left + w + dx},${y + barHeight - dy} ${left + w},${y + barHeight}" fill="rgba(0, 0, 0, 0.3)" />
+
+          <!-- Cara Frontal (3D Front Face) -->
+          <polygon points="${left},${y} ${left + w},${y} ${left + w},${y + barHeight} ${left},${y + barHeight}" fill="${color}" opacity="0.95" />
+
+          <!-- Número de valor en tamaño legible y grande -->
+          <text x="${left + w + dx + 10}" y="${y + barHeight / 2 + 5}" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="start">${d.value.toLocaleString()}</text>
+        </g>
+      `;
+    });
+
+    return `
+      <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-width: ${width}px; display: block; overflow: visible;">
+        <style>
+          .bar-3d-group {
+            cursor: pointer;
+            transition: filter var(--transition-fast), transform var(--transition-fast);
+          }
+          .bar-3d-group:hover {
+            filter: brightness(1.18) drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+          }
+        </style>
+        ${gridHtml}
+        ${rowsHtml}
+      </svg>
+    `;
+  }
+
   // 3. Auxiliares y Render de la pestaña de Estadísticas e Importadores Independientes
   function generate3DBarChartSVG(data, width = 420, height = 240, groupSize = 1, verticalLabels = false) {
     const top = 30;
@@ -3571,7 +3658,8 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
     chartData = Object.keys(progMap).map((prog, idx) => {
       const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "var(--accent)"];
       return {
-        label: prog.length > 18 ? prog.substring(0, 16) + "..." : prog,
+        label: prog,
+        fullLabel: prog,
         value: progMap[prog],
         color: colors[idx % colors.length]
       };
@@ -4048,7 +4136,9 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
             ? renderSplitHistoricalCharts(chartDataI, chartDataII, "Variación entre Semestres -I (2014 - Presente)", "Variación entre Semestres -II (2014 - Presente)", 1)
             : window._alumnosActiveChartView === "evolutivo" || window._alumnosActiveChartView === "evolucion_facultad" || window._alumnosActiveChartView === "evolucion_carrera"
             ? renderSplitHistoricalCharts(chartDataI, chartDataII, "Evolución Semestre I (Año-I)", "Evolución Semestre II (Año-II)", 1)
-            : generate3DBarChartSVG(chartData, 800, 360, 1, window._alumnosActiveChartView === "carreras")
+            : window._alumnosActiveChartView === "carreras"
+            ? generateHorizontal3DBarChartSVG(chartData, 850, 38)
+            : generate3DBarChartSVG(chartData, 800, 360)
           }
         </div>
       </div>
