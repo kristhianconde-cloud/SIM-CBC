@@ -5739,6 +5739,21 @@ const drawEstadisticas = () => {
       .sg-bar3d .fs { left: 100%; bottom: 0; width: 12px; height: 100%; background: var(--c); filter: brightness(0.55); transform-origin: left bottom; transform: skewY(-45deg); }
       .sg-bar3d .ft { left: 0; bottom: 100%; width: 100%; height: 12px; background: var(--c); filter: brightness(1.4); transform-origin: left bottom; transform: skewX(-45deg); }
       .sg-col3d:hover .sg-bar3d { filter: brightness(1.2); transform: translateY(-8px); }
+      .sg-hlist { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.25rem 0.5rem; }
+      .sg-hrow { display: flex; align-items: center; gap: 1rem; padding: 0.25rem 0.6rem; border-radius: 8px; cursor: pointer; transition: background 0.2s ease; }
+      .sg-hrow:hover { background: rgba(255,255,255,0.05); }
+      .sg-hname { flex: 0 0 min(290px, 38%); text-align: right; font-size: 0.9rem; font-weight: 600; color: var(--text-200); line-height: 1.2; transition: color 0.2s ease; }
+      .sg-hname small { display: block; color: var(--text-400); font-size: 0.72rem; font-weight: 500; margin-top: 2px; }
+      .sg-hrow:hover .sg-hname { color: #fff; }
+      .sg-htrack { flex: 1; display: flex; align-items: center; min-width: 0; padding-top: 12px; }
+      .sg-hbar3d { position: relative; height: 22px; min-width: 6px; margin-right: 12px; transform-origin: left center; animation: sgGrowX 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
+      .sg-hbar3d i { position: absolute; display: block; }
+      .sg-hbar3d .ff { left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(0,0,0,0.15)), var(--c); }
+      .sg-hbar3d .fs { left: 100%; bottom: 0; width: 12px; height: 100%; background: var(--c); filter: brightness(0.55); transform-origin: left bottom; transform: skewY(-45deg); }
+      .sg-hbar3d .ft { left: 0; bottom: 100%; width: 100%; height: 12px; background: var(--c); filter: brightness(1.4); transform-origin: left bottom; transform: skewX(-45deg); }
+      .sg-hrow:hover .sg-hbar3d { filter: brightness(1.2); transform: translateX(5px); }
+      .sg-hval { margin-left: 0.5rem; font-weight: 800; color: #fff; font-size: 0.95rem; white-space: nowrap; }
+      @keyframes sgGrowX { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
       .sg-chip { background: rgba(56,189,248,0.1); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
       .sg-chip:hover { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
       .sg-tooltip { position: fixed; z-index: 99999; pointer-events: none; background: rgba(10,15,30,0.96); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.55rem 0.8rem; font-size: 0.85rem; color: #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 290px; display: none; line-height: 1.35; }
@@ -5764,7 +5779,7 @@ const drawEstadisticas = () => {
 
     const sgHints = {
       facultades: "Pasa el cursor sobre una barra para ver el detalle. Haz clic en una facultad para ver sus carreras.",
-      carreras: "Haz clic en una carrera para ver su evolución histórica. Las carreras se agrupan en filas con su nombre completo.",
+      carreras: "Haz clic en una carrera para ver su evolución histórica. Lista de carreras ordenada de mayor a menor. Haz clic en una para ver su evolución histórica.",
       crecimiento: "Haz clic en un semestre para analizarlo. Cada barra se compara con el mismo semestre del año anterior.",
       comparativa: "Selecciona hasta 4 elementos para comparar su evolución (Año-I vs Año-II).",
       evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
@@ -5793,17 +5808,19 @@ const drawEstadisticas = () => {
       if (sgView === "carreras") {
         if (!chartData.length) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Sin datos para este filtro.</div>`;
         const maxV = Math.max(...chartData.map(d => d.value), 1);
-        return `<div class="sg-grid3d">${chartData.map((item, i) => {
-          const h = Math.max(6, (item.value / maxV) * 220);
+        return `<div class="sg-hlist">${chartData.map((item, i) => {
+          const ratio = item.value / maxV;
           const pct = ((item.value / grandTotal) * 100).toFixed(1);
           const full = item.fullLabel || item.label;
           const row = displayRows.find(r => r.Programa === full);
           const fac = row ? row.Facultad : "";
           return `
-            <div class="sg-col sg-col3d" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
-              <div class="sg-barzone"><span class="sg-val">${item.value.toLocaleString()}</span>
-              <div class="sg-bar3d" style="--c: ${item.color}; height: ${h}px; animation-delay: ${i * 45}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div></div>
-              <span class="sg-lbl-h">${sgEsc(full)}</span>
+            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
+              <span class="sg-hname">${sgEsc(full)}<small>${sgEsc(fac)}</small></span>
+              <div class="sg-htrack">
+                <div class="sg-hbar3d" style="--c: ${item.color}; width: calc((100% - 80px) * ${ratio.toFixed(4)}); animation-delay: ${i * 40}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
+                <span class="sg-hval">${item.value.toLocaleString()}</span>
+              </div>
             </div>`;
         }).join("")}</div>`;
       }
