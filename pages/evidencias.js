@@ -8298,7 +8298,58 @@ const getRowCantidad = (r) => {
     const docSearch = (state.docenteSearch || "").toLowerCase().trim();
     const docFiltro = state.docenteFiltro || "todos";
 
-    const filteredDocentes = (RENACYT_EXP_DATA.docentesList || []).filter(d => {
+    const activeSem = state.semestre;
+    const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
+    const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx] || 40;
+
+    const parseFechaPE = (str) => {
+      if (!str || typeof str !== 'string') return 0;
+      const parts = str.split('/');
+      if (parts.length === 3) {
+        const d = parts[0].padStart(2, '0');
+        const m = parts[1].padStart(2, '0');
+        const y = parts[2];
+        return new Date(`${y}-${m}-${d}`).getTime();
+      }
+      return 0;
+    };
+
+    const emisionDates = {
+      "P0198137": "10/06/2024",
+      "P0027836": "25/07/2025",
+      "P0095533": "12/03/2026",
+      "P0364442": "18/06/2026",
+      "P0130249": "09/01/2026",
+      "P0140347": "09/01/2025",
+      "P0018301": "12/11/2024",
+      "P0022224": "12/12/2024",
+      "P0092750": "30/12/2024",
+      "P0045000": "01/02/2025"
+    };
+
+    // Todos los C9 ordenados cronológicamente por emisión
+    const allC9SortedByEmision = (RENACYT_EXP_DATA.docentesList || [])
+      .filter(d => d.tieneInfo)
+      .sort((a, b) => {
+        const timeA = parseFechaPE(emisionDates[a.cvi] || '');
+        const timeB = parseFechaPE(emisionDates[b.cvi] || '');
+        return timeA - timeB;
+      });
+
+    // C9 activos en el semestre seleccionado según el histórico oficial
+    const c9DocentesSemestre = allC9SortedByEmision.slice(0, totalRenacyt);
+    const nonC9Adscritos = (RENACYT_EXP_DATA.docentesList || []).filter(d => !d.tieneInfo);
+
+    // En 2026-I se suman los 9 adscritos fuera de C9; en semestres anteriores sólo los C9 de ese periodo
+    const docentesListSemestre = activeSem === "2026-I"
+      ? [...c9DocentesSemestre, ...nonC9Adscritos]
+      : c9DocentesSemestre;
+
+    const totalDocentesCount = docentesListSemestre.length;
+    const conInfoCount = c9DocentesSemestre.length;
+    const sinInfoCount = activeSem === "2026-I" ? nonC9Adscritos.length : 0;
+
+    const filteredDocentes = docentesListSemestre.filter(d => {
       if (docFiltro === "con_info" && !d.tieneInfo) return false;
       if (docFiltro === "sin_info" && d.tieneInfo) return false;
       if (!docSearch) return true;
@@ -8311,14 +8362,6 @@ const getRowCantidad = (r) => {
              (d.jornada && d.jornada.toLowerCase().includes(docSearch)) ||
              d.cvi.toLowerCase().includes(docSearch);
     });
-
-    const totalDocentesCount = (RENACYT_EXP_DATA.docentesList || []).length;
-    const conInfoCount = (RENACYT_EXP_DATA.docentesList || []).filter(d => d.tieneInfo).length;
-    const sinInfoCount = (RENACYT_EXP_DATA.docentesList || []).filter(d => !d.tieneInfo).length;
-
-    const activeSem = state.semestre;
-    const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
-    const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx];
 
     // Mapa de colores distintivos por facultad
     const facColors = {
@@ -8397,6 +8440,35 @@ const getRowCantidad = (r) => {
       });
     });
 
+    // 1. Estadísticas y Distribución Dinámicas para el Semestre Seleccionado
+    const nivelesCounts = { "Nivel II": 0, "Nivel IV": 0, "Nivel V": 0, "Nivel VI": 0, "Nivel VII": 0 };
+    c9DocentesSemestre.forEach(d => {
+      if (d.nivel) {
+        nivelesCounts[d.nivel] = (nivelesCounts[d.nivel] || 0) + 1;
+      }
+    });
+
+    const maxNivelEnSemestre = Object.keys(nivelesCounts).find(k => nivelesCounts[k] > 0) || "N/A";
+
+    let drCount = 0;
+    let mgCount = 0;
+    c9DocentesSemestre.forEach(d => {
+      if ((d.grado || '').toLowerCase().includes('doctor')) drCount++;
+      else mgCount++;
+    });
+
+    let tcCount = 0;
+    let tpCount = 0;
+    c9DocentesSemestre.forEach(d => {
+      if (d.jornada === 'TC') tcCount++;
+      else tpCount++;
+    });
+
+    const pDr = conInfoCount > 0 ? ((drCount / conInfoCount) * 100).toFixed(1) : "0.0";
+    const pMg = conInfoCount > 0 ? ((mgCount / conInfoCount) * 100).toFixed(1) : "0.0";
+    const pTc = conInfoCount > 0 ? ((tcCount / conInfoCount) * 100).toFixed(1) : "0.0";
+    const pTp = conInfoCount > 0 ? ((tpCount / conInfoCount) * 100).toFixed(1) : "0.0";
+
     const renacytDocentesEstadisticasHTML = `
       <!-- SECCIÓN ESTADÍSTICAS Y DISTRIBUCIÓN RENACYT -->
       <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
@@ -8404,19 +8476,21 @@ const getRowCantidad = (r) => {
           <div>
             <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="pie-chart" style="width: 18px; height: 18px; color: #38bdf8;"></i>
-              <span>ESTADÍSTICAS Y DISTRIBUCIÓN DE INVESTIGADORES RENACYT UPT (2026-I)</span>
+              <span>ESTADÍSTICAS Y DISTRIBUCIÓN DE INVESTIGADORES RENACYT UPT (${activeSem})</span>
             </h4>
             <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
-              Análisis institucional del personal docente acreditado en Formato C9 y adscritos
+              Análisis institucional del personal docente acreditado en el Semestre ${activeSem}
             </p>
           </div>
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
             <div style="background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #10b981; padding: 0.4rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">
-              Formato C9: 40 Docentes
+              Formato C9: ${conInfoCount} Docentes
             </div>
-            <div style="background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.3); color: #facc15; padding: 0.4rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">
-              Fuera de C9 (Adscritos): 9 Docentes
-            </div>
+            ${sinInfoCount > 0 ? `
+              <div style="background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.3); color: #facc15; padding: 0.4rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">
+                Fuera de C9 (Adscritos): ${sinInfoCount} Docentes
+              </div>
+            ` : ''}
           </div>
         </div>
 
@@ -8426,59 +8500,31 @@ const getRowCantidad = (r) => {
           <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 0.85rem;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">DISTRIBUCIÓN POR NIVELES RENACYT</span>
-              <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Máx: Nivel II</span>
+              <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Máx: ${maxNivelEnSemestre}</span>
             </div>
             
             <div style="display: flex; flex-direction: column; gap: 0.55rem;">
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
-                  <span style="color: #38bdf8;">Nivel II (Top UPT)</span>
-                  <span style="color: #ffffff;">2 (5.0%)</span>
-                </div>
-                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 5%; height: 100%; background: #38bdf8; border-radius: 4px;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
-                  <span style="color: #10b981;">Nivel IV</span>
-                  <span style="color: #ffffff;">4 (10.0%)</span>
-                </div>
-                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 10%; height: 100%; background: #10b981; border-radius: 4px;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
-                  <span style="color: #fbbf24;">Nivel V</span>
-                  <span style="color: #ffffff;">12 (30.0%)</span>
-                </div>
-                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 30%; height: 100%; background: #fbbf24; border-radius: 4px;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
-                  <span style="color: #a855f7;">Nivel VI</span>
-                  <span style="color: #ffffff;">9 (22.5%)</span>
-                </div>
-                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 22.5%; height: 100%; background: #a855f7; border-radius: 4px;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
-                  <span style="color: #94a3b8;">Nivel VII</span>
-                  <span style="color: #ffffff;">13 (32.5%)</span>
-                </div>
-                <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 32.5%; height: 100%; background: #94a3b8; border-radius: 4px;"></div>
-                </div>
-              </div>
+              ${[
+                { label: "Nivel II (Top UPT)", key: "Nivel II", color: "#38bdf8" },
+                { label: "Nivel IV", key: "Nivel IV", color: "#10b981" },
+                { label: "Nivel V", key: "Nivel V", color: "#fbbf24" },
+                { label: "Nivel VI", key: "Nivel VI", color: "#a855f7" },
+                { label: "Nivel VII", key: "Nivel VII", color: "#94a3b8" }
+              ].map(n => {
+                const cnt = nivelesCounts[n.key] || 0;
+                const pct = conInfoCount > 0 ? ((cnt / conInfoCount) * 100).toFixed(1) : "0.0";
+                return `
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 3px;">
+                      <span style="color: ${n.color};">${n.label}</span>
+                      <span style="color: #ffffff;">${cnt} (${pct}%)</span>
+                    </div>
+                    <div style="width: 100%; height: 7px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;">
+                      <div style="width: ${pct}%; height: 100%; background: ${n.color}; border-radius: 4px;"></div>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
             </div>
           </div>
 
@@ -8486,7 +8532,7 @@ const getRowCantidad = (r) => {
           <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem;">
             <div>
               <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">GRADO ACADÉMICO (C9)</span>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Alto nivel académico del cuerpo de investigadores</p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Nivel académico del cuerpo de investigadores en ${activeSem}</p>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.85rem; margin: 0.5rem 0;">
@@ -8496,8 +8542,8 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Doctor</span>
                 </div>
                 <div style="text-align: right;">
-                  <span style="font-size: 1.1rem; font-weight: 800; color: #c084fc;">24</span>
-                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (60.0%)</span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #c084fc;">${drCount}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (${pDr}%)</span>
                 </div>
               </div>
 
@@ -8507,15 +8553,15 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Maestro / Magíster</span>
                 </div>
                 <div style="text-align: right;">
-                  <span style="font-size: 1.1rem; font-weight: 800; color: #06b6d4;">16</span>
-                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (40.0%)</span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #06b6d4;">${mgCount}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (${pMg}%)</span>
                 </div>
               </div>
             </div>
 
             <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; display: flex;">
-              <div style="width: 60%; height: 100%; background: #c084fc;" title="Doctores: 24 (60%)"></div>
-              <div style="width: 40%; height: 100%; background: #06b6d4;" title="Maestros: 16 (40%)"></div>
+              <div style="width: ${pDr}%; height: 100%; background: #c084fc;" title="Doctores: ${drCount} (${pDr}%)"></div>
+              <div style="width: ${pMg}%; height: 100%; background: #06b6d4;" title="Maestros: ${mgCount} (${pMg}%)"></div>
             </div>
           </div>
 
@@ -8523,7 +8569,7 @@ const getRowCantidad = (r) => {
           <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1.1rem; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem;">
             <div>
               <span style="font-size: 0.88rem; font-weight: 800; color: #ffffff; text-transform: uppercase;">JORNADA LABORAL (C9)</span>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Predominio de dedicación institucional de Tiempo Completo</p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin: 4px 0 0 0;">Dedicación docente institucional en ${activeSem}</p>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.85rem; margin: 0.5rem 0;">
@@ -8533,8 +8579,8 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Tiempo Completo (TC)</span>
                 </div>
                 <div style="text-align: right;">
-                  <span style="font-size: 1.1rem; font-weight: 800; color: #10b981;">32</span>
-                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (80.0%)</span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #10b981;">${tcCount}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (${pTc}%)</span>
                 </div>
               </div>
 
@@ -8544,15 +8590,15 @@ const getRowCantidad = (r) => {
                   <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Tiempo Parcial (TP)</span>
                 </div>
                 <div style="text-align: right;">
-                  <span style="font-size: 1.1rem; font-weight: 800; color: #fbbf24;">8</span>
-                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (20.0%)</span>
+                  <span style="font-size: 1.1rem; font-weight: 800; color: #fbbf24;">${tpCount}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;"> (${pTp}%)</span>
                 </div>
               </div>
             </div>
 
             <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; display: flex;">
-              <div style="width: 80%; height: 100%; background: #10b981;" title="Tiempo Completo: 32 (80%)"></div>
-              <div style="width: 20%; height: 100%; background: #fbbf24;" title="Tiempo Parcial: 8 (20%)"></div>
+              <div style="width: ${pTc}%; height: 100%; background: #10b981;" title="Tiempo Completo: ${tcCount} (${pTc}%)"></div>
+              <div style="width: ${pTp}%; height: 100%; background: #fbbf24;" title="Tiempo Parcial: ${tpCount} (${pTp}%)"></div>
             </div>
           </div>
 
@@ -8560,6 +8606,7 @@ const getRowCantidad = (r) => {
       </div>
     `;
 
+    // 2. Ranking Top Investigadores Dinámico para el Semestre Seleccionado
     const nivelWeights = {
       "Nivel I": 1,
       "Nivel II": 2,
@@ -8570,33 +8617,8 @@ const getRowCantidad = (r) => {
       "Nivel VII": 7
     };
 
-    const emisionDates = {
-      "P0198137": "10/06/2024",
-      "P0027836": "25/07/2025",
-      "P0095533": "12/03/2026",
-      "P0364442": "18/06/2026",
-      "P0130249": "09/01/2026",
-      "P0140347": "09/01/2025",
-      "P0018301": "12/11/2024",
-      "P0022224": "12/12/2024",
-      "P0092750": "30/12/2024",
-      "P0045000": "01/02/2025"
-    };
-
-    const parseFechaPE = (str) => {
-      if (!str || typeof str !== 'string') return 0;
-      const parts = str.split('/');
-      if (parts.length === 3) {
-        const d = parts[0].padStart(2, '0');
-        const m = parts[1].padStart(2, '0');
-        const y = parts[2];
-        return new Date(`${y}-${m}-${d}`).getTime();
-      }
-      return 0;
-    };
-
-    const top10DocentesRaw = (RENACYT_EXP_DATA.docentesList || [])
-      .filter(d => d.tieneInfo)
+    const top10DocentesRaw = c9DocentesSemestre
+      .slice()
       .sort((a, b) => {
         const wA = nivelWeights[a.nivel] || 99;
         const wB = nivelWeights[b.nivel] || 99;
@@ -8607,45 +8629,26 @@ const getRowCantidad = (r) => {
       })
       .slice(0, 10);
 
-    const top10InvestigadoresData = top10DocentesRaw.map((d, index) => {
-      const pos = index + 1;
-      let medal = `#${pos}`;
-      if (pos === 1) medal = "🥇";
-      else if (pos === 2) medal = "🥈";
-      else if (pos === 3) medal = "🥉";
-
-      const emision = emisionDates[d.cvi] || "Sin fecha";
-
-      return {
-        pos,
-        medal,
-        docente: d.docente,
-        grado: d.grado,
-        facultad: d.facultad,
-        carrera: d.carrera,
-        nivel: d.nivel,
-        emision,
-        cti: d.cvi,
-        orcid: d.orcid
-      };
-    });
+    const top10Count = top10DocentesRaw.length;
+    const topNivelLider = top10DocentesRaw.length > 0 ? top10DocentesRaw[0].nivel : "N/A";
+    const lideresCountInSem = top10DocentesRaw.filter(d => d.nivel === topNivelLider).length;
 
     const renacytTop10RankingHTML = `
-      <!-- SECCIÓN TOP 10 INVESTIGADORES UPT -->
+      <!-- SECCIÓN TOP INVESTIGADORES UPT -->
       <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1.25rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
           <div>
             <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="trophy" style="width: 18px; height: 18px; color: #facc15;"></i>
-              <span>TOP 10 INVESTIGADORES RENACYT UPT</span>
+              <span>TOP ${top10Count} INVESTIGADORES RENACYT UPT (${activeSem})</span>
             </h4>
             <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
-              Ranking de máxima jerarquía investigadora en la UPT clasificado por Nivel RENACYT (Nivel I máximo) y Fecha de Emisión
+              Ranking de máxima jerarquía investigadora en la UPT clasificado por Nivel RENACYT y Fecha de Emisión en el Semestre ${activeSem}
             </p>
           </div>
           <div style="background: linear-gradient(135deg, rgba(250,204,21,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(250,204,21,0.3); color: #facc15; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
             <i data-lucide="award" style="width: 16px; height: 16px;"></i>
-            <span>2 Investigadores Nivel II (Líderes UPT)</span>
+            <span>${lideresCountInSem} Investigadores ${topNivelLider} (Líderes UPT)</span>
           </div>
         </div>
 
@@ -8665,9 +8668,16 @@ const getRowCantidad = (r) => {
               </tr>
             </thead>
             <tbody>
-              ${top10InvestigadoresData.map(r => `
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${r.pos <= 3 ? 'background: rgba(250,204,21,0.08);' : 'color: var(--text-200);'}">
-                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; font-size: 1.1rem; color: ${r.pos === 1 ? '#facc15' : (r.pos === 2 ? '#cbd5e1' : (r.pos === 3 ? '#b45309' : 'var(--text-400)'))};">${r.medal}</td>
+              ${top10DocentesRaw.map((r, index) => {
+                const pos = index + 1;
+                let medal = `#${pos}`;
+                if (pos === 1) medal = "🥇";
+                else if (pos === 2) medal = "🥈";
+                else if (pos === 3) medal = "🥉";
+                const emision = emisionDates[r.cvi] || "Sin fecha";
+                return `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); ${pos <= 3 ? 'background: rgba(250,204,21,0.08);' : 'color: var(--text-200);'}">
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; font-size: 1.1rem; color: ${pos === 1 ? '#facc15' : (pos === 2 ? '#cbd5e1' : (pos === 3 ? '#b45309' : 'var(--text-400)'))};">${medal}</td>
                   <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">${r.docente}</td>
                   <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: #c084fc;">${r.grado}</td>
                   <td style="padding: 10px 12px; font-weight: 700; color: #38bdf8;">${r.facultad}</td>
@@ -8677,15 +8687,15 @@ const getRowCantidad = (r) => {
                       ${r.nivel}
                     </span>
                   </td>
-                  <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: #ffffff;">${r.emision}</td>
-                  <td style="padding: 10px 12px; text-align: center; color: var(--text-300); font-family: monospace;">${r.cti}</td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: #ffffff;">${emision}</td>
+                  <td style="padding: 10px 12px; text-align: center; color: var(--text-300); font-family: monospace;">${r.cvi}</td>
                   <td style="padding: 10px 12px; text-align: center;">
                     <a href="${r.orcid}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
                       <i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Ver Perfil
                     </a>
                   </td>
                 </tr>
-              `).join("")}
+              `;}).join("")}
             </tbody>
           </table>
         </div>
@@ -8699,10 +8709,10 @@ const getRowCantidad = (r) => {
           <div>
             <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="users" style="width: 18px; height: 18px; color: #facc15;"></i>
-              <span>RELACIÓN DE DOCENTES RENACYT UPT</span>
+              <span>RELACIÓN DE DOCENTES RENACYT UPT (${activeSem})</span>
             </h4>
             <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
-              Listado nominal de docentes investigadores adscritos y estado de información acreditada
+              Listado nominal de docentes investigadores adscritos en el Semestre ${activeSem} y estado de información acreditada
             </p>
           </div>
 
@@ -8719,17 +8729,21 @@ const getRowCantidad = (r) => {
               <button class="btn btn-docente-filtro ${docFiltro === 'con_info' ? 'active' : ''}" data-filtro="con_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'con_info' ? 'background: #10b981; color: #fff;' : 'background: transparent; color: var(--text-300);'}">
                 Formato C9 (${conInfoCount})
               </button>
-              <button class="btn btn-docente-filtro ${docFiltro === 'sin_info' ? 'active' : ''}" data-filtro="sin_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'sin_info' ? 'background: #eab308; color: #0f172a;' : 'background: transparent; color: var(--text-300);'}">
-                ⚠️ Fuera de C9 (${sinInfoCount})
-              </button>
+              ${sinInfoCount > 0 ? `
+                <button class="btn btn-docente-filtro ${docFiltro === 'sin_info' ? 'active' : ''}" data-filtro="sin_info" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; border-radius: 6px; ${docFiltro === 'sin_info' ? 'background: #eab308; color: #0f172a;' : 'background: transparent; color: var(--text-300);'}">
+                  ⚠️ Fuera de C9 (${sinInfoCount})
+                </button>
+              ` : ''}
             </div>
           </div>
         </div>
 
-        <div style="padding: 0.75rem 1rem; background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; color: #fef08a; font-size: 0.82rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;">
-          <i data-lucide="alert-triangle" style="width: 18px; height: 18px; color: #facc15; flex-shrink: 0;"></i>
-          <span><strong>Docentes resaltados en amarillo sombreado:</strong> Corresponden a docentes investigadores que no se encuentran en el formato C9 de SUNEDU pero están adscritos a la UPT.</span>
-        </div>
+        ${sinInfoCount > 0 ? `
+          <div style="padding: 0.75rem 1rem; background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; color: #fef08a; font-size: 0.82rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;">
+            <i data-lucide="alert-triangle" style="width: 18px; height: 18px; color: #facc15; flex-shrink: 0;"></i>
+            <span><strong>Docentes resaltados en amarillo sombreado:</strong> Corresponden a docentes investigadores que no se encuentran en el formato C9 de SUNEDU pero están adscritos a la UPT.</span>
+          </div>
+        ` : ''}
 
         <div style="overflow-x: auto; width: 100%;">
           <table class="table" style="width: 100%; font-size: 0.88rem; border-collapse: collapse;">
