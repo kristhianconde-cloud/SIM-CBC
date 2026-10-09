@@ -4484,6 +4484,17 @@ const drawEstadisticas = () => {
               { name: "Cantidad Graduados", desc: "Número de graduados" }
             ]
           };
+        case "desercion":
+          return {
+            title: `Cargar Deserción Estudiantil (${selectedSemester})`,
+            desc: "Importa la tasa de deserción (%) por programa académico y facultad.",
+            columns: [
+              { name: "Semestre", desc: "Semestre académico (ej. 2026-I)" },
+              { name: "Facultad", desc: "Nombre de la facultad" },
+              { name: "Programa", desc: "Programa de estudios" },
+              { name: "Cantidad", desc: "Tasa de deserción (%)" }
+            ]
+          };
         default:
           return {
             title: `Cargar Estadísticas (${selectedSemester})`,
@@ -4587,6 +4598,7 @@ const drawEstadisticas = () => {
             case "postulantes": dbKey = "postulantes"; break;
             case "ingresantes": dbKey = "ingresantes"; break;
             case "egresados": dbKey = "egresados"; break;
+            case "desercion": dbKey = "desercion_estudiantil"; break;
             case "servicios": dbKey = "servicios_complementarios"; break;
           }
 
@@ -4640,6 +4652,7 @@ const drawEstadisticas = () => {
         else if (activeStatsSubTab === "postulantes" && typeof drawPostulantesDashboard === "function") drawPostulantesDashboard(subTabContent);
         else if (activeStatsSubTab === "ingresantes" && typeof drawIngresantesDashboard === "function") drawIngresantesDashboard(subTabContent);
         else if (activeStatsSubTab === "egresados" && typeof drawEgresadosDashboard === "function") drawEgresadosDashboard(subTabContent);
+        else if (activeStatsSubTab === "desercion" && typeof drawDesercionDashboard === "function") drawDesercionDashboard(subTabContent);
         else if (activeStatsSubTab === "laboratorios" && typeof drawLaboratoriosDashboard === "function") drawLaboratoriosDashboard(subTabContent);
         else drawDynamicDashboard(importEntry, subTabContent);
       } else {
@@ -4660,7 +4673,8 @@ const drawEstadisticas = () => {
                                   (s.docentes_renacyt && s.docentes_renacyt.length > 0) ||
                                   (s.postulantes && s.postulantes.length > 0) ||
                                   (s.ingresantes && s.ingresantes.length > 0) ||
-                                  (s.egresados && s.egresados.length > 0));
+                                  (s.egresados && s.egresados.length > 0) ||
+                                  (s.desercion_estudiantil && s.desercion_estudiantil.length > 0));
           
           if (!checkAny(newStats)) {
             try {
