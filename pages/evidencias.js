@@ -5333,6 +5333,11 @@ const drawEstadisticas = () => {
     const totalCount = displayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
 
     // --- Crecimiento / Decrecimiento respecto al semestre anterior ---
+    // Semestre equivalente del año anterior (2026-I -> 2025-I, 2026-II -> 2025-II)
+    const getPrevYearSem = (sem) => {
+      const m = /^(\d{4})-(I{1,2})$/.exec(String(sem || ""));
+      return m ? `${parseInt(m[1], 10) - 1}-${m[2]}` : null;
+    };
     const sortedSems = semesters.slice().sort();
     const currSemIdx = sortedSems.indexOf(activeSem);
     let prevSem = null;
@@ -5342,8 +5347,9 @@ const drawEstadisticas = () => {
     let growthColor = "#38bdf8"; // cyan default
     let growthIcon = "minus";
 
-    if (currSemIdx > 0) {
-      prevSem = sortedSems[currSemIdx - 1];
+    const candidatePrev = getPrevYearSem(activeSem);
+    if (candidatePrev && sortedSems.includes(candidatePrev)) {
+      prevSem = candidatePrev;
       const prevSemEntry = rawList.find(x => x.semestre === prevSem);
       let prevRows = prevSemEntry ? prevSemEntry.rows : [];
       if (selFac !== "Todos") prevRows = prevRows.filter(r => r.Facultad === selFac);
@@ -5427,8 +5433,9 @@ const drawEstadisticas = () => {
         let pVal = 0;
         let diff = 0;
         let pct = 0;
-        if (idx > 0) {
-          const pSem = sortedSems[idx - 1];
+        const pSem = getPrevYearSem(sem);
+        const hasPrev = !!pSem && sortedSems.includes(pSem);
+        if (hasPrev) {
           const pEntry = rawList.find(x => x.semestre === pSem);
           let pRows = pEntry ? pEntry.rows : [];
           if (selFac !== "Todos") pRows = pRows.filter(r => r.Facultad === selFac);
@@ -5441,10 +5448,11 @@ const drawEstadisticas = () => {
         return {
           semestre: sem,
           value: val,
+          prevSem: hasPrev ? pSem : null,
           prevVal: pVal,
           diff: diff,
           pct: pct,
-          color: idx === 0 ? '#38bdf8' : (diff >= 0 ? '#10b981' : '#ef4444'),
+          color: !hasPrev ? '#38bdf8' : (diff >= 0 ? '#10b981' : '#ef4444'),
           isCurrent: sem === activeSem
         };
       });
@@ -5638,12 +5646,12 @@ const drawEstadisticas = () => {
       </div>
 
       <div class="db-status-badge" style="background: rgba(255, 255, 255, 0.02); border: 1px solid ${growthColor}33; padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; text-align: center;">
-        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Var. vs Semestre Anterior</span>
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Variación entre semestres</span>
         <strong style="font-size: 1.45rem; color: ${growthColor}; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 6px;">
           <i data-lucide="${growthIcon}" style="width: 20px; height: 20px;"></i>
           <span>${growthPct}</span>
         </strong>
-        <span style="font-size: 1.02rem; color: var(--text-400);">${currSemIdx > 0 ? `${growthDiffText} vs ${prevSem}` : 'Semestre base de comparación'}</span>
+        <span style="font-size: 1.02rem; color: var(--text-400);">${prevSem ? `${growthDiffText} vs ${prevSem}` : 'Sin semestre equivalente del año anterior'}</span>
       </div>
     `;
 
@@ -5783,9 +5791,9 @@ const drawEstadisticas = () => {
                       const isSelected = item.semestre === activeSem;
                       const highlightStyle = isSelected ? "border: 2px solid #fff; box-shadow: 0 0 14px rgba(255,255,255,0.4);" : "";
                       return `
-                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.semestre}: ${item.value.toLocaleString()} (${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs semestre anterior)">
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.semestre}: ${item.value.toLocaleString()} (${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs ${item.prevSem || 'periodo previo'})">
                           <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">
-                            ${item.semestre === sortedSems[0] ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`}
+                            ${!item.prevSem ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`}
                           </span>
                           <span style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">${item.value.toLocaleString()}</span>
                           <div style="width: 100%; max-width: 50px; height: ${heightPct}%; background: ${item.color}; border-radius: 6px 6px 0 0; transition: height 0.4s ease; ${highlightStyle}"></div>
