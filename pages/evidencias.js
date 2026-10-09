@@ -3467,6 +3467,77 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
 
   const totalMatriculados = displayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
 
+  // Aggregate top faculty & top carrera for active semester
+  const facMapSem = {};
+  semRows.forEach(r => {
+    facMapSem[r.Facultad] = (facMapSem[r.Facultad] || 0) + (r.Cantidad || 0);
+  });
+  let topFacName = "N/A";
+  let topFacVal = 0;
+  Object.entries(facMapSem).forEach(([fac, val]) => {
+    if (val > topFacVal) {
+      topFacVal = val;
+      topFacName = fac;
+    }
+  });
+
+  const progMapSem = {};
+  semRows.forEach(r => {
+    progMapSem[r.Programa] = (progMapSem[r.Programa] || 0) + (r.Cantidad || 0);
+  });
+  let topProgName = "N/A";
+  let topProgVal = 0;
+  Object.entries(progMapSem).forEach(([prog, val]) => {
+    if (val > topProgVal) {
+      topProgVal = val;
+      topProgName = prog;
+    }
+  });
+
+  // Calculate variation against previous year's same semester
+  const getPrevYearSem = (semStr) => {
+    if (!semStr) return null;
+    const parts = semStr.split("-");
+    if (parts.length === 2) {
+      const yr = parseInt(parts[0]);
+      if (!isNaN(yr)) {
+        return `${yr - 1}-${parts[1]}`;
+      }
+    }
+    return null;
+  };
+
+  const prevSem = getPrevYearSem(activeSem);
+  const prevSemEntry = rawList.find(x => x.semestre === prevSem);
+  let variacionText = "Sin datos prev.";
+  let variacionColor = "var(--text-400)";
+  let variacionIcon = "minus";
+
+  if (prevSemEntry) {
+    let prevDisplayRows = prevSemEntry.rows;
+    if (selFac !== "Todos") prevDisplayRows = prevDisplayRows.filter(r => r.Facultad === selFac);
+    if (selCarrera !== "Todos") prevDisplayRows = prevDisplayRows.filter(r => r.Programa === selCarrera);
+    
+    const totalPrev = prevDisplayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
+    if (totalPrev > 0) {
+      const diff = totalMatriculados - totalPrev;
+      const pct = ((diff / totalPrev) * 100).toFixed(1);
+      if (diff > 0) {
+        variacionText = `+${pct}% (+${diff.toLocaleString()})`;
+        variacionColor = "#10b981";
+        variacionIcon = "trending-up";
+      } else if (diff < 0) {
+        variacionText = `${pct}% (${diff.toLocaleString()})`;
+        variacionColor = "#ef4444";
+        variacionIcon = "trending-down";
+      } else {
+        variacionText = `0.0% (0)`;
+        variacionColor = "#f59e0b";
+        variacionIcon = "minus";
+      }
+    }
+  }
+
   // Default chart view selection
   if (!window._alumnosActiveChartView) {
     window._alumnosActiveChartView = "facultades";
@@ -3506,6 +3577,56 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
       };
     }).sort((a, b) => b.value - a.value);
     chartTitle = `Alumnos Matriculados por Carrera - Semestre ${activeSem} (${selFac})`;
+  } else if (window._alumnosActiveChartView === "variacion_semestral") {
+    const sortedSems = semesters.slice().sort();
+    
+    // Año-I semestres
+    const semsI = sortedSems.filter(s => s.endsWith("-I"));
+    semsI.forEach((sem, idx) => {
+      const semEntry = rawList.find(x => x.semestre === sem);
+      let rows = semEntry ? semEntry.rows : [];
+      if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
+      if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+      const sum = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+      
+      let color = "var(--accent)";
+      if (idx > 0) {
+        const prevSem = semsI[idx - 1];
+        const prevEntry = rawList.find(x => x.semestre === prevSem);
+        let prevRows = prevEntry ? prevEntry.rows : [];
+        if (selFac !== "Todos") prevRows = prevRows.filter(r => r.Facultad === selFac);
+        if (selCarrera !== "Todos") prevRows = prevRows.filter(r => r.Programa === selCarrera);
+        const prevSum = prevRows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+        const diff = sum - prevSum;
+        color = diff >= 0 ? "#10b981" : "#ef4444";
+      }
+      chartDataI.push({ label: sem, value: sum, color: color });
+    });
+
+    // Año-II semestres
+    const semsII = sortedSems.filter(s => s.endsWith("-II"));
+    semsII.forEach((sem, idx) => {
+      const semEntry = rawList.find(x => x.semestre === sem);
+      let rows = semEntry ? semEntry.rows : [];
+      if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
+      if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+      const sum = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+      
+      let color = "var(--accent)";
+      if (idx > 0) {
+        const prevSem = semsII[idx - 1];
+        const prevEntry = rawList.find(x => x.semestre === prevSem);
+        let prevRows = prevEntry ? prevEntry.rows : [];
+        if (selFac !== "Todos") prevRows = prevRows.filter(r => r.Facultad === selFac);
+        if (selCarrera !== "Todos") prevRows = prevRows.filter(r => r.Programa === selCarrera);
+        const prevSum = prevRows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+        const diff = sum - prevSum;
+        color = diff >= 0 ? "#10b981" : "#ef4444";
+      }
+      chartDataII.push({ label: sem, value: sum, color: color });
+    });
+
+    chartTitle = `Variación Semestral de Matrícula (Verde: Crecimiento YoY, Rojo: Decrecimiento YoY)`;
   } else if (window._alumnosActiveChartView === "comparativa") {
     if (!window._alumnosComparisonMode) {
       window._alumnosComparisonMode = "carreras";
@@ -3794,41 +3915,67 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
       </div>
 
       <!-- Fila de KPIs -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; width: 100%;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; width: 100%;">
         <!-- Total Alumnos -->
         <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)); border: 1px solid rgba(59, 130, 246, 0.15);">
-          <div style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
+          <div style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;">
             <i data-lucide="graduation-cap"></i>
           </div>
-          <div style="display: flex; flex-direction: column;">
-            <span style="font-size: 1.0rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Total Matriculados</span>
-            <strong style="font-size: 1.7rem; color: #fff; margin-top: 2px;">${totalMatriculados.toLocaleString()}</strong>
-            <span style="font-size: 0.92rem; color: var(--text-400); margin-top: 1px;">Semestre: ${activeSem}</span>
+          <div style="display: flex; flex-direction: column; overflow: hidden;">
+            <span style="font-size: 0.95rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Total Matriculados</span>
+            <strong style="font-size: 1.6rem; color: #fff; margin-top: 2px;">${totalMatriculados.toLocaleString()}</strong>
+            <span style="font-size: 0.9rem; color: var(--text-400); margin-top: 1px;">Semestre: ${activeSem}</span>
           </div>
         </div>
-        <!-- Promedio por Programa -->
+
+        <!-- Facultad Líder -->
         <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 1px solid rgba(16, 185, 129, 0.15);">
-          <div style="background: rgba(16, 185, 129, 0.2); color: #10b981; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
-            <i data-lucide="users"></i>
+          <div style="background: rgba(16, 185, 129, 0.2); color: #10b981; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;">
+            <i data-lucide="building-2"></i>
           </div>
-          <div style="display: flex; flex-direction: column;">
-            <span style="font-size: 1.0rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Promedio por Programa</span>
-            <strong style="font-size: 1.7rem; color: #fff; margin-top: 2px;">${Math.round(totalMatriculados / (displayRows.length || 1)).toLocaleString()}</strong>
-            <span style="font-size: 0.92rem; color: var(--text-400); margin-top: 1px;">Programas evaluados: ${displayRows.length}</span>
+          <div style="display: flex; flex-direction: column; overflow: hidden;">
+            <span style="font-size: 0.95rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Facultad Líder</span>
+            <strong style="font-size: 1.6rem; color: #fff; margin-top: 2px;">${topFacVal.toLocaleString()}</strong>
+            <span style="font-size: 0.88rem; color: var(--accent-light); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${topFacName}">${topFacName}</span>
           </div>
         </div>
+
+        <!-- Carrera Líder -->
+        <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05)); border: 1px solid rgba(245, 158, 11, 0.15);">
+          <div style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;">
+            <i data-lucide="award"></i>
+          </div>
+          <div style="display: flex; flex-direction: column; overflow: hidden;">
+            <span style="font-size: 0.95rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Carrera Líder</span>
+            <strong style="font-size: 1.6rem; color: #fff; margin-top: 2px;">${topProgVal.toLocaleString()}</strong>
+            <span style="font-size: 0.88rem; color: #f59e0b; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${topProgName}">${topProgName}</span>
+          </div>
+        </div>
+
+        <!-- Variación entre Semestres -->
+        <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(8, 145, 178, 0.05)); border: 1px solid rgba(6, 182, 212, 0.15);">
+          <div style="background: rgba(6, 182, 212, 0.2); color: ${variacionColor}; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;">
+            <i data-lucide="${variacionIcon}"></i>
+          </div>
+          <div style="display: flex; flex-direction: column; overflow: hidden;">
+            <span style="font-size: 0.95rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Variación Semestral</span>
+            <strong style="font-size: 1.4rem; color: ${variacionColor}; margin-top: 2px;">${variacionText}</strong>
+            <span style="font-size: 0.88rem; color: var(--text-400); margin-top: 1px;">vs. ${prevSem || 'Años prev.'}</span>
+          </div>
+        </div>
+
         <!-- Reporte Word -->
         <div class="card" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05)); border: 1px solid rgba(139, 92, 246, 0.15);">
           <div style="display: flex; align-items: center; gap: 1rem;">
-            <div style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
+            <div style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;">
               <i data-lucide="file-text"></i>
             </div>
             <div style="display: flex; flex-direction: column;">
-              <span style="font-size: 1.0rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Reporte Estadístico</span>
-              <span style="font-size: 1.08rem; color: var(--text-400); margin-top: 2px; line-height: 1.3; max-width: 140px;">Informe analítico en Word (Word Report)</span>
+              <span style="font-size: 0.95rem; color: var(--text-300); font-weight: 600; text-transform: uppercase;">Reporte Word</span>
+              <span style="font-size: 0.9rem; color: var(--text-400); margin-top: 2px;">Informe analítico</span>
             </div>
           </div>
-          <button id="btn-download-word-report" class="btn btn-primary" style="background: var(--accent); border-color: var(--accent); color: #fff; font-size: 1.05rem; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2); transition: all 0.2s ease;">
+          <button id="btn-download-word-report" class="btn btn-primary" style="background: var(--accent); border-color: var(--accent); color: #fff; font-size: 0.95rem; padding: 0.45rem 0.85rem; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2); transition: all 0.2s ease;">
             <i data-lucide="download" style="width: 14px; height: 14px;"></i>
             Generar Word
           </button>
@@ -3852,6 +3999,9 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
             </button>
             <button class="btn btn-secondary chart-view-btn ${window._alumnosActiveChartView === 'comparativa' ? 'active' : ''}" data-view="comparativa" style="font-size: 0.96rem; padding: 0.35rem 0.8rem; border-radius: 6px; border: none; ${window._alumnosActiveChartView === 'comparativa' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300);'}">
               Comparativa
+            </button>
+            <button class="btn btn-secondary chart-view-btn ${window._alumnosActiveChartView === 'variacion_semestral' ? 'active' : ''}" data-view="variacion_semestral" style="font-size: 0.96rem; padding: 0.35rem 0.8rem; border-radius: 6px; border: none; ${window._alumnosActiveChartView === 'variacion_semestral' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300);'}">
+              Variación entre Semestres
             </button>
             <button class="btn btn-secondary chart-view-btn ${window._alumnosActiveChartView === 'evolutivo' ? 'active' : ''}" data-view="evolutivo" style="font-size: 0.96rem; padding: 0.35rem 0.8rem; border-radius: 6px; border: none; ${window._alumnosActiveChartView === 'evolutivo' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300);'}">
               Histórico UPT
@@ -3894,6 +4044,8 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
                 <span>Por favor, seleccione una Carrera en los filtros superiores para ver su evolución histórica.</span>
               </div>
             `
+            : window._alumnosActiveChartView === "variacion_semestral"
+            ? renderSplitHistoricalCharts(chartDataI, chartDataII, "Variación entre Semestres -I (2014 - Presente)", "Variación entre Semestres -II (2014 - Presente)", 1)
             : window._alumnosActiveChartView === "evolutivo" || window._alumnosActiveChartView === "evolucion_facultad" || window._alumnosActiveChartView === "evolucion_carrera"
             ? renderSplitHistoricalCharts(chartDataI, chartDataII, "Evolución Semestre I (Año-I)", "Evolución Semestre II (Año-II)", 1)
             : generate3DBarChartSVG(chartData, 800, 360, 1, window._alumnosActiveChartView === "carreras")
