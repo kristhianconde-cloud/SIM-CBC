@@ -5756,8 +5756,7 @@ const drawEstadisticas = () => {
       .sg-hrow:hover .sg-hbar3d { filter: brightness(1.2); transform: translateX(5px); }
       .sg-hval { margin-left: 0.5rem; font-weight: 800; color: #fff; font-size: 0.95rem; white-space: nowrap; }
       @keyframes sgGrowX { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
-      .sg-cval { font-size: 0.66rem; font-weight: 800; color: #fff; margin-bottom: 2px; white-space: nowrap; }
-      .sg-cval.v { writing-mode: vertical-rl; transform: rotate(180deg); }
+      .sg-cval { font-size: 0.65rem; font-weight: 800; color: #fff; margin-bottom: 2px; white-space: nowrap; text-align: center; }
       .sg-chip { background: rgba(56,189,248,0.1); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
       .sg-chip:hover { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
       .sg-tooltip { position: fixed; z-index: 99999; pointer-events: none; background: rgba(10,15,30,0.96); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.55rem 0.8rem; font-size: 0.85rem; color: #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 290px; display: none; line-height: 1.35; }
@@ -5869,7 +5868,7 @@ const drawEstadisticas = () => {
           const rows = en ? en.rows : [];
           return rows.filter(r => isFacCmp ? r.Facultad === item : r.Programa === item).reduce((s, r) => s + (r.Cantidad || 0), 0);
         };
-        const vertical = items.length >= 3;
+        const vertical = false;
         const buildCmp = (suffix) => {
           const sems = sortedSems.filter(s => s.endsWith(suffix) && /^\d{4}-/.test(s) && parseInt(s, 10) >= 2014);
           if (!sems.length) return "";
@@ -5885,7 +5884,7 @@ const drawEstadisticas = () => {
                   <div style="display: flex; align-items: flex-end; justify-content: center; gap: 2px; width: 100%; height: 255px;">
                     ${d.vals.map((v, k) => {
                       const h = Math.max(2, (v / maxV) * 190);
-                      return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toLocaleString()} ${sgEsc(sgUnit)}" style="flex: 1; max-width: 30px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval${vertical ? " v" : ""}">${v.toLocaleString()}</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 40}ms;"></div></div>`;
+                      return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toLocaleString()} ${sgEsc(sgUnit)}" style="flex: 1; max-width: 30px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval">${v.toLocaleString()}</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 40}ms;"></div></div>`;
                     }).join("")}
                   </div>
                   <span class="sg-lbl" style="margin-top: 0.4rem; max-width: 100%; font-size: 0.75rem;">${sgEsc(d.sem)}</span>
