@@ -5285,689 +5285,443 @@ const drawEstadisticas = () => {
   };
 
   const drawStandardStatisticsDashboard = (subTabContent, dbKey, prefix, titleLabel, isIngresantes) => {
-
     const rawList = normalizeAlumnosList(estadisticasInst[dbKey] || []);
-
     const semesters = rawList.map(x => x.semestre).sort();
 
-    
-
     const filterKey = `_${prefix}Filters`;
-
     const chartViewKey = `_${prefix}ActiveChartView`;
-
     const compModeKey = `_${prefix}ComparisonMode`;
-
     const compFacsKey = `_${prefix}SelectedComparisonFaculties`;
-
     const compCareersKey = `_${prefix}SelectedComparisonCareers`;
 
-
-
     if (!window[filterKey]) {
-
       const latestSem = semesters.includes(selectedSemester) ? selectedSemester : (semesters[semesters.length - 1] || "2025-II");
-
       window[filterKey] = { semestre: latestSem, facultad: "Todos", carrera: "Todos" };
-
     }
-
-    
 
     let { semestre: activeSem, facultad: selFac, carrera: selCarrera } = window[filterKey];
 
-    
-
     if (!semesters.includes(activeSem)) {
-
       activeSem = semesters.includes(selectedSemester) ? selectedSemester : (semesters[semesters.length - 1] || "2025-II");
-
       window[filterKey].semestre = activeSem;
-
     }
 
-
-
     const semEntry = rawList.find(x => x.semestre === activeSem);
-
     const semRows = semEntry ? semEntry.rows : [];
-
-
 
     const uniqueFaculties = [...new Set(semRows.map(r => r.Facultad))].sort();
 
-
-
     let filteredRowsForCarreras = semRows;
-
     if (selFac !== "Todos") {
-
       filteredRowsForCarreras = semRows.filter(r => r.Facultad === selFac);
-
     }
-
     const uniqueCarreras = [...new Set(filteredRowsForCarreras.map(r => r.Programa))].sort();
 
-
-
     if (selCarrera !== "Todos" && !uniqueCarreras.includes(selCarrera)) {
-
       selCarrera = "Todos";
-
       window[filterKey].carrera = "Todos";
-
     }
-
-
 
     let displayRows = semRows;
-
     if (selFac !== "Todos") {
-
       displayRows = displayRows.filter(r => r.Facultad === selFac);
-
     }
-
     if (selCarrera !== "Todos") {
-
       displayRows = displayRows.filter(r => r.Programa === selCarrera);
-
     }
-
-
 
     const totalCount = displayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
 
+    // --- Crecimiento / Decrecimiento respecto al semestre anterior ---
+    const sortedSems = semesters.slice().sort();
+    const currSemIdx = sortedSems.indexOf(activeSem);
+    let prevSem = null;
+    let prevTotalCount = 0;
+    let growthPct = "0.0%";
+    let growthDiffText = "(0)";
+    let growthColor = "#38bdf8"; // cyan default
+    let growthIcon = "minus";
 
+    if (currSemIdx > 0) {
+      prevSem = sortedSems[currSemIdx - 1];
+      const prevSemEntry = rawList.find(x => x.semestre === prevSem);
+      let prevRows = prevSemEntry ? prevSemEntry.rows : [];
+      if (selFac !== "Todos") prevRows = prevRows.filter(r => r.Facultad === selFac);
+      if (selCarrera !== "Todos") prevRows = prevRows.filter(r => r.Programa === selCarrera);
+      prevTotalCount = prevRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
+
+      const diff = totalCount - prevTotalCount;
+      if (prevTotalCount > 0) {
+        const pct = ((diff / prevTotalCount) * 100).toFixed(1);
+        if (diff > 0) {
+          growthPct = `+${pct}%`;
+          growthDiffText = `(+${diff.toLocaleString()})`;
+          growthColor = "#10b981"; // emerald green
+          growthIcon = "trending-up";
+        } else if (diff < 0) {
+          growthPct = `${pct}%`;
+          growthDiffText = `(${diff.toLocaleString()})`;
+          growthColor = "#ef4444"; // red
+          growthIcon = "trending-down";
+        } else {
+          growthPct = "0.0%";
+          growthDiffText = "(0)";
+          growthColor = "#38bdf8";
+          growthIcon = "minus";
+        }
+      } else if (totalCount > 0) {
+        growthPct = "+100%";
+        growthDiffText = `(+${totalCount.toLocaleString()})`;
+        growthColor = "#10b981";
+        growthIcon = "trending-up";
+      }
+    }
 
     if (!window[chartViewKey]) {
-
       window[chartViewKey] = "facultades";
-
     }
-
-
 
     let chartData = [];
-
     let chartDataI = [];
-
     let chartDataII = [];
-
+    let growthChartData = [];
     let chartTitle = "";
 
-
-
     if (window[chartViewKey] === "facultades") {
-
       const facMap = {};
-
       semRows.forEach(r => {
-
         facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0);
-
       });
-
       chartData = Object.keys(facMap).map((fac, idx) => {
-
         const colors = ["var(--accent)", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
+        return {
+          label: fac,
+          value: facMap[fac],
+          color: colors[idx % colors.length]
+        };
+      }).sort((a, b) => b.value - a.value);
+      chartTitle = `${titleLabel} por Facultad (Semestre ${activeSem})`;
+    } else if (window[chartViewKey] === "carreras") {
+      const progMap = {};
+      displayRows.forEach(r => {
+        progMap[r.Programa] = (progMap[r.Programa] || 0) + (r.Cantidad || 0);
+      });
+      chartData = Object.keys(progMap).map((prog, idx) => {
+        const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "var(--accent)"];
+        return {
+          label: prog.length > 18 ? prog.substring(0, 16) + "..." : prog,
+          fullLabel: prog,
+          value: progMap[prog],
+          color: colors[idx % colors.length]
+        };
+      }).sort((a, b) => b.value - a.value);
+      chartTitle = `${titleLabel} por Carrera - Semestre ${activeSem} (${selFac})`;
+    } else if (window[chartViewKey] === "crecimiento") {
+      growthChartData = sortedSems.map((sem, idx) => {
+        const sEntry = rawList.find(x => x.semestre === sem);
+        let sRows = sEntry ? sEntry.rows : [];
+        if (selFac !== "Todos") sRows = sRows.filter(r => r.Facultad === selFac);
+        if (selCarrera !== "Todos") sRows = sRows.filter(r => r.Programa === selCarrera);
+        const val = sRows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+
+        let pVal = 0;
+        let diff = 0;
+        let pct = 0;
+        if (idx > 0) {
+          const pSem = sortedSems[idx - 1];
+          const pEntry = rawList.find(x => x.semestre === pSem);
+          let pRows = pEntry ? pEntry.rows : [];
+          if (selFac !== "Todos") pRows = pRows.filter(r => r.Facultad === selFac);
+          if (selCarrera !== "Todos") pRows = pRows.filter(r => r.Programa === selCarrera);
+          pVal = pRows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+          diff = val - pVal;
+          pct = pVal > 0 ? ((diff / pVal) * 100) : (val > 0 ? 100 : 0);
+        }
 
         return {
-
-          label: fac,
-
-          value: facMap[fac],
-
-          color: colors[idx % colors.length]
-
+          semestre: sem,
+          value: val,
+          prevVal: pVal,
+          diff: diff,
+          pct: pct,
+          color: idx === 0 ? '#38bdf8' : (diff >= 0 ? '#10b981' : '#ef4444'),
+          isCurrent: sem === activeSem
         };
-
-      }).sort((a, b) => b.value - a.value);
-
-      chartTitle = `${titleLabel} por Facultad (Semestre ${activeSem})`;
-
-    } else if (window[chartViewKey] === "carreras") {
-
-      const progMap = {};
-
-      displayRows.forEach(r => {
-
-        progMap[r.Programa] = (progMap[r.Programa] || 0) + (r.Cantidad || 0);
-
       });
 
-      chartData = Object.keys(progMap).map((prog, idx) => {
-
-        const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "var(--accent)"];
-
-        return {
-
-          label: prog.length > 18 ? prog.substring(0, 16) + "..." : prog,
-
-          fullLabel: prog,
-
-          value: progMap[prog],
-
-          color: colors[idx % colors.length]
-
-        };
-
-      }).sort((a, b) => b.value - a.value);
-
-      chartTitle = `${titleLabel} por Carrera - Semestre ${activeSem} (${selFac})`;
-
+      const filterSub = selFac !== "Todos" ? ` (${selFac}${selCarrera !== "Todos" ? ` - ${selCarrera}` : ""})` : " (Institucional)";
+      chartTitle = `Crecimiento / Decrecimiento Semestral de ${titleLabel}${filterSub}`;
     } else if (window[chartViewKey] === "comparativa") {
-
       if (!window[compModeKey]) {
-
         window[compModeKey] = "carreras";
-
       }
-
       const careerColors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899"];
-
-      const sortedSems = semesters.slice().sort();
-
-
 
       if (window[compModeKey] === "facultades") {
-
         if (!window[compFacsKey]) window[compFacsKey] = [];
-
         window[compFacsKey] = window[compFacsKey].filter(f => uniqueFaculties.includes(f));
-
         const selectedFaculties = window[compFacsKey];
 
-
         sortedSems.filter(s => s.endsWith("-I")).forEach(sem => {
-
           const semEntry = rawList.find(x => x.semestre === sem);
-
           const semRows = semEntry ? semEntry.rows : [];
-
           selectedFaculties.forEach((fac, fIdx) => {
-
             const rows = semRows.filter(r => r.Facultad === fac);
-
             const val = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
-
             chartDataI.push({
-
               label: fIdx === 0 ? sem : "",
-
               value: val,
-
               color: careerColors[fIdx % careerColors.length]
-
             });
-
           });
-
         });
-
-
 
         sortedSems.filter(s => s.endsWith("-II")).forEach(sem => {
-
           const semEntry = rawList.find(x => x.semestre === sem);
-
           const semRows = semEntry ? semEntry.rows : [];
-
           selectedFaculties.forEach((fac, fIdx) => {
-
             const rows = semRows.filter(r => r.Facultad === fac);
-
             const val = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
-
             chartDataII.push({
-
               label: fIdx === 0 ? sem : "",
-
               value: val,
-
               color: careerColors[fIdx % careerColors.length]
-
             });
-
           });
-
         });
 
-        chartTitle = `Comparativa Evolutiva por Facultad (A�o-I vs A�o-II)`;
-
+        chartTitle = `Comparativa Evolutiva por Facultad (Año-I vs Año-II)`;
       } else {
-
         if (!window[compCareersKey]) window[compCareersKey] = [];
-
         window[compCareersKey] = window[compCareersKey].filter(c => uniqueCarreras.includes(c));
-
         const selectedCareers = window[compCareersKey];
 
-
-
         sortedSems.filter(s => s.endsWith("-I")).forEach(sem => {
-
           const semEntry = rawList.find(x => x.semestre === sem);
-
           const semRows = semEntry ? semEntry.rows : [];
-
           selectedCareers.forEach((career, cIdx) => {
-
             const row = semRows.find(r => r.Programa === career);
-
             const val = row ? (row.Cantidad || 0) : 0;
-
             chartDataI.push({
-
               label: cIdx === 0 ? sem : "",
-
               value: val,
-
               color: careerColors[cIdx % careerColors.length]
-
             });
-
           });
-
         });
-
-
 
         sortedSems.filter(s => s.endsWith("-II")).forEach(sem => {
-
           const semEntry = rawList.find(x => x.semestre === sem);
-
           const semRows = semEntry ? semEntry.rows : [];
-
           selectedCareers.forEach((career, cIdx) => {
-
             const row = semRows.find(r => r.Programa === career);
-
             const val = row ? (row.Cantidad || 0) : 0;
-
             chartDataII.push({
-
               label: cIdx === 0 ? sem : "",
-
               value: val,
-
               color: careerColors[cIdx % careerColors.length]
-
             });
-
           });
-
         });
 
-        chartTitle = `Comparativa Evolutiva por Carrera (A�o-I vs A�o-II)`;
-
+        chartTitle = `Comparativa Evolutiva por Carrera (Año-I vs Año-II)`;
       }
-
     } else {
-
-      const sortedSems = semesters.slice().sort();
-
       const activeView = window[chartViewKey];
-
       
-
       sortedSems.filter(s => s.endsWith("-I")).forEach(sem => {
-
         const semEntry = rawList.find(x => x.semestre === sem);
-
         const semRows = semEntry ? semEntry.rows : [];
-
         let rows = semRows;
-
         
-
         if (activeView === "evolucion_facultad") {
-
           if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
-
         } else if (activeView === "evolucion_carrera") {
-
           if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
-
-        } // If "evolutivo", do NOT filter (Institutional)
-
-        
+        }
 
         const sum = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
-
         chartDataI.push({ label: sem, value: sum, color: "var(--accent)" });
-
       });
-
       
-
       sortedSems.filter(s => s.endsWith("-II")).forEach(sem => {
-
         const semEntry = rawList.find(x => x.semestre === sem);
-
         const semRows = semEntry ? semEntry.rows : [];
-
         let rows = semRows;
-
         
-
         if (activeView === "evolucion_facultad") {
-
           if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
-
         } else if (activeView === "evolucion_carrera") {
-
-          if (selCarrera !== "Todos")rows = rows.filter(r => r.Programa === selCarrera);
-
-        } // If "evolutivo", do NOT filter (Institutional)
-
-        
+          if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+        }
 
         const sum = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
-
         chartDataII.push({ label: sem, value: sum, color: "var(--accent)" });
-
       });
-
-      
 
       if (activeView === "evolucion_facultad") {
-
-        chartTitle = `Evoluci�n Hist�rica por Facultad (${selFac})`;
-
+        chartTitle = `Evolución Histórica por Facultad (${selFac})`;
       } else if (activeView === "evolucion_carrera") {
-
-        chartTitle = `Evoluci�n Hist�rica por Carrera (${selCarrera})`;
-
+        chartTitle = `Evolución Histórica por Carrera (${selCarrera})`;
       } else {
-
-        chartTitle = `Evoluci�n Hist�rica Semestral - Institucional (UPT)`;
-
+        chartTitle = `Evolución Histórica Semestral - Institucional (UPT)`;
       }
-
     }
-
-
 
     let comparativeControlsHtml = "";
-
     let comparativeLegendHtml = "";
-
     const activeCompSelection = window[compModeKey] === "facultades"
-
       ? (window[compFacsKey] || [])
-
       : (window[compCareersKey] || []);
 
-
-
     if (window[chartViewKey] === "comparativa") {
-
       const isFacMode = window[compModeKey] === "facultades";
-
       let pills = "";
-
       if (isFacMode) {
-
         pills = uniqueFaculties.map(f => {
-
           const isSelected = (window[compFacsKey] || []).includes(f);
-
           const isMaxReached = (window[compFacsKey] || []).length >= 4;
-
           const disabledAttr = (!isSelected && isMaxReached) ? "disabled" : "";
-
           const disabledStyle = (!isSelected && isMaxReached) ? "opacity: 0.4; cursor: not-allowed;" : "cursor: pointer;";
-
           const activeStyle = isSelected 
-
             ? "background: var(--accent); color: #fff; border-color: var(--accent);" 
-
             : "background: transparent; color: var(--text-300); border-color: var(--border-color);";
-
           return `<button class="comparison-pill-${prefix} btn btn-outline" data-faculty="${f}" style="font-size: 0.96rem; padding: 0.35rem 0.75rem; border-radius: 20px; border: 1px solid; transition: all 0.2s ease; ${activeStyle} ${disabledStyle}" ${disabledAttr}>${f}</button>`;
-
         }).join("");
-
       } else {
-
         pills = uniqueCarreras.map(c => {
-
           const isSelected = (window[compCareersKey] || []).includes(c);
-
           const isMaxReached = (window[compCareersKey] || []).length >= 4;
-
           const disabledAttr = (!isSelected && isMaxReached) ? "disabled" : "";
-
           const disabledStyle = (!isSelected && isMaxReached) ? "opacity: 0.4; cursor: not-allowed;" : "cursor: pointer;";
-
           const activeStyle = isSelected 
-
             ? "background: var(--accent); color: #fff; border-color: var(--accent);" 
-
             : "background: transparent; color: var(--text-300); border-color: var(--border-color);";
-
           return `<button class="comparison-pill-${prefix} btn btn-outline" data-career="${c}" style="font-size: 0.96rem; padding: 0.35rem 0.75rem; border-radius: 20px; border: 1px solid; transition: all 0.2s ease; ${activeStyle} ${disabledStyle}" ${disabledAttr}>${c}</button>`;
-
         }).join("");
-
       }
 
-
-
       comparativeControlsHtml = `
-
         <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; width: 100%;">
-
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-
-            <span style="font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase;">Comparar evoluci�n de:</span>
-
+            <span style="font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase;">Comparar evolución de:</span>
             <div style="display: flex; gap: 8px;">
-
               <button class="comp-mode-${prefix}-btn btn btn-secondary ${isFacMode ? 'active' : ''}" data-mode="facultades" style="font-size: 1.08rem; padding: 0.3rem 0.6rem; border-radius: 4px; ${isFacMode ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Facultades</button>
-
               <button class="comp-mode-${prefix}-btn btn btn-secondary ${!isFacMode ? 'active' : ''}" data-mode="carreras" style="font-size: 1.08rem; padding: 0.3rem 0.6rem; border-radius: 4px; ${!isFacMode ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Carreras</button>
-
             </div>
-
           </div>
-
           <div style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 120px; overflow-y: auto; padding: 4px 0;">
-
             ${pills}
-
           </div>
-
         </div>
-
       `;
-
-
 
       const careerColors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899"];
-
       comparativeLegendHtml = `
-
         <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 12px;">
-
           ${activeCompSelection.map((item, idx) => `
-
             <div style="display: flex; align-items: center; gap: 6px;">
-
               <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: ${careerColors[idx % careerColors.length]}"></span>
-
               <span style="font-size: 0.96rem; color: var(--text-200); font-weight: 600;">${item}</span>
-
             </div>
-
           `).join("")}
-
         </div>
-
       `;
-
     }
 
-
-
     // KPIs
-
     let kpisHtml = `
-
       <div class="db-status-badge" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-
         <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Total ${titleLabel}</span>
-
         <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${totalCount.toLocaleString()}</strong>
-
-        <span style="font-size: 1.05rem; color: var(--text-400);">Encontrados para la selecci�n</span>
-
+        <span style="font-size: 1.05rem; color: var(--text-400);">Encontrados para la selección</span>
       </div>
 
+      <div class="db-status-badge" style="background: rgba(255, 255, 255, 0.02); border: 1px solid ${growthColor}33; padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; text-align: center;">
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Var. vs Semestre Anterior</span>
+        <strong style="font-size: 1.45rem; color: ${growthColor}; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 6px;">
+          <i data-lucide="${growthIcon}" style="width: 20px; height: 20px;"></i>
+          <span>${growthPct}</span>
+        </strong>
+        <span style="font-size: 1.02rem; color: var(--text-400);">${currSemIdx > 0 ? `${growthDiffText} vs ${prevSem}` : 'Semestre base de comparación'}</span>
+      </div>
     `;
 
-    
-
     if (isIngresantes) {
-
       const postEntry = (estadisticasInst.postulantes || []).find(x => x.semestre === activeSem);
-
       let postRows = postEntry ? postEntry.rows : [];
-
       if (selFac !== "Todos") postRows = postRows.filter(r => r.Facultad === selFac);
-
       if (selCarrera !== "Todos") postRows = postRows.filter(r => r.Programa === selCarrera);
-
       const postCount = postRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
-
-      
 
       const rate = postCount > 0 ? ((totalCount / postCount) * 100).toFixed(1) + "%" : "N/A";
 
-      
-
       kpisHtml += `
-
         <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-
           <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Postulantes</span>
-
           <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${postCount.toLocaleString()}</strong>
-
           <span style="font-size: 1.05rem; color: var(--text-400);">Postulantes en el mismo filtro</span>
-
         </div>
 
         <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Tasa de Admisi�n</span>
-
+          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Tasa de Admisión</span>
           <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${rate}</strong>
-
-          <span style="font-size: 1.05rem; color: var(--text-400);">Relaci�n Ingresantes/Postulantes</span>
-
+          <span style="font-size: 1.05rem; color: var(--text-400);">Relación Ingresantes/Postulantes</span>
         </div>
-
       `;
-
     } else {
-
       let topFac = "Ninguno", topFacVal = 0;
-
       const facMap = {};
-
       semRows.forEach(r => facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0));
-
       Object.keys(facMap).forEach(f => {
-
         if (facMap[f] > topFacVal) { topFacVal = facMap[f]; topFac = f; }
-
       });
-
-      
 
       let topCarr = "Ninguno", topCarrVal = 0;
-
-      const carrMap = {};displayRows.forEach(r => carrMap[r.Programa] = (carrMap[r.Programa] || 0) + (r.Cantidad || 0));
-
+      const carrMap = {};
+      displayRows.forEach(r => carrMap[r.Programa] = (carrMap[r.Programa] || 0) + (r.Cantidad || 0));
       Object.keys(carrMap).forEach(c => {
-
         if (carrMap[c] > topCarrVal) { topCarrVal = carrMap[c]; topCarr = c; }
-
       });
 
-      
-
       kpisHtml += `
-
         <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Facultad L�der</span>
-
-          <strong style="font-size: 1.35rem; color: #fff; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; display: inline-block;">${topFac}</strong>
-
-          <span style="font-size: 1.05rem; color: var(--text-400);">${topFacVal.toLocaleString()} postulantes</span>
-
+          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Facultad Líder</span>
+          <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topFac}">${topFac}</strong>
+          <span style="font-size: 1.05rem; color: var(--text-400);">${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
         </div>
 
         <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Carrera L�der</span>
-
-          <strong style="font-size: 1.35rem; color: #fff; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; display: inline-block;">${topCarr}</strong>
-
-          <span style="font-size: 1.05rem; color: var(--text-400);">${topCarrVal.toLocaleString()} postulantes</span>
-
+          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Carrera Líder</span>
+          <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topCarr}">${topCarr}</strong>
+          <span style="font-size: 1.05rem; color: var(--text-400);">${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
         </div>
-
       `;
-
     }
 
-
-
     subTabContent.innerHTML = `
-
       <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 100%;">
-
         <!-- Filter Bar -->
-
         <div class="card" style="padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color);">
-
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-
             <div style="display: flex; flex-direction: column; gap: 4px;">
-
               <label style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 600;">Semestre</label>
-
               <select id="select-semestre-${prefix}" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; width: 120px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-
                 ${semesters.map(s => `<option value="${s}" ${s === activeSem ? "selected" : ""}>${s}</option>`).join("")}
-
               </select>
-
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 4px;">
-
               <label style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 600;">Facultad</label>
-
               <select id="select-facultad-${prefix}" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; width: 140px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
-
                 <option value="Todos" ${selFac === "Todos" ? "selected" : ""}>Todos</option>
-
                 ${uniqueFaculties.map(f => `<option value="${f}" ${f === selFac ? "selected" : ""}>${f}</option>`).join("")}
-
               </select>
-
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 4px;">
-
               <label style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 600;">Carrera Profesional</label>
-
-              <select id="select-carrera-${prefix}" class="form-input" style="padding: 0.35rem 1.75rem 0.35rerem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; width: 160px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
+              <select id="select-carrera-${prefix}" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; width: 160px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
                 <option value="Todos" ${selCarrera === "Todos" ? "selected" : ""}>Todos</option>
                 ${uniqueCarreras.map(c => `<option value="${c}" ${c === selCarrera ? "selected" : ""}>${c}</option>`).join("")}
               </select>
@@ -5995,6 +5749,7 @@ const drawEstadisticas = () => {
               <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                 <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'facultades' ? 'active' : ''}" data-view="facultades" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'facultades' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Por Facultad</button>
                 <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'carreras' ? 'active' : ''}" data-view="carreras" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'carreras' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Por Carrera</button>
+                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'crecimiento' ? 'active' : ''}" data-view="crecimiento" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'crecimiento' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Crecimiento Semestral</button>
                 <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'comparativa' ? 'active' : ''}" data-view="comparativa" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'comparativa' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Comparativa</button>
                 <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'evolutivo' ? 'active' : ''}" data-view="evolutivo" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'evolutivo' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Evolución Histórica</button>
                 <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'evolucion_facultad' ? 'active' : ''}" data-view="evolucion_facultad" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'evolucion_facultad' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Evolución por Facultad</button>
@@ -6018,6 +5773,27 @@ const drawEstadisticas = () => {
                       <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75px;">${item.label}</span>
                     </div>
                   `).join("")}
+                </div>
+              ` : window[chartViewKey] === "crecimiento" ? `
+                <div style="height: 280px; display: flex; align-items: flex-end; gap: 0.8rem; padding: 0 1rem 1rem 2.5rem; position: relative; border-bottom: 1px solid var(--border-color);">
+                  ${(() => {
+                    const maxVal = Math.max(...growthChartData.map(d => d.value), 1);
+                    return growthChartData.map(item => {
+                      const heightPct = Math.max(6, (item.value / maxVal) * 100).toFixed(1);
+                      const isSelected = item.semestre === activeSem;
+                      const highlightStyle = isSelected ? "border: 2px solid #fff; box-shadow: 0 0 14px rgba(255,255,255,0.4);" : "";
+                      return `
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.semestre}: ${item.value.toLocaleString()} (${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs semestre anterior)">
+                          <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">
+                            ${item.semestre === sortedSems[0] ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`}
+                          </span>
+                          <span style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">${item.value.toLocaleString()}</span>
+                          <div style="width: 100%; max-width: 50px; height: ${heightPct}%; background: ${item.color}; border-radius: 6px 6px 0 0; transition: height 0.4s ease; ${highlightStyle}"></div>
+                          <span style="font-size: 0.82rem; color: ${isSelected ? '#fff' : 'var(--text-300)'}; font-weight: ${isSelected ? '700' : '600'}; margin-top: 0.5rem; text-align: center;">${item.semestre}</span>
+                        </div>
+                      `;
+                    }).join("");
+                  })()}
                 </div>
               ` : `
                 <div style="height: 280px; display: flex; align-items: flex-end; gap: 1.5rem; padding: 0 1rem 1rem 2.5rem; position: relative; border-bottom: 1px solid var(--border-color);">
@@ -6143,7 +5919,7 @@ const drawEstadisticas = () => {
         else downloadStandardWordReport(dbKey, titleLabel, activeSem, selFac, selCarrera, prefix);
       };
     }
-
+  };
     if (prefix === "egresados") {
       subTabContent.querySelectorAll(".btn-desercion-tab").forEach(btn => {
         btn.onclick = () => {
