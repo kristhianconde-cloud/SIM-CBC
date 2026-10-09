@@ -5725,7 +5725,7 @@ const drawEstadisticas = () => {
       .sg-barzone { height: 270px; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border-bottom: 1px solid var(--border-color); }
       .sg-lbl-h { margin-top: 0.55rem; min-height: 3.4rem; font-size: 0.8rem; font-weight: 600; color: var(--text-200); text-align: center; line-height: 1.25; word-break: break-word; padding: 0 3px; transition: color 0.2s ease; }
       .sg-col3d:hover .sg-lbl-h { color: #fff; }
-      .sg-val { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem; transition: transform 0.2s ease; }
+      .sg-val { font-size: 1.05rem; font-weight: 800; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.9); margin-bottom: 0.35rem; transition: transform 0.2s ease; }
       .sg-lbl { font-size: 0.82rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; max-width: 90px; overflow: hidden; text-overflow: ellipsis; }
       .sg-lbl-v { writing-mode: vertical-rl; transform: rotate(180deg); height: 170px; margin-top: 0.7rem; font-size: 0.8rem; font-weight: 600; color: var(--text-200); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: end; transition: color 0.2s ease; }
       .sg-bar { position: relative; width: 100%; max-width: 58px; border-radius: 8px 8px 0 0; box-shadow: 0 6px 16px rgba(0,0,0,0.35); transform-origin: bottom; animation: sgGrow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
@@ -5756,7 +5756,7 @@ const drawEstadisticas = () => {
       .sg-hrow:hover .sg-hbar3d { filter: brightness(1.2); transform: translateX(5px); }
       .sg-hval { margin-left: 0.5rem; font-weight: 800; color: #fff; font-size: 0.95rem; white-space: nowrap; }
       @keyframes sgGrowX { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
-      .sg-cval { font-size: 0.65rem; font-weight: 800; color: #fff; margin-bottom: 2px; white-space: nowrap; text-align: center; }
+      .sg-cval { font-size: 0.85rem; font-weight: 800; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.9); margin-bottom: 2px; white-space: nowrap; text-align: center; font-family: inherit; }
       .sg-chip { background: rgba(56,189,248,0.1); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
       .sg-chip:hover { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
       .sg-tooltip { position: fixed; z-index: 99999; pointer-events: none; background: rgba(10,15,30,0.96); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.55rem 0.8rem; font-size: 0.85rem; color: #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 290px; display: none; line-height: 1.35; }
@@ -5884,7 +5884,7 @@ const drawEstadisticas = () => {
                   <div style="display: flex; align-items: flex-end; justify-content: center; gap: 2px; width: 100%; height: 255px;">
                     ${d.vals.map((v, k) => {
                       const h = Math.max(2, (v / maxV) * 190);
-                      return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toLocaleString()} ${sgEsc(sgUnit)}" style="flex: 1; max-width: 30px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval">${v.toLocaleString()}</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 40}ms;"></div></div>`;
+                      return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toLocaleString()} ${sgEsc(sgUnit)}" style="flex: 1; max-width: 30px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval" style="${v === 0 ? "opacity: 0.35;" : ""}">${v.toLocaleString()}</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 40}ms;"></div></div>`;
                     }).join("")}
                   </div>
                   <span class="sg-lbl" style="margin-top: 0.4rem; max-width: 100%; font-size: 0.75rem;">${sgEsc(d.sem)}</span>
