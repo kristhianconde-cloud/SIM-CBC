@@ -3551,7 +3551,7 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
         });
       });
 
-      chartTitle = `Comparativa Evolutiva por Facultad (Año-I vs Año-II)`;
+      chartTitle = `Comparativa por Facultad (semestres -I y -II desde 2014)`;
     } else {
       if (!window._alumnosSelectedComparisonCareers) {
         window._alumnosSelectedComparisonCareers = [];
@@ -3589,7 +3589,7 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
         });
       });
 
-      chartTitle = `Comparativa Evolutiva por Carrera (Año-I vs Año-II)`;
+      chartTitle = `Comparativa por Carrera (semestres -I y -II desde 2014)`;
     }
   } else {
     // Evolución Histórica / Evolución por Facultad / Evolución por Carrera
@@ -5468,6 +5468,7 @@ const drawEstadisticas = () => {
       if (window[compModeKey] === "facultades") {
         if (!window[compFacsKey]) window[compFacsKey] = [];
         window[compFacsKey] = window[compFacsKey].filter(f => uniqueFaculties.includes(f));
+        uniqueFaculties.forEach(f => { if (window[compFacsKey].length < 2 && !window[compFacsKey].includes(f)) window[compFacsKey].push(f); });
         const selectedFaculties = window[compFacsKey];
 
         sortedSems.filter(s => s.endsWith("-I")).forEach(sem => {
@@ -5502,6 +5503,7 @@ const drawEstadisticas = () => {
       } else {
         if (!window[compCareersKey]) window[compCareersKey] = [];
         window[compCareersKey] = window[compCareersKey].filter(c => uniqueCarreras.includes(c));
+        uniqueCarreras.forEach(cr => { if (window[compCareersKey].length < 2 && !window[compCareersKey].includes(cr)) window[compCareersKey].push(cr); });
         const selectedCareers = window[compCareersKey];
 
         sortedSems.filter(s => s.endsWith("-I")).forEach(sem => {
@@ -5612,7 +5614,7 @@ const drawEstadisticas = () => {
       comparativeControlsHtml = `
         <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; width: 100%;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <span style="font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase;">Comparar evolución de:</span>
+            <span style="font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase;">Comparar evolución de: <span style="font-size: 0.8rem; color: var(--text-400); text-transform: none; font-weight: 600;">(${activeCompSelection.length} de 4 · mínimo 2)</span></span>
             <div style="display: flex; gap: 8px;">
               <button class="comp-mode-${prefix}-btn btn btn-secondary ${isFacMode ? 'active' : ''}" data-mode="facultades" style="font-size: 1.08rem; padding: 0.3rem 0.6rem; border-radius: 4px; ${isFacMode ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Facultades</button>
               <button class="comp-mode-${prefix}-btn btn btn-secondary ${!isFacMode ? 'active' : ''}" data-mode="carreras" style="font-size: 1.08rem; padding: 0.3rem 0.6rem; border-radius: 4px; ${!isFacMode ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Carreras</button>
@@ -5754,6 +5756,8 @@ const drawEstadisticas = () => {
       .sg-hrow:hover .sg-hbar3d { filter: brightness(1.2); transform: translateX(5px); }
       .sg-hval { margin-left: 0.5rem; font-weight: 800; color: #fff; font-size: 0.95rem; white-space: nowrap; }
       @keyframes sgGrowX { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+      .sg-cval { font-size: 0.66rem; font-weight: 800; color: #fff; margin-bottom: 2px; white-space: nowrap; }
+      .sg-cval.v { writing-mode: vertical-rl; transform: rotate(180deg); }
       .sg-chip { background: rgba(56,189,248,0.1); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
       .sg-chip:hover { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
       .sg-tooltip { position: fixed; z-index: 99999; pointer-events: none; background: rgba(10,15,30,0.96); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.55rem 0.8rem; font-size: 0.85rem; color: #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 290px; display: none; line-height: 1.35; }
@@ -5781,7 +5785,7 @@ const drawEstadisticas = () => {
       facultades: "Pasa el cursor sobre una barra para ver el detalle. Haz clic en una facultad para ver sus carreras.",
       carreras: "Haz clic en una carrera para ver su evolución histórica. Lista de carreras ordenada de mayor a menor. Haz clic en una para ver su evolución histórica.",
       crecimiento: "Haz clic en un semestre para analizarlo. Semestres -I y -II en cuadros separados (desde 2014). Cada barra se compara con el mismo semestre del año anterior.",
-      comparativa: "Selecciona hasta 4 elementos para comparar su evolución (Año-I vs Año-II).",
+      comparativa: "Selecciona de 2 a 4 opciones para comparar. Pasa el cursor sobre las barras para ver el detalle.",
       evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
       evolucion_facultad: "Usa el filtro de Facultad para ver la evolución de una facultad específica.",
       evolucion_carrera: "Usa el filtro de Carrera para ver la evolución de una carrera específica."
@@ -5853,6 +5857,42 @@ const drawEstadisticas = () => {
             </div>`;
         };
         return buildGrowthChart("-I") + buildGrowthChart("-II");
+      }
+
+      if (sgView === "comparativa") {
+        const items = (activeCompSelection || []).slice(0, 4);
+        if (items.length < 2) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Selecciona al menos 2 opciones (máximo 4) para comparar.</div>`;
+        const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899"];
+        const isFacCmp = window[compModeKey] === "facultades";
+        const valueOf = (sem, item) => {
+          const en = rawList.find(x => x.semestre === sem);
+          const rows = en ? en.rows : [];
+          return rows.filter(r => isFacCmp ? r.Facultad === item : r.Programa === item).reduce((s, r) => s + (r.Cantidad || 0), 0);
+        };
+        const vertical = items.length >= 3;
+        const buildCmp = (suffix) => {
+          const sems = sortedSems.filter(s => s.endsWith(suffix) && /^\d{4}-/.test(s) && parseInt(s, 10) >= 2014);
+          if (!sems.length) return "";
+          const data = sems.map(sem => ({ sem, vals: items.map(it => valueOf(sem, it)) }));
+          const maxV = Math.max(1, ...data.flatMap(d => d.vals));
+          return `
+            <div style="margin-bottom: 0.9rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.6rem;">
+                <span style="font-size: 1rem; font-weight: 800; color: #fff;">Semestres ${suffix} <span style="color: var(--text-400); font-weight: 600; font-size: 0.85rem;">(${sems[0]} → ${sems[sems.length - 1]})</span></span>
+              </div>
+              <div class="sg-chart" style="height: 300px; gap: 0.5rem; padding: 0.5rem 0.5rem 0 0.5rem; overflow-x: hidden;">${data.map((d, gi) => `
+                <div class="sg-col" style="cursor: default; min-width: 0;">
+                  <div style="display: flex; align-items: flex-end; justify-content: center; gap: 2px; width: 100%; height: 255px;">
+                    ${d.vals.map((v, k) => {
+                      const h = Math.max(2, (v / maxV) * 190);
+                      return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toLocaleString()} ${sgEsc(sgUnit)}" style="flex: 1; max-width: 30px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval${vertical ? " v" : ""}">${v.toLocaleString()}</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 40}ms;"></div></div>`;
+                    }).join("")}
+                  </div>
+                  <span class="sg-lbl" style="margin-top: 0.4rem; max-width: 100%; font-size: 0.75rem;">${sgEsc(d.sem)}</span>
+                </div>`).join("")}</div>
+            </div>`;
+        };
+        return buildCmp("-I") + buildCmp("-II");
       }
 
       // comparativa / evolutivo / evolucion_facultad / evolucion_carrera
@@ -5987,12 +6027,12 @@ const drawEstadisticas = () => {
           if (faculty) {
             if (!window[compFacsKey]) window[compFacsKey] = [];
             const idx = window[compFacsKey].indexOf(faculty);
-            if (idx > -1) window[compFacsKey].splice(idx, 1);
+            if (idx > -1) { if (window[compFacsKey].length > 2) window[compFacsKey].splice(idx, 1); }
             else if (window[compFacsKey].length < 4) window[compFacsKey].push(faculty);
           } else if (career) {
             if (!window[compCareersKey]) window[compCareersKey] = [];
             const idx = window[compCareersKey].indexOf(career);
-            if (idx > -1) window[compCareersKey].splice(idx, 1);
+            if (idx > -1) { if (window[compCareersKey].length > 2) window[compCareersKey].splice(idx, 1); }
             else if (window[compCareersKey].length < 4) window[compCareersKey].push(career);
           }
           drawStandardStatisticsDashboard(subTabContent, dbKey, prefix, titleLabel, isIngresantes);
