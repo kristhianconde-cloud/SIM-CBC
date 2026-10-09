@@ -954,6 +954,12 @@ const RENACYT_SHEET_DATA = {
 };
 
 
+const getDesercionRisk = (val) => {
+  if (val >= 8.0) return { label: 'Crítico', icon: '🔴', color: '#f43f5e', badgeBg: 'rgba(244, 63, 94, 0.18)', border: 'rgba(244, 63, 94, 0.4)', text: '🔴 Crítico' };
+  if (val >= 4.0) return { label: 'Medio', icon: '🟡', color: '#f59e0b', badgeBg: 'rgba(245, 158, 11, 0.18)', border: 'rgba(245, 158, 11, 0.4)', text: '🟡 Medio' };
+  return { label: 'Bajo', icon: '🟢', color: '#10b981', badgeBg: 'rgba(16, 185, 129, 0.18)', border: 'rgba(16, 185, 129, 0.4)', text: '🟢 Bajo' };
+};
+
 const getDesercionRate = (row, sem) => {
   if (sem === '2025-I') return row.sem2025_1;
   if (sem === '2025-II') return row.sem2025_2;
@@ -1023,11 +1029,13 @@ const renderDesercionYRezagoSectionHTML = (activeSem, selFac, selCarrera) => {
   } else if (chartView === 'carreras') {
     chartData = displayRows.map((r, idx) => {
       const val = getDesercionRate(r, activeSem);
+      const risk = getDesercionRisk(val);
       return {
         label: r.carrera.length > 18 ? r.carrera.substring(0, 16) + '...' : r.carrera,
         fullLabel: r.carrera,
         value: val,
-        color: val >= 8.0 ? '#f43f5e' : (val >= 4.0 ? '#f59e0b' : '#10b981')
+        color: risk.color,
+        risk: risk
       };
     }).sort((a, b) => b.value - a.value);
     chartTitle = `Tasa de Deserción por Carrera (${semLabel}) ${selFac !== 'Todos' ? '- ' + selFac : ''}`;
@@ -1206,7 +1214,7 @@ const renderDesercionYRezagoSectionHTML = (activeSem, selFac, selCarrera) => {
         <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; text-align: center;">
           <span style="font-size: 0.95rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">CARRERA MAYOR DESERCIÓN</span>
           <strong style="font-size: 1.25rem; color: #fff; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; display: inline-block;">${topCarrera}</strong>
-          <span style="font-size: 0.85rem; color: #06b6d4; font-weight: 700;">${topCarreraVal.toFixed(2)}% Tasa Deserción</span>
+          ${(() => { const r = getDesercionRisk(topCarreraVal); return `<span style="font-size: 0.85rem; color: ${r.color}; font-weight: 700;">${topCarreraVal.toFixed(2)}% Tasa Deserción &bull; ${r.icon} ${r.label}</span>`; })()}
         </div>
       </div>
 
@@ -1244,8 +1252,8 @@ const renderDesercionYRezagoSectionHTML = (activeSem, selFac, selCarrera) => {
                 </div>
 
                 ${chartData.map(item => `
-                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.fullLabel || item.label}: ${item.value.toFixed(2)}%">
-                    <span style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem;">${item.value.toFixed(2)}%</span>
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.fullLabel || item.label}: ${item.value.toFixed(2)}% ${item.risk ? '• ' + item.risk.icon + ' ' + item.risk.label : ''}">
+                    <span style="font-size: 0.85rem; font-weight: 800; color: ${item.risk ? item.risk.color : '#fff'}; margin-bottom: 0.35rem;">${item.risk ? item.risk.icon + ' ' : ''}${item.value.toFixed(2)}%</span>
                     <div style="width: 100%; max-width: 55px; height: ${((item.value / chartMaxVal) * 100).toFixed(1)}%; background: ${item.color}; border-radius: 6px 6px 0 0; transition: height 0.4s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"></div>
                     <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75px;">${item.label}</span>
                   </div>
@@ -1297,14 +1305,13 @@ const renderDesercionYRezagoSectionHTML = (activeSem, selFac, selCarrera) => {
               <tbody>
                 ${displayRows.map(r => {
                   const rate = getDesercionRate(r, activeSem);
-                  const badgeBg = rate >= 8.0 ? 'rgba(244, 63, 94, 0.15)' : (rate >= 4.0 ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)');
-                  const badgeColor = rate >= 8.0 ? '#f43f5e' : (rate >= 4.0 ? '#f59e0b' : '#10b981');
+                  const risk = getDesercionRisk(rate);
                   return `
                     <tr>
                       <td style="padding: 0.45rem 0.5rem; font-weight: 600; color: #fff;">${r.carrera}</td>
                       <td style="padding: 0.45rem 0.5rem; text-align: center; color: var(--text-300); font-size: 0.8rem;">${r.facultad}</td>
                       <td style="padding: 0.45rem 0.5rem; text-align: right;">
-                        <span style="font-weight: 800; color: ${badgeColor}; background: ${badgeBg}; padding: 0.2rem 0.5rem; border-radius: 4px;">${rate.toFixed(2)}%</span>
+                        <span style="font-weight: 800; color: ${risk.color}; background: ${risk.badgeBg}; border: 1px solid ${risk.border}; padding: 0.2rem 0.5rem; border-radius: 4px;">${risk.icon} ${rate.toFixed(2)}%</span>
                       </td>
                     </tr>
                   `;
@@ -4981,11 +4988,14 @@ const drawEstadisticas = () => {
       });
       chartData = Object.keys(progMap).map((prog, idx) => {
         const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "var(--accent)"];
+        const val = progMap[prog];
+        const risk = isRateTab ? getDesercionRisk(val) : null;
         return {
           label: prog.length > 18 ? prog.substring(0, 16) + "..." : prog,
           fullLabel: prog,
-          value: progMap[prog],
-          color: colors[idx % colors.length]
+          value: val,
+          color: isRateTab ? risk.color : colors[idx % colors.length],
+          risk: risk
         };
       }).sort((a, b) => b.value - a.value);
       chartTitle = `${titleLabel} por Carrera - Semestre ${activeSem} (${selFac})`;
@@ -5250,7 +5260,8 @@ const drawEstadisticas = () => {
     const kpiFacTitle = isRateTab ? "Facultad con Mayor Deserción" : "Facultad Líder";
     const kpiCarrTitle = isRateTab ? "Carrera con Mayor Deserción" : "Carrera Líder";
     const kpiFacSub = isRateTab ? `${topFacVal.toFixed(2)}% tasa promedio de deserción` : `${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}`;
-    const kpiCarrSub = isRateTab ? `${topCarrVal.toFixed(2)}% tasa de deserción` : `${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}`;
+    const topCarrRisk = isRateTab ? getDesercionRisk(topCarrVal) : null;
+    const kpiCarrSub = isRateTab ? `${topCarrVal.toFixed(2)}% deserción <span style="display:inline-flex; align-items:center; margin-left:6px; padding:2px 8px; background:${topCarrRisk.badgeBg}; color:${topCarrRisk.color}; border:1px solid ${topCarrRisk.border}; border-radius:10px; font-size:0.78rem; font-weight:800;">${topCarrRisk.icon} ${topCarrRisk.label}</span>` : `${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}`;
 
     kpisHtml += `
       <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
@@ -5479,15 +5490,18 @@ const drawEstadisticas = () => {
           const row = displayRows.find(r => r.Programa === full);
           const fac = row ? row.Facultad : "";
           const inactive = isInactiveCareer(full);
+          const risk = isRateTab ? (item.risk || getDesercionRisk(item.value)) : null;
           const barColor = inactive ? "#ef4444" : item.color;
           const inactiveBadge = inactive ? `<span style="display:inline-block; margin-left: 6px; padding: 2px 6px; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 4px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">[NO ACTIVO]</span>` : "";
+          const riskBadge = (isRateTab && risk) ? `<span style="display:inline-block; margin-left: 6px; padding: 2px 7px; background: ${risk.badgeBg}; color: ${risk.color}; border: 1px solid ${risk.border}; border-radius: 4px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">${risk.icon} ${risk.label}</span>` : "";
           const nameStyle = inactive ? "color: #ef4444; font-weight: 800;" : "";
+          const tipText = isRateTab ? `Tasa de deserción: ${item.value.toFixed(2)}% &bull; Estado de Riesgo: ${risk.icon} ${risk.label}` : `${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)`;
           return `
-            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)} ${inactive ? '[NO ACTIVO]' : ''}|${sgEsc(fac)}|${isRateTab ? item.value.toFixed(2) + "% tasa de deserción" : item.value.toLocaleString() + " " + sgEsc(sgUnit) + " (" + pct + "% del total)"}|↗ Clic para ver su evolución histórica">
-              <span class="sg-hname" style="${nameStyle}">${sgEsc(full)}${inactiveBadge}<small style="${inactive ? 'color: rgba(239, 68, 68, 0.7);' : ''}">${sgEsc(fac)}</small></span>
+            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)} ${inactive ? '[NO ACTIVO]' : ''}|${sgEsc(fac)}|${sgEsc(tipText)}|↗ Clic para ver su evolución histórica">
+              <span class="sg-hname" style="${nameStyle}">${sgEsc(full)}${inactiveBadge}${riskBadge}<small style="${inactive ? 'color: rgba(239, 68, 68, 0.7);' : ''}">${sgEsc(fac)}</small></span>
               <div class="sg-htrack">
                 <div class="sg-hbar3d" style="--c: ${barColor}; width: calc((100% - 80px) * ${ratio.toFixed(4)}); animation-delay: ${i * 40}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
-                <span class="sg-hval" style="${inactive ? 'color: #ef4444; font-weight: 800;' : ''}">${isRateTab ? item.value.toFixed(2) + "%" : item.value.toLocaleString()}</span>
+                <span class="sg-hval" style="${inactive ? 'color: #ef4444; font-weight: 800;' : (isRateTab && risk ? 'color:' + risk.color + '; font-weight: 800;' : '')}">${isRateTab && risk ? `${risk.icon} ${item.value.toFixed(2)}%` : (isRateTab ? item.value.toFixed(2) + "%" : item.value.toLocaleString())}</span>
               </div>
             </div>`;
         }).join("")}</div>`;
