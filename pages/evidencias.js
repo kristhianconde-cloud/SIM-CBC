@@ -4215,6 +4215,212 @@ const LABORATORIOS_DATA = [{"id":1,"nombre":"BASE DE DATOS","tipo":"LABORATORIO"
 
 let _labFilters = { search: '', tipo: 'todos', facultad: 'todas', carrera: 'todas', uso: 'todos' };
 
+
+const exportarReporteLaboratoriosWord = () => {
+  const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
+  const totalAmbientes = LABORATORIOS_DATA.length;
+  const totalLabs = LABORATORIOS_DATA.filter(x => x.tipo === 'LABORATORIO').length;
+  const totalTalleres = LABORATORIOS_DATA.filter(x => x.tipo === 'TALLER').length;
+
+  const facCounts = { FAING: 0, FACSA: 0, FAU: 0, FACEM: 0, FAEDCOH: 0, FADE: 0 };
+  LABORATORIOS_DATA.forEach(x => { if (facCounts[x.facultad] !== undefined) facCounts[x.facultad]++; });
+
+  const carrerasList = [
+    'INGENIERÍA DE SISTEMAS', 'INGENIERÍA CIVIL', 'INGENIERÍA AGROINDUSTRIAL', 'INGENIERÍA INDUSTRIAL',
+    'INGENIERÍA ELECTRÓNICA', 'INGENIERÍA AMBIENTAL', 'INGENIERÍA COMERCIAL', 'CIENCIAS CONTABLES Y FINANCIERAS',
+    'ADMINISTRACIÓN DE EMPRESAS', 'ADMINISTRACIÓN TURÍSTICO - HOTELERA', 'ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES',
+    'ECONOMÍA', 'EDUCACIÓN INICIAL', 'EDUCACIÓN PRIMARIA', 'EDUCACIÓN FÍSICA Y DEPORTES', 'CIENCIAS DE LA COMUNICACIÓN',
+    'PSICOLOGÍA', 'MEDICINA', 'ODONTOLOGÍA', 'TERAPIA Y REHABILITACIÓN', 'LABORATORIO CLÍNICO', 'DERECHO',
+    'ARQUITECTURA', 'URBANISMO'
+  ];
+
+  const p1_analysis = `El análisis cuantitativo de la infraestructura académica física desagregada por facultades en la Universidad Privada de Tacna evidencia la asignación de 85 laboratorios y talleres oficialmente registrados bajo los criterios de la Condición Básica de Calidad 5 (CBC 5) exigida por el modelo de licenciamiento de SUNEDU. La distribución espacial refleja la concentración prioritaria de recintos experimentales en la Facultad de Ingeniería (FAING, 39 ambientes), seguida por la Facultad de Arquitectura y Urbanismo (FAU, 18 recintos) y la Facultad de Ciencias de la Salud (FACSA, 14 laboratorios). Desde la perspectiva de la gestión estratégica universitaria, esta asignación asimétrica responde de forma coherente a la naturaleza técnico-operativa de los planes de estudio de cada área del conocimiento. Para la dirección de calidad, la supervisión continua del estado de conservación, la vigencia de los protocolos de bioseguridad y el mantenimiento preventivo del equipamiento constituyen un requisito indispensable para preservar la vigencia de las licencias operativas y garantizar una formación práctica de excelencia.`;
+
+  const p2_analysis = `La tipificación de la infraestructura entre Laboratorios Especializados y Talleres Prácticos develo una estructura funcional diferenciada diseñada para responder a los estándares pedagógicos propios de cada disciplina. La mayor proporción de la capacidad instalada corresponde a Laboratorios (aproximadamente 72% del total de recintos), orientados al ensayo de ciencias básicas, desarrollo computacional, análisis clínico, investigación de materiales y pruebas biológicas. Por su parte, los Talleres Prácticos (28% del inventario) concentran actividades de diseño arquitectónico, simulación clínica, cámaras Gesell, expresión artística y talleres gastronómicos. Estadísticamente, esta caracterización bifásica asegura la cobertura integral de las horas de práctica contempladas en los sílabos institucionales. La gestión universitaria debe priorizar la actualización del equipamiento tecnológico e informático en ambas categorías, asegurando licencias de software vigentes y material de consumo de laboratorio que responda a los requerimientos cambiantes de la industria laboral regional.`;
+
+  const p3_analysis = `El desglose de disponibilidad de laboratorios y talleres por programa académico evidencia la cobertura de la demanda práctica para las 24 carreras profesionales de la institución. Carreras especializadas como Arquitectura, Medicina Humana, Odontología e Ingeniería Civil presentan los mayores volúmenes de recintos asignados, respondiendo a la rigurosidad de sus perfiles de egreso y acreditaciones específicas. Desde la perspectiva de la planificación operativa de la educación superior, la alta dirección debe evaluar periódicamente el ratio de ocupación horaria de cada ambiente por carrera, evitando la subutilización o el hacinamiento de estudiantes en horarios pico de clase. El monitoreo continuo de los indicadores de uso por estudiante garantiza la asignación equitativa de turnos de práctica, optimiza el rendimiento académico de las cohortes en formación y sustenta la rendición de cuentas ante los organismos de auditoría universitaria.`;
+
+  const p4_analysis = `El análisis de multifuncionalidad e interrelación curricular de los recintos de la universidad expone un modelo de gestión eficiente de la infraestructura universitaria. Se identifica la presencia de laboratorios clave de uso compartido (tales como Química 1, Biología y Microbiología, e Informática Aplicada) que brindan soporte práctico simultáneo a hasta 6 carreras profesionales pertenecientes a distintas facultades. Esta estrategia de optimización espacial y presupuestaria maximiza el retorno de la inversión institucional en equipamiento sofisticado de alto costo. Sin embargo, para la dirección de gestión educativa, los ambientes de alta rotación multicarrera imponen rigurosos desafíos logísticos: requieren la programación sincronizada de horarios de práctica, el abastecimiento continuo de insumos reactivos y el mantenimiento periódico intensivo para evitar interrupciones en el servicio académico. La institucionalización de matrices de uso compartido fortalece la integración interdisciplinaria y optimiza el uso sostenible de los recursos de la universidad.`;
+
+  let docHTML = `
+  <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+  <head>
+    <meta charset="utf-8">
+    <title>Reporte Estadístico de Laboratorios y Talleres - UPT</title>
+    <!--[if gte mso 9]>
+    <xml>
+      <w:WordDocument>
+        <w:View>Print</w:View>
+        <w:Zoom>100</w:Zoom>
+        <w:DoNotOptimizeForBrowser/>
+      </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+      @page SectionPage {
+        size: 210mm 297mm;
+        margin: 20mm 20mm 20mm 20mm;
+        mso-header-margin: 12mm;
+        mso-footer-margin: 12mm;
+        mso-paper-source: 0;
+      }
+      div.Report { page: SectionPage; }
+      body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.45; color: #2d3748; }
+      h1 { font-size: 16pt; color: #0b2545; border-bottom: 2px solid #0078d4; padding-bottom: 4px; margin-top: 15px; margin-bottom: 10px; text-align: center; }
+      h2 { font-size: 12pt; color: #0078d4; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; }
+      p { margin-bottom: 8px; text-align: justify; text-indent: 1cm; }
+      table.data-table { width: 100%; border-collapse: collapse; margin: 10px 0 14px 0; }
+      table.data-table th { background-color: #0b2545; color: #ffffff; font-weight: bold; text-align: left; padding: 7px 10px; border: 1px solid #0b2545; font-size: 9.5pt; }
+      table.data-table td { padding: 6px 10px; border: 1px solid #cbd5e0; font-size: 9pt; }
+      .analysis-box { background-color: #f8fafc; border-left: 4px solid #0078d4; padding: 12px 16px; margin-top: 10px; margin-bottom: 16px; font-style: italic; border-radius: 4px; }
+      .analysis-title { font-weight: bold; color: #0078d4; margin-bottom: 6px; font-size: 9.5pt; font-style: normal; text-transform: uppercase; letter-spacing: 0.03em; }
+    </style>
+  </head>
+  <body>
+    <div class="Report">
+      <h1>REPORTE ESTADÍSTICO DE LABORATORIOS Y TALLERES (CBC 5 - SUNEDU)</h1>
+      <p style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 2px;">UNIVERSIDAD PRIVADA DE TACNA</p>
+      <p style="text-align: center; font-size: 10pt; color: #718096; margin-top: 0; margin-bottom: 14px;">Oficina de Calidad Universitaria e Informes de Licenciamiento (SIM-CBC) &bull; ${fechaHoy}</p>
+
+      <p>
+        El presente informe técnico consolidado presenta la evaluación estadística de la infraestructura de enseñanza e investigación correspondiente a los <strong>85 Laboratorios y Talleres Oficiales</strong> de la Universidad Privada de Tacna. Este documento analiza la distribución de los recintos experimentales, su nivel de especialización y la matriz de atención a las carreras profesionales para el sustento de las Condiciones Básicas de Calidad (CBC 5).
+      </p>
+
+      <h2>1. Distribución de Ambientes por Facultad</h2>
+      <p>A continuación se expone la distribución consolidada de recintos de práctica por cada unidad académica:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Facultad Universitaria</th>
+            <th style="text-align: right; width: 140px;">Total Ambientes</th>
+            <th style="text-align: right; width: 140px;">Participación (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${Object.keys(facCounts).map(fac => {
+            const count = facCounts[fac];
+            const pct = ((count / totalAmbientes) * 100).toFixed(2);
+            return `
+              <tr>
+                <td><strong>${fac}</strong></td>
+                <td style="text-align: right;">${count}</td>
+                <td style="text-align: right;">${pct}%</td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">${p1_analysis}</p>
+      </div>
+
+      <h2>2. Clasificación por Tipo de Recinto (Laboratorio vs. Taller)</h2>
+      <p>Desglose de la capacidad instalada según la naturaleza pedagógica y técnica del espacio:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Tipo de Ambiente</th>
+            <th style="text-align: right; width: 160px;">Total Registrados</th>
+            <th style="text-align: right; width: 140px;">Proporción (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LABORATORIO ESPECIALIZADO</strong></td>
+            <td style="text-align: right;">${totalLabs}</td>
+            <td style="text-align: right;">${((totalLabs / totalAmbientes) * 100).toFixed(2)}%</td>
+          </tr>
+          <tr>
+            <td><strong>TALLER PRÁCTICO</strong></td>
+            <td style="text-align: right;">${totalTalleres}</td>
+            <td style="text-align: right;">${((totalTalleres / totalAmbientes) * 100).toFixed(2)}%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">${p2_analysis}</p>
+      </div>
+
+      <h2>3. Matriz de Cobertura por Carrera Profesional</h2>
+      <p>Cantidad de laboratorios y talleres disponibles para el aprendizaje práctico de cada programa académico:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Carrera Profesional</th>
+            <th style="text-align: right; width: 160px;">Ambientes Disponibles</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${carrerasList.map(c => {
+            const count = LABORATORIOS_DATA.filter(item => item.carreras.includes(c)).length;
+            return `
+              <tr>
+                <td><strong>${c}</strong></td>
+                <td style="text-align: right;">${count} recintos</td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">${p3_analysis}</p>
+      </div>
+
+      <h2>4. Ambientes Polifuncionales de Uso Compartido (Multicarrera)</h2>
+      <p>Principales recintos de alto impacto que brindan soporte simultáneo a múltiples programas profesionales:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Denominación del Ambiente</th>
+            <th>Código SL</th>
+            <th>Facultad</th>
+            <th style="text-align: right; width: 140px;">Carreras Atendidas</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${LABORATORIOS_DATA.filter(item => item.total >= 2).slice(0, 15).map(item => `
+            <tr>
+              <td><strong>${item.nombre}</strong></td>
+              <td>${item.codigo}</td>
+              <td>${item.facultad}</td>
+              <td style="text-align: right;">${item.total} carreras</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">${p4_analysis}</p>
+      </div>
+
+    </div>
+  </body>
+  </html>
+  `;
+
+  const blob = new Blob(['\ufeff' + docHTML], { type: 'application/msword;charset=utf-8' });
+  const downloadUrl = URL.createObjectURL(blob);
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.href = downloadUrl;
+  downloadAnchor.download = `Reporte_Estadistico_Laboratorios_y_Talleres_UPT.doc`;
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  document.body.removeChild(downloadAnchor);
+  URL.revokeObjectURL(downloadUrl);
+};
+
+
 function drawLaboratoriosDashboard(container) {
   if (!container) return;
 
@@ -4281,8 +4487,12 @@ function drawLaboratoriosDashboard(container) {
               Infraestructura física y equipamiento para la enseñanza e investigación universitaria - UPT
             </p>
           </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🟢 86 Ambientes Activos</span>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <button id="btn-export-labs-word" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.45rem 0.9rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: #0284c7; border: none; color: #fff; font-weight: 700; cursor: pointer; margin-right: 8px;">
+              <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
+              <span>Exportar Word</span>
+            </button>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🟢 85 Ambientes Activos</span>
             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🏛️ 6 Facultades</span>
             <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🎓 24 Carreras</span>
           </div>
