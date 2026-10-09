@@ -10783,15 +10783,15 @@ const getRowCantidad = (r) => {
     const docentesListTop = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[yearTopStr])
       ? RENACYT_EXP_DATA.docentesPorAno[yearTopStr]
       : RENACYT_EXP_DATA.docentesList;
-    const c9DocentesTop = docentesListTop.filter(d => d.tieneInfo && d.nivel && d.nivel !== '-');
+    const c9DocentesTop = docentesListTop.filter(d => d.tieneInfo && d.nivel && d.nivel !== '-' && d.facultad && d.facultad !== '-' && d.carrera && d.carrera !== '-');
 
     const semDocentesStr = state.semestreDocentes || "2026-I";
     const yearDocentesStr = semDocentesStr.split('-')[0];
     const docentesListNominal = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[yearDocentesStr])
       ? RENACYT_EXP_DATA.docentesPorAno[yearDocentesStr]
       : RENACYT_EXP_DATA.docentesList;
-    const c9DocentesNominal = docentesListNominal.filter(d => d.tieneInfo);
-    const nonC9Nominal = docentesListNominal.filter(d => !d.tieneInfo);
+    const c9DocentesNominal = docentesListNominal.filter(d => d.tieneInfo && d.facultad && d.facultad !== '-' && d.carrera && d.carrera !== '-');
+    const nonC9Nominal = docentesListNominal.filter(d => !d.tieneInfo || !d.facultad || d.facultad === '-' || !d.carrera || d.carrera === '-');
 
     // Colocar a todos los docentes acreditados (Formato C9) al inicio y a los adscritos sin C9 al final de la lista
     const sortedDocentesListNominal = [...c9DocentesNominal, ...nonC9Nominal];
