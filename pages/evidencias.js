@@ -5785,9 +5785,9 @@ const drawEstadisticas = () => {
       carreras: "Haz clic en una carrera para ver su evolución histórica. Lista de carreras ordenada de mayor a menor. Haz clic en una para ver su evolución histórica.",
       crecimiento: "Haz clic en un semestre para analizarlo. Semestres -I y -II en cuadros separados (desde 2014). Cada barra se compara con el mismo semestre del año anterior.",
       comparativa: "Selecciona de 2 a 4 opciones para comparar. Pasa el cursor sobre las barras para ver el detalle.",
-      evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
-      evolucion_facultad: "Usa el filtro de Facultad para ver la evolución de una facultad específica.",
-      evolucion_carrera: "Usa el filtro de Carrera para ver la evolución de una carrera específica."
+      evolutivo: "Semestres -I y -II en cuadros separados (desde 2014). Barras en 3D con datos por semestre.",
+      evolucion_facultad: "Evolución por facultad en cuadros separados (-I y -II) desde 2014 con barras 3D.",
+      evolucion_carrera: "Evolución por carrera en cuadros separados (-I y -II) desde 2014 con barras 3D."
     };
 
     const sgChartHtml = (() => {
@@ -5894,21 +5894,46 @@ const drawEstadisticas = () => {
         return buildCmp("-I") + buildCmp("-II");
       }
 
-      // comparativa / evolutivo / evolucion_facultad / evolucion_carrera
-      const maxVal = Math.max(...chartDataI.map(d => d.value), ...chartDataII.map(d => d.value), 1);
-      return `<div class="sg-chart" style="height: 300px; gap: 1.5rem;">${chartDataI.map((item, idx) => {
-        const itemII = chartDataII[idx] || { value: 0, label: "" };
-        const tipI = `${sgEsc(item.label || 'Año-I')}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}`;
-        const tipII = `${sgEsc(itemII.label || 'Año-II')}|${itemII.value.toLocaleString()} ${sgEsc(sgUnit)}`;
+      // Evolución Histórica / Evolución por Facultad / Evolución por Carrera (Barras 3D en 2 cuadros -I y -II desde 2014)
+      const buildEvo3DChart = (suffix) => {
+        const sems = sortedSems.filter(s => s.endsWith(suffix) && /^\d{4}-/.test(s) && parseInt(s, 10) >= 2014);
+        if (!sems.length) return `<div style="text-align:center;color:var(--text-400);padding:2rem 0;">Sin datos para los semestres ${suffix}.</div>`;
+        
+        const data = sems.map(sem => {
+          const sEntry = rawList.find(x => x.semestre === sem);
+          let sRows = sEntry ? sEntry.rows : [];
+          if (sgView === "evolucion_facultad") {
+            if (selFac !== "Todos") sRows = sRows.filter(r => r.Facultad === selFac);
+          } else if (sgView === "evolucion_carrera") {
+            if (selCarrera !== "Todos") sRows = sRows.filter(r => r.Programa === selCarrera);
+          }
+          const val = sRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
+          return { semestre: sem, value: val, isCurrent: sem === activeSem };
+        });
+
+        const maxV = Math.max(1, ...data.map(d => d.value));
+        const first = sems[0], last = sems[sems.length - 1];
+
         return `
-          <div class="sg-col" style="cursor: default;">
-            <div style="display: flex; align-items: flex-end; gap: 4px; width: 100%; justify-content: center; height: 250px;">
-              <div class="sg-hov" data-tip="${tipI}" style="flex: 1; max-width: 26px; height: ${Math.max(1, (item.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; border-radius: 5px 5px 0 0; animation-delay: ${idx * 40}ms;"></div>
-              <div class="sg-hov" data-tip="${tipII}" style="flex: 1; max-width: 26px; height: ${Math.max(1, (itemII.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; opacity: 0.6; border-radius: 5px 5px 0 0; animation-delay: ${idx * 40 + 20}ms;"></div>
+          <div style="margin-bottom: 0.9rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.6rem;">
+              <span style="font-size: 1rem; font-weight: 800; color: #fff;">Semestres ${suffix} <span style="color: var(--text-400); font-weight: 600; font-size: 0.85rem;">(${first} → ${last})</span></span>
+              <span style="font-size: 0.78rem; color: var(--text-400);">Valores semestrales en 3D</span>
             </div>
-            <span class="sg-lbl">${sgEsc(item.label)}</span>
+            <div class="sg-chart" style="height: 310px; gap: 0.4rem; padding: 0.5rem 0.5rem 0 0.5rem; overflow-x: hidden;">${data.map((item, i) => {
+              const h = Math.max(6, (item.value / maxV) * 200);
+              const isSel = item.isCurrent;
+              const color = isSel ? "#10b981" : "var(--accent)";
+              return `
+                <div class="sg-col" data-click="sem" data-key="${sgEsc(item.semestre)}" data-tip="${sgEsc(item.semestre)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}|↗ Clic para seleccionar este semestre" style="min-width: 0;">
+                  <span class="sg-cval" style="${item.value === 0 ? "opacity: 0.35;" : ""} font-size: 0.82rem;">${item.value.toLocaleString()}</span>
+                  <div class="sg-bar3d" style="--c: ${color}; height: ${h}px; animation-delay: ${i * 35}ms; ${isSel ? 'outline: 2px solid #fff; outline-offset: 1px;' : ''}"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
+                  <span class="sg-lbl" style="color: ${isSel ? "#fff" : "var(--text-300)"}; font-weight: ${isSel ? "800" : "600"}; font-size: 0.76rem;">${sgEsc(item.semestre)}</span>
+                </div>`;
+            }).join("")}</div>
           </div>`;
-      }).join("")}</div>`;
+      };
+      return buildEvo3DChart("-I") + buildEvo3DChart("-II");
     })();
 
 
