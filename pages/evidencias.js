@@ -4945,9 +4945,17 @@ const drawEstadisticas = () => {
 
     if (window[chartViewKey] === "facultades") {
       const facMap = {};
+      const facCnt = {};
       semRows.forEach(r => {
         facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0);
+        facCnt[r.Facultad] = (facCnt[r.Facultad] || 0) + 1;
       });
+      // Deserción: tasa % -> promedio de las carreras de la facultad
+      if (prefix === "desercion") {
+        Object.keys(facMap).forEach(f => {
+          facMap[f] = Math.round((facMap[f] / (facCnt[f] || 1)) * 100) / 100;
+        });
+      }
       chartData = Object.keys(facMap).map((fac, idx) => {
         const colors = ["var(--accent)", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
         return {
@@ -5341,12 +5349,15 @@ const drawEstadisticas = () => {
       if (sgView === "facultades") {
         if (!chartData.length) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Sin datos para este semestre.</div>`;
         const maxV = Math.max(...chartData.map(d => d.value), 1);
+        const isRate = prefix === "desercion";
+        const fmtV = (v) => isRate ? `${v.toFixed(2)}%` : v.toLocaleString();
         return `<div class="sg-chart" style="height: 330px;">${chartData.map((item, i) => {
           const h = Math.max(6, (item.value / maxV) * 230);
           const pct = ((item.value / grandTotal) * 100).toFixed(1);
+          const tipLine = isRate ? `Tasa promedio de deserción: ${fmtV(item.value)}` : `${item.value.toLocaleString()} ${sgUnit} (${pct}% del total)`;
           return `
-            <div class="sg-col" data-click="fac" data-key="${sgEsc(item.label)}" data-tip="${sgEsc(item.label)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver sus carreras">
-              <span class="sg-val">${item.value.toLocaleString()}</span>
+            <div class="sg-col" data-click="fac" data-key="${sgEsc(item.label)}" data-tip="${sgEsc(item.label)}|${sgEsc(tipLine)}|↗ Clic para ver sus carreras">
+              <span class="sg-val">${fmtV(item.value)}</span>
               <div class="sg-bar" style="height: ${h}px; background: ${item.color}; animation-delay: ${i * 70}ms;"></div>
               <span class="sg-lbl">${sgEsc(item.label)}</span>
             </div>`;
