@@ -10740,6 +10740,8 @@ const getRowCantidad = (r) => {
     if (!window._renacytState) {
       window._renacytState = {
         semestre: "2026-I",
+        semestreTop: "2026-I",
+        semestreDocentes: "2026-I",
         activeTab: "facultad",
         facultadGraficoTipo: "barras",
         evolucionModo: "facultad",
@@ -10754,6 +10756,8 @@ const getRowCantidad = (r) => {
     }
 
     const state = window._renacytState;
+    if (!state.semestreTop) state.semestreTop = "2026-I";
+    if (!state.semestreDocentes) state.semestreDocentes = "2026-I";
     if (!state.facultadGraficoTipo) state.facultadGraficoTipo = "barras";
     if (!state.selectedEvoFacultad) state.selectedEvoFacultad = "FACEM";
     if (!state.selectedEvoCarrera) state.selectedEvoCarrera = "Derecho";
@@ -10773,6 +10777,39 @@ const getRowCantidad = (r) => {
     const activeSem = state.semestre;
     const semIdx = RENACYT_EXP_DATA.semestres.indexOf(activeSem) >= 0 ? RENACYT_EXP_DATA.semestres.indexOf(activeSem) : 18;
     const totalRenacyt = RENACYT_EXP_DATA.totalesHist[semIdx] || 40;
+
+    const semTopStr = state.semestreTop || "2026-I";
+    const yearTopStr = semTopStr.split('-')[0];
+    const docentesListTop = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[yearTopStr])
+      ? RENACYT_EXP_DATA.docentesPorAno[yearTopStr]
+      : RENACYT_EXP_DATA.docentesList;
+    const c9DocentesTop = docentesListTop.filter(d => d.tieneInfo);
+
+    const semDocentesStr = state.semestreDocentes || "2026-I";
+    const yearDocentesStr = semDocentesStr.split('-')[0];
+    const docentesListNominal = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[yearDocentesStr])
+      ? RENACYT_EXP_DATA.docentesPorAno[yearDocentesStr]
+      : RENACYT_EXP_DATA.docentesList;
+    const c9DocentesNominal = docentesListNominal.filter(d => d.tieneInfo);
+    const nonC9Nominal = docentesListNominal.filter(d => !d.tieneInfo);
+
+    const totalDocentesCount = docentesListNominal.length;
+    const conInfoCount = c9DocentesNominal.length;
+    const sinInfoCount = nonC9Nominal.length;
+
+    const filteredDocentes = docentesListNominal.filter(d => {
+      if (docFiltro === "con_info" && !d.tieneInfo) return false;
+      if (docFiltro === "sin_info" && d.tieneInfo) return false;
+      if (!docSearch) return true;
+      return d.docente.toLowerCase().includes(docSearch) ||
+             (d.grado && d.grado.toLowerCase().includes(docSearch)) ||
+             d.facultad.toLowerCase().includes(docSearch) ||
+             d.carrera.toLowerCase().includes(docSearch) ||
+             d.nivel.toLowerCase().includes(docSearch) ||
+             (d.condicion && d.condicion.toLowerCase().includes(docSearch)) ||
+             (d.jornada && d.jornada.toLowerCase().includes(docSearch)) ||
+             d.cvi.toLowerCase().includes(docSearch);
+    });
 
     const parseFechaPE = (str) => {
       if (!str || typeof str !== 'string') return 0;
@@ -10800,32 +10837,10 @@ const getRowCantidad = (r) => {
     };
 
     const currentYearStr = activeSem.split('-')[0];
-
-    // Obtener la nómina exacta de docentes correspondiente al año según el cuadro oficial del Excel
     const docentesListSemestre = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[currentYearStr])
       ? RENACYT_EXP_DATA.docentesPorAno[currentYearStr]
       : RENACYT_EXP_DATA.docentesList;
-
     const c9DocentesSemestre = docentesListSemestre.filter(d => d.tieneInfo);
-    const nonC9Adscritos = docentesListSemestre.filter(d => !d.tieneInfo);
-
-    const totalDocentesCount = docentesListSemestre.length;
-    const conInfoCount = c9DocentesSemestre.length;
-    const sinInfoCount = nonC9Adscritos.length;
-
-    const filteredDocentes = docentesListSemestre.filter(d => {
-      if (docFiltro === "con_info" && !d.tieneInfo) return false;
-      if (docFiltro === "sin_info" && d.tieneInfo) return false;
-      if (!docSearch) return true;
-      return d.docente.toLowerCase().includes(docSearch) ||
-             (d.grado && d.grado.toLowerCase().includes(docSearch)) ||
-             d.facultad.toLowerCase().includes(docSearch) ||
-             d.carrera.toLowerCase().includes(docSearch) ||
-             d.nivel.toLowerCase().includes(docSearch) ||
-             (d.condicion && d.condicion.toLowerCase().includes(docSearch)) ||
-             (d.jornada && d.jornada.toLowerCase().includes(docSearch)) ||
-             d.cvi.toLowerCase().includes(docSearch);
-    });
 
     // Mapa de colores distintivos por facultad
     const facColors = {
@@ -11081,7 +11096,7 @@ const getRowCantidad = (r) => {
       "Nivel VII": 7
     };
 
-    const top10DocentesRaw = c9DocentesSemestre
+    const top10DocentesRaw = c9DocentesTop
       .slice()
       .sort((a, b) => {
         const wA = nivelWeights[a.nivel] || 99;
@@ -11106,15 +11121,25 @@ const getRowCantidad = (r) => {
           <div>
             <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="trophy" style="width: 18px; height: 18px; color: #facc15;"></i>
-              <span>TOP ${top10Count} INVESTIGADORES RENACYT UPT (${activeSem})</span>
+              <span>TOP ${top10Count} INVESTIGADORES RENACYT UPT (${semTopStr})</span>
             </h4>
             <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
-              Ranking de máxima jerarquía investigadora en la UPT clasificado por Nivel RENACYT y Fecha de Emisión en el Semestre ${activeSem}
+              Ranking de máxima jerarquía investigadora en la UPT clasificado por Nivel RENACYT y Fecha de Emisión en el Semestre ${semTopStr}
             </p>
           </div>
-          <div style="background: linear-gradient(135deg, rgba(250,204,21,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(250,204,21,0.3); color: #facc15; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="award" style="width: 16px; height: 16px;"></i>
-            <span>${lideresCountInSem} Investigadores ${topNivelLider} (Líderes UPT)</span>
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label style="font-size: 0.8rem; color: var(--text-300); font-weight: 700;">Semestre:</label>
+              <select id="renacyt-select-semestre-top" style="background: var(--bg-dark-800); border: 1px solid #facc15; color: #ffffff; font-weight: 700; padding: 0.35rem 0.65rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; outline: none;">
+                <option value="2026-I" ${semTopStr === '2026-I' ? 'selected' : ''}>Semestre 2026-I (Actual)</option>
+                <option value="2025-II" ${semTopStr === '2025-II' ? 'selected' : ''}>Semestre 2025-II</option>
+                <option value="2025-I" ${semTopStr === '2025-I' ? 'selected' : ''}>Semestre 2025-I</option>
+              </select>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(250,204,21,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(250,204,21,0.3); color: #facc15; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="award" style="width: 16px; height: 16px;"></i>
+              <span>${lideresCountInSem} Investigadores ${topNivelLider} (Líderes UPT)</span>
+            </div>
           </div>
         </div>
 
@@ -11175,14 +11200,23 @@ const getRowCantidad = (r) => {
           <div>
             <h4 style="font-size: 0.98rem; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="users" style="width: 18px; height: 18px; color: #facc15;"></i>
-              <span>RELACIÓN DE DOCENTES RENACYT UPT (${activeSem})</span>
+              <span>RELACIÓN DE DOCENTES RENACYT UPT (${semDocentesStr})</span>
             </h4>
             <p style="font-size: 0.78rem; color: var(--text-300); margin: 4px 0 0 0;">
-              Listado nominal de docentes investigadores adscritos en el Semestre ${activeSem} y estado de información acreditada
+              Listado nominal de docentes investigadores adscritos en el Semestre ${semDocentesStr} y estado de información acreditada
             </p>
           </div>
 
           <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label style="font-size: 0.8rem; color: var(--text-300); font-weight: 700;">Semestre:</label>
+              <select id="renacyt-select-semestre-docentes" style="background: var(--bg-dark-800); border: 1px solid #38bdf8; color: #ffffff; font-weight: 700; padding: 0.35rem 0.65rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; outline: none;">
+                <option value="2026-I" ${semDocentesStr === '2026-I' ? 'selected' : ''}>Semestre 2026-I (Actual)</option>
+                <option value="2025-II" ${semDocentesStr === '2025-II' ? 'selected' : ''}>Semestre 2025-II</option>
+                <option value="2025-I" ${semDocentesStr === '2025-I' ? 'selected' : ''}>Semestre 2025-I</option>
+              </select>
+            </div>
+
             <div style="position: relative; width: 280px; max-width: 100%;">
               <input type="text" id="renacyt-search-docentes" placeholder="Buscar docente, grado, facultad, carrera..." value="${state.docenteSearch || ''}" style="width: 100%; padding: 0.55rem 0.85rem 0.55rem 2.4rem; background: var(--bg-dark-800); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none;" />
               <i data-lucide="search" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text-400);"></i>
@@ -11749,6 +11783,24 @@ const getRowCantidad = (r) => {
     if (selSemMain) {
       selSemMain.onchange = (e) => {
         window._renacytState.semestre = e.target.value;
+        drawRenacytDashboard(subTabContent);
+      };
+    }
+
+    // Event Listener Selector Semestre Top 10 Ranking
+    const selSemTop = subTabContent.querySelector("#renacyt-select-semestre-top");
+    if (selSemTop) {
+      selSemTop.onchange = (e) => {
+        window._renacytState.semestreTop = e.target.value;
+        drawRenacytDashboard(subTabContent);
+      };
+    }
+
+    // Event Listener Selector Semestre Relación de Docentes
+    const selSemDocentes = subTabContent.querySelector("#renacyt-select-semestre-docentes");
+    if (selSemDocentes) {
+      selSemDocentes.onchange = (e) => {
+        window._renacytState.semestreDocentes = e.target.value;
         drawRenacytDashboard(subTabContent);
       };
     }
