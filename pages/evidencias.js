@@ -5919,7 +5919,7 @@ const drawEstadisticas = () => {
         else downloadStandardWordReport(dbKey, titleLabel, activeSem, selFac, selCarrera, prefix);
       };
     }
-  };
+
     if (prefix === "egresados") {
       subTabContent.querySelectorAll(".btn-desercion-tab").forEach(btn => {
         btn.onclick = () => {
