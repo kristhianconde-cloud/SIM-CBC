@@ -10783,7 +10783,7 @@ const getRowCantidad = (r) => {
     const docentesListTop = (RENACYT_EXP_DATA.docentesPorAno && RENACYT_EXP_DATA.docentesPorAno[yearTopStr])
       ? RENACYT_EXP_DATA.docentesPorAno[yearTopStr]
       : RENACYT_EXP_DATA.docentesList;
-    const c9DocentesTop = docentesListTop.filter(d => d.tieneInfo);
+    const c9DocentesTop = docentesListTop.filter(d => d.tieneInfo && d.nivel && d.nivel !== '-');
 
     const semDocentesStr = state.semestreDocentes || "2026-I";
     const yearDocentesStr = semDocentesStr.split('-')[0];
@@ -10793,11 +10793,14 @@ const getRowCantidad = (r) => {
     const c9DocentesNominal = docentesListNominal.filter(d => d.tieneInfo);
     const nonC9Nominal = docentesListNominal.filter(d => !d.tieneInfo);
 
-    const totalDocentesCount = docentesListNominal.length;
+    // Colocar a todos los docentes acreditados (Formato C9) al inicio y a los adscritos sin C9 al final de la lista
+    const sortedDocentesListNominal = [...c9DocentesNominal, ...nonC9Nominal];
+
+    const totalDocentesCount = sortedDocentesListNominal.length;
     const conInfoCount = c9DocentesNominal.length;
     const sinInfoCount = nonC9Nominal.length;
 
-    const filteredDocentes = docentesListNominal.filter(d => {
+    const filteredDocentes = sortedDocentesListNominal.filter(d => {
       if (docFiltro === "con_info" && !d.tieneInfo) return false;
       if (docFiltro === "sin_info" && d.tieneInfo) return false;
       if (!docSearch) return true;
@@ -11262,9 +11265,9 @@ const getRowCantidad = (r) => {
               </tr>
             </thead>
             <tbody>
-              ${filteredDocentes.length > 0 ? filteredDocentes.map(r => `
+              ${filteredDocentes.length > 0 ? filteredDocentes.map((r, index) => `
                 <tr style="border-bottom: ${r.tieneInfo ? '1px solid rgba(255,255,255,0.04)' : '1px solid rgba(234, 179, 8, 0.25)'}; ${!r.tieneInfo ? 'background: rgba(234, 179, 8, 0.14); color: #fef08a;' : 'color: var(--text-200);'}">
-                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${!r.tieneInfo ? '#facc15' : 'var(--text-400)'};">#${r.id}</td>
+                  <td style="padding: 10px 12px; text-align: center; font-weight: 800; color: ${!r.tieneInfo ? '#facc15' : 'var(--text-400)'};">#${index + 1}</td>
                   <td style="padding: 10px 12px; font-weight: 800; color: #ffffff;">${r.docente}</td>
                   <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: ${!r.tieneInfo ? '#fef08a' : '#c084fc'};">${r.grado}</td>
                   <td style="padding: 10px 12px; font-weight: 700; color: ${!r.tieneInfo ? '#fef08a' : '#38bdf8'};">${r.facultad}</td>
