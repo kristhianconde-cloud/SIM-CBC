@@ -4350,6 +4350,10 @@ const drawEstadisticas = () => {
             <i data-lucide="graduation-cap" style="width: 16px; height: 16px;"></i>
             <span>Egresados</span>
           </button>
+          <button class="btn btn-secondary sub-tab-btn ${activeStatsSubTab === 'desercion' ? 'active' : ''}" data-subtab="desercion" style="display: flex; align-items: center; gap: 8px; font-size: 1.08rem; padding: 0.5rem 1rem; border-radius: 8px; ${activeStatsSubTab === 'desercion' ? 'background: var(--accent); border-color: var(--accent); color: #fff;' : 'background: transparent; border-color: transparent; color: var(--text-300);'} transition: all 0.25s ease;">
+            <i data-lucide="trending-down" style="width: 16px; height: 16px;"></i>
+            <span>Deserción Estudiantil</span>
+          </button>
           <button class="btn btn-secondary sub-tab-btn ${activeStatsSubTab === 'laboratorios' ? 'active' : ''}" data-subtab="laboratorios" style="display: flex; align-items: center; gap: 8px; font-size: 1.08rem; padding: 0.5rem 1rem; border-radius: 8px; ${activeStatsSubTab === 'laboratorios' ? 'background: var(--accent); border-color: var(--accent); color: #fff;' : 'background: transparent; border-color: transparent; color: var(--text-300);'} transition: all 0.25s ease;">
             <i data-lucide="flask-conical" style="width: 16px; height: 16px;"></i>
             <span>Laboratorios y Talleres</span>
@@ -4394,6 +4398,7 @@ const drawEstadisticas = () => {
       case "postulantes": rawList = estadisticasInst.postulantes || []; break;
       case "ingresantes": rawList = estadisticasInst.ingresantes || []; break;
       case "egresados": rawList = estadisticasInst.egresados || []; break;
+      case "desercion": rawList = normalizeAlumnosList(estadisticasInst.desercion_estudiantil || []); break;
       case "servicios": rawList = estadisticasInst.servicios_complementarios || []; break;
     }
 
@@ -4625,7 +4630,7 @@ const drawEstadisticas = () => {
     const conf = getImporterConfig();
 
     const isTestMode = window.location.search.includes("run_tests=true");
-    const isCustomDashboard = ["alumnos", "docentes", "renacyt", "postulantes", "ingresantes", "egresados", "laboratorios"].includes(activeStatsSubTab);
+    const isCustomDashboard = ["alumnos", "docentes", "renacyt", "postulantes", "ingresantes", "egresados", "desercion", "laboratorios"].includes(activeStatsSubTab);
     const hasAnyData = rawList.length > 0;
     if (isCustomDashboard && !forceShowImporter && (!isTestMode || hasAnyData)) {
       if (hasAnyData) {
@@ -4805,6 +4810,8 @@ const drawEstadisticas = () => {
         drawIngresantesDashboard(subTabContent);
       } else if (activeStatsSubTab === "egresados" && typeof drawEgresadosDashboard === "function") {
         drawEgresadosDashboard(subTabContent);
+      } else if (activeStatsSubTab === "desercion" && typeof drawDesercionDashboard === "function") {
+        drawDesercionDashboard(subTabContent);
       } else if (activeStatsSubTab === "laboratorios" && typeof drawLaboratoriosDashboard === "function") {
         drawLaboratoriosDashboard(subTabContent);
       } else {
@@ -11483,6 +11490,10 @@ const getRowCantidad = (r) => {
 
   const drawEgresadosDashboard = (subTabContent) => {
     drawStandardStatisticsDashboard(subTabContent, "egresados", "egresados", "Egresados", false);
+  };
+
+  const drawDesercionDashboard = (subTabContent) => {
+    drawStandardStatisticsDashboard(subTabContent, "desercion_estudiantil", "desercion", "Tasa de Deserción", false);
   };
 
   const downloadEgresadosWordReport = () => {

@@ -30660,6 +30660,383 @@
           }
         ]
       }
+    ],
+    "desercion_estudiantil": [
+      {
+        "semestre": "2025-I",
+        "rows": [
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN INICIAL",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN PRIMARIA",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN FISICA Y DEPORTES",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "CIENCIAS DE LA COMUNICACIÓN",
+            "Cantidad": 9.09
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "PSICOLOGÍA",
+            "Cantidad": 14.3
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA DE SISTEMAS",
+            "Cantidad": 4.85
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA ELECTRÓNICA",
+            "Cantidad": 7.46
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA CIVIL",
+            "Cantidad": 2.43
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AGROINDUSTRIAL",
+            "Cantidad": 7.14
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AMBIENTAL",
+            "Cantidad": 3.68
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA INDUSTRIAL",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FADE",
+            "Programa": "DERECHO",
+            "Cantidad": 5.76
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "MEDICINA",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "ODONTOLOGÍA",
+            "Cantidad": 9.8
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN TERAPIA FÍSICA Y REHABILITACIÓN",
+            "Cantidad": 3
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN LABORATORIO CLÍNICO Y ANATOMÍA PATOLÓGICA",
+            "Cantidad": 3
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "ARQUITECTURA",
+            "Cantidad": 3.4
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "URBANISMO",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "INGENIERÍA COMERCIAL",
+            "Cantidad": 3
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "CIENCIAS CONTABLES Y FINANCIERAS",
+            "Cantidad": 4.5
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE EMPRESAS",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES",
+            "Cantidad": 0.7
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN TURÍSTICA HOTELERA",
+            "Cantidad": 0.93
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ECONOMÍA",
+            "Cantidad": 0
+          }
+        ]
+      },
+      {
+        "semestre": "2025-II",
+        "rows": [
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN INICIAL",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN PRIMARIA",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN FISICA Y DEPORTES",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "CIENCIAS DE LA COMUNICACIÓN",
+            "Cantidad": 8.78
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "PSICOLOGÍA",
+            "Cantidad": 12.8
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA DE SISTEMAS",
+            "Cantidad": 7.25
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA ELECTRÓNICA",
+            "Cantidad": 4.55
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA CIVIL",
+            "Cantidad": 6.91
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AGROINDUSTRIAL",
+            "Cantidad": 9.08
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AMBIENTAL",
+            "Cantidad": 3.84
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA INDUSTRIAL",
+            "Cantidad": 7.32
+          },
+          {
+            "Facultad": "FADE",
+            "Programa": "DERECHO",
+            "Cantidad": 7.13
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "MEDICINA",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "ODONTOLOGÍA",
+            "Cantidad": 6.8
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN TERAPIA FÍSICA Y REHABILITACIÓN",
+            "Cantidad": 2
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN LABORATORIO CLÍNICO Y ANATOMÍA PATOLÓGICA",
+            "Cantidad": 9
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "ARQUITECTURA",
+            "Cantidad": 3.24
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "URBANISMO",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "INGENIERÍA COMERCIAL",
+            "Cantidad": 2
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "CIENCIAS CONTABLES Y FINANCIERAS",
+            "Cantidad": 6.7
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE EMPRESAS",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES",
+            "Cantidad": 1.32
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN TURÍSTICA HOTELERA",
+            "Cantidad": 3.57
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ECONOMÍA",
+            "Cantidad": 0
+          }
+        ]
+      },
+      {
+        "semestre": "2026-I",
+        "rows": [
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN INICIAL",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN PRIMARIA",
+            "Cantidad": 3
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "EDUCACIÓN FISICA Y DEPORTES",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "CIENCIAS DE LA COMUNICACIÓN",
+            "Cantidad": 8.18
+          },
+          {
+            "Facultad": "FAEDCOH",
+            "Programa": "PSICOLOGÍA",
+            "Cantidad": 8.6
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA DE SISTEMAS",
+            "Cantidad": 5
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA ELECTRÓNICA",
+            "Cantidad": 6.41
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA CIVIL",
+            "Cantidad": 10.81
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AGROINDUSTRIAL",
+            "Cantidad": 9.09
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA AMBIENTAL",
+            "Cantidad": 4.02
+          },
+          {
+            "Facultad": "FAING",
+            "Programa": "INGENIERÍA INDUSTRIAL",
+            "Cantidad": 3.17
+          },
+          {
+            "Facultad": "FADE",
+            "Programa": "DERECHO",
+            "Cantidad": 6.13
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "MEDICINA",
+            "Cantidad": 0.28
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "ODONTOLOGÍA",
+            "Cantidad": 6.59
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN TERAPIA FÍSICA Y REHABILITACIÓN",
+            "Cantidad": 2
+          },
+          {
+            "Facultad": "FACSA",
+            "Programa": "TECNOLOGÍA MÉDICA CON MENCIÓN EN LABORATORIO CLÍNICO Y ANATOMÍA PATOLÓGICA",
+            "Cantidad": 3
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "ARQUITECTURA",
+            "Cantidad": 4.48
+          },
+          {
+            "Facultad": "FAU",
+            "Programa": "URBANISMO",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "INGENIERÍA COMERCIAL",
+            "Cantidad": 7
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "CIENCIAS CONTABLES Y FINANCIERAS",
+            "Cantidad": 6.6
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE EMPRESAS",
+            "Cantidad": 0
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES",
+            "Cantidad": 1
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ADMINISTRACIÓN TURÍSTICA HOTELERA",
+            "Cantidad": 4.81
+          },
+          {
+            "Facultad": "FACEM",
+            "Programa": "ECONOMÍA",
+            "Cantidad": 0
+          }
+        ]
+      }
     ]
   },
   "transparencia": {
