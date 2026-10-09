@@ -10874,8 +10874,21 @@ const getRowCantidad = (r) => {
 
     const carreraLider = carreraDataCur[0] || { carrera: "Derecho", cantidad: 6 };
 
-    // Crecimiento desde 2017
-    const crecTotal = "+3,900%";
+    // Subtexto dinámico para Carrera Líder en el semestre seleccionado
+    const carrerasConDatos = carreraDataCur.filter(c => c.cantidad > 0);
+    let carreraSubtext = "Máxima representatividad por carrera";
+    if (carrerasConDatos.length > 1) {
+      const segund = carrerasConDatos[1];
+      const tercer = carrerasConDatos[2];
+      carreraSubtext = `Seguida de ${segund.carrera} (${segund.cantidad})${tercer ? ` y ${tercer.carrera} (${tercer.cantidad})` : ''}`;
+    }
+
+    // Crecimiento dinámico desde 2017-I hasta el semestre seleccionado (activeSem)
+    const initialCount = (RENACYT_EXP_DATA.totalesHist && RENACYT_EXP_DATA.totalesHist[0]) ? RENACYT_EXP_DATA.totalesHist[0] : 1;
+    const growthVal = totalRenacyt - initialCount;
+    const growthPctNum = Math.round((growthVal / initialCount) * 100);
+    const crecTotal = (growthPctNum >= 0 ? '+' : '') + growthPctNum.toLocaleString('es-PE') + '%';
+    const crecTitle = `CRECIMIENTO (2017 - ${activeSem.split('-')[0]})`;
 
     // Datos para gráficos de evolución histórica en barras (19 semestres)
     const selEvoFacName = state.selectedEvoFacultad || "FACEM";
@@ -11354,7 +11367,7 @@ const getRowCantidad = (r) => {
             <div>
               <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">CARRERA LÍDER</span>
               <div style="font-size: 1.5rem; font-weight: 800; color: #fbbf24; margin-top: 0.25rem;">${carreraLider.carrera} <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-200);">(${carreraLider.cantidad})</span></div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">Seguida de Negocios (5) y Medicina (4)</p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">${carreraSubtext}</p>
             </div>
             <div style="background-color: rgba(251,191,36,0.08); color: #fbbf24; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(251,191,36,0.15); flex-shrink: 0;">
               <i data-lucide="graduation-cap" style="width: 26px; height: 26px;"></i>
@@ -11364,9 +11377,9 @@ const getRowCantidad = (r) => {
           <!-- KPI 4: Crecimiento Porcentual -->
           <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
             <div>
-              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">CRECIMIENTO (2017-2026)</span>
+              <span style="font-size: 0.72rem; color: var(--text-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">${crecTitle}</span>
               <div style="font-size: 1.85rem; font-weight: 800; color: #c084fc; margin-top: 0.25rem;">${crecTotal}</div>
-              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">De 1 (2017-I) a ${totalRenacyt} docentes (${activeSem})</p>
+              <p style="font-size: 0.75rem; color: var(--text-300); margin-top: 4px; margin-bottom: 0;">De ${initialCount} (2017-I) a ${totalRenacyt} docentes (${activeSem})</p>
             </div>
             <div style="background-color: rgba(192,132,252,0.08); color: #c084fc; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(192,132,252,0.15); flex-shrink: 0;">
               <i data-lucide="trending-up" style="width: 26px; height: 26px;"></i>
