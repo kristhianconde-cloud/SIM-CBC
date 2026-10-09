@@ -5780,7 +5780,7 @@ const drawEstadisticas = () => {
     const sgHints = {
       facultades: "Pasa el cursor sobre una barra para ver el detalle. Haz clic en una facultad para ver sus carreras.",
       carreras: "Haz clic en una carrera para ver su evolución histórica. Lista de carreras ordenada de mayor a menor. Haz clic en una para ver su evolución histórica.",
-      crecimiento: "Haz clic en un semestre para analizarlo. Cada barra se compara con el mismo semestre del año anterior.",
+      crecimiento: "Haz clic en un semestre para analizarlo. Semestres -I y -II en cuadros separados (desde 2014). Cada barra se compara con el mismo semestre del año anterior.",
       comparativa: "Selecciona hasta 4 elementos para comparar su evolución (Año-I vs Año-II).",
       evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
       evolucion_facultad: "Usa el filtro de Facultad para ver la evolución de una facultad específica.",
@@ -5827,19 +5827,32 @@ const drawEstadisticas = () => {
 
       if (sgView === "crecimiento") {
         const maxV = Math.max(...growthChartData.map(d => d.value), 1);
-        return `<div class="sg-chart" style="height: 340px;">${growthChartData.map((item, i) => {
-          const h = Math.max(6, (item.value / maxV) * 200);
-          const isSel = item.semestre === activeSem;
-          const badge = !item.prevSem ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`;
-          const detail = item.prevSem ? `${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs ${item.prevSem} (${badge})` : "Sin semestre equivalente del año anterior";
+        const buildGrowthChart = (suffix) => {
+          const list = growthChartData.filter(d => d.semestre.endsWith(suffix) && parseInt(d.semestre, 10) >= 2014);
+          if (!list.length) return `<div style="text-align:center;color:var(--text-400);padding:2rem 0;">Sin datos para los semestres ${suffix}.</div>`;
+          const first = list[0].semestre, last = list[list.length - 1].semestre;
           return `
-            <div class="sg-col" data-click="sem" data-key="${sgEsc(item.semestre)}" data-tip="${sgEsc(item.semestre)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}|${sgEsc(detail)}|↗ Clic para seleccionar este semestre">
-              <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">${badge}</span>
-              <span class="sg-val">${item.value.toLocaleString()}</span>
-              <div class="sg-bar" style="height: ${h}px; background: ${item.color}; animation-delay: ${i * 40}ms; ${isSel ? 'outline: 2px solid #fff; outline-offset: 1px;' : ''}"></div>
-              <span class="sg-lbl" style="color: ${isSel ? '#fff' : 'var(--text-300)'}; font-weight: ${isSel ? '800' : '600'};">${sgEsc(item.semestre)}</span>
+            <div style="margin-bottom: 1.75rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+                <span style="font-size: 1rem; font-weight: 800; color: #fff;">Semestres ${suffix} <span style="color: var(--text-400); font-weight: 600; font-size: 0.85rem;">(${first} → ${last})</span></span>
+                <span style="font-size: 0.78rem; color: var(--text-400);">Comparado con el ${suffix} del año anterior</span>
+              </div>
+              <div class="sg-chart" style="height: 330px;">${list.map((item, i) => {
+                const h = Math.max(6, (item.value / maxV) * 200);
+                const isSel = item.semestre === activeSem;
+                const badge = !item.prevSem ? "Base" : `${item.pct >= 0 ? "+" : ""}${item.pct.toFixed(1)}%`;
+                const detail = item.prevSem ? `${item.diff >= 0 ? "+" : ""}${item.diff.toLocaleString()} vs ${item.prevSem} (${badge})` : "Sin semestre equivalente del año anterior";
+                return `
+                  <div class="sg-col" data-click="sem" data-key="${sgEsc(item.semestre)}" data-tip="${sgEsc(item.semestre)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}|${sgEsc(detail)}|↗ Clic para seleccionar este semestre">
+                    <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">${badge}</span>
+                    <span class="sg-val">${item.value.toLocaleString()}</span>
+                    <div class="sg-bar" style="height: ${h}px; background: ${item.color}; animation-delay: ${i * 40}ms; ${isSel ? "outline: 2px solid #fff; outline-offset: 1px;" : ""}"></div>
+                    <span class="sg-lbl" style="color: ${isSel ? "#fff" : "var(--text-300)"}; font-weight: ${isSel ? "800" : "600"};">${sgEsc(item.semestre)}</span>
+                  </div>`;
+              }).join("")}</div>
             </div>`;
-        }).join("")}</div>`;
+        };
+        return buildGrowthChart("-I") + buildGrowthChart("-II");
       }
 
       // comparativa / evolutivo / evolucion_facultad / evolucion_carrera
