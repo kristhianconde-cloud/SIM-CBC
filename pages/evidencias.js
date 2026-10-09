@@ -5147,54 +5147,47 @@ const drawEstadisticas = () => {
       </div>
     `;
 
+    let topFac = "Ninguno", topFacVal = 0;
+    const facMap = {};
+    semRows.forEach(r => facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0));
+    Object.keys(facMap).forEach(f => {
+      if (facMap[f] > topFacVal) { topFacVal = facMap[f]; topFac = f; }
+    });
+
+    let topCarr = "Ninguno", topCarrVal = 0;
+    const carrMap = {};
+    displayRows.forEach(r => carrMap[r.Programa] = (carrMap[r.Programa] || 0) + (r.Cantidad || 0));
+    Object.keys(carrMap).forEach(c => {
+      if (carrMap[c] > topCarrVal) { topCarrVal = carrMap[c]; topCarr = c; }
+    });
+
+    kpisHtml += `
+      <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Facultad Líder</span>
+        <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topFac}">${topFac}</strong>
+        <span style="font-size: 1.05rem; color: var(--text-400);">${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
+      </div>
+
+      <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Carrera Líder</span>
+        <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topCarr}">${topCarr}</strong>
+        <span style="font-size: 1.05rem; color: var(--text-400);">${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
+      </div>
+    `;
+
     if (isIngresantes) {
       const postEntry = (estadisticasInst.postulantes || []).find(x => x.semestre === activeSem);
       let postRows = postEntry ? postEntry.rows : [];
       if (selFac !== "Todos") postRows = postRows.filter(r => r.Facultad === selFac);
       if (selCarrera !== "Todos") postRows = postRows.filter(r => r.Programa === selCarrera);
       const postCount = postRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
-
       const rate = postCount > 0 ? ((totalCount / postCount) * 100).toFixed(1) + "%" : "N/A";
 
       kpisHtml += `
-        <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Postulantes</span>
-          <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${postCount.toLocaleString()}</strong>
-          <span style="font-size: 1.05rem; color: var(--text-400);">Postulantes en el mismo filtro</span>
-        </div>
-
-        <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
+        <div class="db-status-badge" style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
           <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Tasa de Admisión</span>
           <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${rate}</strong>
-          <span style="font-size: 1.05rem; color: var(--text-400);">Relación Ingresantes/Postulantes</span>
-        </div>
-      `;
-    } else {
-      let topFac = "Ninguno", topFacVal = 0;
-      const facMap = {};
-      semRows.forEach(r => facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0));
-      Object.keys(facMap).forEach(f => {
-        if (facMap[f] > topFacVal) { topFacVal = facMap[f]; topFac = f; }
-      });
-
-      let topCarr = "Ninguno", topCarrVal = 0;
-      const carrMap = {};
-      displayRows.forEach(r => carrMap[r.Programa] = (carrMap[r.Programa] || 0) + (r.Cantidad || 0));
-      Object.keys(carrMap).forEach(c => {
-        if (carrMap[c] > topCarrVal) { topCarrVal = carrMap[c]; topCarr = c; }
-      });
-
-      kpisHtml += `
-        <div class="db-status-badge" style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Facultad Líder</span>
-          <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topFac}">${topFac}</strong>
-          <span style="font-size: 1.05rem; color: var(--text-400);">${topFacVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
-        </div>
-
-        <div class="db-status-badge" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-          <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Carrera Líder</span>
-          <strong style="font-size: 1.2rem; line-height: 1.3; color: #fff; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;" title="${topCarr}">${topCarr}</strong>
-          <span style="font-size: 1.05rem; color: var(--text-400);">${topCarrVal.toLocaleString()} ${titleLabel.toLowerCase()}</span>
+          <span style="font-size: 1.05rem; color: var(--text-400);">${totalCount.toLocaleString()} ingresantes de ${postCount.toLocaleString()} postulantes</span>
         </div>
       `;
     }
