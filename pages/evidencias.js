@@ -5707,6 +5707,138 @@ const drawEstadisticas = () => {
       `;
     }
 
+    // ===== Dashboard interactivo (tooltips, drill-down, barras 3D) =====
+    const sgEsc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const sgView = window[chartViewKey];
+    const sgUnit = String(titleLabel || "").toLowerCase();
+
+    const sgStyles = `<style>
+      .sg-panel { background: var(--bg-dark-800); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; }
+      .sg-chart { display: flex; align-items: flex-end; gap: 0.9rem; padding: 0.5rem 1rem 0 1rem; border-bottom: 1px solid var(--border-color); overflow-x: auto; overflow-y: hidden; }
+      .sg-chart::-webkit-scrollbar { height: 8px; }
+      .sg-chart::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+      .sg-col { flex: 1 1 0; min-width: 46px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; cursor: pointer; }
+      .sg-col3d { flex: 1 0 60px; }
+      .sg-val { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem; transition: transform 0.2s ease; }
+      .sg-lbl { font-size: 0.82rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; max-width: 90px; overflow: hidden; text-overflow: ellipsis; }
+      .sg-lbl-v { writing-mode: vertical-rl; transform: rotate(180deg); height: 170px; margin-top: 0.7rem; font-size: 0.8rem; font-weight: 600; color: var(--text-200); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: end; transition: color 0.2s ease; }
+      .sg-bar { position: relative; width: 100%; max-width: 58px; border-radius: 8px 8px 0 0; box-shadow: 0 6px 16px rgba(0,0,0,0.35); transform-origin: bottom; animation: sgGrow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
+      .sg-bar::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(0,0,0,0.18)); pointer-events: none; }
+      .sg-col:hover .sg-bar, .sg-hov:hover { filter: brightness(1.28); transform: scaleY(1.03); }
+      .sg-hov { transform-origin: bottom; transition: filter 0.2s ease, transform 0.2s ease; cursor: pointer; animation: sgGrow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+      .sg-col:hover .sg-val { transform: translateY(-3px); }
+      .sg-col:hover .sg-lbl-v { color: #fff; }
+      .sg-bar3d { position: relative; width: 38px; margin-right: 12px; margin-top: 12px; transform-origin: bottom; animation: sgGrow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
+      .sg-bar3d::before { content: ''; position: absolute; left: 6px; right: -12px; bottom: -5px; height: 8px; background: rgba(0,0,0,0.5); filter: blur(5px); z-index: -1; }
+      .sg-bar3d i { position: absolute; display: block; }
+      .sg-bar3d .ff { left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.22), rgba(0,0,0,0.15)), var(--c); }
+      .sg-bar3d .fs { left: 100%; bottom: 0; width: 12px; height: 100%; background: var(--c); filter: brightness(0.55); transform-origin: left bottom; transform: skewY(-45deg); }
+      .sg-bar3d .ft { left: 0; bottom: 100%; width: 100%; height: 12px; background: var(--c); filter: brightness(1.4); transform-origin: left bottom; transform: skewX(-45deg); }
+      .sg-col3d:hover .sg-bar3d { filter: brightness(1.2); transform: translateY(-8px); }
+      .sg-chip { background: rgba(56,189,248,0.1); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+      .sg-chip:hover { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+      .sg-tooltip { position: fixed; z-index: 99999; pointer-events: none; background: rgba(10,15,30,0.96); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.55rem 0.8rem; font-size: 0.85rem; color: #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 290px; display: none; line-height: 1.35; }
+      @keyframes sgGrow { from { transform: scaleY(0.04); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+    </style>`;
+
+    const sgViewButtons = [
+      ["facultades", "Por Facultad"],
+      ["carreras", "Por Carrera"],
+      ["crecimiento", "Crecimiento Semestral"],
+      ["comparativa", "Comparativa"],
+      ["evolutivo", "Evolución Histórica"],
+      ["evolucion_facultad", "Evolución por Facultad"],
+      ["evolucion_carrera", "Evolución por Carrera"]
+    ].map(([v, l]) => `<button class="btn btn-secondary chart-view-${prefix}-btn ${sgView === v ? 'active' : ''}" data-view="${v}" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${sgView === v ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">${l}</button>`).join("");
+
+    const sgChips = (selFac !== "Todos" || selCarrera !== "Todos") ? `
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <span style="font-size: 0.8rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Filtro activo:</span>
+        ${selFac !== "Todos" ? `<button class="sg-chip" data-clear="fac" title="Quitar filtro de facultad">${sgEsc(selFac)} ✕</button>` : ""}
+        ${selCarrera !== "Todos" ? `<button class="sg-chip" data-clear="car" title="Quitar filtro de carrera">${sgEsc(selCarrera)} ✕</button>` : ""}
+      </div>` : "";
+
+    const sgHints = {
+      facultades: "Pasa el cursor sobre una barra para ver el detalle. Haz clic en una facultad para ver sus carreras.",
+      carreras: "Haz clic en una carrera para ver su evolución histórica. Desplázate horizontalmente si hay muchas carreras.",
+      crecimiento: "Haz clic en un semestre para analizarlo. Cada barra se compara con el mismo semestre del año anterior.",
+      comparativa: "Selecciona hasta 4 elementos para comparar su evolución (Año-I vs Año-II).",
+      evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
+      evolucion_facultad: "Usa el filtro de Facultad para ver la evolución de una facultad específica.",
+      evolucion_carrera: "Usa el filtro de Carrera para ver la evolución de una carrera específica."
+    };
+
+    const sgChartHtml = (() => {
+      const grandTotal = chartData.reduce((s, d) => s + d.value, 0) || 1;
+
+      if (sgView === "facultades") {
+        if (!chartData.length) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Sin datos para este semestre.</div>`;
+        const maxV = Math.max(...chartData.map(d => d.value), 1);
+        return `<div class="sg-chart" style="height: 330px;">${chartData.map((item, i) => {
+          const h = Math.max(6, (item.value / maxV) * 230);
+          const pct = ((item.value / grandTotal) * 100).toFixed(1);
+          return `
+            <div class="sg-col" data-click="fac" data-key="${sgEsc(item.label)}" data-tip="${sgEsc(item.label)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver sus carreras">
+              <span class="sg-val">${item.value.toLocaleString()}</span>
+              <div class="sg-bar" style="height: ${h}px; background: ${item.color}; animation-delay: ${i * 70}ms;"></div>
+              <span class="sg-lbl">${sgEsc(item.label)}</span>
+            </div>`;
+        }).join("")}</div>`;
+      }
+
+      if (sgView === "carreras") {
+        if (!chartData.length) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Sin datos para este filtro.</div>`;
+        const maxV = Math.max(...chartData.map(d => d.value), 1);
+        return `<div class="sg-chart" style="height: 470px;">${chartData.map((item, i) => {
+          const h = Math.max(6, (item.value / maxV) * 220);
+          const pct = ((item.value / grandTotal) * 100).toFixed(1);
+          const full = item.fullLabel || item.label;
+          const row = displayRows.find(r => r.Programa === full);
+          const fac = row ? row.Facultad : "";
+          return `
+            <div class="sg-col sg-col3d" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
+              <span class="sg-val">${item.value.toLocaleString()}</span>
+              <div class="sg-bar3d" style="--c: ${item.color}; height: ${h}px; animation-delay: ${i * 45}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
+              <span class="sg-lbl-v">${sgEsc(full)}</span>
+            </div>`;
+        }).join("")}</div>`;
+      }
+
+      if (sgView === "crecimiento") {
+        const maxV = Math.max(...growthChartData.map(d => d.value), 1);
+        return `<div class="sg-chart" style="height: 340px;">${growthChartData.map((item, i) => {
+          const h = Math.max(6, (item.value / maxV) * 200);
+          const isSel = item.semestre === activeSem;
+          const badge = !item.prevSem ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`;
+          const detail = item.prevSem ? `${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs ${item.prevSem} (${badge})` : "Sin semestre equivalente del año anterior";
+          return `
+            <div class="sg-col" data-click="sem" data-key="${sgEsc(item.semestre)}" data-tip="${sgEsc(item.semestre)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}|${sgEsc(detail)}|↗ Clic para seleccionar este semestre">
+              <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">${badge}</span>
+              <span class="sg-val">${item.value.toLocaleString()}</span>
+              <div class="sg-bar" style="height: ${h}px; background: ${item.color}; animation-delay: ${i * 40}ms; ${isSel ? 'outline: 2px solid #fff; outline-offset: 1px;' : ''}"></div>
+              <span class="sg-lbl" style="color: ${isSel ? '#fff' : 'var(--text-300)'}; font-weight: ${isSel ? '800' : '600'};">${sgEsc(item.semestre)}</span>
+            </div>`;
+        }).join("")}</div>`;
+      }
+
+      // comparativa / evolutivo / evolucion_facultad / evolucion_carrera
+      const maxVal = Math.max(...chartDataI.map(d => d.value), ...chartDataII.map(d => d.value), 1);
+      return `<div class="sg-chart" style="height: 300px; gap: 1.5rem;">${chartDataI.map((item, idx) => {
+        const itemII = chartDataII[idx] || { value: 0, label: "" };
+        const tipI = `${sgEsc(item.label || 'Año-I')}|${item.value.toLocaleString()} ${sgEsc(sgUnit)}`;
+        const tipII = `${sgEsc(itemII.label || 'Año-II')}|${itemII.value.toLocaleString()} ${sgEsc(sgUnit)}`;
+        return `
+          <div class="sg-col" style="cursor: default;">
+            <div style="display: flex; align-items: flex-end; gap: 4px; width: 100%; justify-content: center; height: 250px;">
+              <div class="sg-hov" data-tip="${tipI}" style="flex: 1; max-width: 26px; height: ${Math.max(1, (item.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; border-radius: 5px 5px 0 0; animation-delay: ${idx * 40}ms;"></div>
+              <div class="sg-hov" data-tip="${tipII}" style="flex: 1; max-width: 26px; height: ${Math.max(1, (itemII.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; opacity: 0.6; border-radius: 5px 5px 0 0; animation-delay: ${idx * 40 + 20}ms;"></div>
+            </div>
+            <span class="sg-lbl">${sgEsc(item.label)}</span>
+          </div>`;
+      }).join("")}</div>`;
+    })();
+
+
     subTabContent.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 100%;">
         <!-- Filter Bar -->
@@ -5747,109 +5879,27 @@ const drawEstadisticas = () => {
           ${kpisHtml}
         </div>
 
-        <!-- Visor Main Grid (Charts & Details Table) -->
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start; width: 100%;">
-          
-          <!-- Left: Gráficos Estadísticos Card -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <div style="margin-bottom: 1rem;">
-              <span style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">GRÁFICOS ESTADÍSTICOS</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'facultades' ? 'active' : ''}" data-view="facultades" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'facultades' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Por Facultad</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'carreras' ? 'active' : ''}" data-view="carreras" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'carreras' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Por Carrera</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'crecimiento' ? 'active' : ''}" data-view="crecimiento" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'crecimiento' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Crecimiento Semestral</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'comparativa' ? 'active' : ''}" data-view="comparativa" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'comparativa' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Comparativa</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'evolutivo' ? 'active' : ''}" data-view="evolutivo" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'evolutivo' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Evolución Histórica</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'evolucion_facultad' ? 'active' : ''}" data-view="evolucion_facultad" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'evolucion_facultad' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Evolución por Facultad</button>
-                <button class="btn btn-secondary chart-view-${prefix}-btn ${window[chartViewKey] === 'evolucion_carrera' ? 'active' : ''}" data-view="evolucion_carrera" style="font-size: 0.95rem; padding: 0.4rem 0.8rem; border-radius: 6px; ${window[chartViewKey] === 'evolucion_carrera' ? 'background: var(--accent); color:#fff;' : 'background:transparent; color:var(--text-300); border:1px solid var(--border-color);'}">Evolución por Carrera</button>
-              </div>
-            </div>
-
-            ${comparativeControlsHtml}
-
-            <div style="background: var(--bg-dark-800); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem;">
-              <h4 style="text-align: center; color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem;">${chartTitle}</h4>
-
-              ${comparativeLegendHtml}
-
-              ${(window[chartViewKey] === "facultades" || window[chartViewKey] === "carreras") ? `
-                <div style="height: 280px; display: flex; align-items: flex-end; gap: 1rem; padding: 0 1rem 1rem 2.5rem; position: relative; border-bottom: 1px solid var(--border-color);">
-                  ${chartData.map(item => `
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.fullLabel || item.label}: ${item.value.toLocaleString()}">
-                      <span style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem;">${item.value}</span>
-                      <div style="width: 100%; max-width: 55px; height: ${Math.max(4, (item.value / (chartData[0] ? chartData[0].value || 1 : 1)) * 100).toFixed(1)}%; background: ${item.color}; border-radius: 6px 6px 0 0; transition: height 0.4s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"></div>
-                      <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75px;">${item.label}</span>
-                    </div>
-                  `).join("")}
-                </div>
-              ` : window[chartViewKey] === "crecimiento" ? `
-                <div style="height: 280px; display: flex; align-items: flex-end; gap: 0.8rem; padding: 0 1rem 1rem 2.5rem; position: relative; border-bottom: 1px solid var(--border-color);">
-                  ${(() => {
-                    const maxVal = Math.max(...growthChartData.map(d => d.value), 1);
-                    return growthChartData.map(item => {
-                      const heightPct = Math.max(6, (item.value / maxVal) * 100).toFixed(1);
-                      const isSelected = item.semestre === activeSem;
-                      const highlightStyle = isSelected ? "border: 2px solid #fff; box-shadow: 0 0 14px rgba(255,255,255,0.4);" : "";
-                      return `
-                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;" title="${item.semestre}: ${item.value.toLocaleString()} (${item.diff >= 0 ? '+' : ''}${item.diff.toLocaleString()} vs ${item.prevSem || 'periodo previo'})">
-                          <span style="font-size: 0.78rem; font-weight: 800; color: ${item.color}; background: ${item.color}18; border: 1px solid ${item.color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">
-                            ${!item.prevSem ? 'Base' : `${item.pct >= 0 ? '+' : ''}${item.pct.toFixed(1)}%`}
-                          </span>
-                          <span style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">${item.value.toLocaleString()}</span>
-                          <div style="width: 100%; max-width: 50px; height: ${heightPct}%; background: ${item.color}; border-radius: 6px 6px 0 0; transition: height 0.4s ease; ${highlightStyle}"></div>
-                          <span style="font-size: 0.82rem; color: ${isSelected ? '#fff' : 'var(--text-300)'}; font-weight: ${isSelected ? '700' : '600'}; margin-top: 0.5rem; text-align: center;">${item.semestre}</span>
-                        </div>
-                      `;
-                    }).join("");
-                  })()}
-                </div>
-              ` : `
-                <div style="height: 280px; display: flex; align-items: flex-end; gap: 1.5rem; padding: 0 1rem 1rem 2.5rem; position: relative; border-bottom: 1px solid var(--border-color);">
-                  ${chartDataI.map((item, idx) => {
-                    const itemII = chartDataII[idx] || { value: 0 };
-                    const maxVal = Math.max(...chartDataI.map(d => d.value), ...chartDataII.map(d => d.value), 1);
-                    return `
-                      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end;">
-                        <div style="display: flex; align-items: flex-end; gap: 4px; width: 100%; justify-content: center; height: 100%;">
-                          <div style="flex: 1; max-width: 25px; height: ${((item.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; border-radius: 4px 4px 0 0;" title="${item.value}"></div>
-                          <div style="flex: 1; max-width: 25px; height: ${((itemII.value / maxVal) * 100).toFixed(1)}%; background: ${item.color}; opacity: 0.6; border-radius: 4px 4px 0 0;" title="${itemII.value}"></div>
-                        </div>
-                        <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem;">${item.label}</span>
-                      </div>
-                    `;
-                  }).join("")}
-                </div>
-              `}
+        <!-- Gráficos interactivos (ancho completo) -->
+        <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 1rem; width: 100%;">
+          ${sgStyles}
+          <div>
+            <span style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">GRÁFICOS ESTADÍSTICOS</span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${sgViewButtons}
             </div>
           </div>
 
-          <!-- Right: Detalle de Registros Table -->
-          <div class="card" style="padding: 1.25rem; background: var(--bg-dark-600); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <span style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">DETALLE DE REGISTROS</span>
-              <span style="font-size: 0.8rem; color: var(--text-300); font-weight: 600;">Total Registros</span>
-            </div>
+          ${sgChips}
 
-            <div style="max-height: 420px; overflow-y: auto; padding-right: 4px;">
-              <table class="data-table" style="width: 100%; font-size: 0.9rem;">
-                <thead>
-                  <tr>
-                    <th style="text-align: left; padding: 0.5rem;">Carrera Profesional</th>
-                    <th style="text-align: center; padding: 0.5rem; width: 60px;">Fac.</th>
-                    <th style="text-align: right; padding: 0.5rem; width: 80px;">Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${displayRows.map(r => `
-                    <tr>
-                      <td style="padding: 0.45rem 0.5rem; font-weight: 600; color: #fff;">${r.Programa}</td>
-                      <td style="padding: 0.45rem 0.5rem; text-align: center; color: var(--text-300); font-size: 0.8rem;">${r.Facultad}</td>
-                      <td style="padding: 0.45rem 0.5rem; text-align: right; font-weight: 800; color: var(--accent-light);">${(r.Cantidad || 0).toLocaleString()}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
+          ${comparativeControlsHtml}
+
+          <div class="sg-panel">
+            <h4 style="text-align: center; color: #fff; font-size: 1.1rem; font-weight: 700; margin: 0 0 0.35rem 0;">${chartTitle}</h4>
+            <p style="text-align: center; color: var(--text-400); font-size: 0.85rem; margin: 0 0 1.25rem 0;">${sgHints[sgView] || ""}</p>
+
+            ${comparativeLegendHtml}
+
+            ${sgChartHtml}
           </div>
         </div>
 
@@ -5915,6 +5965,65 @@ const drawEstadisticas = () => {
         };
       });
     }
+
+    // Interactividad: tooltip flotante + drill-down
+    let sgTip = document.getElementById("sg-tooltip");
+    if (!sgTip) {
+      sgTip = document.createElement("div");
+      sgTip.id = "sg-tooltip";
+      sgTip.className = "sg-tooltip";
+      document.body.appendChild(sgTip);
+    }
+    sgTip.style.display = "none";
+    const sgMove = (e) => {
+      const pad = 14;
+      let x = e.clientX + pad, y = e.clientY + pad;
+      const w = sgTip.offsetWidth, h = sgTip.offsetHeight;
+      if (x + w > window.innerWidth - 8) x = e.clientX - w - pad;
+      if (y + h > window.innerHeight - 8) y = e.clientY - h - pad;
+      sgTip.style.left = Math.max(4, x) + "px";
+      sgTip.style.top = Math.max(4, y) + "px";
+    };
+    subTabContent.querySelectorAll("[data-tip]").forEach(el => {
+      el.onmouseenter = (e) => {
+        const parts = (el.getAttribute("data-tip") || "").split("|");
+        sgTip.innerHTML = `<strong style="color:#fff;display:block;margin-bottom:2px;">${sgEsc(parts[0])}</strong>` +
+          parts.slice(1).map(p => p.startsWith("↗")
+            ? `<div style="color:#38bdf8;font-size:0.78rem;margin-top:4px;">${sgEsc(p)}</div>`
+            : `<div>${sgEsc(p)}</div>`).join("");
+        sgTip.style.display = "block";
+        sgMove(e);
+      };
+      el.onmousemove = sgMove;
+      el.onmouseleave = () => { sgTip.style.display = "none"; };
+    });
+
+    subTabContent.querySelectorAll("[data-click]").forEach(el => {
+      el.onclick = () => {
+        sgTip.style.display = "none";
+        const kind = el.getAttribute("data-click");
+        const key = el.getAttribute("data-key");
+        if (kind === "fac") {
+          window[filterKey] = { semestre: activeSem, facultad: key, carrera: "Todos" };
+          window[chartViewKey] = "carreras";
+        } else if (kind === "car") {
+          window[filterKey] = { semestre: activeSem, facultad: el.getAttribute("data-fac") || selFac, carrera: key };
+          window[chartViewKey] = "evolucion_carrera";
+        } else if (kind === "sem") {
+          window[filterKey] = { semestre: key, facultad: selFac, carrera: selCarrera };
+        }
+        drawStandardStatisticsDashboard(subTabContent, dbKey, prefix, titleLabel, isIngresantes);
+      };
+    });
+
+    subTabContent.querySelectorAll("[data-clear]").forEach(btn => {
+      btn.onclick = () => {
+        const k = btn.getAttribute("data-clear");
+        window[filterKey] = { semestre: activeSem, facultad: k === "fac" ? "Todos" : selFac, carrera: "Todos" };
+        drawStandardStatisticsDashboard(subTabContent, dbKey, prefix, titleLabel, isIngresantes);
+      };
+    });
+
 
     const btnWord = subTabContent.querySelector(`#btn-export-word-${prefix}`);
     if (btnWord) {
