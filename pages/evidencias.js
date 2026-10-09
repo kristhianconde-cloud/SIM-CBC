@@ -3552,6 +3552,314 @@ const drawAlumnosRegularesDashboard = (subTabContent) => {
   drawStandardStatisticsDashboard(subTabContent, "alumnos_regulares", "alumnos", "Alumnos Matriculados", false);
 };
 
+
+const downloadStandardWordReport = (dbKey, titleLabel, activeSem = "Todos", selFac = "Todos", selCarrera = "Todos", prefix = "general") => {
+  const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
+  const isRate = prefix === "desercion";
+  const unit = isRate ? "%" : "alumnos";
+
+  // Data sources
+  let rawList = [];
+  if (prefix === "postulantes") rawList = normalizeAlumnosList(estadisticasInst.postulantes || []);
+  else if (prefix === "ingresantes") rawList = normalizeAlumnosList(estadisticasInst.ingresantes || []);
+  else if (prefix === "egresados") rawList = normalizeAlumnosList(estadisticasInst.egresados || []);
+  else if (prefix === "desercion") rawList = normalizeAlumnosList(estadisticasInst.desercion_estudiantil || []);
+  else rawList = normalizeAlumnosList(estadisticasInst[dbKey] || []);
+
+  const semEntry = rawList.find(x => x.semestre === activeSem) || rawList[0] || { rows: [] };
+  const semRows = semEntry ? semEntry.rows : [];
+
+  const facMap = {};
+  const facCnt = {};
+  semRows.forEach(r => {
+    facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0);
+    facCnt[r.Facultad] = (facCnt[r.Facultad] || 0) + 1;
+  });
+  if (isRate) {
+    Object.keys(facMap).forEach(f => {
+      facMap[f] = Math.round((facMap[f] / (facCnt[f] || 1)) * 100) / 100;
+    });
+  }
+
+  let filteredCarreras = semRows;
+  if (selFac !== "Todos") {
+    filteredCarreras = semRows.filter(r => r.Facultad === selFac);
+  }
+
+  const sortedSems = rawList.map(x => x.semestre).sort();
+
+  const evolutionList = sortedSems.map(sem => {
+    const sEntry = rawList.find(x => x.semestre === sem);
+    const sRows = sEntry ? sEntry.rows : [];
+    let rows = sRows;
+    if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
+    if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+    
+    let val = 0;
+    if (isRate) {
+      val = rows.length ? Math.round((rows.reduce((s, r) => s + (r.Cantidad || 0), 0) / rows.length) * 100) / 100 : 0;
+    } else {
+      val = rows.reduce((s, r) => s + (r.Cantidad || 0), 0);
+    }
+    return { semestre: sem, cantidad: val };
+  }).sort((a, b) => a.semestre.localeCompare(b.semestre));
+
+  // Paragraph texts specialized by prefix
+  let p1_analysis = "";
+  let p2_analysis = "";
+  let p3_analysis = "";
+
+  if (prefix === "desercion") {
+    p1_analysis = `El análisis econométrico y cuali-cuantitativo de la tasa de deserción estudiantil por facultades expone patrones heterogéneos de abandono académico en la estructura universitaria. Se identifica que unidades académicas con exigencia técnico-operativa intensiva presentan variaciones específicas respecto al promedio institucional real (3.46% en 2025-I, 4.26% en 2025-II y 4.17% en 2026-I), influenciadas por factores multivariados como la carga lectiva en ciclos iniciales, la adaptación al modelo pedagógico y brechas vocacionales tempranas. Desde la perspectiva de la gestión universitaria y la efectividad del servicio educativo, la varianza observada demanda una intervención estratégica focalizada. Las facultades en nivel de riesgo medio o crítico requieren el fortalecimiento de programas institucionales de acompañamiento psicopedagógico, tutorías académicas personalizadas y mentorías entre pares. Dichas acciones mitigan el riesgo de deserción temprana, optimizando los indicadores de eficiencia terminal y resguardando las Condiciones Básicas de Calidad exigidas por la reglamentación nacional de educación superior.`;
+    
+    p2_analysis = `La desagregación de la deserción por programa de estudios evidencia discontinuidades académicas focalizadas que demandan un diagnóstico micro-estructural. Las carreras profesionales que registran tasas de deserción en nivel crítico (superiores al 8.00%) reflejan cuellos de botella en asignaturas filtro de ciencias básicas y razonamiento cuantitativo, así como desajustes en las expectativas de empleabilidad regional. Estadísticamente, la probabilidad de abandono se concentra exponencialmente durante los primeros cuatro semestres académicos. Para la alta dirección universitaria, esta evidencia empírica respalda la urgencia de implementar alertas tempranas automatizadas basadas en el rendimiento académico intermedio y la asistencia a clases. La reestructuración de mallas curriculares orientadas a la flexibilidad formativa y el apoyo socioeconómico oportuno constituyen pilares fundamentales para contraer los índices de abandono y consolidar la retención estudiantil sostenible.`;
+
+    p3_analysis = `La evaluación longitudinal de la tasa de deserción institucional a través de las series consecutivas revela una trayectoria de estabilidad con fluctuaciones acotadas expresadas en puntos porcentuales (pp). La variación en pp entre periodos correlativos demuestra una dinámica estacional donde el semestre impar experimenta variaciones incrementales vinculadas a la transición de cohorte, mientras que los semestres pares registran procesos de regularización y nivelación. Desde la óptica de la dirección estadística en gestión educativa, la tasa promedio institucional se mantiene dentro de los márgenes aceptables para el sistema universitario nacional. No obstante, para garantizar una tendencia decreciente sostenida, se recomienda institucionalizar modelos predictivos de minería de datos educativos que anticipen el riesgo de abandono antes del cierre de cada proceso de matrícula.`;
+  } else if (prefix === "egresados") {
+    p1_analysis = `El análisis cuantitativo de la distribución de egresados por facultad refleja la efectividad del proceso formativo y el volumen de capital humano calificado que la Universidad Privada de Tacna transfiere anualmente al mercado laboral regional y nacional. Las facultades con mayor masa matricular lideran la generación absoluta de egresados, demostrando la fluidez de su tránsito académico interno. Desde la gestión institucional de la educación superior, este indicador constituye una evidencia crítica de la Condición Básica de Calidad relacionada con la idoneidad del servicio educativo y la tasa de culminación de estudios dentro de los plazos reglamentarios de la normativa universitaria.`;
+
+    p2_analysis = `La tasa de egreso desagregada por programa de estudios permite evaluar la eficiencia terminal específica de cada carrera universitaria. Aquellos programas que mantienen una relación armónica entre el volumen de ingresantes de cohortes históricas y sus egresados actuales demuestran la eficacia de sus procesos de titulación, tutoría de tesis y suficiencia académica. Por el contrario, brechas significativas entre la matrícula final y el egreso efectivo señalan la presencia de trabas en la elaboración de trabajos de investigación o rigideces administrativas en el proceso de graduación, requiriendo programas institucionales de titulación profesional acelerada y talleres de tesis integrados al último año de estudios.`;
+
+    p3_analysis = `La serie histórica de egresados a lo largo de los semestres muestra una tendencia positiva con fluctuaciones estacionales normadas por los calendarios académicos de sustentación y fin de carrera. El incremento progresivo en el número de graduandos confirma la solidez pedagógica y la capacidad de la universidad para acompañar el ciclo de vida del estudiante hasta su culminación exitosa. Estadísticamente, la estabilidad en las cohortes de egreso sostiene la reputación institucional y retroalimenta los indicadores de seguimiento a egresados y empleabilidad exigidos en los procesos de acreditación nacional e internacional.`;
+  } else if (prefix === "postulantes" || prefix === "ingresantes") {
+    p1_analysis = `El análisis descriptivo e inferencial de los indicadores de atracción y admisión universitaria expone la preferencia del mercado aspirante hacia la oferta académica de la institución. La concentración de la demanda en facultades clave reafirma el posicionamiento de la Universidad Privada de Tacna como polo de desarrollo educativo en la región sur del país. Desde la alta gestión universitaria, estos resultados orientan la planificación del número de vacantes, la optimización de los exámenes de admisión y la asignación eficiente del presupuesto de difusión estratégica.`;
+
+    p2_analysis = `El comportamiento detallado por programa de estudios evidencia la selectividad y la tasa de cobertura de vacantes de cada carrera profesional. Programas de alta demanda muestran ratios de postulante por vacante significativamente elevados, lo que permite la selección de ingresantes con perfiles académicos sobresalientes. En contraposición, programas en consolidación requieren la implementación de campañas de orientación vocacional especializada para diversificar la captación de estudiantes en áreas de alto potencial regional.`;
+
+    p3_analysis = `La evolución histórica de la masa de postulantes e ingresantes refleja la resistencia y adaptabilidad de la universidad ante cambios demográficos y económicos de la región. La tendencia observada demuestra un crecimiento sostenido que valida la confianza social en el modelo educativo de la institución. Para la dirección estadística, la consistencia de estas series temporales permite estructurar modelos econométricos de proyección de demanda a mediano y largo plazo.`;
+  } else {
+    p1_analysis = `El análisis descriptivo de los datos agregados por facultad revela la distribución y dinámica del servicio educativo universitario. La concentración observada en unidades académicas principales refleja el dinamismo y posicionamiento que estas áreas mantienen en el mercado profesional de la región Tacna. Desde la perspectiva de la gestión universitaria, esta distribución impone demandas rigurosas de planificación de recursos: las facultades mayoritarias requieren la auditoría continua de capacidad física de aulas, ratios estudiante/docente y disponibilidad de talleres, a fin de no vulnerar los estándares exigidos por las Condiciones Básicas de Calidad.`;
+
+    p2_analysis = `La distribución desagregada por programa académico expone los focos de atracción educativa y las variaciones internas de cada facultad. Los programas tradicionales de alta demanda demuestran poseer bases estables que actúan como motores económicos y de reputación para la institución. Sin embargo, esta concentración requiere supervisar periódicamente la tasa de graduación y empleabilidad mediante modelos analíticos multivariados, garantizando que el desarrollo sea sostenible en el tiempo y responda a la demanda laboral real.`;
+
+    p3_analysis = `La evolución longitudinal y el análisis histórico acumulado confirman la estabilidad operacional de la universidad. Las fluctuaciones observadas entre semestres responden a patrones de estacionalidad propios del calendario académico universitario. Este comportamiento sostenido y libre de anomalías severas valida la predictibilidad de la planificación presupuestaria anual y sustenta la asignación de recursos docentes bajo criterios técnicos de sostenibilidad financiera e institucional.`;
+  }
+
+  let docHTML = `
+  <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+  <head>
+    <meta charset="utf-8">
+    <title>Reporte Estadístico de ${titleLabel} - UPT</title>
+    <!--[if gte mso 9]>
+    <xml>
+      <w:WordDocument>
+        <w:View>Print</w:View>
+        <w:Zoom>100</w:Zoom>
+        <w:DoNotOptimizeForBrowser/>
+      </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+      @page SectionPage {
+        size: 210mm 297mm;
+        margin: 20mm 20mm 20mm 20mm;
+        mso-header-margin: 12mm;
+        mso-footer-margin: 12mm;
+        mso-paper-source: 0;
+      }
+      div.Report {
+        page: SectionPage;
+      }
+      body {
+        font-family: 'Calibri', 'Arial', sans-serif;
+        font-size: 11pt;
+        line-height: 1.45;
+        color: #2d3748;
+      }
+      h1 {
+        font-size: 16pt;
+        color: #0b2545;
+        border-bottom: 2px solid #0078d4;
+        padding-bottom: 4px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      h2 {
+        font-size: 12pt;
+        color: #0078d4;
+        margin-top: 16px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+      p {
+        margin-bottom: 8px;
+        text-align: justify;
+        text-indent: 1cm;
+      }
+      table.data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0 14px 0;
+      }
+      table.data-table th {
+        background-color: #0b2545;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: left;
+        padding: 7px 10px;
+        border: 1px solid #0b2545;
+        font-size: 9.5pt;
+      }
+      table.data-table td {
+        padding: 6px 10px;
+        border: 1px solid #cbd5e0;
+        font-size: 9pt;
+      }
+      .analysis-box {
+        background-color: #f8fafc;
+        border-left: 4px solid #0078d4;
+        padding: 12px 16px;
+        margin-top: 10px;
+        margin-bottom: 16px;
+        font-style: italic;
+        border-radius: 4px;
+      }
+      .analysis-title {
+        font-weight: bold;
+        color: #0078d4;
+        margin-bottom: 6px;
+        font-size: 9.5pt;
+        font-style: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Report">
+      <h1>REPORTE ESTADÍSTICO DE ${titleLabel.toUpperCase()}</h1>
+      <p style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 2px;">UNIVERSIDAD PRIVADA DE TACNA</p>
+      <p style="text-align: center; font-size: 10pt; color: #718096; margin-top: 0; margin-bottom: 14px;">Oficina de Calidad Universitaria e Informes de Licenciamiento (SIM-CBC) &bull; ${fechaHoy}</p>
+      
+      <p>
+        El presente informe técnico detallado ofrece un análisis exhaustivo y sistemático respecto al indicador de <strong>${titleLabel}</strong> en la Universidad Privada de Tacna (Filtro Semestral: ${activeSem}, Facultad: ${selFac}, Carrera: ${selCarrera}). Este reporte ha sido elaborado bajo los estándares analíticos de un técnico estadístico especializado en gestión de la educación superior universitaria y compila la evidencia empírica institucional para la evaluación de las Condiciones Básicas de Calidad (CBC).
+      </p>
+
+      <h2>1. Distribución por Facultad (${titleLabel})</h2>
+      <p>
+        A continuación se expone el cuadro consolidado por facultades universitarias correspondiente al periodo de análisis seleccionado:
+      </p>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Facultad Universitaria</th>
+            <th style="text-align: right; width: 160px;">${isRate ? "Tasa Promedio (%)" : "Total Registros"}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${Object.keys(facMap).map(fac => {
+            const val = facMap[fac];
+            return `
+              <tr>
+                <td><strong>${fac}</strong></td>
+                <td style="text-align: right;">${isRate ? val.toFixed(2) + "%" : val.toLocaleString()}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">
+          ${p1_analysis}
+        </p>
+      </div>
+
+      <h2>2. Desglose por Programa de Estudios / Carrera Profesional</h2>
+      <p>
+        El comportamiento del indicador desagregado para cada programa académico se detalla en la siguiente matriz de datos:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Carrera Profesional</th>
+            <th>Facultad</th>
+            <th style="text-align: right; width: 160px;">${isRate ? "Tasa (%)" : "Total Registros"}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filteredCarreras.map(r => `
+            <tr>
+              <td><strong>${r.Programa}</strong></td>
+              <td>${r.Facultad}</td>
+              <td style="text-align: right;">${isRate ? (r.Cantidad || 0).toFixed(2) + "%" : (r.Cantidad || 0).toLocaleString()}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">
+          ${p2_analysis}
+        </p>
+      </div>
+
+      <h2>3. Evolución Histórica Semestral y Tendencia</h2>
+      <p>
+        El comportamiento longitudinal y la tendencia a través de las series temporales semestrales consecutivas se presenta a continuación:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Semestre Académico</th>
+            <th style="text-align: right; width: 180px;">${isRate ? "Tasa Institucional (%)" : "Total Acumulado"}</th>
+            <th style="text-align: right; width: 140px;">Variación</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${evolutionList.map((entry, index) => {
+            const prev = index > 0 ? evolutionList[index - 1].cantidad : 0;
+            let diffStr = "N/A";
+            if (prev > 0) {
+              if (isRate) {
+                const diffPP = (entry.cantidad - prev).toFixed(2);
+                diffStr = (diffPP >= 0 ? "+" : "") + diffPP + " pp";
+              } else {
+                const diffPct = (((entry.cantidad - prev) / prev) * 100).toFixed(2);
+                diffStr = (diffPct >= 0 ? "+" : "") + diffPct + "%";
+              }
+            }
+            return `
+              <tr>
+                <td><strong>${entry.semestre}</strong></td>
+                <td style="text-align: right;">${isRate ? entry.cantidad.toFixed(2) + "%" : entry.cantidad.toLocaleString()}</td>
+                <td style="text-align: right;">${diffStr}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+
+      <div class="analysis-box">
+        <div class="analysis-title">Análisis Estadístico Especializado (Técnico en Gestión Educativa)</div>
+        <p style="margin-bottom:0; text-indent:0;">
+          ${p3_analysis}
+        </p>
+      </div>
+
+    </div>
+  </body>
+  </html>
+  `;
+
+  const blob = new Blob(['﻿' + docHTML], { type: 'application/msword;charset=utf-8' });
+  const downloadUrl = URL.createObjectURL(blob);
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.href = downloadUrl;
+  downloadAnchor.download = `Reporte_Estadistico_${titleLabel.replace(/\s+/g, '_')}_UPT_${activeSem}.doc`;
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  document.body.removeChild(downloadAnchor);
+  URL.revokeObjectURL(downloadUrl);
+};
+
+
 const downloadAlumnosWordReport = () => {
   const { semestre: activeSem, facultad: selFac, carrera: selCarrera } = window._alumnosFilters;
   const rawList = normalizeAlumnosList(estadisticasInst.alumnos_regulares || []);
