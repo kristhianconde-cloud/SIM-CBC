@@ -5718,7 +5718,7 @@ const drawEstadisticas = () => {
       .sg-chart::-webkit-scrollbar { height: 8px; }
       .sg-chart::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
       .sg-col { flex: 1 1 0; min-width: 46px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; cursor: pointer; }
-      .sg-col3d { flex: 1 0 60px; }
+      .sg-col3d { flex: 1 1 0; min-width: 0; }
       .sg-val { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem; transition: transform 0.2s ease; }
       .sg-lbl { font-size: 0.82rem; color: var(--text-300); font-weight: 600; margin-top: 0.5rem; text-align: center; white-space: nowrap; max-width: 90px; overflow: hidden; text-overflow: ellipsis; }
       .sg-lbl-v { writing-mode: vertical-rl; transform: rotate(180deg); height: 170px; margin-top: 0.7rem; font-size: 0.8rem; font-weight: 600; color: var(--text-200); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: end; transition: color 0.2s ease; }
@@ -5728,7 +5728,7 @@ const drawEstadisticas = () => {
       .sg-hov { transform-origin: bottom; transition: filter 0.2s ease, transform 0.2s ease; cursor: pointer; animation: sgGrow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
       .sg-col:hover .sg-val { transform: translateY(-3px); }
       .sg-col:hover .sg-lbl-v { color: #fff; }
-      .sg-bar3d { position: relative; width: 38px; margin-right: 12px; margin-top: 12px; transform-origin: bottom; animation: sgGrow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
+      .sg-bar3d { position: relative; width: calc(100% - 12px); max-width: 38px; min-width: 10px; margin-right: 12px; margin-top: 12px; transform-origin: bottom; animation: sgGrow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; transition: filter 0.2s ease, transform 0.2s ease; }
       .sg-bar3d::before { content: ''; position: absolute; left: 6px; right: -12px; bottom: -5px; height: 8px; background: rgba(0,0,0,0.5); filter: blur(5px); z-index: -1; }
       .sg-bar3d i { position: absolute; display: block; }
       .sg-bar3d .ff { left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.22), rgba(0,0,0,0.15)), var(--c); }
@@ -5760,7 +5760,7 @@ const drawEstadisticas = () => {
 
     const sgHints = {
       facultades: "Pasa el cursor sobre una barra para ver el detalle. Haz clic en una facultad para ver sus carreras.",
-      carreras: "Haz clic en una carrera para ver su evolución histórica. Desplázate horizontalmente si hay muchas carreras.",
+      carreras: "Haz clic en una carrera para ver su evolución histórica. Todas las carreras se muestran en columnas verticales.",
       crecimiento: "Haz clic en un semestre para analizarlo. Cada barra se compara con el mismo semestre del año anterior.",
       comparativa: "Selecciona hasta 4 elementos para comparar su evolución (Año-I vs Año-II).",
       evolutivo: "Evolución institucional por semestre. Pasa el cursor sobre las barras para ver el valor.",
@@ -5789,7 +5789,7 @@ const drawEstadisticas = () => {
       if (sgView === "carreras") {
         if (!chartData.length) return `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">Sin datos para este filtro.</div>`;
         const maxV = Math.max(...chartData.map(d => d.value), 1);
-        return `<div class="sg-chart" style="height: 470px;">${chartData.map((item, i) => {
+        return `<div class="sg-chart" style="height: 470px; gap: 0.35rem; overflow-x: hidden; padding: 0.5rem 0.5rem 0 0.5rem;">${chartData.map((item, i) => {
           const h = Math.max(6, (item.value / maxV) * 220);
           const pct = ((item.value / grandTotal) * 100).toFixed(1);
           const full = item.fullLabel || item.label;
