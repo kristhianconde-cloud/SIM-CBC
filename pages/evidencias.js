@@ -5534,7 +5534,7 @@ const drawEstadisticas = () => {
           </div>
         </div>
 
-        ${prefix === "egresados" ? renderDesercionYRezagoSectionHTML(activeSem, selFac, selCarrera) : ""}
+
       </div>
     `;
 
