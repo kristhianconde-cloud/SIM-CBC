@@ -5832,12 +5832,12 @@ const drawEstadisticas = () => {
           if (!list.length) return `<div style="text-align:center;color:var(--text-400);padding:2rem 0;">Sin datos para los semestres ${suffix}.</div>`;
           const first = list[0].semestre, last = list[list.length - 1].semestre;
           return `
-            <div style="margin-bottom: 1.75rem;">
+            <div style="margin-bottom: 0.9rem;">
               <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
                 <span style="font-size: 1rem; font-weight: 800; color: #fff;">Semestres ${suffix} <span style="color: var(--text-400); font-weight: 600; font-size: 0.85rem;">(${first} → ${last})</span></span>
                 <span style="font-size: 0.78rem; color: var(--text-400);">Comparado con el ${suffix} del año anterior</span>
               </div>
-              <div class="sg-chart" style="height: 330px;">${list.map((item, i) => {
+              <div class="sg-chart" style="height: 285px;">${list.map((item, i) => {
                 const h = Math.max(6, (item.value / maxV) * 200);
                 const isSel = item.semestre === activeSem;
                 const badge = !item.prevSem ? "Base" : `${item.pct >= 0 ? "+" : ""}${item.pct.toFixed(1)}%`;
