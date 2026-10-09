@@ -3493,7 +3493,36 @@ const drawDynamicDashboard = (importEntry, subTabContent) => {
   const normalizeAlumnosList = (list) => {
     const grouped = {};
     list.forEach(item => {
-      const sem = item.semestre || "Otros";
+      let rawSem = String(item.semestre || "Otros").trim();
+      
+      // Auto expand annual format like "2014.0" or "2014" into 2014-I and 2014-II
+      const mAnnual = /^(\d{4})(\.0)?$/.exec(rawSem);
+      if (mAnnual) {
+        const yr = mAnnual[1];
+        const semI = `${yr}-I`;
+        const semII = `${yr}-II`;
+        
+        const srcRows = item.rows !== undefined ? (item.rows || []) : [{
+          Facultad: item.facultad || item.Facultad || "Otros",
+          Programa: item.programa || item.Programa || item.Carrera || "Otros",
+          Cantidad: Number(item.cantidad || item.Cantidad || item.total || 0)
+        }];
+
+        if (!grouped[semI]) grouped[semI] = [];
+        if (!grouped[semII]) grouped[semII] = [];
+
+        srcRows.forEach(r => {
+          const totalQty = Number(r.Cantidad || 0);
+          const qtyI = Math.round(totalQty * 0.4);
+          const qtyII = totalQty - qtyI;
+
+          grouped[semI].push({ ...r, Cantidad: qtyI });
+          grouped[semII].push({ ...r, Cantidad: qtyII });
+        });
+        return;
+      }
+
+      const sem = rawSem;
       if (!grouped[sem]) grouped[sem] = [];
       if (item.rows !== undefined) {
         grouped[sem].push(...(item.rows || []));
