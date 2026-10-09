@@ -4880,7 +4880,11 @@ const drawEstadisticas = () => {
       displayRows = displayRows.filter(r => r.Programa === selCarrera);
     }
 
-    const totalCount = displayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
+    const isRateTab = prefix === "desercion";
+    // Tasa % = promedio simple de las carreras (Tasa Institucional real: 3.46, 4.26, 4.17)
+    const rateAvg = (rows) => rows.length ? Math.round((rows.reduce((s, r) => s + (r.Cantidad || 0), 0) / rows.length) * 100) / 100 : 0;
+    const fmtDiff = (d) => isRateTab ? `${d >= 0 ? "+" : ""}${d.toFixed(2)} pp` : d.toLocaleString();
+    const totalCount = isRateTab ? rateAvg(displayRows) : displayRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
 
     // --- Crecimiento / Decrecimiento respecto al semestre anterior ---
     // Semestre equivalente del año anterior (2026-I -> 2025-I, 2026-II -> 2025-II)
@@ -4897,26 +4901,26 @@ const drawEstadisticas = () => {
     let growthColor = "#38bdf8"; // cyan default
     let growthIcon = "minus";
 
-    const candidatePrev = getPrevYearSem(activeSem);
+    const candidatePrev = isRateTab ? (currSemIdx > 0 ? sortedSems[currSemIdx - 1] : null) : getPrevYearSem(activeSem);
     if (candidatePrev && sortedSems.includes(candidatePrev)) {
       prevSem = candidatePrev;
       const prevSemEntry = rawList.find(x => x.semestre === prevSem);
       let prevRows = prevSemEntry ? prevSemEntry.rows : [];
       if (selFac !== "Todos") prevRows = prevRows.filter(r => r.Facultad === selFac);
       if (selCarrera !== "Todos") prevRows = prevRows.filter(r => r.Programa === selCarrera);
-      prevTotalCount = prevRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
+      prevTotalCount = isRateTab ? rateAvg(prevRows) : prevRows.reduce((sum, r) => sum + (r.Cantidad || 0), 0);
 
       const diff = totalCount - prevTotalCount;
       if (prevTotalCount > 0) {
         const pct = ((diff / prevTotalCount) * 100).toFixed(1);
         if (diff > 0) {
           growthPct = `+${pct}%`;
-          growthDiffText = `(+${diff.toLocaleString()})`;
+          growthDiffText = `(${fmtDiff(diff)})`;
           growthColor = "#10b981"; // emerald green
           growthIcon = "trending-up";
         } else if (diff < 0) {
           growthPct = `${pct}%`;
-          growthDiffText = `(${diff.toLocaleString()})`;
+          growthDiffText = `(${fmtDiff(diff)})`;
           growthColor = "#ef4444"; // red
           growthIcon = "trending-down";
         } else {
@@ -4927,10 +4931,15 @@ const drawEstadisticas = () => {
         }
       } else if (totalCount > 0) {
         growthPct = "+100%";
-        growthDiffText = `(+${totalCount.toLocaleString()})`;
+        growthDiffText = `(${fmtDiff(totalCount)})`;
         growthColor = "#10b981";
         growthIcon = "trending-up";
       }
+    }
+
+    // Deserción: si la tasa sube es negativo (rojo); si baja es positivo (verde)
+    if (isRateTab && growthIcon !== "minus") {
+      growthColor = growthIcon === "trending-up" ? "#ef4444" : "#10b981";
     }
 
     if (!window[chartViewKey]) {
@@ -5202,9 +5211,9 @@ const drawEstadisticas = () => {
     // KPIs
     let kpisHtml = `
       <div class="db-status-badge" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.1); padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; text-align: center;">
-        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Total ${titleLabel}</span>
-        <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${totalCount.toLocaleString()}</strong>
-        <span style="font-size: 1.05rem; color: var(--text-400);">Encontrados para la selección</span>
+        <span style="font-size: 1.08rem; color: var(--text-300); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">${isRateTab ? "Tasa de Deserción" + (selFac === "Todos" && selCarrera === "Todos" ? " UPT" : "") : "Total " + titleLabel}</span>
+        <strong style="font-size: 1.7rem; color: #fff; font-weight: 800;">${isRateTab ? totalCount.toFixed(2) + "%" : totalCount.toLocaleString()}</strong>
+        <span style="font-size: 1.05rem; color: var(--text-400);">${isRateTab ? "Promedio de las carreras" : "Encontrados para la selección"}</span>
       </div>
 
       <div class="db-status-badge" style="background: rgba(255, 255, 255, 0.02); border: 1px solid ${growthColor}33; padding: 0.85rem 1.25rem; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; text-align: center;">
@@ -5224,7 +5233,6 @@ const drawEstadisticas = () => {
       facMap[r.Facultad] = (facMap[r.Facultad] || 0) + (r.Cantidad || 0);
       facCntK[r.Facultad] = (facCntK[r.Facultad] || 0) + 1;
     });
-    const isRateTab = prefix === "desercion";
     if (isRateTab) {
       Object.keys(facMap).forEach(f => { facMap[f] = Math.round((facMap[f] / (facCntK[f] || 1)) * 100) / 100; });
     }
@@ -5356,7 +5364,91 @@ const drawEstadisticas = () => {
       evolucion_carrera: "Evolución por carrera en cuadros separados (-I y -II) desde 2014 con barras 3D."
     };
 
+    // ===== Deserción: línea de tiempo continua (todos los semestres en un solo gráfico) =====
+    const rateTimelineViews = ["crecimiento", "comparativa", "evolutivo", "evolucion_facultad", "evolucion_carrera"];
+    if (isRateTab) {
+      const facTxt = selFac === "Todos" ? "Institucional (UPT)" : selFac;
+      const carTxt = selCarrera === "Todos" ? "Institucional (UPT)" : selCarrera;
+      const filtTxt = selFac !== "Todos" ? `${selFac}${selCarrera !== "Todos" ? " - " + selCarrera : ""}` : (selCarrera !== "Todos" ? selCarrera : "Institucional (UPT)");
+      const rateTitles = {
+        crecimiento: `Variación semestral de la Tasa de Deserción - ${filtTxt}`,
+        comparativa: `Comparativa de Tasa de Deserción por ${window[compModeKey] === "facultades" ? "Facultad" : "Carrera"} (línea de tiempo continua)`,
+        evolutivo: `Evolución histórica de la Tasa Institucional de Deserción (UPT)`,
+        evolucion_facultad: `Evolución de la Tasa de Deserción por Facultad - ${facTxt}`,
+        evolucion_carrera: `Evolución de la Tasa de Deserción por Carrera - ${carTxt}`
+      };
+      if (rateTitles[sgView]) chartTitle = rateTitles[sgView];
+      const rateHint = "Todos los semestres consecutivos en un solo gráfico. La variación se calcula contra el semestre inmediato anterior (en puntos porcentuales, pp). Si la tasa sube se marca en rojo; si baja, en verde.";
+      rateTimelineViews.forEach(v => { sgHints[v] = rateHint; });
+    }
+
+    const renderRateTimeline = () => {
+      const sems = sortedSems.filter(s => /^\d{4}-I{1,2}$/.test(s));
+      const emptyMsg = (t) => `<div style="text-align:center;color:var(--text-400);padding:3rem 0;">${t}</div>`;
+      if (!sems.length) return emptyMsg("Sin datos de deserción.");
+      const rowsOf = (sem) => { const en = rawList.find(x => x.semestre === sem); return en ? en.rows : []; };
+      const header = `
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+          <span style="font-size: 1rem; font-weight: 800; color: #fff;">Línea de tiempo <span style="color: var(--text-400); font-weight: 600; font-size: 0.85rem;">(${sems[0]} → ${sems[sems.length - 1]})</span></span>
+          <span style="font-size: 0.78rem; color: var(--text-400);">Variación vs semestre consecutivo anterior</span>
+        </div>`;
+
+      if (sgView === "comparativa") {
+        const items = (activeCompSelection || []).slice(0, 4);
+        if (items.length < 2) return emptyMsg("Selecciona al menos 2 opciones (máximo 4) para comparar.");
+        const colors = ["#06b6d4", "#10b981", "#f59e0b", "#ec4899"];
+        const isFacCmp = window[compModeKey] === "facultades";
+        const valueOf = (sem, item) => rateAvg(rowsOf(sem).filter(r => isFacCmp ? r.Facultad === item : r.Programa === item));
+        const data = sems.map(sem => ({ sem, vals: items.map(it => valueOf(sem, it)) }));
+        const maxV = Math.max(0.01, ...data.flatMap(d => d.vals));
+        return header + `<div class="sg-chart" style="height: 330px; gap: 1rem; padding: 0.5rem 0.5rem 0 0.5rem; overflow-x: auto;">${data.map((d, gi) => `
+          <div class="sg-col" style="cursor: default; min-width: ${Math.max(70, items.length * 38)}px;">
+            <div style="display: flex; align-items: flex-end; justify-content: center; gap: 4px; width: 100%; height: 280px;">
+              ${d.vals.map((v, k) => {
+                const h = Math.max(2, (v / maxV) * 200);
+                const prev = gi > 0 ? data[gi - 1].vals[k] : null;
+                const detail = prev === null ? "Semestre base" : `${fmtDiff(v - prev)} vs ${data[gi - 1].sem}`;
+                return `<div data-tip="${sgEsc(items[k])}|${sgEsc(d.sem)}|${v.toFixed(2)}% de deserción|${sgEsc(detail)}" style="flex: 1; max-width: 38px; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"><span class="sg-cval" style="${v === 0 ? "opacity: 0.35;" : ""} font-size: 0.8rem;">${v.toFixed(2)}%</span><div class="sg-hov" style="width: 100%; height: ${h}px; background: ${colors[k]}; border-radius: 4px 4px 0 0; animation-delay: ${gi * 60}ms;"></div></div>`;
+              }).join("")}
+            </div>
+            <span class="sg-lbl" style="margin-top: 0.4rem; font-size: 0.85rem; font-weight: 700;">${sgEsc(d.sem)}</span>
+          </div>`).join("")}</div>`;
+      }
+
+      const filterRows = (rows) => {
+        if (sgView === "crecimiento") {
+          if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
+          if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+        } else if (sgView === "evolucion_facultad") {
+          if (selFac !== "Todos") rows = rows.filter(r => r.Facultad === selFac);
+        } else if (sgView === "evolucion_carrera") {
+          if (selCarrera !== "Todos") rows = rows.filter(r => r.Programa === selCarrera);
+        }
+        return rows;
+      };
+      const data = sems.map(sem => ({ semestre: sem, value: rateAvg(filterRows(rowsOf(sem))) }));
+      const maxV = Math.max(0.01, ...data.map(d => d.value));
+      return header + `<div class="sg-chart" style="height: 330px; gap: 1rem; padding: 0.5rem 0.5rem 0 0.5rem; overflow-x: auto;">${data.map((item, i) => {
+        const prev = i > 0 ? data[i - 1] : null;
+        const diff = prev ? item.value - prev.value : 0;
+        const color = !prev ? "#38bdf8" : (diff > 0 ? "#ef4444" : (diff < 0 ? "#10b981" : "#38bdf8"));
+        const badge = !prev ? "Base" : fmtDiff(diff);
+        const rel = prev && prev.value > 0 ? ` (${diff >= 0 ? "+" : ""}${((diff / prev.value) * 100).toFixed(1)}%)` : "";
+        const detail = prev ? `${fmtDiff(diff)} vs ${prev.semestre}${rel}` : "Semestre base de la serie";
+        const h = Math.max(6, (item.value / maxV) * 210);
+        const isSel = item.semestre === activeSem;
+        return `
+          <div class="sg-col" data-click="sem" data-key="${sgEsc(item.semestre)}" data-tip="${sgEsc(item.semestre)}|${item.value.toFixed(2)}% de deserción|${sgEsc(detail)}|↗ Clic para seleccionar este semestre" style="min-width: 80px;">
+            <span style="font-size: 0.8rem; font-weight: 800; color: ${color}; background: ${color}18; border: 1px solid ${color}33; padding: 2px 6px; border-radius: 4px; margin-bottom: 0.35rem; white-space: nowrap;">${badge}</span>
+            <span class="sg-cval" style="font-size: 0.95rem;">${item.value.toFixed(2)}%</span>
+            <div class="sg-bar3d" style="--c: ${color}; height: ${h}px; animation-delay: ${i * 60}ms; ${isSel ? "outline: 2px solid #fff; outline-offset: 1px;" : ""}"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
+            <span class="sg-lbl" style="color: ${isSel ? "#fff" : "var(--text-300)"}; font-weight: ${isSel ? "800" : "600"}; font-size: 0.85rem;">${sgEsc(item.semestre)}</span>
+          </div>`;
+      }).join("")}</div>`;
+    };
+
     const sgChartHtml = (() => {
+      if (isRateTab && rateTimelineViews.includes(sgView)) return renderRateTimeline();
       const grandTotal = chartData.reduce((s, d) => s + d.value, 0) || 1;
 
       if (sgView === "facultades") {
@@ -5391,11 +5483,11 @@ const drawEstadisticas = () => {
           const inactiveBadge = inactive ? `<span style="display:inline-block; margin-left: 6px; padding: 2px 6px; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 4px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">[NO ACTIVO]</span>` : "";
           const nameStyle = inactive ? "color: #ef4444; font-weight: 800;" : "";
           return `
-            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)} ${inactive ? '[NO ACTIVO]' : ''}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
+            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)} ${inactive ? '[NO ACTIVO]' : ''}|${sgEsc(fac)}|${isRateTab ? item.value.toFixed(2) + "% tasa de deserción" : item.value.toLocaleString() + " " + sgEsc(sgUnit) + " (" + pct + "% del total)"}|↗ Clic para ver su evolución histórica">
               <span class="sg-hname" style="${nameStyle}">${sgEsc(full)}${inactiveBadge}<small style="${inactive ? 'color: rgba(239, 68, 68, 0.7);' : ''}">${sgEsc(fac)}</small></span>
               <div class="sg-htrack">
                 <div class="sg-hbar3d" style="--c: ${barColor}; width: calc((100% - 80px) * ${ratio.toFixed(4)}); animation-delay: ${i * 40}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
-                <span class="sg-hval" style="${inactive ? 'color: #ef4444; font-weight: 800;' : ''}">${item.value.toLocaleString()}</span>
+                <span class="sg-hval" style="${inactive ? 'color: #ef4444; font-weight: 800;' : ''}">${isRateTab ? item.value.toFixed(2) + "%" : item.value.toLocaleString()}</span>
               </div>
             </div>`;
         }).join("")}</div>`;
