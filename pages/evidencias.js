@@ -4319,7 +4319,7 @@ const drawEstadisticas = () => {
           </button>
           <button class="btn btn-secondary sub-tab-btn ${activeStatsSubTab === 'egresados' ? 'active' : ''}" data-subtab="egresados" style="display: flex; align-items: center; gap: 8px; font-size: 1.08rem; padding: 0.5rem 1rem; border-radius: 8px; ${activeStatsSubTab === 'egresados' ? 'background: var(--accent); border-color: var(--accent); color: #fff;' : 'background: transparent; border-color: transparent; color: var(--text-300);'} transition: all 0.25s ease;">
             <i data-lucide="graduation-cap" style="width: 16px; height: 16px;"></i>
-            <span>Egresados y Graduados</span>
+            <span>Egresados</span>
           </button>
           <button class="btn btn-secondary sub-tab-btn ${activeStatsSubTab === 'laboratorios' ? 'active' : ''}" data-subtab="laboratorios" style="display: flex; align-items: center; gap: 8px; font-size: 1.08rem; padding: 0.5rem 1rem; border-radius: 8px; ${activeStatsSubTab === 'laboratorios' ? 'background: var(--accent); border-color: var(--accent); color: #fff;' : 'background: transparent; border-color: transparent; color: var(--text-300);'} transition: all 0.25s ease;">
             <i data-lucide="flask-conical" style="width: 16px; height: 16px;"></i>
@@ -4440,8 +4440,8 @@ const drawEstadisticas = () => {
           };
         case "egresados":
           return {
-            title: `Cargar Egresados y Graduados (${selectedSemester})`,
-            desc: "Importa la cantidad de egresados y graduados por programa académico y facultad.",
+            title: `Cargar Egresados (${selectedSemester})`,
+            desc: "Importa la cantidad de egresados por programa académico y facultad.",
             columns: [
               { name: "Semestre", desc: "Semestre académico (ej. 2026-I)" },
               { name: "Facultad", desc: "Nombre de la facultad" },
@@ -11453,12 +11453,12 @@ const getRowCantidad = (r) => {
   };
 
   const drawEgresadosDashboard = (subTabContent) => {
-    drawStandardStatisticsDashboard(subTabContent, "egresados", "egresados", "Egresados y Graduados", false);
+    drawStandardStatisticsDashboard(subTabContent, "egresados", "egresados", "Egresados", false);
   };
 
   const downloadEgresadosWordReport = () => {
     const { semestre: activeSem, facultad: selFac, carrera: selCarrera } = window._egresadosFilters || { semestre: selectedSemester, facultad: "Todos", carrera: "Todos" };
-    downloadStandardWordReport("egresados", "Egresados y Graduados", activeSem, selFac, selCarrera, "egresados");
+    downloadStandardWordReport("egresados", "Egresados", activeSem, selFac, selCarrera, "egresados");
   };
 
     // 5. Manejador de Sub-Pestañas (Matriz vs Estadísticas)
