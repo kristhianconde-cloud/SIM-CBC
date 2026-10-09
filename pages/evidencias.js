@@ -2925,6 +2925,13 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     // drawSemesterLinks();
   };
 
+const isInactiveCareer = (name) => {
+  if (!name) return false;
+  const n = String(name).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return (n.includes("produccion") && n.includes("administracion")) || 
+         (n.includes("educacion") && n.includes("tecnica"));
+};
+
   function generateHorizontal3DBarChartSVG(data, width = 850, rowHeight = 38) {
     if (!data || data.length === 0) {
       return `<div style="text-align:center; padding: 2rem; color: var(--text-400);">Sin datos</div>`;
@@ -2959,8 +2966,11 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
     data.forEach((d, idx) => {
       const y = top + idx * rowHeight + 6;
       const w = maxVal > 0 ? (d.value / maxVal) * drawWidth : 0;
-      const color = d.color || "var(--accent)";
       const labelText = d.fullLabel || d.label || "";
+      const inactive = typeof isInactiveCareer === "function" && isInactiveCareer(labelText);
+      const color = inactive ? "#ef4444" : (d.color || "var(--accent)");
+      const labelColor = inactive ? "#ef4444" : "var(--text-200)";
+      const displayLabel = inactive ? `${labelText} [NO ACTIVO]` : labelText;
 
       if (w <= 0) {
         rowsHtml += `
@@ -2976,7 +2986,7 @@ export async function renderEvidenciasPage(container, userRole = "admin", active
       rowsHtml += `
         <g class="bar-3d-group" data-label="${labelText}" data-value="${d.value}">
           <!-- Etiqueta Nombre en Lista Vertical a la Izquierda -->
-          <text x="${left - 12}" y="${y + barHeight / 2 + 4}" fill="var(--text-200)" font-size="12.5" font-weight="600" text-anchor="end">${labelText}</text>
+          <text x="${left - 12}" y="${y + barHeight / 2 + 4}" fill="${labelColor}" font-size="12.5" font-weight="${inactive ? '800' : '600'}" text-anchor="end">${displayLabel}</text>
 
           <!-- Cara Superior (3D Top Face) -->
           <polygon points="${left},${y} ${left + dx},${y - dy} ${left + w + dx},${y - dy} ${left + w},${y}" fill="${color}" opacity="0.85" />
@@ -5094,10 +5104,12 @@ const drawEstadisticas = () => {
           const isMaxReached = (window[compCareersKey] || []).length >= 4;
           const disabledAttr = (!isSelected && isMaxReached) ? "disabled" : "";
           const disabledStyle = (!isSelected && isMaxReached) ? "opacity: 0.4; cursor: not-allowed;" : "cursor: pointer;";
+          const inactive = isInactiveCareer(c);
           const activeStyle = isSelected 
-            ? "background: var(--accent); color: #fff; border-color: var(--accent);" 
-            : "background: transparent; color: var(--text-300); border-color: var(--border-color);";
-          return `<button class="comparison-pill-${prefix} btn btn-outline" data-career="${c}" style="font-size: 0.96rem; padding: 0.35rem 0.75rem; border-radius: 20px; border: 1px solid; transition: all 0.2s ease; ${activeStyle} ${disabledStyle}" ${disabledAttr}>${c}</button>`;
+            ? (inactive ? "background: #ef4444; color: #fff; border-color: #ef4444;" : "background: var(--accent); color: #fff; border-color: var(--accent);")
+            : (inactive ? "background: rgba(239,68,68,0.1); color: #ef4444; border-color: rgba(239,68,68,0.4);" : "background: transparent; color: var(--text-300); border-color: var(--border-color);");
+          const badge = inactive ? ` <span style="font-size:0.75rem; font-weight:800; color:${isSelected ? '#fff' : '#ef4444'};">[NO ACTIVO]</span>` : "";
+          return `<button class="comparison-pill-${prefix} btn btn-outline" data-career="${c}" style="font-size: 0.96rem; padding: 0.35rem 0.75rem; border-radius: 20px; border: 1px solid; transition: all 0.2s ease; ${activeStyle} ${disabledStyle}" ${disabledAttr}>${c}${badge}</button>`;
         }).join("");
       }
 
@@ -5260,7 +5272,7 @@ const drawEstadisticas = () => {
       <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
         <span style="font-size: 0.8rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Filtro activo:</span>
         ${selFac !== "Todos" ? `<button class="sg-chip" data-clear="fac" title="Quitar filtro de facultad">${sgEsc(selFac)} ✕</button>` : ""}
-        ${selCarrera !== "Todos" ? `<button class="sg-chip" data-clear="car" title="Quitar filtro de carrera">${sgEsc(selCarrera)} ✕</button>` : ""}
+        ${selCarrera !== "Todos" ? `<button class="sg-chip" data-clear="car" style="${isInactiveCareer(selCarrera) ? 'background: rgba(239,68,68,0.15); color: #ef4444; border-color: rgba(239,68,68,0.4); font-weight: 700;' : ''}" title="Quitar filtro de carrera">${sgEsc(selCarrera)} ${isInactiveCareer(selCarrera) ? '[NO ACTIVO]' : ''} ✕</button>` : ""}
       </div>` : "";
 
     const sgHints = {
@@ -5300,12 +5312,16 @@ const drawEstadisticas = () => {
           const full = item.fullLabel || item.label;
           const row = displayRows.find(r => r.Programa === full);
           const fac = row ? row.Facultad : "";
+          const inactive = isInactiveCareer(full);
+          const barColor = inactive ? "#ef4444" : item.color;
+          const inactiveBadge = inactive ? `<span style="display:inline-block; margin-left: 6px; padding: 2px 6px; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 4px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">[NO ACTIVO]</span>` : "";
+          const nameStyle = inactive ? "color: #ef4444; font-weight: 800;" : "";
           return `
-            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
-              <span class="sg-hname">${sgEsc(full)}<small>${sgEsc(fac)}</small></span>
+            <div class="sg-hrow" data-click="car" data-key="${sgEsc(full)}" data-fac="${sgEsc(fac)}" data-tip="${sgEsc(full)} ${inactive ? '[NO ACTIVO]' : ''}|${sgEsc(fac)}|${item.value.toLocaleString()} ${sgEsc(sgUnit)} (${pct}% del total)|↗ Clic para ver su evolución histórica">
+              <span class="sg-hname" style="${nameStyle}">${sgEsc(full)}${inactiveBadge}<small style="${inactive ? 'color: rgba(239, 68, 68, 0.7);' : ''}">${sgEsc(fac)}</small></span>
               <div class="sg-htrack">
-                <div class="sg-hbar3d" style="--c: ${item.color}; width: calc((100% - 80px) * ${ratio.toFixed(4)}); animation-delay: ${i * 40}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
-                <span class="sg-hval">${item.value.toLocaleString()}</span>
+                <div class="sg-hbar3d" style="--c: ${barColor}; width: calc((100% - 80px) * ${ratio.toFixed(4)}); animation-delay: ${i * 40}ms;"><i class="ff"></i><i class="fs"></i><i class="ft"></i></div>
+                <span class="sg-hval" style="${inactive ? 'color: #ef4444; font-weight: 800;' : ''}">${item.value.toLocaleString()}</span>
               </div>
             </div>`;
         }).join("")}</div>`;
@@ -5444,7 +5460,12 @@ const drawEstadisticas = () => {
               <label style="font-size: 0.92rem; color: var(--text-400); text-transform: uppercase; font-weight: 600;">Carrera Profesional</label>
               <select id="select-carrera-${prefix}" class="form-input" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; width: 160px; background: var(--bg-dark-800); border-color: var(--border-color); color: #fff;">
                 <option value="Todos" ${selCarrera === "Todos" ? "selected" : ""}>Todos</option>
-                ${uniqueCarreras.map(c => `<option value="${c}" ${c === selCarrera ? "selected" : ""}>${c}</option>`).join("")}
+                ${uniqueCarreras.map(c => {
+                const inactive = isInactiveCareer(c);
+                const label = inactive ? `${c} [NO ACTIVO]` : c;
+                const style = inactive ? 'color: #ef4444; font-weight: 700;' : '';
+                return `<option value="${c}" ${c === selCarrera ? "selected" : ""} style="${style}">${label}</option>`;
+              }).join("")}
               </select>
             </div>
           </div>
