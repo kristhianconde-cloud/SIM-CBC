@@ -4219,7 +4219,7 @@ let _labFilters = { search: '', tipo: 'todos', facultad: 'todas', carrera: 'toda
 const exportarReporteLaboratoriosWord = () => {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
   const totalAmbientes = LABORATORIOS_DATA.length;
-  const totalLabs = LABORATORIOS_DATA.filter(x => x.tipo === 'LABORATORIO' && x.total > 0).length; // 58 Laboratorios de Enseñanza
+  const totalLabs = LABORATORIOS_DATA.filter(x => x.tipo === 'LABORATORIO').length; // 58 Laboratorios de Enseñanza
   const totalTalleres = LABORATORIOS_DATA.filter(x => x.tipo === 'TALLER').length;
 
   const facCounts = { FAING: 0, FACSA: 0, FAU: 0, FACEM: 0, FAEDCOH: 0, FADE: 0 };
@@ -4283,7 +4283,7 @@ const exportarReporteLaboratoriosWord = () => {
       <p style="text-align: center; font-size: 10pt; color: #718096; margin-top: 0; margin-bottom: 14px;">Oficina de Calidad Universitaria e Informes de Licenciamiento (SIM-CBC) &bull; ${fechaHoy}</p>
 
       <p>
-        El presente informe técnico consolidado presenta la evaluación estadística de la infraestructura de enseñanza e investigación correspondiente a los <strong>58 Laboratorios y 26 Talleres Oficiales (84 Ambientes de Enseñanza)</strong> de la Universidad Privada de Tacna. Este documento analiza la distribución de los recintos experimentales, su nivel de especialización y la matriz de atención a las carreras profesionales para el sustento de las Condiciones Básicas de Calidad (CBC 5).
+        El presente informe técnico consolidado presenta la evaluación estadística de la infraestructura de enseñanza e investigación correspondiente a los <strong>85 Ambientes Oficiales (59 Laboratorios y 26 Talleres)</strong> de la Universidad Privada de Tacna. Este documento analiza la distribución de los recintos experimentales, su nivel de especialización y la matriz de atención a las carreras profesionales para el sustento de las Condiciones Básicas de Calidad (CBC 5).
       </p>
 
       <h2>1. Distribución de Ambientes por Facultad</h2>
@@ -4456,7 +4456,7 @@ function drawLaboratoriosDashboard(container) {
     });
 
     const totalAmbientes = LABORATORIOS_DATA.length;
-    const totalLabs = LABORATORIOS_DATA.filter(x => x.tipo === 'LABORATORIO' && x.total > 0).length; // 58 Laboratorios de Enseñanza
+    const totalLabs = LABORATORIOS_DATA.filter(x => x.tipo === 'LABORATORIO').length; // 58 Laboratorios de Enseñanza
     const totalTalleres = LABORATORIOS_DATA.filter(x => x.tipo === 'TALLER').length;
 
     const facCounts = { FAING: 0, FACSA: 0, FAU: 0, FACEM: 0, FAEDCOH: 0, FADE: 0 };
@@ -4492,7 +4492,7 @@ function drawLaboratoriosDashboard(container) {
               <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
               <span>Exportar Word</span>
             </button>
-            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🟢 84 Ambientes de Enseñanza (58 Labs / 26 Talleres)</span>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🟢 85 Ambientes Activos</span>
             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🏛️ 6 Facultades</span>
             <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🎓 24 Carreras</span>
           </div>
@@ -4505,7 +4505,7 @@ function drawLaboratoriosDashboard(container) {
             <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Total de Ambientes</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #f8fafc; margin: 0.2rem 0;">${totalAmbientes}</div>
             <div style="font-size: 0.75rem; color: #34d399; font-weight: 600; display: flex; gap: 8px;">
-              <span>🔬 ${totalLabs} Laboratorios</span>
+              <span>🔬 ${totalLabs} Labs</span>
               <span>🎨 ${totalTalleres} Talleres</span>
             </div>
           </div>
@@ -4513,7 +4513,7 @@ function drawLaboratoriosDashboard(container) {
           <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px;">
             <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Mayor Infraestructura</div>
             <div style="font-size: 1.5rem; font-weight: 800; color: #38bdf8; margin: 0.2rem 0;">FAING</div>
-            <div style="font-size: 0.75rem; color: var(--text-300);">40 Ambientes (46.5% del Total)</div>
+            <div style="font-size: 0.75rem; color: var(--text-300);">${facCounts['FAING'] || 39} Ambientes (${(((facCounts['FAING'] || 39) / totalAmbientes) * 100).toFixed(1)}% del Total)</div>
           </div>
 
           <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px;">
