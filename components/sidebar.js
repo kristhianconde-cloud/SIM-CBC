@@ -51,10 +51,6 @@ export function renderSidebar(activePage = "dashboard") {
         <!-- Sección de Administración (Solo Administrador) -->
         ${currentRole === "Administrador" ? `
           <div class="sidebar-section-header">Administración</div>
-          <a class="nav-item ${activePage === 'usuarios' ? 'active' : ''}" data-page="usuarios">
-            <i data-lucide="users"></i>
-            <span>Control de Usuarios</span>
-          </a>
           <a class="nav-item ${activePage === 'monitoreo' ? 'active' : ''}" data-page="monitoreo">
             <i data-lucide="activity"></i>
             <span>Monitoreo del Sistema</span>

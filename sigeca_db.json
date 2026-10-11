@@ -7796,6 +7796,18 @@
       ],
       "status": "active",
       "solicitudes": []
+    },
+    {
+      "uid": "zBMDMxvjm2VHThxUM9wacsrarSv1",
+      "email": "carlos@upt.pe",
+      "nombre": "Carlos mendoza",
+      "rol": "Usuario",
+      "subtipo": "N/A",
+      "areas": [
+        "Licenciamiento"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-11T05:36:57.980Z"
     }
   ],
   "condiciones": {
