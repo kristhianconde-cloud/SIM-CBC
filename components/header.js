@@ -5,10 +5,7 @@
 export function renderHeader(title = "Dashboard", currentUser = null) {
   let roleText = "Invitado";
   if (currentUser) {
-    roleText = currentUser.rol;
-    if (currentUser.rol === "Profesional") {
-      roleText = currentUser.subtipo === "Autoridades" ? "Prof. Autoridad" : "Prof. de Área";
-    }
+    roleText = currentUser.rolVisual || currentUser.rol || "Usuario";
   }
 
   return `

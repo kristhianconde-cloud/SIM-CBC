@@ -6,6 +6,7 @@ import { db } from "./services/db.js?v=20260925.ULTIMA";
 import { renderWelcomePage } from "./pages/welcome.js?v=20260925.ULTIMA";
 import { renderSidebar } from "./components/sidebar.js?v=20260925.ULTIMA";
 import { renderHeader } from "./components/header.js?v=20260925.ULTIMA";
+import { logoutFromFirebase } from "./services/firebase-auth.js?v=20261011.1";
 
 // Páginas cargadas dinámicamente
 import { renderDashboardPage } from "./pages/dashboard.js?v=20260925.ULTIMA";
@@ -97,47 +98,20 @@ class AppController {
     ];
   }
 
-  // Guardia de Navegación / Verificación de Permisos Académicos
+  // Guardia de Navegación / Verificación de Permisos (RBAC: Administrador y Usuario)
   hasPageAccess(page) {
     if (page === "welcome") return true;
     if (!this.currentUser) return false;
     
-    // El Administrador tiene acceso irrestricto
+    // El Administrador tiene acceso total a todos los módulos
     if (this.currentUser.rol === "Administrador") return true;
 
-    // Control de Usuarios y Monitoreo son de acceso exclusivo para el Administrador
-    if (page === "usuarios" || page === "monitoreo") {
+    // Control de Usuarios, Monitoreo y Solicitudes son exclusivos del Administrador
+    if (page === "usuarios" || page === "monitoreo" || page === "solicitudes") {
       return false;
     }
 
-    // Solicitudes es para Profesional Estándar
-    if (page === "solicitudes") {
-      return this.currentUser.rol === "Profesional" && this.currentUser.subtipo === "Estándar";
-    }
-
-    // Módulos Académicos restringidos
-    const areaMap = {
-      plan: "Licenciamiento",
-      evidencias: "Licenciamiento",
-      cbc_estadisticas: "Licenciamiento",
-      transparencia: "Licenciamiento",
-      transparencia_cbc: "Licenciamiento",
-      asesor_sunedu: "Licenciamiento",
-      asesor_licenciamiento: "Licenciamiento",
-
-    };
-
-    const requiredArea = areaMap[page];
-    if (requiredArea) {
-      // Las autoridades pueden ver todas las áreas académicas
-      if (this.currentUser.rol === "Profesional" && this.currentUser.subtipo === "Autoridades") {
-        return true;
-      }
-      // Colaboradores y profesionales de área deben tener el área en su listado
-      return this.currentUser.areas && this.currentUser.areas.includes(requiredArea);
-    }
-
-    // El dashboard y el resto de herramientas son accesibles para todos
+    // Todos los módulos de consulta, estadísticas, matrices y herramientas son accesibles para el rol Usuario
     return true;
   }
 
@@ -291,7 +265,12 @@ class AppController {
     // 3. Botón de Logout
     const btnLogout = this.appContainer.querySelector("#btn-logout-action");
     if (btnLogout) {
-      btnLogout.onclick = () => {
+      btnLogout.onclick = async () => {
+        try {
+          await logoutFromFirebase();
+        } catch (e) {
+          console.warn("[SIM-CBC] Error en logoutFromFirebase:", e);
+        }
         localStorage.removeItem("sigeca_current_user");
         localStorage.removeItem("sigeca_cursos");
         localStorage.removeItem("sigeca_credit_settings");

@@ -16,7 +16,8 @@ export function renderSidebar(activePage = "dashboard") {
   const isGecaActive = ["malla", "encuestas", "prompts"].includes(activePage);
 
   const userName = currentUser.nombre;
-  let userRoleText = currentUser.rol === "Administrador" ? "Administrador" : "Usuario";
+  const currentRole = currentUser.rolVisual || currentUser.rol;
+  let userRoleText = currentRole === "Administrador" ? "Administrador" : "Usuario";
 
   // Obtener iniciales del nombre
   const userInitials = userName
@@ -47,8 +48,8 @@ export function renderSidebar(activePage = "dashboard") {
           <span>Resumen General</span>
         </a>
 
-        <!-- Sección de Administración (Solo Admin) -->
-        ${currentUser.rol === "Administrador" ? `
+        <!-- Sección de Administración (Solo Administrador) -->
+        ${currentRole === "Administrador" ? `
           <div class="sidebar-section-header">Administración</div>
           <a class="nav-item ${activePage === 'usuarios' ? 'active' : ''}" data-page="usuarios">
             <i data-lucide="users"></i>
@@ -57,15 +58,6 @@ export function renderSidebar(activePage = "dashboard") {
           <a class="nav-item ${activePage === 'monitoreo' ? 'active' : ''}" data-page="monitoreo">
             <i data-lucide="activity"></i>
             <span>Monitoreo del Sistema</span>
-          </a>
-        ` : ""}
-
-        <!-- Sección de Solicitudes (Solo Profesional Estándar) -->
-        ${currentUser.rol === "Profesional" && currentUser.subtipo === "Estándar" ? `
-          <div class="sidebar-section-header">Solicitudes</div>
-          <a class="nav-item ${activePage === 'solicitudes' ? 'active' : ''}" data-page="solicitudes">
-            <i data-lucide="key-round"></i>
-            <span>Solicitar Accesos</span>
           </a>
         ` : ""}
 
