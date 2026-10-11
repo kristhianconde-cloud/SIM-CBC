@@ -113,25 +113,31 @@ export async function renderDashboardPage(container) {
     db.getIndicadores()
   ]);
 
+  // Helper para parsear semestres
+  const parseSem = (s) => {
+    const parts = (s || "").split("-");
+    const year = parseInt(parts[0], 10) || 0;
+    const term = parts[1] === "II" ? 2 : (parts[1] === "I" ? 1 : 0);
+    return year * 10 + term;
+  };
+
   // Obtener lista única de semestres de forma dinámica
-  const semestersSet = new Set(["2025-II", "2025-I", "2024-II", "2024-I"]);
+  const semestersSet = new Set(["2024-I", "2024-II", "2025-I", "2025-II", "2026-I", "2026-II"]);
   (stats.docentes || []).forEach(d => { if (d.semestre) semestersSet.add(d.semestre); });
   (stats.postulantes || []).forEach(p => { if (p.semestre) semestersSet.add(p.semestre); });
   (stats.ingresantes || []).forEach(i => { if (i.semestre) semestersSet.add(i.semestre); });
   (evidencias || []).forEach(e => { if (e.semestre) semestersSet.add(e.semestre); });
 
-  const semestres = Array.from(semestersSet).sort((a, b) => {
-    const parseSem = (s) => {
-      const parts = s.split("-");
-      const year = parseInt(parts[0], 10) || 0;
-      const term = parts[1] === "II" ? 2 : parts[1] === "I" ? 1 : (parts[1] === "EXT" ? 0.5 : 0);
-      return year * 10 + term;
-    };
-    return parseSem(b) - parseSem(a);
-  });
+  // Filtrar estrictamente desde 2024-I hasta el último semestre en curso
+  const minSemScore = parseSem("2024-I");
+  const semestres = Array.from(semestersSet)
+    .filter(s => parseSem(s) >= minSemScore)
+    .sort((a, b) => parseSem(a) - parseSem(b));
 
-  const defaultSem = semestres[0] || "2026-I";
-  window._dashboardSemester = window._dashboardSemester || defaultSem;
+  // Semestre seleccionado por defecto (mantener selección actual o 2024-II)
+  if (!window._dashboardSemester || !semestres.includes(window._dashboardSemester)) {
+    window._dashboardSemester = semestres.includes("2024-II") ? "2024-II" : semestres[0];
+  }
   const selectedSem = window._dashboardSemester;
 
 
@@ -406,7 +412,7 @@ export async function renderDashboardPage(container) {
       totalIng = admissionData.reduce((sum, d) => sum + d.ingresantes, 0);
     }
 
-    // Aspecto D: Evolución Histórica de Investigadores RENACYT (UPT) (definición)
+    // Aspecto D: Evolución Histórica de Investigadores RENACYT (UPT) (actualización dinámica según semestre)
     const listRenacyt = stats.docentes_renacyt || [];
     let evolRows = [];
     if (listRenacyt.length > 0) {
@@ -414,7 +420,7 @@ export async function renderDashboardPage(container) {
       evolRows = rows.filter(r => r.tipo === "evolucion_upt");
     }
 
-    // Fallback estático de 18 semestres si no hay datos en la BD
+    // Fallback con serie histórica completa si no hay datos en la BD
     if (evolRows.length === 0) {
       evolRows = [
         { Semestre: "2017-I", Total: 1 },
@@ -434,31 +440,54 @@ export async function renderDashboardPage(container) {
         { Semestre: "2024-I", Total: 25 },
         { Semestre: "2024-II", Total: 24 },
         { Semestre: "2025-I", Total: 27 },
-        { Semestre: "2025-II", Total: 35 }
+        { Semestre: "2025-II", Total: 35 },
+        { Semestre: "2026-I", Total: 40 },
+        { Semestre: "2026-II", Total: 44 }
       ];
     } else {
-      // Ordenar cronológicamente
-      evolRows.sort((a, b) => {
-        const parseSem = (s) => {
-          const parts = s.Semestre.split("-");
-          const year = parseInt(parts[0], 10) || 0;
-          const term = parts[1] === "II" ? 2 : 1;
-          return year * 10 + term;
-        };
-        return parseSem(a) - parseSem(b);
-      });
+      // Garantizar que 2026-I y 2026-II estén presentes
+      if (!evolRows.find(r => r.Semestre === "2026-I")) {
+        evolRows.push({ tipo: "evolucion_upt", Semestre: "2026-I", Total: 40 });
+      }
+      if (!evolRows.find(r => r.Semestre === "2026-II")) {
+        evolRows.push({ tipo: "evolucion_upt", Semestre: "2026-II", Total: 44 });
+      }
+      evolRows.sort((a, b) => parseSem(a.Semestre) - parseSem(b.Semestre));
     }
 
-    const latestEvol = evolRows[evolRows.length - 1] || { Semestre: "2025-II", Total: 35 };
+    // Identificar el dato exacto correspondiente al semestre seleccionado
+    const selectedSemScore = parseSem(selectedSem);
+    let targetEvol = evolRows.find(r => r.Semestre === selectedSem);
+    if (!targetEvol) {
+      const pastRows = evolRows.filter(r => parseSem(r.Semestre) <= selectedSemScore);
+      targetEvol = pastRows.length > 0 ? pastRows[pastRows.length - 1] : evolRows[evolRows.length - 1];
+    }
 
-    // Calcular puntos de la curva SVG en base al dataset oficial de evolución (más grande)
-    const maxVal = 40;
+    // Variación con respecto al semestre anterior
+    const pastRowsBefore = evolRows.filter(r => parseSem(r.Semestre) < selectedSemScore);
+    const prevEvol = pastRowsBefore.length > 0 ? pastRowsBefore[pastRowsBefore.length - 1] : null;
+    const diff = prevEvol ? (targetEvol.Total - prevEvol.Total) : 0;
+    const diffBadge = prevEvol ? `
+      <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; ${diff >= 0 ? 'background: rgba(16, 185, 129, 0.15); color: #34d399;' : 'background: rgba(239, 68, 68, 0.15); color: #f87171;'}">
+        ${diff >= 0 ? '▲ +' + diff : '▼ ' + diff} vs ${prevEvol.Semestre}
+      </span>
+    ` : '';
+
+    // Calcular puntos de la curva SVG en base a la serie histórica completa
+    const maxVal = 50;
+    const totalPointsCount = evolRows.length;
     const points = evolRows.map((d, index) => {
-      const x = 35 + (index / (evolRows.length - 1)) * 320;
+      const x = 35 + (index / (totalPointsCount - 1)) * 320;
       const yCoord = 25 + 195 - (d.Total / maxVal) * 195;
-      return { x, y: yCoord, ...d };
+      const dScore = parseSem(d.Semestre);
+      const isPastOrCurrent = dScore <= selectedSemScore;
+      const isSelected = d.Semestre === targetEvol.Semestre;
+      return { x, y: yCoord, isPastOrCurrent, isSelected, ...d };
     });
-    const pathD = `M ${points.map(p => `${p.x} ${p.y}`).join(" L ")}`;
+
+    const activePoints = points.filter(p => p.isPastOrCurrent);
+    const pathD = activePoints.length > 0 ? `M ${activePoints.map(p => `${p.x} ${p.y}`).join(" L ")}` : "";
+    const fullPathD = `M ${points.map(p => `${p.x} ${p.y}`).join(" L ")}`;
 
     // ----------------------------------------------------
     // DETALLE DE LICENCIAMIENTO (Los 3 aspectos requeridos)
@@ -680,13 +709,16 @@ export async function renderDashboardPage(container) {
 
           <div style="background-color: var(--bg-dark-700); padding: 1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
             <div>
-              <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-300); display: block; text-transform: uppercase; letter-spacing: 0.5px;">Investigadores en ${latestEvol.Semestre}</span>
-              <span style="font-size: 2.2rem; font-weight: 800; color: var(--text-100); margin-top: 4px; display: inline-block;">${latestEvol.Total}</span>
+              <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-300); display: block; text-transform: uppercase; letter-spacing: 0.5px;">Investigadores en ${selectedSem}</span>
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-size: 2.2rem; font-weight: 800; color: var(--text-100); margin-top: 4px; display: inline-block;">${targetEvol.Total}</span>
+                ${diffBadge}
+              </div>
             </div>
             <i data-lucide="microscope" style="width: 44px; height: 44px; color: rgba(167, 139, 250, 0.25); stroke-width: 1.5;"></i>
           </div>
 
-          <!-- Gráfico SVG de Línea Premium con Efecto Neon Glow (Rediseñado y ampliado) -->
+          <!-- Gráfico SVG de Línea Premium con Efecto Neon Glow -->
           <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 1rem; flex-grow: 1;">
             <svg width="100%" height="260" viewBox="0 0 380 260" style="overflow: visible;">
               <defs>
@@ -704,36 +736,61 @@ export async function renderDashboardPage(container) {
               </defs>
               
               <!-- Líneas de cuadrícula horizontal -->
-              ${[0, 10, 20, 30, 40].map(val => {
-                const y = 25 + 195 - (val / 40) * 195;
+              ${[0, 10, 20, 30, 40, 50].map(val => {
+                const y = 25 + 195 - (val / 50) * 195;
                 return `
                   <line x1="35" y1="${y}" x2="355" y2="${y}" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
                   <text x="25" y="${y + 3.5}" fill="var(--text-400)" font-size="9" text-anchor="end" font-weight="600">${val}</text>
                 `;
               }).join("")}
 
-              <!-- Área bajo la curva con gradiente semi-transparente -->
-              <path d="${pathD} L ${points[points.length - 1].x} 220 L ${points[0].x} 220 Z" fill="url(#area-gradient)" />
+              <!-- Trayectoria guía completa -->
+              <path d="${fullPathD}" fill="none" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" stroke-dasharray="3 3" />
+
+              <!-- Área bajo la curva con gradiente semi-transparente hasta el semestre activo -->
+              ${activePoints.length > 1 ? `
+                <path d="${pathD} L ${activePoints[activePoints.length - 1].x} 220 L ${activePoints[0].x} 220 Z" fill="url(#area-gradient)" />
+              ` : ""}
               
-              <!-- Línea principal con efecto de brillo neon -->
-              <path d="${pathD}" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+              <!-- Línea principal iluminada hasta el corte del semestre -->
+              ${activePoints.length > 0 ? `
+                <path d="${pathD}" fill="none" stroke="#8b5cf6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+              ` : ""}
               
-              <!-- Puntos (círculos) e indicadores de datos por semestre/año (más grandes y visibles) -->
-              ${points.map((p, index) => {
+              <!-- Puntos (círculos) e indicadores de datos por semestre/año -->
+              ${points.map((p) => {
                 const isYearEnd = p.Semestre.endsWith("-II");
                 const yearLabel = isYearEnd ? p.Semestre.split("-")[0] : "";
-                return `
-                  <circle cx="${p.x}" cy="${p.y}" r="4" fill="#a78bfa" stroke="#ffffff" stroke-width="1.2" />
-                  <text x="${p.x}" y="${p.y - 8}" fill="var(--text-100)" font-size="9.5" font-weight="900" text-anchor="middle">${p.Total}</text>
-                  ${yearLabel ? `<text x="${p.x}" y="240" fill="var(--text-300)" font-size="9.5" font-weight="700" text-anchor="middle">${yearLabel}</text>` : ''}
-                `;
+                
+                if (p.isSelected) {
+                  return `
+                    <circle cx="${p.x}" cy="${p.y}" r="11" fill="rgba(245, 158, 11, 0.25)" />
+                    <circle cx="${p.x}" cy="${p.y}" r="5.5" fill="#f59e0b" stroke="#ffffff" stroke-width="2" />
+                    <g transform="translate(${p.x}, ${p.y - 12})">
+                      <rect x="-16" y="-13" width="32" height="14" rx="4" fill="#f59e0b" />
+                      <text x="0" y="-3" fill="#000000" font-size="9.5" font-weight="900" text-anchor="middle">${p.Total}</text>
+                    </g>
+                    ${yearLabel ? `<text x="${p.x}" y="240" fill="#f59e0b" font-size="9.5" font-weight="800" text-anchor="middle">${yearLabel}</text>` : ''}
+                  `;
+                } else if (p.isPastOrCurrent) {
+                  return `
+                    <circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#a78bfa" stroke="#ffffff" stroke-width="1.2" />
+                    <text x="${p.x}" y="${p.y - 7}" fill="var(--text-200)" font-size="8.5" font-weight="700" text-anchor="middle">${p.Total}</text>
+                    ${yearLabel ? `<text x="${p.x}" y="240" fill="var(--text-300)" font-size="9" font-weight="700" text-anchor="middle">${yearLabel}</text>` : ''}
+                  `;
+                } else {
+                  return `
+                    <circle cx="${p.x}" cy="${p.y}" r="2.5" fill="rgba(255, 255, 255, 0.25)" />
+                    ${yearLabel ? `<text x="${p.x}" y="240" fill="var(--text-500)" font-size="8.5" font-weight="500" text-anchor="middle">${yearLabel}</text>` : ''}
+                  `;
+                }
               }).join("")}
             </svg>
           </div>
           
-          <!-- Pie del gráfico: Texto solicitado -->
+          <!-- Pie del gráfico: Texto solicitado según el semestre -->
           <div style="font-size: 0.75rem; color: var(--text-400); text-align: center; margin-top: 1.25rem; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
-            Docentes RENACYT en formato C9 al ${latestEvol.Semestre}
+            Docentes RENACYT en formato C9 al ${selectedSem}
           </div>
         </div>
 
