@@ -6,13 +6,13 @@
  * Configuración oficial del proyecto Firebase 'sim-cbc'
  */
 export const firebaseConfig = {
-  apiKey: "AIzaSyD-jRnIBiS8yPolwv77IRc_qSTHDzM3S20",
+  apiKey: "AIzaSyB-jRnIBiS8yPolwv77IRq_qSTHDzM3S28",
   authDomain: "sim-cbc.firebaseapp.com",
   projectId: "sim-cbc",
   storageBucket: "sim-cbc.firebasestorage.app",
-  messagingSenderId: "272745598225",
-  appId: "1:272745598225:web:c27z50d4b71922f20bb640",
-  measurementId: "G-29BBIBDSYW"
+  messagingSenderId: "272745580225",
+  appId: "1:272745580225:web:c27a50d4b71922f20bb640",
+  measurementId: "G-29BBIBDSVN"
 };
 
 /**
