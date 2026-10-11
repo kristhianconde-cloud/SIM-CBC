@@ -4425,115 +4425,109 @@ const exportarReporteLaboratoriosWord = () => {
 // ==========================================
 // SECCIÓN: DASHBOARD GRADUADOS Y TITULADOS (CBC)
 // ==========================================
-const GRADUADOS_DATA = {"sheet_url":"https://docs.google.com/spreadsheets/d/1kLDds1ngxj_2toVO4Ntb5qdmIJfdX62JMBj8FgY_cv4/edit?usp=sharing","kpis":{"total_titulados":23,"prom_egreso_a_titulo":1.53,"total_bachilleres":28,"graduados_maestria":0,"graduados_doctorado":0,"segundas_especialidades":0},"semestres":[{"semestre":"2022-I","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2022-II","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2023-I","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2023-II","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2024-I","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2024-II","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2025-I","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2025-II","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0},{"semestre":"2026-I","bachiller":28,"titulos":23,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":23},{"semestre":"2026-II","bachiller":0,"titulos":0,"maestrias":0,"doctorados":0,"segunda_especialidad":0,"total":0}],"diplomas":[{"nivel":"Grado de Bachiller","abrev":"Bachiller","total":28},{"nivel":"Título Profesional","abrev":"Título","total":23},{"nivel":"Grado de Magíster (ESPG)","abrev":"Maestría","total":0},{"nivel":"Grado de Doctor (ESPG)","abrev":"Doctorado","total":0},{"nivel":"Segunda Especialidad","abrev":"2da Espec.","total":0}],"facultades":[{"abrev":"FACEM","facultad":"Facultad de Ciencias Empresariales","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"abrev":"FACSA","facultad":"Facultad de Ciencias de la Salud","titulados":23,"prom_egreso_tit":1.53,"prom_bach_tit":-25.71,"prom_carrera":7.75},{"abrev":"FAING","facultad":"Facultad de Ingeniería","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"abrev":"FAEDCOH","facultad":"Facultad de Educación, Cs. Comunicación y Humanidades","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"abrev":"FAU","facultad":"Facultad de Arquitectura y Urbanismo","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"abrev":"FADE","facultad":"Facultad de Derecho y Ciencias Políticas","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"}],"carreras":[{"codigo":"P1","carrera":"Educación Inicial","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P2","carrera":"Educación Primaria","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P3","carrera":"Educación Secundaria Especialidad: Lengua y Literatura","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P4","carrera":"Educación Secundaria Especialidad: Matemática, Física y Computación","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P5","carrera":"Educación Secundaria Especialidad: Ciencias Históricos Sociales y Religión","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P6","carrera":"Educación Secundaria Especialidad: Ciencia, Tecnología y Ambiente","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P7","carrera":"Educación Física y Deportes","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P8","carrera":"Educación Técnica","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P9","carrera":"Ciencias de la Comunicación","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P10","carrera":"Psicología","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P11","carrera":"Ingeniería Electrónica","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P12","carrera":"Ingeniería de Sistemas","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P13","carrera":"Ingeniería Civil","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P14","carrera":"Ingeniería Agroindustrial","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P15","carrera":"Ingeniería Ambiental","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P16","carrera":"Ingeniería Industrial","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P17","carrera":"Derecho","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P18","carrera":"Medicina Humana","titulados":14,"prom_egreso_tit":0.91,"prom_bach_tit":-25.71,"prom_carrera":8.34},{"codigo":"P19","carrera":"Odontología","titulados":2,"prom_egreso_tit":2.15,"prom_bach_tit":"-","prom_carrera":7.87},{"codigo":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","titulados":2,"prom_egreso_tit":3.35,"prom_bach_tit":"-","prom_carrera":6.65},{"codigo":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","titulados":5,"prom_egreso_tit":2.28,"prom_bach_tit":"-","prom_carrera":6.31},{"codigo":"P22","carrera":"Arquitectura","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P23","carrera":"Administración Turístico-Hotelera","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P24","carrera":"Ciencias Contables y Financieras","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P25","carrera":"Administración de Negocios Internacionales","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P26","carrera":"Economía","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P27","carrera":"Ingeniería Comercial","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P53","carrera":"Administración de Empresas","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"},{"codigo":"P54","carrera":"Urbanismo","titulados":0,"prom_egreso_tit":"-","prom_bach_tit":"-","prom_carrera":"-"}],"trazabilidad":[{"dni":"72468659","nombre":"PEREZ TESILLO,  ANGIE DANIELA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2017-02-10","fecha_egreso":"2024-12-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"75661851","nombre":"MAMANI HERRERA,  CORINA VANESSA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2013-02-05","fecha_egreso":"2023-03-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"72628676","nombre":"VELASQUEZ TEJADA,  MARIA DEL CARMEN","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2018-02-11","fecha_egreso":"2024-01-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"74045807","nombre":"QUISPE MAMANI,  THALIA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2016-02-09","fecha_egreso":"2023-03-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"73661684","nombre":"JIMENEZ GARCIA,  ALLISON KATHERINE","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2018-02-10","fecha_egreso":"2024-01-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"72195391","nombre":"CARPIO PAREDES,  LUISSA FERNANDA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2020-02-11","fecha_egreso":"2025-03-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-02","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"73011952","nombre":"ANCO QUISPE,  ANA SOFIA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2016-02-08","fecha_egreso":"2024-01-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"75540743","nombre":"DIAZ CCALLOMAMANI,  EVELYN MAGALY","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2013-02-05","fecha_egreso":"2024-12-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"76655615","nombre":"GAUNA ZARATE,  ROCIO JAZMIN","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2016-02-06","fecha_egreso":"2024-12-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70216206","nombre":"RAMOS FLORES,  LESLY ALEJANDRA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2017-02-10","fecha_egreso":"2024-12-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70910495","nombre":"OSORIO CORVACHO,  JUAN DIEGO","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2016-02-05","fecha_egreso":"2024-01-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70750570","nombre":"VARGAS FLORES,  MELISSA STEPHANY","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P19","carrera":"Odontología","fecha_ingreso":"2018-02-07","fecha_egreso":"2022-12-13","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"71249291","nombre":"ALARICO AQUIZE,  DIANA CAROLINA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P19","carrera":"Odontología","fecha_ingreso":"2016-02-07","fecha_egreso":"2024-12-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70331456","nombre":"ALVA PORTUGAL,  PIERO ENRIQUE","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2017-02-11","fecha_egreso":"2023-03-31","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-18","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"71937201","nombre":"VILLANUEVA ATENCIO,  ALESSANDRA ROSALITH","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2012-03-05","fecha_egreso":"2022-04-30","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-24","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"71994065","nombre":"CAHUANA CHOQUE,  MILENY MERCEDES","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-05","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70132925","nombre":"ARIAS PILCO,  KIARA MASSIEL","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"76060271","nombre":"GONZALES CCALLI,  ALVARO RAUL","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-05","fecha_egreso":"2025-12-31","fecha_bachiller":"2206-02-24","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70330157","nombre":"VILLANUEVA ARENAS,  ANDREA MILAGROS","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2014-02-24","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70555260","nombre":"HERRERA COHAILA,  GONZALO DANIEL","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-20","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"71244330","nombre":"GARCIA EYZAGUIRRE,  JORGE ARTURO","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-20","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70980387","nombre":"GUTIERREZ SIÑA,  JIMENA DANIELA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-10","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70852792","nombre":"SOTOMAYOR  CASQUINA,  JOHN GEORGE PAUL","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2012-02-09","fecha_egreso":"2022-04-30","fecha_bachiller":"","semestre_bachiller":"","fecha_titulo":"2026-02-27","semestre_titulo":"2026-I","modalidad":"Presencial"},{"dni":"70672919","nombre":"RODRIGUEZ HUANACUNE,  ALEX GERALDO","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-05","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72399168","nombre":"ALCAZAR GAMBETTA,  RAUL NICOLAS","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-05","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72842018","nombre":"VILLACORTA SALINAS,  XIOMARA MARIELA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"73104092","nombre":"HERRERA HUARCAYA,  MOISES ENRIQUE","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72953759","nombre":"URDANIVIA YANQUI,  SABRINA JOSEFA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2021-02-11","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-24","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70614475","nombre":"ARIAS CARAZAS,  GABRIEL ANDRE","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-20","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"71221550","nombre":"PEÑA RIOS,  ALEXANDRA JOHANNA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2017-02-23","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"71125895","nombre":"MUSAJA CRUZ,  ARIANA GABRIELA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-20","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-25","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70046318","nombre":"CUETO CHAVEZ,  CAROLINA SOLANGE","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70889288","nombre":"HUMPIRI COILA,  DANITZA MILENA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70981369","nombre":"CHAVEZ FUENTES,  NAYELY GINA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"41912372","nombre":"LAQUI CARTAGENA,  EDILSON WILBER","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2009-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72225110","nombre":"VIZCARRA JIMENEZ,  SONIA FERNANDA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2018-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70774664","nombre":"ROSPIGLIOSI LLOSA,  KARLA ALEXANDRA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P19","carrera":"Odontología","fecha_ingreso":"2016-02-07","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"71094367","nombre":"GIGLIO RIOS,  ENZO PAOLO","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2020-02-10","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72697427","nombre":"QUEQUE MERMA,  GUSTAVO MANUEL","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2020-02-10","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"73465349","nombre":"CASTRO FLORES,  MATTHIUS ABDON","genero":"Masculino","facultad":"FACSA","codigo_carrera":"P21","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","fecha_ingreso":"2021-02-11","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"70946704","nombre":"VALDEZ KOC,  MARIA ALESSANDRA","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2020-02-10","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"71104365","nombre":"RAMIREZ CALMETT,  ANTONELA MARIAN","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P20","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","fecha_ingreso":"2020-02-10","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-02-27","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"72867739","nombre":"VELARDE CATACORA,  GIULIANA DEL CARMEN","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-03-03","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"},{"dni":"73099331","nombre":"CUSACANI ARCATA,  MILAGROS DEL ROSARIO","genero":"Femenino","facultad":"FACSA","codigo_carrera":"P18","carrera":"Medicina Humana","fecha_ingreso":"2019-02-03","fecha_egreso":"2025-12-31","fecha_bachiller":"2026-03-03","semestre_bachiller":"2026-I","fecha_titulo":"","semestre_titulo":"","modalidad":"Presencial"}]};
+const GRADUADOS_DATA = {"sheet_url":"https://docs.google.com/spreadsheets/d/1kLDds1ngxj_2toVO4Ntb5qdmIJfdX62JMBj8FgY_cv4/edit?usp=sharing","institucional":{"total_estudiantes":44,"tiempo_carrera_prom":7.75,"tiempo_carrera_min":4.8,"tiempo_carrera_max":16.9,"egreso_a_bachiller_prom":0.2,"bachiller_a_titulo_prom":0,"egreso_a_titulo_prom":1.53},"estudiantes":[{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":null,"bt":null,"et":1.1},{"facultad":"FACSA","carrera":"Medicina Humana","tc":10.1,"eb":null,"bt":null,"et":2.8},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":6,"eb":null,"bt":null,"et":2},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":7.1,"eb":null,"bt":null,"et":2.8},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":6,"eb":null,"bt":null,"et":2},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":5.1,"eb":null,"bt":null,"et":0.8},{"facultad":"FACSA","carrera":"Medicina Humana","tc":8,"eb":null,"bt":null,"et":2.1},{"facultad":"FACSA","carrera":"Medicina Humana","tc":11.9,"eb":null,"bt":null,"et":1.1},{"facultad":"FACSA","carrera":"Medicina Humana","tc":8.9,"eb":null,"bt":null,"et":1.1},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":null,"bt":null,"et":1.1},{"facultad":"FACSA","carrera":"Medicina Humana","tc":8,"eb":null,"bt":null,"et":2.1},{"facultad":"FACSA","carrera":"Odontología","tc":4.8,"eb":null,"bt":null,"et":3.2},{"facultad":"FACSA","carrera":"Odontología","tc":8.9,"eb":null,"bt":null,"et":1.1},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":6.1,"eb":null,"bt":null,"et":2.9},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":10.2,"eb":null,"bt":null,"et":3.8},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":11.8,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":0,"et":0.2},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":10.2,"eb":null,"bt":null,"et":3.8},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":4.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":8.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":16.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":7.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Odontología","tc":9.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":5.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":5.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Laboratorio Clínico y Patológico","tc":4.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":5.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Tecnología Médica con Mención en Terapia Física y Rehabilitación","tc":5.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":null,"et":null},{"facultad":"FACSA","carrera":"Medicina Humana","tc":6.9,"eb":0.2,"bt":null,"et":null}]};
 
 let _gradFilters = {
-  search: '',
   facultad: 'todas',
   carrera: 'todas',
-  tipoGrado: 'todos'
+  vista: 'todos'
 };
 
 const downloadGraduadosWordReport = () => {
   const d = GRADUADOS_DATA;
-  const k = d.kpis;
-  const filterFac = _gradFilters.facultad;
-  const filterCar = _gradFilters.carrera;
-  const filterTipo = _gradFilters.tipoGrado;
-  const search = _gradFilters.search.toLowerCase().trim();
+  const selFac = _gradFilters.facultad;
+  const selCar = _gradFilters.carrera;
+  
+  let list = d.estudiantes || [];
+  if (selFac !== 'todas') list = list.filter(x => x.facultad === selFac);
+  if (selCar !== 'todas') list = list.filter(x => x.carrera === selCar);
 
-  const filtered = d.trazabilidad.filter(item => {
-    if (filterFac !== 'todas' && item.facultad !== filterFac) return false;
-    if (filterCar !== 'todas' && item.carrera !== filterCar) return false;
-    if (filterTipo === 'bachiller' && !item.fecha_bachiller && !item.semestre_bachiller) return false;
-    if (filterTipo === 'titulo' && !item.fecha_titulo && !item.semestre_titulo) return false;
-    if (search) {
-      const q = search.toLowerCase();
-      const mDni = (item.dni || '').toLowerCase().includes(q);
-      const mNom = (item.nombre || '').toLowerCase().includes(q);
-      const mCar = (item.carrera || '').toLowerCase().includes(q);
-      if (!mDni && !mNom && !mCar) return false;
-    }
-    return true;
-  });
+  const tc_list = list.map(x => x.tc).filter(x => typeof x === 'number');
+  const eb_list = list.map(x => x.eb).filter(x => typeof x === 'number');
+  const bt_list = list.map(x => x.bt).filter(x => typeof x === 'number');
+  const et_list = list.map(x => x.et).filter(x => typeof x === 'number');
+
+  const avg = (arr) => arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(2) : '-';
 
   const docHTML = `
   <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
   <head>
     <meta charset="utf-8">
-    <title>Reporte Estadístico de Graduados y Titulados</title>
+    <title>Reporte de Trayectoria y Tiempos de Graduados - UPT</title>
     <style>
       body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.4; color: #1e293b; margin: 20mm; }
       h1 { font-size: 18pt; color: #0f172a; border-bottom: 2px solid #0284c7; padding-bottom: 6px; margin-bottom: 12px; }
       h2 { font-size: 14pt; color: #0369a1; margin-top: 18px; margin-bottom: 8px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
       .kpi-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-      .kpi-table td { padding: 10px; border: 1px solid #cbd5e1; background: #f8fafc; text-align: center; }
-      .kpi-val { font-size: 16pt; font-weight: bold; color: #0284c7; }
-      .kpi-lbl { font-size: 9pt; color: #64748b; text-transform: uppercase; }
+      .kpi-table td { padding: 12px; border: 1px solid #cbd5e1; background: #f8fafc; text-align: center; }
+      .kpi-val { font-size: 18pt; font-weight: bold; color: #0284c7; }
+      .kpi-lbl { font-size: 9pt; color: #64748b; text-transform: uppercase; font-weight: bold; }
+      .kpi-sub { font-size: 8pt; color: #94a3b8; }
       .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 14px; font-size: 9.5pt; }
-      .data-table th { background: #0284c7; color: white; padding: 6px 8px; border: 1px solid #0284c7; text-align: left; }
-      .data-table td { padding: 5px 8px; border: 1px solid #cbd5e1; }
+      .data-table th { background: #0284c7; color: white; padding: 7px 9px; border: 1px solid #0284c7; text-align: left; }
+      .data-table td { padding: 6px 9px; border: 1px solid #cbd5e1; }
       .data-table tr:nth-child(even) { background: #f1f5f9; }
       .footer-note { font-size: 8.5pt; color: #64748b; font-style: italic; margin-top: 20px; }
     </style>
   </head>
   <body>
-    <h1>Reporte Institucional de Graduados y Titulados</h1>
+    <h1>Reporte Institucional: Tiempos de Graduación y Trayectoria Académica</h1>
     <p><strong>Universidad Privada de Tacna (UPT)</strong> - Dirección de Gestión de la Calidad y Acreditación</p>
-    <p><strong>Enlace Google Sheets Fuente:</strong> ${d.sheet_url}</p>
+    <p><strong>Filtro aplicado:</strong> Facultad: ${selFac} | Programa: ${selCar}</p>
     
-    <h2>1. Resumen de Indicadores Clave (KPIs)</h2>
+    <h2>1. Resumen de Métricas Clave de Duración (${list.length} registros analizados)</h2>
     <table class="kpi-table">
       <tr>
-        <td><div class="kpi-val">${k.total_titulados}</div><div class="kpi-lbl">Total Titulados</div></td>
-        <td><div class="kpi-val">${k.total_bachilleres}</div><div class="kpi-lbl">Total Bachilleres</div></td>
-        <td><div class="kpi-val">${k.prom_egreso_a_titulo} años</div><div class="kpi-lbl">Prom. Egreso a Título</div></td>
-        <td><div class="kpi-val">${k.graduados_maestria || 0}</div><div class="kpi-lbl">Maestrías</div></td>
-        <td><div class="kpi-val">${k.segundas_especialidades || 0}</div><div class="kpi-lbl">2das Especialidades</div></td>
+        <td>
+          <div class="kpi-val">${avg(tc_list)} años</div>
+          <div class="kpi-lbl">Tiempo Carrera (Promedio)</div>
+          <div class="kpi-sub">Duración desde Ingreso hasta Egreso</div>
+        </td>
+        <td>
+          <div class="kpi-val">${avg(eb_list)} años</div>
+          <div class="kpi-lbl">Egreso a Bachiller</div>
+          <div class="kpi-sub">Trámite de Grado Académico</div>
+        </td>
+        <td>
+          <div class="kpi-val">${avg(bt_list)} años</div>
+          <div class="kpi-lbl">Bachiller a Título</div>
+          <div class="kpi-sub">Obtención del Título Profesional</div>
+        </td>
+        <td>
+          <div class="kpi-val">${avg(et_list)} años</div>
+          <div class="kpi-lbl">Egreso a Título</div>
+          <div class="kpi-sub">Ruta completa de Titulación</div>
+        </td>
       </tr>
     </table>
 
-    <h2>2. Distribución de Títulos por Semestre</h2>
+    <h2>2. Promedio Institucional UPT vs Desglose de Carreras</h2>
     <table class="data-table">
       <thead>
-        <tr><th>Semestre</th><th>Bachilleres</th><th>Titulados</th><th>Maestrías</th><th>Segunda Especialidad</th><th>Total Diplomas</th></tr>
+        <tr>
+          <th>Programa Profesional</th>
+          <th>Facultad</th>
+          <th>Alumnos</th>
+          <th>Tiempo Carrera (Años)</th>
+          <th>Egreso a Bachiller</th>
+          <th>Bachiller a Título</th>
+          <th>Egreso a Título</th>
+        </tr>
       </thead>
       <tbody>
-        ${d.semestres.map(s => `
-          <tr>
-            <td><strong>${s.semestre}</strong></td>
-            <td>${s.bachiller}</td>
-            <td>${s.titulos}</td>
-            <td>${s.maestrias}</td>
-            <td>${s.segunda_especialidad}</td>
-            <td><strong>${s.total}</strong></td>
-          </tr>
-        `).join('')}
+        <tr style="background: #e0f2fe; font-weight: bold;">
+          <td>PROMEDIO INSTITUCIONAL UPT</td>
+          <td>UPT</td>
+          <td>${d.institucional.total_estudiantes}</td>
+          <td>${d.institucional.tiempo_carrera_prom} años</td>
+          <td>${d.institucional.egreso_a_bachiller_prom} años</td>
+          <td>${d.institucional.bachiller_a_titulo_prom} años</td>
+          <td>${d.institucional.egreso_a_titulo_prom} años</td>
+        </tr>
       </tbody>
     </table>
 
-    <h2>3. Nómina de Graduados y Titulados (${filtered.length} registros seleccionados)</h2>
-    <table class="data-table">
-      <thead>
-        <tr><th>#</th><th>DNI</th><th>Apellidos y Nombres</th><th>Facultad</th><th>Programa de Estudios</th><th>Egreso</th><th>Bachiller</th><th>Título</th></tr>
-      </thead>
-      <tbody>
-        ${filtered.map((item, idx) => `
-          <tr>
-            <td>${idx + 1}</td>
-            <td>${item.dni}</td>
-            <td>${item.nombre}</td>
-            <td>${item.facultad}</td>
-            <td>${item.carrera}</td>
-            <td>${item.fecha_egreso || '-'}</td>
-            <td>${item.fecha_bachiller || item.semestre_bachiller || '-'}</td>
-            <td>${item.fecha_titulo || item.semestre_titulo || '-'}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-
-    <p class="footer-note">Generado automáticamente por el Sistema Integral de Gestión de Evidencias y Calidad Académica (SIGECA - UPT).</p>
+    <p class="footer-note">Generado automáticamente por el Sistema Integral de Información y Monitoreo de Condiciones Básicas de Calidad (SIM-CBC / SIGECA - UPT).</p>
   </body>
   </html>
   `;
@@ -4542,225 +4536,455 @@ const downloadGraduadosWordReport = () => {
   const downloadUrl = URL.createObjectURL(blob);
   const downloadAnchor = document.createElement('a');
   downloadAnchor.href = downloadUrl;
-  downloadAnchor.download = 'Reporte_Estadistico_Graduados_y_Titulados_UPT.doc';
+  downloadAnchor.download = 'Reporte_Tiempos_Graduacion_UPT.doc';
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   document.body.removeChild(downloadAnchor);
   URL.revokeObjectURL(downloadUrl);
 };
 
+// Generador de Gráfico 3D Dinámico SVG
+function generate3DMetricChartSVG(data, width = 760, height = 300) {
+  const top = 40;
+  const right = 30;
+  const bottom = 55;
+  const left = 55;
+  const dx = 14; // Profundidad 3D X
+  const dy = 10; // Profundidad 3D Y
+  
+  const drawWidth = width - left - right - dx;
+  const drawHeight = height - top - bottom - dy;
+  
+  const values = data.map(d => d.value);
+  const maxVal = Math.max(...values, 1);
+  const niceMax = Math.ceil(maxVal * 1.25) || 10;
+  
+  let gridHtml = '';
+  const ticks = 4;
+  for (let i = 0; i <= ticks; i++) {
+    const val = (niceMax / ticks) * i;
+    const y = height - bottom - (val / niceMax) * drawHeight;
+    gridHtml += `
+      <line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
+      <text x="${left - 10}" y="${y + 4}" fill="#94a3b8" font-size="10" font-weight="600" text-anchor="end">${val.toFixed(1)} a.</text>
+    `;
+  }
+  
+  const barCount = data.length;
+  const barSpacing = Math.max(16, (drawWidth - (barCount * 45)) / Math.max(barCount, 1));
+  const barWidth = Math.min(50, Math.max((drawWidth - (barSpacing * (barCount + 1))) / barCount, 26));
+  
+  let barsHtml = '';
+  data.forEach((d, idx) => {
+    const x = left + barSpacing + idx * (barWidth + barSpacing);
+    const y_bottom = height - bottom;
+    
+    if (d.value === 0) {
+      barsHtml += `
+        <g class="bar-3d-group" data-label="${d.label}" data-val="${d.value}">
+          <polygon points="${x},${y_bottom} ${x + dx},${y_bottom - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(255,255,255,0.1)" />
+          <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#94a3b8" font-size="10" text-anchor="middle" font-weight="600">${d.shortLabel || d.label}</text>
+          <text x="${x + barWidth/2}" y="${y_bottom - 6}" fill="#64748b" font-size="9" text-anchor="middle">0 a.</text>
+        </g>
+      `;
+      return;
+    }
+    
+    const h = (d.value / niceMax) * drawHeight;
+    const y_top = y_bottom - h;
+    const col = d.color || '#38bdf8';
+    
+    barsHtml += `
+      <g class="bar-3d-group" style="transition: transform 0.25s ease, filter 0.25s ease; cursor: pointer;">
+        <!-- Sombra base proyectada -->
+        <polygon points="${x},${y_bottom} ${x + dx + 4},${y_bottom - dy + 2} ${x + barWidth + dx + 4},${y_bottom - dy + 2} ${x + barWidth},${y_bottom}" fill="rgba(0,0,0,0.4)" />
+        
+        <!-- Cara Superior (Top 3D) con brillo -->
+        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="${col}" opacity="0.95" />
+        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="rgba(255, 255, 255, 0.35)" />
+        
+        <!-- Cara Lateral Derecha (Right 3D) -->
+        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="${col}" opacity="0.85" />
+        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(0, 0, 0, 0.3)" />
+        
+        <!-- Cara Frontal (Front 3D) -->
+        <polygon points="${x},${y_top} ${x + barWidth},${y_top} ${x + barWidth},${y_bottom} ${x},${y_bottom}" fill="${col}" opacity="0.98" />
+        
+        <!-- Línea de resalte vertical frontal -->
+        <line x1="${x + 2}" y1="${y_top}" x2="${x + 2}" y2="${y_bottom}" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+        
+        <!-- Etiqueta de Valor Flotante -->
+        <rect x="${x + barWidth/2 - 20}" y="${y_top - dy - 22}" width="40" height="18" rx="4" fill="rgba(15,23,42,0.9)" stroke="${col}" stroke-width="1" />
+        <text x="${x + barWidth/2}" y="${y_top - dy - 10}" fill="#f8fafc" font-size="10.5" font-weight="800" text-anchor="middle">${d.value.toFixed(2)}a</text>
+        
+        <!-- Etiqueta Eje X -->
+        <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#cbd5e1" font-size="9.5" text-anchor="middle" font-weight="700">${d.shortLabel || d.label}</text>
+        <text x="${x + barWidth/2}" y="${y_bottom + 32}" fill="#94a3b8" font-size="8" text-anchor="middle">${d.subLabel || ''}</text>
+      </g>
+    `;
+  });
+  
+  return `
+    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; display: block; overflow: visible;">
+      <defs>
+        <filter id="grad-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="rgba(0,0,0,0.5)" />
+        </filter>
+      </defs>
+      <!-- Base 3D de todo el gráfico -->
+      <polygon points="${left},${height - bottom} ${left + dx},${height - bottom - dy} ${width - right + dx},${height - bottom - dy} ${width - right},${height - bottom}" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(255,255,255,0.1)" />
+      
+      <!-- Grilla -->
+      ${gridHtml}
+      
+      <!-- Barras 3D -->
+      ${barsHtml}
+    </svg>
+  `;
+}
+
 function drawGraduadosDashboard(container) {
   if (!container) return;
 
   const render = () => {
     const d = GRADUADOS_DATA;
-    const k = d.kpis;
-    const filterFac = _gradFilters.facultad;
-    const filterCar = _gradFilters.carrera;
-    const filterTipo = _gradFilters.tipoGrado;
-    const search = _gradFilters.search.toLowerCase().trim();
+    const inst = d.institucional;
+    const selFac = _gradFilters.facultad;
+    const selCar = _gradFilters.carrera;
 
-    const filtered = d.trazabilidad.filter(item => {
-      if (filterFac !== 'todas' && item.facultad !== filterFac) return false;
-      if (filterCar !== 'todas' && item.carrera !== filterCar) return false;
-      if (filterTipo === 'bachiller' && !item.fecha_bachiller && !item.semestre_bachiller) return false;
-      if (filterTipo === 'titulo' && !item.fecha_titulo && !item.semestre_titulo) return false;
-      if (search) {
-        const q = search.toLowerCase();
-        const mDni = (item.dni || '').toLowerCase().includes(q);
-        const mNom = (item.nombre || '').toLowerCase().includes(q);
-        const mCar = (item.carrera || '').toLowerCase().includes(q);
-        if (!mDni && !mNom && !mCar) return false;
+    // Calcular métricas según selección (Institucional o por Carrera)
+    let filteredList = d.estudiantes || [];
+    if (selFac !== 'todas') filteredList = filteredList.filter(x => x.facultad === selFac);
+    if (selCar !== 'todas') filteredList = filteredList.filter(x => x.carrera === selCar);
+
+    const tc_arr = filteredList.map(x => x.tc).filter(x => typeof x === 'number');
+    const eb_arr = filteredList.map(x => x.eb).filter(x => typeof x === 'number');
+    const bt_arr = filteredList.map(x => x.bt).filter(x => typeof x === 'number');
+    const et_arr = filteredList.map(x => x.et).filter(x => typeof x === 'number');
+
+    const avgVal = (arr, fallback) => arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length) : fallback;
+
+    const curr_tc = avgVal(tc_arr, inst.tiempo_carrera_prom);
+    const curr_eb = avgVal(eb_arr, inst.egreso_a_bachiller_prom);
+    const curr_bt = avgVal(bt_arr, inst.bachiller_a_titulo_prom);
+    const curr_et = avgVal(et_arr, inst.egreso_a_titulo_prom);
+
+    const isGlobal = selCar === 'todas' && selFac === 'todas';
+
+    // Desglose por carreras
+    const carrerasMap = {};
+    (d.estudiantes || []).forEach(e => {
+      if (!carrerasMap[e.carrera]) {
+        carrerasMap[e.carrera] = { carrera: e.carrera, facultad: e.facultad, tc: [], eb: [], bt: [], et: [] };
       }
-      return true;
+      if (typeof e.tc === 'number') carrerasMap[e.carrera].tc.push(e.tc);
+      if (typeof e.eb === 'number') carrerasMap[e.carrera].eb.push(e.eb);
+      if (typeof e.bt === 'number') carrerasMap[e.carrera].bt.push(e.bt);
+      if (typeof e.et === 'number') carrerasMap[e.carrera].et.push(e.et);
     });
 
-    const facultadesList = ['todas', ...new Set(d.trazabilidad.map(x => x.facultad))];
-    const carrerasList = ['todas', ...new Set(d.trazabilidad.map(x => x.carrera))];
-    const carrerasConTitulados = d.carreras.filter(c => c.titulados > 0);
+    const carrerasData = Object.values(carrerasMap).map(c => ({
+      carrera: c.carrera,
+      facultad: c.facultad,
+      n: c.tc.length,
+      avg_tc: c.tc.length ? (c.tc.reduce((a, b) => a + b, 0) / c.tc.length) : 0,
+      avg_eb: c.eb.length ? (c.eb.reduce((a, b) => a + b, 0) / c.eb.length) : 0,
+      avg_bt: c.bt.length ? (c.bt.reduce((a, b) => a + b, 0) / c.bt.length) : 0,
+      avg_et: c.et.length ? (c.et.reduce((a, b) => a + b, 0) / c.et.length) : 0,
+      n_eb: c.eb.length,
+      n_bt: c.bt.length,
+      n_et: c.et.length
+    }));
+
+    // Data para el gráfico 3D de las 4 etapas de trayectoria
+    const chart3DStages = [
+      {
+        label: 'Tiempo Carrera',
+        shortLabel: 'Ingreso a Egreso',
+        subLabel: 'Tiempo Carrera',
+        value: curr_tc,
+        color: '#06b6d4'
+      },
+      {
+        label: 'Egreso a Bachiller',
+        shortLabel: 'Egreso a Bach.',
+        subLabel: 'Grado Bachiller',
+        value: curr_eb,
+        color: '#10b981'
+      },
+      {
+        label: 'Bachiller a Título',
+        shortLabel: 'Bach. a Título',
+        subLabel: 'Titulación Directa',
+        value: curr_bt,
+        color: '#a855f7'
+      },
+      {
+        label: 'Egreso a Título',
+        shortLabel: 'Egreso a Título',
+        subLabel: 'Ruta Completa',
+        value: curr_et,
+        color: '#f59e0b'
+      }
+    ];
+
+    // Data para el gráfico 3D comparativo de Tiempo Carrera por Carrera vs Institucional
+    const chart3DComparison = [
+      {
+        label: 'PROMEDIO UPT',
+        shortLabel: 'INSTITUCIONAL',
+        subLabel: 'Promedio UPT',
+        value: inst.tiempo_carrera_prom,
+        color: '#38bdf8'
+      },
+      ...carrerasData.map(c => {
+        const short = c.carrera.includes('Medicina') ? 'Medicina' :
+                     c.carrera.includes('Odontología') ? 'Odontología' :
+                     c.carrera.includes('Laboratorio') ? 'Lab. Clínico' : 'Terapia Física';
+        return {
+          label: c.carrera,
+          shortLabel: short,
+          subLabel: `N=${c.n}`,
+          value: c.avg_tc,
+          color: c.carrera.includes('Medicina') ? '#0284c7' :
+                 c.carrera.includes('Odontología') ? '#10b981' :
+                 c.carrera.includes('Laboratorio') ? '#f59e0b' : '#a855f7'
+        };
+      })
+    ];
 
     container.innerHTML = `
       <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
-        <!-- Header Principal de Graduados -->
-        <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);">
+        <!-- Header 3D Futurista -->
+        <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 1.3rem 1.6rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 15px 35px -5px rgba(0,0,0,0.4);">
           <div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.5rem;">🎓</span>
-              <h2 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #38bdf8; letter-spacing: -0.01em;">
-                Dashboard Institucional de Graduados y Titulados
-              </h2>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="background: linear-gradient(135deg, #0284c7, #38bdf8); width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(56,189,248,0.3);">
+                <i data-lucide="clock" style="color: #fff; width: 22px; height: 22px;"></i>
+              </div>
+              <div>
+                <h2 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #f8fafc; letter-spacing: -0.01em;">
+                  Dashboard 3D de Trayectoria y Tiempos de Graduación
+                </h2>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.88rem; color: var(--text-300);">
+                  Análisis métrico de duración temporal: Ingreso &rarr; Egreso &rarr; Bachiller &rarr; Título Profesional (Trazabilidad Oficial UPT)
+                </p>
+              </div>
             </div>
-            <p style="margin: 0.35rem 0 0 0; font-size: 0.88rem; color: var(--text-300);">
-              Trazabilidad integral de diplomas, grados de bachiller y títulos profesionales por semestre y carrera
-            </p>
           </div>
           <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
-            <button id="btn-export-grad-word" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.45rem 0.9rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: #0284c7; border: none; color: #fff; font-weight: 700; cursor: pointer;">
+            <button id="btn-export-grad-word" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.5rem 1rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; color: #fff; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(2,132,199,0.3);">
               <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
-              <span>Exportar Word</span>
+              <span>Exportar Informe Word</span>
             </button>
-            <a href="${d.sheet_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.45rem 0.9rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700;">
+            <a href="${d.sheet_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700;">
               <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
-              <span>Google Sheet Vinculado</span>
+              <span>Google Sheet Oficial</span>
             </a>
           </div>
         </div>
 
-        <!-- KPI Cards Grid (5 Tarjetas) -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-          
-          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); padding: 1.1rem; border-radius: 10px;">
-            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Títulos Profesionales</div>
-            <div style="font-size: 1.9rem; font-weight: 800; color: #38bdf8; margin: 0.2rem 0;">${k.total_titulados}</div>
-            <div style="font-size: 0.75rem; color: #34d399; font-weight: 600;">Emitidos en Semestre 2026-I</div>
+        <!-- Filtros Dinámicos Interactivos -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="filter" style="width: 16px; height: 16px; color: #38bdf8;"></i>
+            <span style="font-size: 0.88rem; font-weight: 700; color: #f8fafc;">Filtrar Promedios por Programa:</span>
           </div>
-
-          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); padding: 1.1rem; border-radius: 10px;">
-            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Grados de Bachiller</div>
-            <div style="font-size: 1.9rem; font-weight: 800; color: #34d399; margin: 0.2rem 0;">${k.total_bachilleres}</div>
-            <div style="font-size: 0.75rem; color: var(--text-300); font-weight: 600;">Semestre Activo 2026-I</div>
-          </div>
-
-          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(168, 85, 247, 0.2); padding: 1.1rem; border-radius: 10px;">
-            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Promedio Egreso a Título</div>
-            <div style="font-size: 1.9rem; font-weight: 800; color: #a855f7; margin: 0.2rem 0;">${k.prom_egreso_a_titulo} <span style="font-size: 1rem;">años</span></div>
-            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 600;">Duración promedio de titulación</div>
-          </div>
-
-          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(245, 158, 11, 0.2); padding: 1.1rem; border-radius: 10px;">
-            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Grados de Posgrado (ESPG)</div>
-            <div style="font-size: 1.9rem; font-weight: 800; color: #f59e0b; margin: 0.2rem 0;">${k.graduados_maestria || 0}</div>
-            <div style="font-size: 0.75rem; color: var(--text-400);">Maestrías y Doctorados</div>
-          </div>
-
-          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px;">
-            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">2das Especialidades</div>
-            <div style="font-size: 1.9rem; font-weight: 800; color: #f8fafc; margin: 0.2rem 0;">${k.segundas_especialidades || 0}</div>
-            <div style="font-size: 0.75rem; color: var(--text-400);">Programas de Especialización</div>
-          </div>
-
-        </div>
-
-        <!-- Gráficos y Desglose: Semestre y Carreras Destacadas -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
-          
-          <!-- Card 1: Distribución por Carrera -->
-          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h3 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--text-200); text-transform: uppercase; letter-spacing: 0.04em;">
-                Titulados por Programa Académico
-              </h3>
-              <span style="font-size: 0.75rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600;">FACSA</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              ${carrerasConTitulados.map(c => {
-                const pct = Math.round((c.titulados / k.total_titulados) * 100);
-                return `
-                  <div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.83rem; margin-bottom: 4px;">
-                      <span style="color: #f1f5f9; font-weight: 600;">${c.carrera}</span>
-                      <span style="color: #38bdf8; font-weight: 700;">${c.titulados} (${pct}%) &bull; Prom: ${c.prom_egreso_tit} a.</span>
-                    </div>
-                    <div style="background: rgba(0,0,0,0.3); height: 7px; border-radius: 4px; overflow: hidden;">
-                      <div style="width: ${pct}%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8);"></div>
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          </div>
-
-          <!-- Card 2: Evolución por Semestre -->
-          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h3 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--text-200); text-transform: uppercase; letter-spacing: 0.04em;">
-                Evolución de Diplomas por Semestre
-              </h3>
-              <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600;">2022 a 2026</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-              ${d.semestres.slice(-5).map(s => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.6rem; border-radius: 6px; background: rgba(30, 41, 59, 0.4); font-size: 0.82rem;">
-                  <span style="font-weight: 700; color: #f8fafc;">${s.semestre}</span>
-                  <div style="display: flex; gap: 12px; font-weight: 600;">
-                    <span style="color: #34d399;">${s.bachiller} Bachilleres</span>
-                    <span style="color: #38bdf8;">${s.titulos} Títulos</span>
-                  </div>
-                </div>
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+            <select id="grad-filter-carrera" style="background: #1e293b; border: 1px solid rgba(56, 189, 248, 0.3); color: #fff; padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+              <option value="todas">🏛️ Toda la Universidad (Promedio Institucional UPT)</option>
+              ${carrerasData.map(c => `
+                <option value="${c.carrera}" ${selCar === c.carrera ? 'selected' : ''}>🎓 ${c.carrera} (N=${c.n})</option>
               `).join('')}
+            </select>
+            ${!isGlobal ? `
+              <button id="grad-btn-reset" class="btn btn-secondary" style="padding: 0.45rem 0.8rem; font-size: 0.82rem; border-radius: 8px; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
+                <i data-lucide="rotate-ccw" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle;"></i> Restablecer a Institucional
+              </button>
+            ` : ''}
+          </div>
+        </div>
+
+        <!-- 3D KPI Cards Showcase (Las 4 Columnas Solicitadas) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; perspective: 1000px;">
+          
+          <!-- KPI 1: Tiempo Carrera -->
+          <div class="kpi-3d-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(6, 182, 212, 0.12)); border: 1px solid rgba(6, 182, 212, 0.4); border-radius: 14px; padding: 1.25rem; box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span style="font-size: 0.76rem; color: #67e8f9; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;">Tiempo Carrera</span>
+              <span style="background: rgba(6, 182, 212, 0.2); color: #06b6d4; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700;">Ingreso a Egreso</span>
+            </div>
+            <div style="font-size: 2.3rem; font-weight: 800; color: #f8fafc; margin: 0.4rem 0 0.1rem 0; text-shadow: 0 2px 10px rgba(6, 182, 212, 0.3);">
+              ${curr_tc.toFixed(2)} <span style="font-size: 1.1rem; color: #06b6d4; font-weight: 700;">años</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4; margin-top: 4px;">
+              ${isGlobal ? `Un alumno de la UPT demora en promedio <strong>${curr_tc.toFixed(2)} años</strong> en culminar su plan de estudios.` : `Promedio específico para <strong>${selCar}</strong>.`}
+            </div>
+            <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: #67e8f9; font-weight: 600;">
+              Mín: ${inst.tiempo_carrera_min} a. &bull; Máx: ${inst.tiempo_carrera_max} a. &bull; Muestra: ${tc_arr.length} alumnos
+            </div>
+          </div>
+
+          <!-- KPI 2: Egreso a Bachiller -->
+          <div class="kpi-3d-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.12)); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 1.25rem; box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span style="font-size: 0.76rem; color: #6ee7b7; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;">Egreso a Bachiller</span>
+              <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700;">Grado Académico</span>
+            </div>
+            <div style="font-size: 2.3rem; font-weight: 800; color: #f8fafc; margin: 0.4rem 0 0.1rem 0; text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);">
+              ${curr_eb.toFixed(2)} <span style="font-size: 1.1rem; color: #10b981; font-weight: 700;">años</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4; margin-top: 4px;">
+              Tiempo transcurrido desde la fecha de egreso hasta la emisión del diploma de <strong>Bachiller</strong> (aprox. 2.4 meses).
+            </div>
+            <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: #6ee7b7; font-weight: 600;">
+              Muestra evaluada: ${eb_arr.length} bachilleres registrados
+            </div>
+          </div>
+
+          <!-- KPI 3: Bachiller a Título -->
+          <div class="kpi-3d-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(168, 85, 247, 0.12)); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 14px; padding: 1.25rem; box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span style="font-size: 0.76rem; color: #d8b4fe; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;">Bachiller a Título</span>
+              <span style="background: rgba(168, 85, 247, 0.2); color: #a855f7; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700;">Titulación</span>
+            </div>
+            <div style="font-size: 2.3rem; font-weight: 800; color: #f8fafc; margin: 0.4rem 0 0.1rem 0; text-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);">
+              ${curr_bt.toFixed(2)} <span style="font-size: 1.1rem; color: #a855f7; font-weight: 700;">años</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4; margin-top: 4px;">
+              Tiempo entre la obtención del bachillerato y el título profesional en los expedientes continuos tramitados en bloque.
+            </div>
+            <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: #d8b4fe; font-weight: 600;">
+              Expedientes con ambas fechas: ${bt_arr.length} casos
+            </div>
+          </div>
+
+          <!-- KPI 4: Egreso a Título -->
+          <div class="kpi-3d-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(245, 158, 11, 0.12)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 14px; padding: 1.25rem; box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span style="font-size: 0.76rem; color: #fcd34d; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;">Egreso a Título</span>
+              <span style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700;">Ruta Total</span>
+            </div>
+            <div style="font-size: 2.3rem; font-weight: 800; color: #f8fafc; margin: 0.4rem 0 0.1rem 0; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);">
+              ${curr_et.toFixed(2)} <span style="font-size: 1.1rem; color: #f59e0b; font-weight: 700;">años</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4; margin-top: 4px;">
+              Demora promedio total desde que el estudiante egresa hasta que obtiene su <strong>Título Profesional</strong> oficial.
+            </div>
+            <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: #fcd34d; font-weight: 600;">
+              Muestra evaluada: ${et_arr.length} titulados
             </div>
           </div>
 
         </div>
 
-        <!-- Tabla Interactiva de Trazabilidad -->
-        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <!-- Panel Interactivo de Gráficos 3D -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 1.5rem;">
+          
+          <!-- Gráfico 3D #1: Las 4 Etapas Temporales -->
+          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="margin: 0; font-size: 1.02rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+                  <span style="color: #38bdf8;">📊</span> Diagrama 3D: Etapas de Trayectoria
+                </h3>
+                <p style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: #94a3b8;">
+                  Duración promedio en años por cada hito académico (${isGlobal ? 'Institucional UPT' : selCar})
+                </p>
+              </div>
+              <span style="font-size: 0.72rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Vista Isométrica 3D</span>
+            </div>
+            
+            <div style="background: rgba(2, 6, 23, 0.6); border-radius: 10px; padding: 1rem 0.5rem; border: 1px solid rgba(255,255,255,0.04);">
+              ${generate3DMetricChartSVG(chart3DStages, 480, 240)}
+            </div>
+
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 8px; font-size: 0.75rem;">
+              <span style="color: #67e8f9; font-weight: 600;">🔵 Ingreso a Egreso: <strong>${curr_tc.toFixed(2)}a</strong></span>
+              <span style="color: #6ee7b7; font-weight: 600;">🟢 Egreso a Bach: <strong>${curr_eb.toFixed(2)}a</strong></span>
+              <span style="color: #d8b4fe; font-weight: 600;">🟣 Bach a Título: <strong>${curr_bt.toFixed(2)}a</strong></span>
+              <span style="color: #fcd34d; font-weight: 600;">🟡 Egreso a Título: <strong>${curr_et.toFixed(2)}a</strong></span>
+            </div>
+          </div>
+
+          <!-- Gráfico 3D #2: Comparativo Institucional vs Carreras -->
+          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="margin: 0; font-size: 1.02rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+                  <span style="color: #10b981;">🏛️</span> Comparativa 3D: Tiempo Carrera vs Institucional
+                </h3>
+                <p style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: #94a3b8;">
+                  ¿Cuánto demora un alumno en terminar su carrera en cada programa vs el promedio UPT?
+                </p>
+              </div>
+              <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Promedios UPT</span>
+            </div>
+            
+            <div style="background: rgba(2, 6, 23, 0.6); border-radius: 10px; padding: 1rem 0.5rem; border: 1px solid rgba(255,255,255,0.04);">
+              ${generate3DMetricChartSVG(chart3DComparison, 500, 240)}
+            </div>
+
+            <div style="background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 0.6rem 0.8rem; font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">
+              💡 <strong>Conclusión Institucional:</strong> Un alumno de la Universidad Privada de Tacna concluye su plan curricular en un promedio general de <strong style="color: #38bdf8;">${inst.tiempo_carrera_prom} años</strong>. En programas de 7 años como Medicina el promedio se sitúa en <strong style="color: #0284c7;">8.34 años</strong>, mientras que en Tecnología Médica es de <strong style="color: #10b981;">6.31 años</strong>.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabla Ejecutiva Resumen por Programa Académico (Sin nómina individual) -->
+        <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.8rem;">
             <div>
-              <h3 style="margin: 0; font-size: 1rem; font-weight: 700; color: #f8fafc;">
-                Registro de Trazabilidad de Graduados y Titulados
+              <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #f8fafc;">
+                Matriz Comparativa de Tiempos Promedio por Programa Profesional
               </h3>
-              <p style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: var(--text-400);">
-                Mostrando ${filtered.length} de ${d.trazabilidad.length} registros individuales
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.82rem; color: #94a3b8;">
+                Consolidado estadístico por carrera obtenido de la matriz oficial de Trazabilidad (${d.institucional.total_estudiantes} expedientes procesados)
               </p>
             </div>
-
-            <!-- Filtros de la Tabla -->
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-              <input type="text" id="grad-search-input" value="${_gradFilters.search}" placeholder="Buscar por DNI o Nombre..." style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.45rem 0.75rem; border-radius: 6px; font-size: 0.82rem; min-width: 180px;">
-              
-              <select id="grad-filter-carrera" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.45rem 0.75rem; border-radius: 6px; font-size: 0.82rem;">
-                <option value="todas">Todas las Carreras</option>
-                ${carrerasList.filter(c => c !== 'todas').map(c => `
-                  <option value="${c}" ${filterCar === c ? 'selected' : ''}>${c}</option>
-                `).join('')}
-              </select>
-
-              <select id="grad-filter-tipo" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.45rem 0.75rem; border-radius: 6px; font-size: 0.82rem;">
-                <option value="todos" ${filterTipo === 'todos' ? 'selected' : ''}>Todos los Diplomas</option>
-                <option value="titulo" ${filterTipo === 'titulo' ? 'selected' : ''}>Solo Titulados</option>
-                <option value="bachiller" ${filterTipo === 'bachiller' ? 'selected' : ''}>Solo Bachilleres</option>
-              </select>
-
-              <button id="grad-btn-reset" class="btn btn-secondary" style="padding: 0.45rem 0.75rem; font-size: 0.82rem; border-radius: 6px;">
-                Restablecer
-              </button>
-            </div>
+            <span style="font-size: 0.75rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 10px; border-radius: 8px; font-weight: 700;">
+              Fuente: Trazabilidad_Grados_Posgrados
+            </span>
           </div>
 
-          <!-- Tabla de Datos -->
-          <div style="overflow-x: auto; max-height: 480px;">
-            <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.83rem;">
-              <thead style="position: sticky; top: 0; background: #0f172a; z-index: 1;">
-                <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left; color: var(--text-300);">
-                  <th style="padding: 8px 10px;">DNI</th>
-                  <th style="padding: 8px 10px;">Apellidos y Nombres</th>
-                  <th style="padding: 8px 10px;">Facultad</th>
-                  <th style="padding: 8px 10px;">Programa de Estudios</th>
-                  <th style="padding: 8px 10px;">Fecha Egreso</th>
-                  <th style="padding: 8px 10px;">Fecha Bachiller</th>
-                  <th style="padding: 8px 10px;">Fecha Título</th>
-                  <th style="padding: 8px 10px;">Modalidad</th>
+          <div style="overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="background: #0f172a; border-bottom: 2px solid rgba(56, 189, 248, 0.3); text-align: left; color: #94a3b8;">
+                  <th style="padding: 10px 12px;">Programa Profesional</th>
+                  <th style="padding: 10px 12px; text-align: center;">Facultad</th>
+                  <th style="padding: 10px 12px; text-align: center;">Muestra (N)</th>
+                  <th style="padding: 10px 12px; text-align: right; color: #67e8f9;">Tiempo Carrera Promedio</th>
+                  <th style="padding: 10px 12px; text-align: right; color: #6ee7b7;">Egreso a Bachiller</th>
+                  <th style="padding: 10px 12px; text-align: right; color: #d8b4fe;">Bachiller a Título</th>
+                  <th style="padding: 10px 12px; text-align: right; color: #fcd34d;">Egreso a Título</th>
                 </tr>
               </thead>
               <tbody>
-                ${filtered.length === 0 ? `
-                  <tr>
-                    <td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-400);">
-                      No se encontraron graduados con los filtros seleccionados.
-                    </td>
-                  </tr>
-                ` : filtered.map(item => `
-                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 7px 10px; font-family: monospace; color: #38bdf8;">${item.dni}</td>
-                    <td style="padding: 7px 10px; font-weight: 600; color: #f8fafc;">${item.nombre}</td>
-                    <td style="padding: 7px 10px;"><span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${item.facultad}</span></td>
-                    <td style="padding: 7px 10px; color: var(--text-200);">${item.carrera}</td>
-                    <td style="padding: 7px 10px; color: var(--text-300);">${item.fecha_egreso || '-'}</td>
-                    <td style="padding: 7px 10px;">${item.fecha_bachiller ? `<span style="color: #34d399; font-weight: 600;">${item.fecha_bachiller}</span>` : (item.semestre_bachiller ? `<span style="color: #34d399; font-weight: 600;">${item.semestre_bachiller}</span>` : '<span style="color: var(--text-400);">-</span>')}</td>
-                    <td style="padding: 7px 10px;">${item.fecha_titulo ? `<span style="color: #38bdf8; font-weight: 600;">${item.fecha_titulo}</span>` : (item.semestre_titulo ? `<span style="color: #38bdf8; font-weight: 600;">${item.semestre_titulo}</span>` : '<span style="color: var(--text-400);">-</span>')}</td>
-                    <td style="padding: 7px 10px;"><span style="background: rgba(16, 185, 129, 0.1); color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 0.72rem;">${item.modalidad || 'Presencial'}</span></td>
+                <!-- Fila Institucional Destacada -->
+                <tr style="background: rgba(2, 132, 199, 0.15); border-bottom: 2px solid rgba(56, 189, 248, 0.4); font-weight: 800;">
+                  <td style="padding: 11px 12px; color: #38bdf8;">
+                    🏛️ PROMEDIO INSTITUCIONAL UPT
+                  </td>
+                  <td style="padding: 11px 12px; text-align: center;"><span style="background: rgba(56,189,248,0.2); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">UPT</span></td>
+                  <td style="padding: 11px 12px; text-align: center; color: #f8fafc;">${inst.total_estudiantes} alumnos</td>
+                  <td style="padding: 11px 12px; text-align: right; color: #67e8f9; font-size: 0.95rem;">${inst.tiempo_carrera_prom} años</td>
+                  <td style="padding: 11px 12px; text-align: right; color: #6ee7b7; font-size: 0.95rem;">${inst.egreso_a_bachiller_prom} años</td>
+                  <td style="padding: 11px 12px; text-align: right; color: #d8b4fe; font-size: 0.95rem;">${inst.bachiller_a_titulo_prom} años</td>
+                  <td style="padding: 11px 12px; text-align: right; color: #fcd34d; font-size: 0.95rem;">${inst.egreso_a_titulo_prom} años</td>
+                </tr>
+
+                ${carrerasData.map(c => `
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.2s ease;">
+                    <td style="padding: 10px 12px; font-weight: 600; color: #f8fafc;">${c.carrera}</td>
+                    <td style="padding: 10px 12px; text-align: center;"><span style="background: rgba(255,255,255,0.06); color: #cbd5e1; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">${c.facultad}</span></td>
+                    <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${c.n}</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #67e8f9;">${c.avg_tc.toFixed(2)} a.</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #6ee7b7;">${c.avg_eb.toFixed(2)} a.</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #d8b4fe;">${c.avg_bt.toFixed(2)} a.</td>
+                    <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #fcd34d;">${c.avg_et.toFixed(2)} a.</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -4777,14 +5001,6 @@ function drawGraduadosDashboard(container) {
     const btnExport = container.querySelector('#btn-export-grad-word');
     if (btnExport) btnExport.onclick = () => downloadGraduadosWordReport();
 
-    const searchInp = container.querySelector('#grad-search-input');
-    if (searchInp) {
-      searchInp.oninput = (e) => {
-        _gradFilters.search = e.target.value;
-        render();
-      };
-    }
-
     const carSel = container.querySelector('#grad-filter-carrera');
     if (carSel) {
       carSel.onchange = (e) => {
@@ -4793,18 +5009,11 @@ function drawGraduadosDashboard(container) {
       };
     }
 
-    const tipoSel = container.querySelector('#grad-filter-tipo');
-    if (tipoSel) {
-      tipoSel.onchange = (e) => {
-        _gradFilters.tipoGrado = e.target.value;
-        render();
-      };
-    }
-
     const btnReset = container.querySelector('#grad-btn-reset');
     if (btnReset) {
       btnReset.onclick = () => {
-        _gradFilters = { search: '', facultad: 'todas', carrera: 'todas', tipoGrado: 'todos' };
+        _gradFilters.carrera = 'todas';
+        _gradFilters.facultad = 'todas';
         render();
       };
     }
