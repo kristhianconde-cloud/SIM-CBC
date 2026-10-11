@@ -111,12 +111,11 @@ export function renderWelcomePage(containerId, onLoginSuccess) {
 
             <!-- Oficina de Gestión de la Calidad y Carreras Profesionales -->
             <div class="welcome-careers-showcase">
-              <div class="quality-office-banner">
-                <div class="quality-office-header">
-                  <i data-lucide="line-chart"></i>
-                  <h3>Oficina de Gestión de la Calidad</h3>
+              <div class="quality-office-banner" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem;">
+                <i data-lucide="award" style="color: #38bdf8; width: 20px; height: 20px; flex-shrink: 0;"></i>
+                <div style="font-size: 0.88rem; font-weight: 700; color: #f8fafc; letter-spacing: 0.02em;">
+                  Diseñado y Desarrollado por: <span style="color: #38bdf8;">Ingeniero Comercial Kristhian Conde Zegarra</span>
                 </div>
-                <p class="quality-office-slogan">Trabajando por la excelencia y la mejora continua</p>
               </div>
               
               <h3 class="careers-section-title">Carreras profesionales de la UPT</h3>
