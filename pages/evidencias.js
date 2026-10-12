@@ -4778,10 +4778,6 @@ function drawGraduadosDashboard(container) {
               <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
               <span>Exportar Informe Word</span>
             </button>
-            <a href="${d.sheet_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700;">
-              <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
-              <span>Google Sheet Oficial</span>
-            </a>
           </div>
         </div>
 
