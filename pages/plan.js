@@ -296,7 +296,7 @@ export async function renderPlanPage(container, userRole = "admin") {
     if (pageItems.length === 0) {
       tableBody.innerHTML = `
         <tr>
-          <td colspan="10" style="text-align: center; color: var(--text-400); padding: 4rem 1rem;">
+          <td colspan="${isEditable ? 10 : 9}" style="text-align: center; color: var(--text-400); padding: 4rem 1rem;">
             <i data-lucide="search-code" style="width: 40px; height: 40px; margin-bottom: 0.5rem; color: var(--text-400);"></i>
             <p>No se encontraron programas con los filtros seleccionados.</p>
           </td>
@@ -426,18 +426,18 @@ export async function renderPlanPage(container, userRole = "admin") {
             <td class="text-center">
               ${resolucionHtml}
             </td>
-            <td class="text-center">
-              <div style="display: flex; gap: 0.25rem; justify-content: center;">
-                <button class="btn btn-secondary btn-edit-prog" data-id="${p.id}" style="padding: 0.35rem; border-radius: 4px;" title="Editar Detalles">
-                  <i data-lucide="edit-3" style="width: 13px; height: 13px;"></i>
-                </button>
-                ${isEditable ? `
+            ${isEditable ? `
+              <td class="text-center">
+                <div style="display: flex; gap: 0.25rem; justify-content: center;">
+                  <button class="btn btn-secondary btn-edit-prog" data-id="${p.id}" style="padding: 0.35rem; border-radius: 4px;" title="Editar Detalles">
+                    <i data-lucide="edit-3" style="width: 13px; height: 13px;"></i>
+                  </button>
                   <button class="btn btn-danger btn-delete-prog" data-id="${p.id}" style="padding: 0.35rem; border-radius: 4px;" title="Eliminar Programa">
                     <i data-lucide="trash-2" style="width: 13px; height: 13px;"></i>
                   </button>
-                ` : ""}
-              </div>
-            </td>
+                </div>
+              </td>
+            ` : ""}
           </tr>
         `;
       }).join("");
@@ -1664,7 +1664,7 @@ export async function renderPlanPage(container, userRole = "admin") {
                   <th style="width: 10%; text-align: center;">Fecha de actualización según resolución</th>
                   <th style="width: 12%; text-align: center;">Vigencia del plan de estudios</th>
                   <th style="width: 12%; text-align: center;">Resolución</th>
-                  <th style="width: 8%; text-align: center;">Acciones</th>
+                  ${isEditable ? '<th style="width: 8%; text-align: center;">Acciones</th>' : ''}
                 </tr>
               </thead>
               <tbody id="programas-table-body">
