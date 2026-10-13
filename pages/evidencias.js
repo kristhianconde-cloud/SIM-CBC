@@ -602,14 +602,173 @@ window.openMultimediaConfigModal = (semestreForzado) => {
   window.openVideoConfigModal(semestreForzado);
 };
 
+// Función auxiliar para transformar enlaces a formato reproducible en <iframe>
+function convertirUrlParaEmbed(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== 'string') return '';
+  let url = procesarEntradaMultimedia(rawUrl).trim();
+  if (!url) return '';
+
+  // Google Drive: convertir enlaces /view a /preview
+  if (url.includes('drive.google.com')) {
+    // Si contiene /file/d/{id}/view... o similares
+    if (url.includes('/file/d/')) {
+      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return `https://drive.google.com/file/d/${match[1]}/preview`;
+      }
+    }
+    // Si contiene id={id}
+    if (url.includes('id=')) {
+      const match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return `https://drive.google.com/file/d/${match[1]}/preview`;
+      }
+    }
+  }
+
+  // YouTube: convertir a embed
+  if (url.includes('youtube.com/watch')) {
+    const match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+    }
+  }
+  if (url.includes('youtu.be/')) {
+    const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+    }
+  }
+  if (url.includes('youtube.com/shorts/')) {
+    const match = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+    }
+  }
+
+  // Vimeo
+  if (url.includes('vimeo.com') && !url.includes('player.vimeo.com')) {
+    const match = url.match(/vimeo\.com\/(?:.*\/)?(\d+)/);
+    if (match && match[1]) {
+      return `https://player.vimeo.com/video/${match[1]}?autoplay=1`;
+    }
+  }
+
+  return url;
+}
+
+// Modal Interactivo con estilo oscuro y limpieza de src al cerrar
+function abrirModalMultimediaViewer({ titulo, icono, tag, semestre, embedUrl, rawUrl }) {
+  let modal = document.getElementById("sigeca-multimedia-player-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "sigeca-multimedia-player-modal";
+    modal.className = "modal-overlay";
+    modal.style.cssText = "position: fixed; inset: 0; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); z-index: 100000; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.25s ease;";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-wrapper" style="background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; width: 100%; max-width: 900px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden; display: flex; flex-direction: column;">
+      
+      <!-- Cabecera del Visor Modal -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.4rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.95);">
+        <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
+          <span style="font-size: 1.4rem;">${icono}</span>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #f8fafc; letter-spacing: -0.01em;">
+                ${titulo}
+              </h3>
+              <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 4px;">
+                ${semestre}
+              </span>
+            </div>
+            <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: #94a3b8;">
+              ${tag} - Sistema Integral de Monitoreo CBC (UPT)
+            </p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 8px;">
+          ${rawUrl ? `
+            <a href="${rawUrl}" target="_blank" rel="noopener noreferrer" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #cbd5e1; border-radius: 6px; padding: 5px 10px; font-size: 0.75rem; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s;" title="Abrir en ventana externa">
+              <span>Abrir Externo</span> ↗
+            </a>
+          ` : ''}
+          <button id="sigeca-close-media-modal-btn" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'; this.style.color='#f87171'; this.style.borderColor='rgba(239, 68, 68, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.1)';">✕</button>
+        </div>
+      </div>
+
+      <!-- Contenedor del Reproductor Responsivo <iframe> -->
+      <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #020617; overflow: hidden;">
+        <iframe id="sigeca-multimedia-iframe" src="${embedUrl}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+
+      <!-- Pie del Modal -->
+      <div style="padding: 0.7rem 1.25rem; background: rgba(15, 23, 42, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.06); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #64748b;">
+        <span>🔒 Visor Integrado de Calidad Académica UPT</span>
+        <button id="sigeca-close-media-modal-footer-btn" class="btn btn-secondary" style="padding: 0.35rem 0.85rem; font-size: 0.75rem; border-radius: 6px;">Cerrar Reproductor</button>
+      </div>
+
+    </div>
+  `;
+
+  modal.style.display = "flex";
+  requestAnimationFrame(() => {
+    modal.style.opacity = "1";
+  });
+
+  // Función de cierre dinámico: LIMPIA el src del iframe para detener inmediatamente el audio/video
+  const cerrarModal = () => {
+    modal.style.opacity = "0";
+    setTimeout(() => {
+      const iframe = modal.querySelector("#sigeca-multimedia-iframe");
+      if (iframe) {
+        iframe.src = "";
+      }
+      modal.style.display = "none";
+      modal.innerHTML = "";
+    }, 250);
+  };
+
+  const closeBtn = modal.querySelector("#sigeca-close-media-modal-btn");
+  const footerCloseBtn = modal.querySelector("#sigeca-close-media-modal-footer-btn");
+
+  if (closeBtn) closeBtn.onclick = cerrarModal;
+  if (footerCloseBtn) footerCloseBtn.onclick = cerrarModal;
+
+  modal.onclick = (e) => {
+    if (e.target === modal) cerrarModal();
+  };
+
+  // Tecla Escape para cerrar
+  const onKeyEscape = (e) => {
+    if (e.key === "Escape") {
+      cerrarModal();
+      document.removeEventListener("keydown", onKeyEscape);
+    }
+  };
+  document.addEventListener("keydown", onKeyEscape);
+}
+
 window.reproducirVideo = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.videoUrl || '';
-  const targetUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
 
-  if (targetUrl && esUrlValida(targetUrl)) {
-    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  if (cleanUrl && esUrlValida(cleanUrl)) {
+    const embedUrl = convertirUrlParaEmbed(cleanUrl);
+    const titulo = mediaData.videoTitulo || `Video Explicativo CBC ${currentSem}`;
+    abrirModalMultimediaViewer({
+      titulo: titulo,
+      icono: "🎬",
+      tag: "Video Institucional CBC",
+      semestre: currentSem,
+      embedUrl: embedUrl,
+      rawUrl: cleanUrl
+    });
   } else if (canEditMultimedia()) {
     window.openVideoConfigModal(currentSem);
   } else {
@@ -621,10 +780,19 @@ window.reproducirPodcast = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.podcastUrl || '';
-  const targetUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
 
-  if (targetUrl && esUrlValida(targetUrl)) {
-    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  if (cleanUrl && esUrlValida(cleanUrl)) {
+    const embedUrl = convertirUrlParaEmbed(cleanUrl);
+    const titulo = mediaData.podcastTitulo || `Podcast: Análisis CBC ${currentSem}`;
+    abrirModalMultimediaViewer({
+      titulo: titulo,
+      icono: "🎙️",
+      tag: "Podcast Semestral CBC",
+      semestre: currentSem,
+      embedUrl: embedUrl,
+      rawUrl: cleanUrl
+    });
   } else if (canEditMultimedia()) {
     window.openPodcastConfigModal(currentSem);
   } else {
