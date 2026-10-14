@@ -122,21 +122,22 @@ export async function renderDashboardPage(container) {
   };
 
   // Obtener lista única de semestres de forma dinámica
-  const semestersSet = new Set(["2024-I", "2024-II", "2025-I", "2025-II", "2026-I", "2026-II"]);
+  const semestersSet = new Set(["2024-I", "2024-II", "2025-I", "2025-II", "2026-I"]);
   (stats.docentes || []).forEach(d => { if (d.semestre) semestersSet.add(d.semestre); });
   (stats.postulantes || []).forEach(p => { if (p.semestre) semestersSet.add(p.semestre); });
   (stats.ingresantes || []).forEach(i => { if (i.semestre) semestersSet.add(i.semestre); });
   (evidencias || []).forEach(e => { if (e.semestre) semestersSet.add(e.semestre); });
 
-  // Filtrar estrictamente desde 2024-I hasta el último semestre en curso
+  // Filtrar estrictamente desde 2024-I hasta 2026-I (en Resumen General no se muestra 2026-II hasta nuevo aviso)
   const minSemScore = parseSem("2024-I");
+  const maxSemScore = parseSem("2026-I");
   const semestres = Array.from(semestersSet)
-    .filter(s => parseSem(s) >= minSemScore)
+    .filter(s => parseSem(s) >= minSemScore && parseSem(s) <= maxSemScore)
     .sort((a, b) => parseSem(a) - parseSem(b));
 
-  // Semestre seleccionado por defecto (mantener selección actual o 2024-II)
+  // Semestre seleccionado por defecto (mantener selección actual si es válida, o 2026-I por defecto)
   if (!window._dashboardSemester || !semestres.includes(window._dashboardSemester)) {
-    window._dashboardSemester = semestres.includes("2024-II") ? "2024-II" : semestres[0];
+    window._dashboardSemester = semestres.includes("2026-I") ? "2026-I" : (semestres.includes("2024-II") ? "2024-II" : semestres[0]);
   }
   const selectedSem = window._dashboardSemester;
 
@@ -441,19 +442,18 @@ export async function renderDashboardPage(container) {
         { Semestre: "2024-II", Total: 24 },
         { Semestre: "2025-I", Total: 27 },
         { Semestre: "2025-II", Total: 35 },
-        { Semestre: "2026-I", Total: 40 },
-        { Semestre: "2026-II", Total: 44 }
+        { Semestre: "2026-I", Total: 40 }
       ];
     } else {
-      // Garantizar que 2026-I y 2026-II estén presentes
+      // Garantizar que 2026-I esté presente
       if (!evolRows.find(r => r.Semestre === "2026-I")) {
         evolRows.push({ tipo: "evolucion_upt", Semestre: "2026-I", Total: 40 });
       }
-      if (!evolRows.find(r => r.Semestre === "2026-II")) {
-        evolRows.push({ tipo: "evolucion_upt", Semestre: "2026-II", Total: 44 });
-      }
       evolRows.sort((a, b) => parseSem(a.Semestre) - parseSem(b.Semestre));
     }
+
+    // Filtrar serie histórica para no mostrar 2026-II en Resumen General hasta nuevo aviso
+    evolRows = evolRows.filter(r => parseSem(r.Semestre) <= maxSemScore);
 
     // Identificar el dato exacto correspondiente al semestre seleccionado
     const selectedSemScore = parseSem(selectedSem);
