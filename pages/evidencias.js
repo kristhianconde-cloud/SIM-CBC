@@ -7403,8 +7403,8 @@ const getRowCantidad = (r) => {
     { facultad: "FACEM", programas: ["Administración de Empresas", "Contabilidad y Finanzas", "Ingeniería Comercial", "Economía y Microfinanzas", "Turismo y Hotelería"] },
     { facultad: "FADE", programas: ["Derecho y Ciencias Políticas"] },
     { facultad: "FACSA", programas: ["Medicina Humana", "Odontología", "Enfermería", "Obstetricia", "Tecnología Médica"] },
-    { facultad: "FAING", programas: ["Ingeniería de Sistemas", "Ingeniería Civil", "Ingeniería Electrónica", "Ingeniería Agroindustrial", "Ingeniería Ambiental"] },
-    { facultad: "FAU", programas: ["Arquitectura y Urbanismo"] }
+    { facultad: "FAING", programas: ["Ingeniería de Sistemas", "Ingeniería Civil", "Ingeniería Electrónica", "Ingeniería Agroindustrial", "Ingeniería Ambiental", "Ingeniería Industrial"] },
+    { facultad: "FAU", programas: ["Arquitectura", "Urbanismo"] }
   ];
 
   const generarDocentesProgramaData = (facultadesData) => {
