@@ -15249,7 +15249,7 @@
           {
             "Facultad": "FAU",
             "Programa": "Arquitectura",
-            "Cantidad": 9
+            "Cantidad": 10
           },
           {
             "Facultad": "FAU",
@@ -15264,17 +15264,17 @@
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Ambiental",
-            "Cantidad": 1
+            "Cantidad": 2
           },
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Civil",
-            "Cantidad": 27
+            "Cantidad": 35
           },
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería de Sistemas",
-            "Cantidad": 10
+            "Cantidad": 14
           },
           {
             "Facultad": "FAING",
@@ -15284,12 +15284,12 @@
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Industrial",
-            "Cantidad": 9
+            "Cantidad": 11
           },
           {
             "Facultad": "FADE",
             "Programa": "Derecho",
-            "Cantidad": 28
+            "Cantidad": 32
           },
           {
             "Facultad": "FAEDCOH",
@@ -15304,7 +15304,7 @@
           {
             "Facultad": "FAEDCOH",
             "Programa": "Educación Primaria",
-            "Cantidad": 8
+            "Cantidad": 11
           },
           {
             "Facultad": "FAEDCOH",
@@ -15314,12 +15314,12 @@
           {
             "Facultad": "FAEDCOH",
             "Programa": "Educación Física y Deportes",
-            "Cantidad": 24
+            "Cantidad": 25
           },
           {
             "Facultad": "FAEDCOH",
             "Programa": "Psicología",
-            "Cantidad": 14
+            "Cantidad": 17
           },
           {
             "Facultad": "FACEM",
@@ -15339,12 +15339,12 @@
           {
             "Facultad": "FACEM",
             "Programa": "Economía",
-            "Cantidad": 7
+            "Cantidad": 1
           },
           {
             "Facultad": "FACEM",
             "Programa": "Ingeniería Comercial",
-            "Cantidad": 1
+            "Cantidad": 11
           },
           {
             "Facultad": "FACEM",
