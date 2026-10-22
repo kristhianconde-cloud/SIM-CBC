@@ -19031,7 +19031,7 @@
           {
             "Facultad": "FAU",
             "Programa": "Arquitectura",
-            "Cantidad": 9
+            "Cantidad": 10
           },
           {
             "Facultad": "FAU",
@@ -19046,17 +19046,17 @@
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Ambiental",
-            "Cantidad": 1
+            "Cantidad": 2
           },
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Civil",
-            "Cantidad": 25
+            "Cantidad": 33
           },
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería de Sistemas",
-            "Cantidad": 9
+            "Cantidad": 13
           },
           {
             "Facultad": "FAING",
@@ -19066,12 +19066,12 @@
           {
             "Facultad": "FAING",
             "Programa": "Ingeniería Industrial",
-            "Cantidad": 8
+            "Cantidad": 10
           },
           {
             "Facultad": "FADE",
             "Programa": "Derecho",
-            "Cantidad": 27
+            "Cantidad": 31
           },
           {
             "Facultad": "FAEDCOH",
@@ -19081,7 +19081,7 @@
           {
             "Facultad": "FAEDCOH",
             "Programa": "Educación Inicial",
-            "Cantidad": 2
+            "Cantidad": 5
           },
           {
             "Facultad": "FAEDCOH",
@@ -19096,17 +19096,17 @@
           {
             "Facultad": "FAEDCOH",
             "Programa": "Educación Física y Deportes",
-            "Cantidad": 23
+            "Cantidad": 24
           },
           {
             "Facultad": "FAEDCOH",
             "Programa": "Psicología",
-            "Cantidad": 14
+            "Cantidad": 17
           },
           {
             "Facultad": "FACEM",
             "Programa": "Administración de Negocios Internacionales",
-            "Cantidad": 8
+            "Cantidad": 7
           },
           {
             "Facultad": "FACEM",
@@ -19126,7 +19126,7 @@
           {
             "Facultad": "FACEM",
             "Programa": "Ingeniería Comercial",
-            "Cantidad": 7
+            "Cantidad": 11
           },
           {
             "Facultad": "FACEM",
@@ -19136,7 +19136,7 @@
           {
             "Facultad": "FACEM",
             "Programa": "Administración de Empresas",
-            "Cantidad": 2
+            "Cantidad": 3
           }
         ]
       }
