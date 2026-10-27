@@ -369,7 +369,8 @@ class DatabaseService {
          "sigeca_transparencia",
          "sigeca_transparencia_cbc",
           "sigeca_tablero_indicadores",
-          "sigeca_semestre_links"
+          "sigeca_semestre_links",
+          "sigeca_multimedia_links"
        ];
        if (!self.isInitializing && keysToSync.includes(key)) {
          originalSetItem.call(localStorage, "sigeca_last_local_write", Date.now().toString());
@@ -1144,7 +1145,8 @@ class DatabaseService {
           transparencia: "sigeca_transparencia",
           transparencia_cbc: "sigeca_transparencia_cbc",
           tablero_indicadores: "sigeca_tablero_indicadores",
-          semestre_links: "sigeca_semestre_links"
+          semestre_links: "sigeca_semestre_links",
+          multimedia_links: "sigeca_multimedia_links"
         };
         
         for (const [serverKey, localKey] of Object.entries(keysMap)) {
@@ -1193,7 +1195,8 @@ class DatabaseService {
         transparencia: JSON.parse(localStorage.getItem("sigeca_transparencia") || "null"),
         transparencia_cbc: JSON.parse(localStorage.getItem("sigeca_transparencia_cbc") || "null"),
         tablero_indicadores: JSON.parse(localStorage.getItem("sigeca_tablero_indicadores") || "[]"),
-        semestre_links: JSON.parse(localStorage.getItem("sigeca_semestre_links") || "{}")
+        semestre_links: JSON.parse(localStorage.getItem("sigeca_semestre_links") || "{}"),
+        multimedia_links: JSON.parse(localStorage.getItem("sigeca_multimedia_links") || "{}")
       };
       
       const response = await fetch('/api/db', {
@@ -1244,7 +1247,8 @@ class DatabaseService {
               { localKey: "sigeca_transparencia", dbKey: "transparencia" },
               { localKey: "sigeca_transparencia_cbc", dbKey: "transparencia_cbc" },
               { localKey: "sigeca_tablero_indicadores", dbKey: "tablero_indicadores" },
-              { localKey: "sigeca_semestre_links", dbKey: "semestre_links" }
+              { localKey: "sigeca_semestre_links", dbKey: "semestre_links" },
+              { localKey: "sigeca_multimedia_links", dbKey: "multimedia_links" }
             ];
             
             this.isInitializing = true; // Desactivar interceptor local
