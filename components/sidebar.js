@@ -13,7 +13,7 @@ export function renderSidebar(activePage = "dashboard") {
 
   const isLicenciamientoActive = ["plan", "evidencias", "cbc_estadisticas", "transparencia", "transparencia_cbc", "asesor_sunedu", "asesor_licenciamiento"].includes(activePage);
   const isAcreditacionActive = ["acred_sineace", "acred_cinda", "acred_icacit", "acreditacion"].includes(activePage);
-  const isGecaActive = ["malla", "encuestas", "prompts"].includes(activePage);
+  const isGecaActive = ["malla", "prompts"].includes(activePage);
 
   const userName = currentUser.nombre;
   const currentRole = currentUser.rolVisual || currentUser.rol;
@@ -126,10 +126,6 @@ export function renderSidebar(activePage = "dashboard") {
             <a class="nav-subitem ${activePage === 'malla' ? 'active' : ''}" data-page="malla">
               <i data-lucide="table-properties"></i>
               <span>Malla Curricular C1</span>
-            </a>
-            <a class="nav-subitem ${activePage === 'encuestas' ? 'active' : ''}" data-page="encuestas">
-              <i data-lucide="pie-chart"></i>
-              <span>Analizador de Encuestas</span>
             </a>
             <a class="nav-subitem ${activePage === 'prompts' ? 'active' : ''}" data-page="prompts">
               <i data-lucide="terminal"></i>
