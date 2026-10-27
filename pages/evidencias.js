@@ -756,19 +756,15 @@ window.reproducirVideo = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.videoUrl || '';
-  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+  let cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+
+  // Si es un enlace de SharePoint / OneDrive con /embed.aspx, restaurarlo para apertura directa en pestaña externa
+  if (cleanUrl.includes('sharepoint.com') && cleanUrl.includes('/embed.aspx')) {
+    cleanUrl = cleanUrl.replace('/embed.aspx', '/onedrive.aspx');
+  }
 
   if (cleanUrl && esUrlValida(cleanUrl)) {
-    const embedUrl = convertirUrlParaEmbed(cleanUrl);
-    const titulo = mediaData.videoTitulo || `Video Explicativo CBC ${currentSem}`;
-    abrirModalMultimediaViewer({
-      titulo: titulo,
-      icono: "🎬",
-      tag: "Video Institucional CBC",
-      semestre: currentSem,
-      embedUrl: embedUrl,
-      rawUrl: cleanUrl
-    });
+    window.open(cleanUrl, '_blank', 'noopener,noreferrer');
   } else if (canEditMultimedia()) {
     window.openVideoConfigModal(currentSem);
   } else {
@@ -780,19 +776,14 @@ window.reproducirPodcast = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.podcastUrl || '';
-  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+  let cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
+
+  if (cleanUrl.includes('sharepoint.com') && cleanUrl.includes('/embed.aspx')) {
+    cleanUrl = cleanUrl.replace('/embed.aspx', '/onedrive.aspx');
+  }
 
   if (cleanUrl && esUrlValida(cleanUrl)) {
-    const embedUrl = convertirUrlParaEmbed(cleanUrl);
-    const titulo = mediaData.podcastTitulo || `Podcast: Análisis CBC ${currentSem}`;
-    abrirModalMultimediaViewer({
-      titulo: titulo,
-      icono: "🎙️",
-      tag: "Podcast Semestral CBC",
-      semestre: currentSem,
-      embedUrl: embedUrl,
-      rawUrl: cleanUrl
-    });
+    window.open(cleanUrl, '_blank', 'noopener,noreferrer');
   } else if (canEditMultimedia()) {
     window.openPodcastConfigModal(currentSem);
   } else {
