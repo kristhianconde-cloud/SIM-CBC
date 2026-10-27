@@ -114,12 +114,12 @@ const isPlaceholderUrl = (url) => {
 const loadEnlacesMultimedia = () => {
   const defaults = {
     '2026-I': {
-      videoUrl: '',
+      videoUrl: 'https://uptpe-my.sharepoint.com/:v:/r/personal/licencia_institucional_upt_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Flicencia_institucional_upt_pe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20-%20EVIDENCIAS%2F2026-I%2FV%C3%8DDEO%20RESUMEN%2FSEGUIMIENTO%20A%20LAS%20CBC%202026-I%20FINAL%202.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&share=cQrpNQs7fDM4QJoOSldrsLtlEgUCFuH7DB0KEQeA_CNa_vgJug',
       videoTitulo: 'Video Explicativo CBC 2026-I',
-      videoPortada: '',
-      podcastUrl: '',
+      videoPortada: 'https://uptpe-my.sharepoint.com/:i:/r/personal/licencia_institucional_upt_pe/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FV%C3%8DDEO%20RESUMEN%2FPORTADA%201%2Ejpg&parent=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FV%C3%8DDEO%20RESUMEN&share=cQrmX%2DbHEKfUS5SdYWUaswmGEgUCPO5vNYeYNouONoDGLeaQ%5Fw',
+      podcastUrl: 'https://uptpe-my.sharepoint.com/:v:/r/personal/licencia_institucional_upt_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Flicencia_institucional_upt_pe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20-%20EVIDENCIAS%2F2026-I%2FPODCAST%2FTEMA_1_SOLIDEZ_VULNERABILIDAD_UPT_STREAMING.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&share=cQrTJ3cN8q2vQb6Roegw6onGEgUCZAcFNSbm3K5f9_WswKoo2Q',
       podcastTitulo: 'Podcast: Análisis CBC 2026-I',
-      podcastPortada: ''
+      podcastPortada: 'https://uptpe-my.sharepoint.com/:i:/r/personal/licencia_institucional_upt_pe/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FPODCAST%2FMan%5Fand%5Fwoman%5Frecording%5Fpodcast%5F20260918124428%2Ejpeg&parent=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FPODCAST&share=cQrDi8liD%5FMHR760262y2b1iEgUCaS%5FWgUOqYPYfBzOIDg2spg'
     },
     '2026-II': {
       videoUrl: '',
@@ -134,31 +134,37 @@ const loadEnlacesMultimedia = () => {
     const saved = localStorage.getItem("sigeca_multimedia_links");
     if (saved) {
       const parsed = JSON.parse(saved);
-      Object.keys(parsed).forEach(k => {
-        if (parsed[k]) {
-          if (isPlaceholderUrl(parsed[k].videoUrl)) {
-            parsed[k].videoUrl = '';
-          } else if (parsed[k].videoUrl) {
-            parsed[k].videoUrl = normalizarIframeCode(parsed[k].videoUrl);
+      const merged = { ...defaults };
+      Object.keys(defaults).forEach(k => {
+        merged[k] = { ...defaults[k], ...(parsed[k] || {}) };
+        if (merged[k]) {
+          if (isPlaceholderUrl(merged[k].videoUrl)) {
+            merged[k].videoUrl = defaults[k]?.videoUrl || '';
+          } else if (merged[k].videoUrl) {
+            merged[k].videoUrl = normalizarIframeCode(merged[k].videoUrl);
           }
-          if (isPlaceholderUrl(parsed[k].podcastUrl)) {
-            parsed[k].podcastUrl = '';
-          } else if (parsed[k].podcastUrl) {
-            parsed[k].podcastUrl = normalizarIframeCode(parsed[k].podcastUrl);
+          if (isPlaceholderUrl(merged[k].podcastUrl)) {
+            merged[k].podcastUrl = defaults[k]?.podcastUrl || '';
+          } else if (merged[k].podcastUrl) {
+            merged[k].podcastUrl = normalizarIframeCode(merged[k].podcastUrl);
           }
-          if (isPlaceholderUrl(parsed[k].videoPortada)) {
-            parsed[k].videoPortada = '';
-          } else if (parsed[k].videoPortada) {
-            parsed[k].videoPortada = procesarEntradaMultimedia(parsed[k].videoPortada);
+          if (isPlaceholderUrl(merged[k].videoPortada)) {
+            merged[k].videoPortada = defaults[k]?.videoPortada || '';
+          } else if (merged[k].videoPortada) {
+            merged[k].videoPortada = procesarEntradaMultimedia(merged[k].videoPortada);
           }
-          if (isPlaceholderUrl(parsed[k].podcastPortada)) {
-            parsed[k].podcastPortada = '';
-          } else if (parsed[k].podcastPortada) {
-            parsed[k].podcastPortada = procesarEntradaMultimedia(parsed[k].podcastPortada);
+          if (isPlaceholderUrl(merged[k].podcastPortada)) {
+            merged[k].podcastPortada = defaults[k]?.podcastPortada || '';
+          } else if (merged[k].podcastPortada) {
+            merged[k].podcastPortada = procesarEntradaMultimedia(merged[k].podcastPortada);
           }
+          if (!merged[k].videoUrl && defaults[k]?.videoUrl) merged[k].videoUrl = defaults[k].videoUrl;
+          if (!merged[k].videoPortada && defaults[k]?.videoPortada) merged[k].videoPortada = defaults[k].videoPortada;
+          if (!merged[k].podcastUrl && defaults[k]?.podcastUrl) merged[k].podcastUrl = defaults[k].podcastUrl;
+          if (!merged[k].podcastPortada && defaults[k]?.podcastPortada) merged[k].podcastPortada = defaults[k].podcastPortada;
         }
       });
-      return { ...defaults, ...parsed };
+      return merged;
     }
   } catch (e) {
     console.error("Error loading multimedia links from storage", e);
@@ -170,6 +176,9 @@ const saveEnlacesMultimedia = (data) => {
   try {
     localStorage.setItem("sigeca_multimedia_links", JSON.stringify(data));
     window.ENLACES_MULTIMEDIA = data;
+    if (window.db && typeof window.db.saveToServer === "function") {
+      window.db.saveToServer();
+    }
   } catch (e) {
     console.error("Error saving multimedia links to storage", e);
   }
@@ -610,20 +619,38 @@ function convertirUrlParaEmbed(rawUrl) {
 
   // Google Drive: convertir enlaces /view a /preview
   if (url.includes('drive.google.com')) {
-    // Si contiene /file/d/{id}/view... o similares
     if (url.includes('/file/d/')) {
       const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
       if (match && match[1]) {
         return `https://drive.google.com/file/d/${match[1]}/preview`;
       }
     }
-    // Si contiene id={id}
     if (url.includes('id=')) {
       const match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
       if (match && match[1]) {
         return `https://drive.google.com/file/d/${match[1]}/preview`;
       }
     }
+  }
+
+  // Microsoft OneDrive / SharePoint handling
+  if (url.includes('onedrive.live.com') || url.includes('1drv.ms') || url.includes('sharepoint.com')) {
+    let embed = url;
+    if (url.includes('onedrive.live.com') && url.includes('resid=') && !url.includes('embed')) {
+      embed = url.replace('/view.aspx', '/embed').replace('/redir', '/embed');
+    } else if (url.includes('sharepoint.com')) {
+      if (embed.includes('/stream.aspx')) {
+        embed = embed.replace('/stream.aspx', '/embed.aspx');
+      } else if (embed.includes('/onedrive.aspx') || embed.includes('/Doc.aspx') || embed.includes('/view.aspx')) {
+        embed = embed.replace('/onedrive.aspx', '/embed.aspx')
+                     .replace('/Doc.aspx', '/embed.aspx')
+                     .replace('/view.aspx', '/embed.aspx');
+      }
+      if (!embed.includes('embed') && !embed.includes('action=embedview')) {
+        embed = embed + (embed.includes('?') ? '&action=embedview' : '?action=embedview');
+      }
+    }
+    return embed;
   }
 
   // YouTube: convertir a embed
@@ -756,15 +783,18 @@ window.reproducirVideo = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.videoUrl || '';
-  let cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
-
-  // Si es un enlace de SharePoint / OneDrive con /embed.aspx, restaurarlo para apertura directa en pestaña externa
-  if (cleanUrl.includes('sharepoint.com') && cleanUrl.includes('/embed.aspx')) {
-    cleanUrl = cleanUrl.replace('/embed.aspx', '/onedrive.aspx');
-  }
+  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
 
   if (cleanUrl && esUrlValida(cleanUrl)) {
-    window.open(cleanUrl, '_blank', 'noopener,noreferrer');
+    const embedUrl = convertirUrlParaEmbed(cleanUrl);
+    abrirModalMultimediaViewer({
+      titulo: mediaData.videoTitulo || `Video Explicativo CBC ${currentSem}`,
+      icono: '🎬',
+      tag: 'Video Explicativo CBC',
+      semestre: currentSem,
+      embedUrl: embedUrl,
+      rawUrl: cleanUrl
+    });
   } else if (canEditMultimedia()) {
     window.openVideoConfigModal(currentSem);
   } else {
@@ -776,14 +806,18 @@ window.reproducirPodcast = (semestreForzado) => {
   const currentSem = semestreForzado || window._selectedEvidenciasSemestre || "2026-I";
   const mediaData = (window.ENLACES_MULTIMEDIA || loadEnlacesMultimedia())[currentSem] || {};
   const rawUrl = mediaData.podcastUrl || '';
-  let cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
-
-  if (cleanUrl.includes('sharepoint.com') && cleanUrl.includes('/embed.aspx')) {
-    cleanUrl = cleanUrl.replace('/embed.aspx', '/onedrive.aspx');
-  }
+  const cleanUrl = procesarEntradaMultimedia(rawUrl) || rawUrl;
 
   if (cleanUrl && esUrlValida(cleanUrl)) {
-    window.open(cleanUrl, '_blank', 'noopener,noreferrer');
+    const embedUrl = convertirUrlParaEmbed(cleanUrl);
+    abrirModalMultimediaViewer({
+      titulo: mediaData.podcastTitulo || `Podcast CBC ${currentSem}`,
+      icono: '🎙️',
+      tag: 'Podcast Semestral CBC',
+      semestre: currentSem,
+      embedUrl: embedUrl,
+      rawUrl: cleanUrl
+    });
   } else if (canEditMultimedia()) {
     window.openPodcastConfigModal(currentSem);
   } else {
