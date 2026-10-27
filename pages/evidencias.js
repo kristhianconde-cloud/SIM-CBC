@@ -23,7 +23,7 @@ window.procesarEntradaMultimedia = procesarEntradaMultimedia;
 const esUrlValida = (url) => {
   if (!url || typeof url !== 'string') return false;
   const clean = url.trim().toLowerCase();
-  return clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('data:image/');
+  return clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('data:image/') || clean.startsWith('./') || clean.startsWith('assets/');
 };
 
 const esIframeEmbedStrict = (entrada) => {
@@ -116,10 +116,10 @@ const loadEnlacesMultimedia = () => {
     '2026-I': {
       videoUrl: 'https://uptpe-my.sharepoint.com/:v:/r/personal/licencia_institucional_upt_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Flicencia_institucional_upt_pe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20-%20EVIDENCIAS%2F2026-I%2FV%C3%8DDEO%20RESUMEN%2FSEGUIMIENTO%20A%20LAS%20CBC%202026-I%20FINAL%202.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&share=cQrpNQs7fDM4QJoOSldrsLtlEgUCFuH7DB0KEQeA_CNa_vgJug',
       videoTitulo: 'PRESENTACIÓN DEL INFORME DE SEGUIMIENTO DE LAS CONDICIONES BÁSICAS DE CALIDAD 2026-I',
-      videoPortada: 'https://uptpe-my.sharepoint.com/:i:/r/personal/licencia_institucional_upt_pe/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FV%C3%8DDEO%20RESUMEN%2FPORTADA%201%2Ejpg&parent=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FV%C3%8DDEO%20RESUMEN&share=cQrmX%2DbHEKfUS5SdYWUaswmGEgUCPO5vNYeYNouONoDGLeaQ%5Fw',
+      videoPortada: './assets/portada_video_2026_1.jpg',
       podcastUrl: 'https://uptpe-my.sharepoint.com/:v:/r/personal/licencia_institucional_upt_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Flicencia_institucional_upt_pe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20-%20EVIDENCIAS%2F2026-I%2FPODCAST%2FTEMA_1_SOLIDEZ_VULNERABILIDAD_UPT_STREAMING.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&share=cQrTJ3cN8q2vQb6Roegw6onGEgUCZAcFNSbm3K5f9_WswKoo2Q',
       podcastTitulo: 'PÓDCAST CALIDAD EDUCATIVA',
-      podcastPortada: 'https://uptpe-my.sharepoint.com/:i:/r/personal/licencia_institucional_upt_pe/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FPODCAST%2FMan%5Fand%5Fwoman%5Frecording%5Fpodcast%5F20260918124428%2Ejpeg&parent=%2Fpersonal%2Flicencia%5Finstitucional%5Fupt%5Fpe%2FDocuments%2FCONDICIONES%20B%C3%81SICAS%20DE%20CALIDAD%20%2D%20EVIDENCIAS%2F2026%2DI%2FPODCAST&share=cQrDi8liD%5FMHR760262y2b1iEgUCaS%5FWgUOqYPYfBzOIDg2spg'
+      podcastPortada: './assets/portada_podcast_2026_1.jpg'
     },
     '2026-II': {
       videoUrl: '',
@@ -159,9 +159,13 @@ const loadEnlacesMultimedia = () => {
             merged[k].podcastPortada = procesarEntradaMultimedia(merged[k].podcastPortada);
           }
           if (!merged[k].videoUrl || isPlaceholderUrl(merged[k].videoUrl)) merged[k].videoUrl = defaults[k]?.videoUrl || '';
-          if (!merged[k].videoPortada || isPlaceholderUrl(merged[k].videoPortada)) merged[k].videoPortada = defaults[k]?.videoPortada || '';
+          if (!merged[k].videoPortada || isPlaceholderUrl(merged[k].videoPortada) || merged[k].videoPortada.includes('sharepoint.com') || merged[k].videoPortada.includes('onedrive.')) {
+            merged[k].videoPortada = defaults[k]?.videoPortada || '';
+          }
           if (!merged[k].podcastUrl || isPlaceholderUrl(merged[k].podcastUrl)) merged[k].podcastUrl = defaults[k]?.podcastUrl || '';
-          if (!merged[k].podcastPortada || isPlaceholderUrl(merged[k].podcastPortada)) merged[k].podcastPortada = defaults[k]?.podcastPortada || '';
+          if (!merged[k].podcastPortada || isPlaceholderUrl(merged[k].podcastPortada) || merged[k].podcastPortada.includes('sharepoint.com') || merged[k].podcastPortada.includes('onedrive.')) {
+            merged[k].podcastPortada = defaults[k]?.podcastPortada || '';
+          }
           if (!merged[k].videoTitulo || merged[k].videoTitulo === 'Video Explicativo CBC 2026-I') {
             merged[k].videoTitulo = defaults[k]?.videoTitulo || merged[k].videoTitulo;
           }
@@ -272,7 +276,7 @@ const isSemesterGe2026I = (sem) => esSemestreConEnlaces(sem);
 const formatImageUrl = (rawUrl) => {
   const cleanUrl = procesarEntradaMultimedia(rawUrl);
   if (isPlaceholderUrl(cleanUrl)) return '';
-  if (cleanUrl.startsWith('data:image/')) return cleanUrl;
+  if (cleanUrl.startsWith('data:image/') || cleanUrl.startsWith('./') || cleanUrl.startsWith('assets/')) return cleanUrl;
 
   // Google Drive
   if (cleanUrl.includes('drive.google.com') && cleanUrl.includes('/file/d/')) {
