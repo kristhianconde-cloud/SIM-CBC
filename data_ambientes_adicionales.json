@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "tipo": "INTERNO",
+    "nombre": "AULA",
+    "ubicacion": "D-305",
+    "facultad": "FAEDCOH",
+    "carreras": [
+      "EDUCACIÓN FÍSICA Y DEPORTES"
+    ],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 2,
+    "tipo": "INTERNO",
+    "nombre": "LOZA DEPORTIVA UPT",
+    "ubicacion": "LOZAS EN LOCAL SL02",
+    "facultad": "FAEDCOH",
+    "carreras": [
+      "EDUCACIÓN FÍSICA Y DEPORTES"
+    ],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 3,
+    "tipo": "INTERNO",
+    "nombre": "GIMNASIO UPT",
+    "ubicacion": "PRIMER PISO SL01",
+    "facultad": "FAEDCOH",
+    "carreras": [
+      "EDUCACIÓN FÍSICA Y DEPORTES"
+    ],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 4,
+    "tipo": "EXTERNO",
+    "nombre": "ESTADIO JORGE BASADRE",
+    "ubicacion": "ARIA ARAGUEZ TACNA",
+    "facultad": "FAEDCOH",
+    "carreras": [
+      "EDUCACIÓN FÍSICA Y DEPORTES"
+    ],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 5,
+    "tipo": "EXTERNO",
+    "nombre": "FUNDO DEL ABUELO",
+    "ubicacion": "GREGORIO ALBARRACÍN 396",
+    "facultad": "FAEDCOH",
+    "carreras": [
+      "EDUCACIÓN FÍSICA Y DEPORTES"
+    ],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 6,
+    "tipo": "INTERNO",
+    "nombre": "FUNDO LAS VILCAS",
+    "ubicacion": "Avenida Collpa (Ex - Tarapaca) Km.: 6.88 Sector Pago Arunta",
+    "facultad": "FAING",
+    "carreras": [
+      "INGENIERÍA AGROINDUSTRIAL"
+    ],
+    "total": 1,
+    "obs": "-"
+  }
+]
