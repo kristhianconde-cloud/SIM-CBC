@@ -4409,6 +4409,72 @@ const downloadAlumnosWordReport = () => {
 // ==========================================================================
 const LABORATORIOS_DATA = [{"id": 1, "nombre": "BASE DE DATOS", "tipo": "LABORATORIO", "codigo": "SL02LA27", "ubicacion": "3ER PISO PAB. P FAING P-306", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS"], "total": 1}, {"id": 2, "nombre": "REDES Y COMUNICACIÓN DE DATOS", "tipo": "LABORATORIO", "codigo": "SL02LA29", "ubicacion": "3ER PISO PAB. P FAING P-311", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS"], "total": 1}, {"id": 3, "nombre": "DESARROLLO DE APLICACIONES 1", "tipo": "LABORATORIO", "codigo": "SL02LA28", "ubicacion": "3ER PISO PAB. P FAING P-310", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS"], "total": 1}, {"id": 4, "nombre": "LENGUAJE DE PROGRAMACIÓN", "tipo": "LABORATORIO", "codigo": "SL02LA30", "ubicacion": "3ER PISO PAB. Q FAING Q-302", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS"], "total": 1}, {"id": 5, "nombre": "DESARROLLO WEB", "tipo": "LABORATORIO", "codigo": "SL02LA32", "ubicacion": "3ER PISO PAB. Q FAING Q-306", "facultad": "FAING", "carreras": ["INGENIERÍA AMBIENTAL"], "total": 1}, {"id": 6, "nombre": "DESARROLLO DE APLICACIONES 2", "tipo": "LABORATORIO", "codigo": "SL02LA34", "ubicacion": "3ER PISO PAB. R FAING R-306", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS"], "total": 1}, {"id": 7, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA41", "ubicacion": "4TO PISO PAB. R FAING R-406", "facultad": "FAING", "carreras": ["INGENIERÍA INDUSTRIAL"], "total": 1}, {"id": 8, "nombre": "QUÍMICA 1", "tipo": "LABORATORIO", "codigo": "SL02LA24", "ubicacion": "2DO PISO PAB. R FAING R-202", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL", "INGENIERÍA AGROINDUSTRIAL", "INGENIERÍA INDUSTRIAL", "MEDICINA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 6}, {"id": 9, "nombre": "QUÍMICA 2", "tipo": "LABORATORIO", "codigo": "SL02LA14", "ubicacion": "1ER PISO PAB. Q FAING Q-106", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL", "INGENIERÍA INDUSTRIAL"], "total": 2}, {"id": 10, "nombre": "SIMULACIÓN ELECTRÓNICA", "tipo": "LABORATORIO", "codigo": "SL02LA36", "ubicacion": "4TO PISO PAB. P FAING P-411", "facultad": "FAING", "carreras": ["INGENIERÍA INDUSTRIAL", "INGENIERÍA ELECTRÓNICA"], "total": 2}, {"id": 11, "nombre": "CONTROL Y AUTOMATIZACIÓN", "tipo": "LABORATORIO", "codigo": "SL02LA31", "ubicacion": "3ER PISO PAB. Q FAING Q-303", "facultad": "FAING", "carreras": ["INGENIERÍA INDUSTRIAL", "INGENIERÍA ELECTRÓNICA"], "total": 2}, {"id": 12, "nombre": "ELECTRÓNICA", "tipo": "LABORATORIO", "codigo": "SL02LA35", "ubicacion": "4TO PISO PAB. P FAING P-406", "facultad": "FAING", "carreras": ["INGENIERÍA ELECTRÓNICA"], "total": 1}, {"id": 13, "nombre": "TELECOMUNICACIONES", "tipo": "LABORATORIO", "codigo": "SL02LA38", "ubicacion": "4TO PISO PAB. Q FAING Q-404", "facultad": "FAING", "carreras": ["INGENIERÍA ELECTRÓNICA"], "total": 1}, {"id": 14, "nombre": "MÁQUINAS ELÉCTRICAS", "tipo": "LABORATORIO", "codigo": "SL02LA39", "ubicacion": "4TO PISO PAB. Q FAING Q-407", "facultad": "FAING", "carreras": ["INGENIERÍA ELECTRÓNICA"], "total": 1}, {"id": 15, "nombre": "TELEMÁTICA", "tipo": "LABORATORIO", "codigo": "SL02LA37", "ubicacion": "4TO PISO PAB. Q FAING Q-403", "facultad": "FAING", "carreras": ["INGENIERÍA ELECTRÓNICA"], "total": 1}, {"id": 16, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA25", "ubicacion": "2DO PISO PAB. R FAING R-205", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 17, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA26", "ubicacion": "2DO PISO PAB. R FAING R-206", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 18, "nombre": "FÍSICA", "tipo": "LABORATORIO", "codigo": "SL02LA40", "ubicacion": "4TO PISO PAB. R FAING R-403", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL", "INGENIERÍA AGROINDUSTRIAL"], "total": 2}, {"id": 19, "nombre": "HIDRÁULICA", "tipo": "LABORATORIO", "codigo": "SL02LA17", "ubicacion": "1ER PISO PAB. R FAING R-104", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 20, "nombre": "GABINETE DE TOPOGRAFÍA", "tipo": "TALLER", "codigo": "SL02T19", "ubicacion": "1ER PISO PAB. R FAING R-105", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 21, "nombre": "TECNOLOGÍA DE CONCRETOS", "tipo": "LABORATORIO", "codigo": "SL02LA45", "ubicacion": "1ER PISO PAB. S FAING S-106", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 22, "nombre": "ENSAYOS CONVENCIONALES", "tipo": "LABORATORIO", "codigo": "SL02LA46", "ubicacion": "1ER PISO PAB. S FAING S-107 A", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 23, "nombre": "PAVIMENTO", "tipo": "LABORATORIO", "codigo": "SL02LA47", "ubicacion": "1ER PISO PAB. S SUELOS S-109", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 24, "nombre": "ENSAYOS ESPECIALES", "tipo": "LABORATORIO", "codigo": "SL02LA48", "ubicacion": "1ER PISO PAB. S SUELOS S-111", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 25, "nombre": "ESTRUCTURAS", "tipo": "LABORATORIO", "codigo": "SL02LA15", "ubicacion": "1ER PISO PAB. Q FAING Q-107", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 26, "nombre": "CALIDAD DEL AGUA", "tipo": "LABORATORIO", "codigo": "SL02LA18", "ubicacion": "2DO PISO PAB. P FAING P-206", "facultad": "FAING", "carreras": ["INGENIERÍA AMBIENTAL"], "total": 1}, {"id": 27, "nombre": "BIOLOGÍA Y MICROBIOLOGÍA", "tipo": "LABORATORIO", "codigo": "SL02LA33", "ubicacion": "3ER PISO PAB. R FAING R-302", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL", "INGENIERÍA AMBIENTAL", "MEDICINA", "ODONTOLOGÍA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 6}, {"id": 28, "nombre": "CALIDAD DE SUELOS", "tipo": "LABORATORIO", "codigo": "SL02LA21", "ubicacion": "2DO PISO PAB. P FAING P-211", "facultad": "FAING", "carreras": ["INGENIERÍA AMBIENTAL"], "total": 1}, {"id": 29, "nombre": "CALIDAD DEL AIRE", "tipo": "LABORATORIO", "codigo": "SL02LA19", "ubicacion": "2DO PISO PAB. P FAING P-210 B", "facultad": "FAING", "carreras": ["INGENIERÍA AMBIENTAL"], "total": 1}, {"id": 30, "nombre": "CÓMPUTO EPIAM", "tipo": "LABORATORIO", "codigo": "SL02LA16", "ubicacion": "1ER PISO PAB. R FAING R-101", "facultad": "FAING", "carreras": ["INGENIERÍA DE SISTEMAS", "INGENIERÍA AGROINDUSTRIAL", "INGENIERÍA AMBIENTAL"], "total": 3}, {"id": 31, "nombre": "PROCESOS LÁCTEOS", "tipo": "LABORATORIO", "codigo": "SL02LA12", "ubicacion": "1ER PISO PAB. P FAING P-115", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 32, "nombre": "ANÁLISIS SENSORIAL", "tipo": "LABORATORIO", "codigo": "SL02LA20", "ubicacion": "2DO PISO PAB. P FAING P-210 A", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 33, "nombre": "FRUTAS Y HORTALIZAS", "tipo": "LABORATORIO", "codigo": "SL02LA13", "ubicacion": "1ER PISO PAB. Q FAING Q-103", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 34, "nombre": "MICROBIOLOGÍA AGROINDUSTRIAL", "tipo": "LABORATORIO", "codigo": "SL02LA22", "ubicacion": "2DO PISO PAB. Q FAING Q-202", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 35, "nombre": "ANÁLISIS DE PRODUCTOS AGROINDUSTRIALES", "tipo": "LABORATORIO", "codigo": "SL02LA23", "ubicacion": "2DO PISO PAB. Q FAING Q-206", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 36, "nombre": "LABORATORIO DE PANIFICACIÓN", "tipo": "LABORATORIO", "codigo": "SL02LA44", "ubicacion": "1ER PISO PAB. U FAING U-103 B", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 37, "nombre": "TALLER DE ENOLOGÍA Y LICORES", "tipo": "TALLER", "codigo": "SL02T20", "ubicacion": "2DO PISO PAB. U FAING U-201 A", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 38, "nombre": "PROCESOS CÁRNICOS E HIDROBIOLÓGICOS", "tipo": "LABORATORIO", "codigo": "SL02LA11", "ubicacion": "1ER PISO PAB. P FAING P-107", "facultad": "FAING", "carreras": ["INGENIERÍA AGROINDUSTRIAL"], "total": 1}, {"id": 39, "nombre": "BIM (BUILDING INFORMATION MODELING)", "tipo": "LABORATORIO", "codigo": "SL02LA43", "ubicacion": "1ER PISO PAB. R FAING R-113", "facultad": "FAING", "carreras": ["INGENIERÍA CIVIL"], "total": 1}, {"id": 40, "nombre": "CÓMPUTO A", "tipo": "LABORATORIO", "codigo": "SL03LA01", "ubicacion": "2DO PISO PAB. A FACEM A-204", "facultad": "FACEM", "carreras": ["INGENIERÍA COMERCIAL", "CIENCIAS CONTABLES Y FINANCIERAS", "ADMINISTRACIÓN DE EMPRESAS", "ADMINISTRACIÓN TURÍSTICO - HOTELERA", "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES", "ECONOMÍA"], "total": 6}, {"id": 41, "nombre": "CÓMPUTO B", "tipo": "LABORATORIO", "codigo": "SL03LA02", "ubicacion": "3ER PISO PAB. A FACEM A-304", "facultad": "FACEM", "carreras": ["CIENCIAS CONTABLES Y FINANCIERAS", "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES"], "total": 2}, {"id": 42, "nombre": "CÓMPUTO C", "tipo": "LABORATORIO", "codigo": "SL03LA03", "ubicacion": "4TO PISO PAB. A FACEM A-401", "facultad": "FACEM", "carreras": ["INGENIERÍA COMERCIAL", "CIENCIAS CONTABLES Y FINANCIERAS", "ADMINISTRACIÓN TURÍSTICO - HOTELERA", "ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES", "ECONOMÍA"], "total": 5}, {"id": 43, "nombre": "HOUSE KEEPING", "tipo": "TALLER", "codigo": "SL03T02", "ubicacion": "4TO PISO PAB. B FACEM B-402", "facultad": "FACEM", "carreras": ["ADMINISTRACIÓN TURÍSTICO - HOTELERA"], "total": 1}, {"id": 44, "nombre": "BAR", "tipo": "TALLER", "codigo": "SL03T01", "ubicacion": "3ER PISO PAB. B FACEM B-303", "facultad": "FACEM", "carreras": ["ADMINISTRACIÓN TURÍSTICO - HOTELERA"], "total": 1}, {"id": 45, "nombre": "GASTRONOMÍA", "tipo": "TALLER", "codigo": "SL03T03", "ubicacion": "4TO PISO PAB. B FACEM B-406", "facultad": "FACEM", "carreras": ["ADMINISTRACIÓN TURÍSTICO - HOTELERA"], "total": 1}, {"id": 46, "nombre": "ODONTOLOGÍA I", "tipo": "LABORATORIO", "codigo": "SL02LA01", "ubicacion": "1ER PISO PAB. I FACSA I-104 A", "facultad": "FACSA", "carreras": ["ODONTOLOGÍA"], "total": 1}, {"id": 47, "nombre": "ODONTOLOGÍA II", "tipo": "LABORATORIO", "codigo": "SL02LA02", "ubicacion": "1ER PISO PAB. I FACSA I-104 B", "facultad": "FACSA", "carreras": ["ODONTOLOGÍA"], "total": 1}, {"id": 48, "nombre": "SALA DE FISIOLOGÍA Y FARMACOLOGÍA", "tipo": "LABORATORIO", "codigo": "SL02LA03", "ubicacion": "1ER PISO PAB. I FACSA I-107", "facultad": "FACSA", "carreras": ["MEDICINA", "ODONTOLOGÍA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 4}, {"id": 49, "nombre": "ANATOMÍA", "tipo": "LABORATORIO", "codigo": "SL02LA04", "ubicacion": "1ER PISO PAB. K FACSA K-102", "facultad": "FACSA", "carreras": ["MEDICINA", "ODONTOLOGÍA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 4}, {"id": 50, "nombre": "CIRUGÍA EXPERMIENTAL", "tipo": "LABORATORIO", "codigo": "SL02LA50", "ubicacion": "1ER PISO PAB. K FACSA K-107", "facultad": "FACSA", "carreras": ["MEDICINA"], "total": 1}, {"id": 51, "nombre": "LABORATORIO DE CENTRO DE SIMULACIÓN (CENTRO DE CONTROL DE ÁREA CLÍNICO OBSTÉTRICA Y CENTRO DE CONTROL DEL ÁREA QUIRÚRGICA)", "tipo": "LABORATORIO", "codigo": "SL02LA42", "ubicacion": "3ER PISO PAB. I FACSA I-308", "facultad": "FACSA", "carreras": ["MEDICINA"], "total": 1}, {"id": 52, "nombre": "MICROBIOLOGÍA Y PARASITOLOGÍA", "tipo": "LABORATORIO", "codigo": "SL02LA05", "ubicacion": "2DO PISO PAB. J FACSA J-201", "facultad": "FACSA", "carreras": ["MEDICINA", "ODONTOLOGÍA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 4}, {"id": 53, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA06", "ubicacion": "2DO PISO PAB. J FACSA J-202 A", "facultad": "FACSA", "carreras": ["MEDICINA", "ODONTOLOGÍA", "TERAPIA Y REHABILITACIÓN", "LABORATORIO CLÍNICO"], "total": 4}, {"id": 54, "nombre": "MICROSCOPIA", "tipo": "LABORATORIO", "codigo": "SL02LA07", "ubicacion": "2DO PISO PAB. J FACSA J-203", "facultad": "FACSA", "carreras": ["MEDICINA", "LABORATORIO CLÍNICO"], "total": 2}, {"id": 55, "nombre": "INVESTIGACIÓN", "tipo": "LABORATORIO", "codigo": "SL02LA08", "ubicacion": "1ER PISO PAB. I FACSA I-108", "facultad": "FACSA", "carreras": [], "total": 0}, {"id": 56, "nombre": "GABINETE DE TERAPIA FÍSICAY  REHABILITACIÓN", "tipo": "LABORATORIO", "codigo": "SL02LA51", "ubicacion": "2DO PISO PAB. I FACSA I-204", "facultad": "FACSA", "carreras": ["TERAPIA Y REHABILITACIÓN"], "total": 1}, {"id": 57, "nombre": "CENTRO DOCENTE ODONTOLÓGICO", "tipo": "LABORATORIO", "codigo": "SL04LA01", "ubicacion": "AV. BOLOGNESI", "facultad": "FACSA", "carreras": ["ODONTOLOGÍA"], "total": 1}, {"id": 58, "nombre": "SALA DE USOS MÚLTIPLES DE LABORATORIO CLÍNICO Y ANATOMÍA PATOLÓGICA", "tipo": "LABORATORIO", "codigo": "SL02LA52", "ubicacion": "", "facultad": "FACSA", "carreras": ["LABORATORIO CLÍNICO"], "total": 1}, {"id": 59, "nombre": "CENTRO DOCENTE EN TERAPIA FÍSICA Y REHABILTIACIÓN (CENTIR)", "tipo": "LABORATORIO", "codigo": "SL02LA53", "ubicacion": "", "facultad": "FACSA", "carreras": ["TERAPIA Y REHABILITACIÓN"], "total": 1}, {"id": 60, "nombre": "CÓMPUTO EPCC", "tipo": "LABORATORIO", "codigo": "SL01LA01", "ubicacion": "3ER PISO PAB. C FAEDCOH C-301", "facultad": "FAEDCOH", "carreras": ["CIENCIAS DE LA COMUNICACIÓN"], "total": 1}, {"id": 61, "nombre": "CÓMPUTO EPED / EPH", "tipo": "LABORATORIO", "codigo": "SL01LA02", "ubicacion": "3ER PISO PAB. C FAEDCOH C-304", "facultad": "FAEDCOH", "carreras": ["EDUCACIÓN INICIAL", "EDUCACIÓN PRIMARIA", "EDUCACIÓN FÍSICA Y DEPORTES", "PSICOLOGÍA"], "total": 4}, {"id": 62, "nombre": "CÁMARA GESSEL 01", "tipo": "TALLER", "codigo": "SL01T01", "ubicacion": "1ER PISO PAB. E FAEDCOH E-104 A Y 104 B", "facultad": "FAEDCOH", "carreras": ["PSICOLOGÍA"], "total": 1}, {"id": 63, "nombre": "CÁMARA GESSEL 02", "tipo": "TALLER", "codigo": "SL01T02", "ubicacion": "3ER PISO PAB. C FAEDCOH C-303 A Y C-303 B", "facultad": "FAEDCOH", "carreras": ["PSICOLOGÍA"], "total": 1}, {"id": 64, "nombre": "SET DE FOTOGRAFÍA Y VÍDEO", "tipo": "TALLER", "codigo": "SL01T03", "ubicacion": "1ER PISO PAB. E FAEDCOH E-103 B", "facultad": "FAEDCOH", "carreras": ["CIENCIAS DE LA COMUNICACIÓN"], "total": 1}, {"id": 65, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA49", "ubicacion": "1ER PISO PAB. L FADE L-103", "facultad": "FADE", "carreras": ["DERECHO"], "total": 1}, {"id": 66, "nombre": "SALA DE PROCESOS SIMULADOS", "tipo": "TALLER", "codigo": "SL02T18", "ubicacion": "2DO PISO PAB. M FADE M-202", "facultad": "FADE", "carreras": ["DERECHO"], "total": 1}, {"id": 67, "nombre": "GABINETE DE PRÁCTICAS FORENSES", "tipo": "TALLER", "codigo": "SL02T17", "ubicacion": "1ER PISO PAB. M FADE M-104", "facultad": "FADE", "carreras": ["DERECHO"], "total": 1}, {"id": 68, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA09", "ubicacion": "2DO PISO PAB. N FAU N-209", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 69, "nombre": "CÓMPUTO", "tipo": "LABORATORIO", "codigo": "SL02LA10", "ubicacion": "2DO PISO PAB. N FAU N-210", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 70, "nombre": "TALLER DE DISEÑO 11", "tipo": "TALLER", "codigo": "SL02T11", "ubicacion": "2DO PISO PAB. N FAU N-202", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 71, "nombre": "TALLER DE DISEÑO 14", "tipo": "TALLER", "codigo": "SL02T14", "ubicacion": "2DO PISO PAB. N FAU N-204", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 72, "nombre": "TALLER DE DISEÑO 15", "tipo": "TALLER", "codigo": "SL02T15", "ubicacion": "2DO PISO PAB. N FAU N-208", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 73, "nombre": "TALLER DE DISEÑO 1", "tipo": "TALLER", "codigo": "SL02T01", "ubicacion": "1ER PISO PAB. N FAU N-104", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 74, "nombre": "TALLER DE DISEÑO 2", "tipo": "TALLER", "codigo": "SL02T02", "ubicacion": "1ER PISO PAB. N FAU N-111", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 75, "nombre": "TALLER DE DISEÑO 3", "tipo": "TALLER", "codigo": "SL02T03", "ubicacion": "2DO PISO PAB. N FAU N-201", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 76, "nombre": "TALLER DE DISEÑO 4", "tipo": "TALLER", "codigo": "SL02T04", "ubicacion": "2DO PISO PAB. N FAU N-203", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 77, "nombre": "TALLER DE DISEÑO 5", "tipo": "TALLER", "codigo": "SL02T05", "ubicacion": "3ER PISO PAB. N FAU N-301", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 78, "nombre": "TALLER DE DISEÑO 6", "tipo": "TALLER", "codigo": "SL02T06", "ubicacion": "3ER PISO PAB. N FAU N-303", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 79, "nombre": "TALLER DE DISEÑO 7", "tipo": "TALLER", "codigo": "SL02T07", "ubicacion": "3ER PISO PAB. N FAU N-309", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 80, "nombre": "TALLER DE DISEÑO 8", "tipo": "TALLER", "codigo": "SL02T08", "ubicacion": "3ER PISO PAB. N FAU N-310", "facultad": "FAU", "carreras": ["ARQUITECTURA", "URBANISMO"], "total": 2}, {"id": 81, "nombre": "TALLER DE DISEÑO 9", "tipo": "TALLER", "codigo": "SL02T09", "ubicacion": "4TO PISO PAB. N FAU N-401", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 82, "nombre": "TALLER DE DISEÑO 10", "tipo": "TALLER", "codigo": "SL02T10", "ubicacion": "4TO PISO PAB. N FAU N-403", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 83, "nombre": "TALLER DE DISEÑO 12", "tipo": "TALLER", "codigo": "SL02T12", "ubicacion": "4TO PISO PAB. N FAU N-409", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 84, "nombre": "TALLER DE DISEÑO 13", "tipo": "TALLER", "codigo": "SL02T13", "ubicacion": "4TO PISO PAB. N FAU N-410", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}, {"id": 85, "nombre": "TALLER DE ARTE", "tipo": "TALLER", "codigo": "SL02T16", "ubicacion": "5TO PISO PAB. N FAU N-503", "facultad": "FAU", "carreras": ["ARQUITECTURA"], "total": 1}];
 
+// ==========================================================================
+// MATRIZ DE AMBIENTES ACADÉMICOS ADICIONALES (INTERNOS Y EXTERNOS)
+// ==========================================================================
+const AMBIENTES_ADICIONALES_DATA = [
+  {
+    "id": 1,
+    "tipo": "INTERNO",
+    "nombre": "AULA",
+    "ubicacion": "D-305",
+    "facultad": "FAEDCOH",
+    "carreras": ["EDUCACIÓN FÍSICA Y DEPORTES"],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 2,
+    "tipo": "INTERNO",
+    "nombre": "LOZA DEPORTIVA UPT",
+    "ubicacion": "LOZAS EN LOCAL SL02",
+    "facultad": "FAEDCOH",
+    "carreras": ["EDUCACIÓN FÍSICA Y DEPORTES"],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 3,
+    "tipo": "INTERNO",
+    "nombre": "GIMNASIO UPT",
+    "ubicacion": "PRIMER PISO SL01",
+    "facultad": "FAEDCOH",
+    "carreras": ["EDUCACIÓN FÍSICA Y DEPORTES"],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 4,
+    "tipo": "EXTERNO",
+    "nombre": "ESTADIO JORGE BASADRE",
+    "ubicacion": "ARIA ARAGUEZ TACNA",
+    "facultad": "FAEDCOH",
+    "carreras": ["EDUCACIÓN FÍSICA Y DEPORTES"],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 5,
+    "tipo": "EXTERNO",
+    "nombre": "FUNDO DEL ABUELO",
+    "ubicacion": "GREGORIO ALBARRACÍN 396",
+    "facultad": "FAEDCOH",
+    "carreras": ["EDUCACIÓN FÍSICA Y DEPORTES"],
+    "total": 1,
+    "obs": "-"
+  },
+  {
+    "id": 6,
+    "tipo": "INTERNO",
+    "nombre": "FUNDO LAS VILCAS",
+    "ubicacion": "Avenida Collpa (Ex - Tarapaca) Km.: 6.88 Sector Pago Arunta",
+    "facultad": "FAING",
+    "carreras": ["INGENIERÍA AGROINDUSTRIAL"],
+    "total": 1,
+    "obs": "-"
+  }
+];
+
 let _labFilters = { search: '', tipo: 'todos', facultad: 'todas', carrera: 'todas', uso: 'todos' };
 
 
@@ -5480,6 +5546,93 @@ function drawLaboratoriosDashboard(container) {
               </tbody>
             </table>
           </div>
+        </div>
+
+        <!-- SECCIÓN: AMBIENTES ACADÉMICOS ADICIONALES (CBC III.7) -->
+        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          
+          <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 1.1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.4rem;">🏢</span>
+                <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #38bdf8; letter-spacing: -0.01em;">
+                  Ambientes Académicos Adicionales (Internos y Externos)
+                </h3>
+              </div>
+              <p style="margin: 0.3rem 0 0 0; font-size: 0.84rem; color: var(--text-300);">
+                Aulas especializadas, complejos deportivos, fundos y recintos formativos complementarios de la universidad
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+              <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.35rem 0.75rem; border-radius: 6px;">🏢 6 Ambientes Adicionales</span>
+              <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.35rem 0.75rem; border-radius: 6px;">🏠 4 Internos</span>
+              <span style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.35rem 0.75rem; border-radius: 6px;">🌐 2 Externos</span>
+              <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.35rem 0.75rem; border-radius: 6px;">🏛️ FAEDCOH y FAING</span>
+            </div>
+          </div>
+
+          <!-- Contador de Ambientes Adicionales -->
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-300);">
+            <span>Mostrando <strong>${AMBIENTES_ADICIONALES_DATA.length}</strong> de <strong>${AMBIENTES_ADICIONALES_DATA.length}</strong> ambientes adicionales registrados</span>
+          </div>
+
+          <!-- Tabla Matriz Ambientes Adicionales -->
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <div class="cbc-table-scroll" style="overflow-x: auto;">
+              <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                <thead style="background: #1e293b; box-shadow: 0 2px 5px rgba(0,0,0,0.5);">
+                  <tr style="background: #1e293b; color: #38bdf8; text-align: left;">
+                    <th style="padding: 0.75rem; width: 45px; text-align: center; border-bottom: 2px solid #334155;">N°</th>
+                    <th style="padding: 0.75rem; width: 120px; border-bottom: 2px solid #334155;">Tipo</th>
+                    <th style="padding: 0.75rem; width: 230px; border-bottom: 2px solid #334155;">Denominación del Ambiente</th>
+                    <th style="padding: 0.75rem; border-bottom: 2px solid #334155;">Ubicación Física</th>
+                    <th style="padding: 0.75rem; width: 95px; text-align: center; border-bottom: 2px solid #334155;">Facultad</th>
+                    <th style="padding: 0.75rem; border-bottom: 2px solid #334155;">Carreras que Utilizan el Ambiente</th>
+                    <th style="padding: 0.75rem; width: 65px; text-align: center; border-bottom: 2px solid #334155;">Total</th>
+                    <th style="padding: 0.75rem; width: 110px; border-bottom: 2px solid #334155;">Observación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${AMBIENTES_ADICIONALES_DATA.map(item => {
+                    const isInterno = item.tipo === 'INTERNO';
+                    const badgeBg = isInterno ? 'rgba(56, 189, 248, 0.15)' : 'rgba(245, 158, 11, 0.15)';
+                    const badgeColor = isInterno ? '#38bdf8' : '#f59e0b';
+                    const badgeBorder = isInterno ? 'rgba(56, 189, 248, 0.3)' : 'rgba(245, 158, 11, 0.3)';
+
+                    return `
+                      <tr style="border-bottom: 1px solid #1e293b; transition: background 0.15s;" onmouseover="this.style.background='rgba(30, 41, 59, 0.5)'" onmouseout="this.style.background='transparent'">
+                        <td style="padding: 0.65rem; text-align: center; font-weight: 700; color: var(--text-400);">${item.id}</td>
+                        <td style="padding: 0.65rem;">
+                          <span style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeBorder}; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 0.74rem;">
+                            ${isInterno ? '🏠 INTERNO' : '🌐 EXTERNO'}
+                          </span>
+                        </td>
+                        <td style="padding: 0.65rem; font-weight: 700; color: #f8fafc;">${item.nombre}</td>
+                        <td style="padding: 0.65rem; color: var(--text-300); font-size: 0.8rem;">${item.ubicacion || '-'}</td>
+                        <td style="padding: 0.65rem; text-align: center;">
+                          <span style="background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">
+                            ${item.facultad}
+                          </span>
+                        </td>
+                        <td style="padding: 0.65rem;">
+                          <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            ${item.carreras.map(c => `
+                              <span style="background: rgba(51, 65, 85, 0.6); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-size: 0.73rem;">
+                                ${c}
+                              </span>
+                            `).join('')}
+                          </div>
+                        </td>
+                        <td style="padding: 0.65rem; text-align: center; font-weight: 800; color: #38bdf8;">${item.total}</td>
+                        <td style="padding: 0.65rem; color: #f59e0b; font-size: 0.75rem;">${item.obs || '-'}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
 
 
