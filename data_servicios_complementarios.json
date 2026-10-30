@@ -1,0 +1,315 @@
+{
+  "semestre": "2026-I",
+  "fecha_actualizacion": "2026-10-30",
+  "componentes": {
+    "VI.1_salud": {
+      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+      "atenciones_topicos": {
+        "2025-II": 5177,
+        "2026-I": 6080,
+        "variacion_pct": "+17.44%",
+        "detalle_topicos": [
+          {
+            "topico": "FAEDCOH",
+            "cobertura": "FAEDCOH – Capanique I",
+            "atenciones_2025_2": 0,
+            "atenciones_2026_1": 0
+          },
+          {
+            "topico": "FAING",
+            "cobertura": "FAING - Mecánica de suelos",
+            "atenciones_2025_2": 0,
+            "atenciones_2026_1": 0
+          },
+          {
+            "topico": "FACEM",
+            "cobertura": "FACEM – Capanique III",
+            "atenciones_2025_2": 0,
+            "atenciones_2026_1": 0
+          },
+          {
+            "topico": "Clínica Docente Odontológica",
+            "cobertura": "Clínica Docente Odontológica",
+            "atenciones_2025_2": 0,
+            "atenciones_2026_1": 7
+          },
+          {
+            "topico": "ESPG",
+            "cobertura": "Escuela de Posgrado",
+            "atenciones_2025_2": 14,
+            "atenciones_2026_1": 15
+          },
+          {
+            "topico": "Policlínico UPT",
+            "cobertura": "FAING, FADE, FAU, FAEDCOH, FACEM, FACSA – Capanique II",
+            "atenciones_2025_2": 5163,
+            "atenciones_2026_1": 6058
+          }
+        ]
+      },
+      "atenciones_por_carrera": [
+        {
+          "carrera": "Medicina Humana",
+          "facultad": "FACSA",
+          "atenciones": 1022
+        },
+        {
+          "carrera": "Derecho",
+          "facultad": "FADE",
+          "atenciones": 1021
+        },
+        {
+          "carrera": "Psicología",
+          "facultad": "FAEDCOH",
+          "atenciones": 752
+        },
+        {
+          "carrera": "Arquitectura",
+          "facultad": "FAU",
+          "atenciones": 740
+        },
+        {
+          "carrera": "Ingeniería Civil",
+          "facultad": "FAING",
+          "atenciones": 354
+        },
+        {
+          "carrera": "Terapia Física y Rehabilitación",
+          "facultad": "FACSA",
+          "atenciones": 279
+        },
+        {
+          "carrera": "Administración de Negocios Internacionales",
+          "facultad": "FACEM",
+          "atenciones": 222
+        },
+        {
+          "carrera": "Ingeniería de Sistemas",
+          "facultad": "FAING",
+          "atenciones": 197
+        },
+        {
+          "carrera": "Odontología",
+          "facultad": "FACSA",
+          "atenciones": 179
+        },
+        {
+          "carrera": "Ingeniería Comercial",
+          "facultad": "FACEM",
+          "atenciones": 169
+        },
+        {
+          "carrera": "Ciencias Contables y Financieras",
+          "facultad": "FACEM",
+          "atenciones": 167
+        },
+        {
+          "carrera": "Ciencias de la Comunicación",
+          "facultad": "FAEDCOH",
+          "atenciones": 153
+        },
+        {
+          "carrera": "Laboratorio Clínico y Anatomía Patológica",
+          "facultad": "FACSA",
+          "atenciones": 124
+        },
+        {
+          "carrera": "Administración Turístico – Hotelera",
+          "facultad": "FACEM",
+          "atenciones": 123
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "facultad": "FAING",
+          "atenciones": 119
+        },
+        {
+          "carrera": "Ingeniería Ambiental",
+          "facultad": "FAING",
+          "atenciones": 116
+        },
+        {
+          "carrera": "Educación Inicial",
+          "facultad": "FAEDCOH",
+          "atenciones": 110
+        },
+        {
+          "carrera": "Economía",
+          "facultad": "FACEM",
+          "atenciones": 64
+        },
+        {
+          "carrera": "Educación Física y Deportes",
+          "facultad": "FAEDCOH",
+          "atenciones": 57
+        },
+        {
+          "carrera": "Ingeniería Electrónica",
+          "facultad": "FAING",
+          "atenciones": 40
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "facultad": "FACEM",
+          "atenciones": 24
+        },
+        {
+          "carrera": "Educación Primaria",
+          "facultad": "FAEDCOH",
+          "atenciones": 17
+        },
+        {
+          "carrera": "Ingeniería Agroindustrial",
+          "facultad": "FAING",
+          "atenciones": 9
+        }
+      ]
+    },
+    "VI.2_servicio_social": {
+      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+      "atenciones_totales": 307,
+      "seguro_universitario_beneficiarios": 7131,
+      "atenciones_por_facultad": [
+        {
+          "facultad": "FAEDCOH",
+          "atenciones_2025_2": 39,
+          "atenciones_2026_1": 40,
+          "seguro_beneficiarios": 1060
+        },
+        {
+          "facultad": "FACEM",
+          "atenciones_2025_2": 47,
+          "atenciones_2026_1": 64,
+          "seguro_beneficiarios": 1358
+        },
+        {
+          "facultad": "FAING",
+          "atenciones_2025_2": 44,
+          "atenciones_2026_1": 66,
+          "seguro_beneficiarios": 1647
+        },
+        {
+          "facultad": "FACSA",
+          "atenciones_2025_2": 51,
+          "atenciones_2026_1": 58,
+          "seguro_beneficiarios": 987
+        },
+        {
+          "facultad": "FADE",
+          "atenciones_2025_2": 51,
+          "atenciones_2026_1": 61,
+          "seguro_beneficiarios": 1524
+        },
+        {
+          "facultad": "FAU",
+          "atenciones_2025_2": 32,
+          "atenciones_2026_1": 18,
+          "seguro_beneficiarios": 555
+        }
+      ],
+      "becas": {
+        "total_2025_2": 107,
+        "total_2026_1": 117,
+        "distribucion_facultad_2026_1": {
+          "FACSA": 28,
+          "FAING": 26,
+          "FACEM": 20,
+          "FAEDCOH": 18,
+          "FADE": 17,
+          "FAU": 8
+        },
+        "modalidades_2026_1": {
+          "orfandad_100": 37,
+          "merito_academico": 36,
+          "escasos_recursos_25": 25,
+          "descuento_hermanos_10": 17,
+          "prodac": 2
+        }
+      },
+      "ficha_ingresantes": 417,
+      "estudiantes_discapacidad_conadis": 19
+    },
+    "VI.3_psicopedagogia": {
+      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK",
+      "sesiones_totales": 404,
+      "tutorias_totales": 1374,
+      "consejeria_psicologica": 377,
+      "evaluacion_ingresantes": 398,
+      "distribucion_facultades": [
+        {
+          "facultad": "FACEM",
+          "sesiones": 160,
+          "tutorias": 337
+        },
+        {
+          "facultad": "FADE",
+          "sesiones": 23,
+          "tutorias": 456
+        },
+        {
+          "facultad": "FAING",
+          "sesiones": 78,
+          "tutorias": 180
+        },
+        {
+          "facultad": "FAU",
+          "sesiones": 57,
+          "tutorias": 135
+        },
+        {
+          "facultad": "FACSA",
+          "sesiones": 43,
+          "tutorias": 97
+        },
+        {
+          "facultad": "FAEDCOH",
+          "sesiones": 43,
+          "tutorias": 169
+        }
+      ]
+    },
+    "VI.4_deportes_gimnasio": {
+      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+      "total_atletas": 81,
+      "varones": 42,
+      "damas": 39,
+      "disciplinas": {
+        "basquetbol": {
+          "varones": 16,
+          "damas": 15,
+          "total": 31
+        },
+        "voleibol": {
+          "varones": 15,
+          "damas": 14,
+          "total": 29
+        },
+        "futsal_futbol": {
+          "varones": 11,
+          "damas": 10,
+          "total": 21
+        }
+      },
+      "gimnasio": {
+        "usuarios_unicos_2026_1": 95,
+        "total_accesos": 605,
+        "distribucion_facultad": {
+          "FAING": 32,
+          "FAEDCOH": 27,
+          "FACEM": 18,
+          "FACSA": 14,
+          "FAU": 3,
+          "FADE": 1
+        }
+      }
+    },
+    "VI.6_seguridad_vigilancia": {
+      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ",
+      "cobertura_horas_hombre": "100%",
+      "tiempo_respuesta": "3 a 4 minutos",
+      "incidentes_criticos": 0,
+      "locales_cubiertos": 5,
+      "satisfaccion_usuario": "96%"
+    }
+  }
+}
