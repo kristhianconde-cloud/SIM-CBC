@@ -5688,6 +5688,572 @@ function drawLaboratoriosDashboard(container) {
 }
 
 
+
+// ==========================================================================
+// SERVICIOS EDUCACIONALES COMPLEMENTARIOS BÁSICOS (CBC VI) - DASHBOARD
+// ==========================================================================
+const SERVICIOS_COMPLEMENTARIOS_DATA = {"semestre":"2026-I","fecha_actualizacion":"2026-10-30","componentes":{"VI.1_salud":{"evidencia_url":"https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n","atenciones_topicos":{"2025-II":5177,"2026-I":6080,"variacion_pct":"+17.44%","detalle_topicos":[{"topico":"FAEDCOH","cobertura":"FAEDCOH – Capanique I","atenciones_2025_2":0,"atenciones_2026_1":0},{"topico":"FAING","cobertura":"FAING - Mecánica de suelos","atenciones_2025_2":0,"atenciones_2026_1":0},{"topico":"FACEM","cobertura":"FACEM – Capanique III","atenciones_2025_2":0,"atenciones_2026_1":0},{"topico":"Clínica Docente Odontológica","cobertura":"Clínica Docente Odontológica","atenciones_2025_2":0,"atenciones_2026_1":7},{"topico":"ESPG","cobertura":"Escuela de Posgrado","atenciones_2025_2":14,"atenciones_2026_1":15},{"topico":"Policlínico UPT","cobertura":"FAING, FADE, FAU, FAEDCOH, FACEM, FACSA – Capanique II","atenciones_2025_2":5163,"atenciones_2026_1":6058}]},"atenciones_por_carrera":[{"carrera":"Medicina Humana","facultad":"FACSA","atenciones":1022},{"carrera":"Derecho","facultad":"FADE","atenciones":1021},{"carrera":"Psicología","facultad":"FAEDCOH","atenciones":752},{"carrera":"Arquitectura","facultad":"FAU","atenciones":740},{"carrera":"Ingeniería Civil","facultad":"FAING","atenciones":354},{"carrera":"Terapia Física y Rehabilitación","facultad":"FACSA","atenciones":279},{"carrera":"Administración de Negocios Internacionales","facultad":"FACEM","atenciones":222},{"carrera":"Ingeniería de Sistemas","facultad":"FAING","atenciones":197},{"carrera":"Odontología","facultad":"FACSA","atenciones":179},{"carrera":"Ingeniería Comercial","facultad":"FACEM","atenciones":169},{"carrera":"Ciencias Contables y Financieras","facultad":"FACEM","atenciones":167},{"carrera":"Ciencias de la Comunicación","facultad":"FAEDCOH","atenciones":153},{"carrera":"Laboratorio Clínico y Anatomía Patológica","facultad":"FACSA","atenciones":124},{"carrera":"Administración Turístico – Hotelera","facultad":"FACEM","atenciones":123},{"carrera":"Ingeniería Industrial","facultad":"FAING","atenciones":119},{"carrera":"Ingeniería Ambiental","facultad":"FAING","atenciones":116},{"carrera":"Educación Inicial","facultad":"FAEDCOH","atenciones":110},{"carrera":"Economía","facultad":"FACEM","atenciones":64},{"carrera":"Educación Física y Deportes","facultad":"FAEDCOH","atenciones":57},{"carrera":"Ingeniería Electrónica","facultad":"FAING","atenciones":40},{"carrera":"Administración de Empresas","facultad":"FACEM","atenciones":24},{"carrera":"Educación Primaria","facultad":"FAEDCOH","atenciones":17},{"carrera":"Ingeniería Agroindustrial","facultad":"FAING","atenciones":9}]},"VI.2_servicio_social":{"evidencia_url":"https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci","atenciones_totales":307,"seguro_universitario_beneficiarios":7131,"atenciones_por_facultad":[{"facultad":"FAEDCOH","atenciones_2025_2":39,"atenciones_2026_1":40,"seguro_beneficiarios":1060},{"facultad":"FACEM","atenciones_2025_2":47,"atenciones_2026_1":64,"seguro_beneficiarios":1358},{"facultad":"FAING","atenciones_2025_2":44,"atenciones_2026_1":66,"seguro_beneficiarios":1647},{"facultad":"FACSA","atenciones_2025_2":51,"atenciones_2026_1":58,"seguro_beneficiarios":987},{"facultad":"FADE","atenciones_2025_2":51,"atenciones_2026_1":61,"seguro_beneficiarios":1524},{"facultad":"FAU","atenciones_2025_2":32,"atenciones_2026_1":18,"seguro_beneficiarios":555}],"becas":{"total_2025_2":107,"total_2026_1":117,"distribucion_facultad_2026_1":{"FACSA":28,"FAING":26,"FACEM":20,"FAEDCOH":18,"FADE":17,"FAU":8},"modalidades_2026_1":{"orfandad_100":37,"merito_academico":36,"escasos_recursos_25":25,"descuento_hermanos_10":17,"prodac":2}},"ficha_ingresantes":417,"estudiantes_discapacidad_conadis":19},"VI.3_psicopedagogia":{"evidencia_url":"https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK","sesiones_totales":404,"tutorias_totales":1374,"consejeria_psicologica":377,"evaluacion_ingresantes":398,"distribucion_facultades":[{"facultad":"FACEM","sesiones":160,"tutorias":337},{"facultad":"FADE","sesiones":23,"tutorias":456},{"facultad":"FAING","sesiones":78,"tutorias":180},{"facultad":"FAU","sesiones":57,"tutorias":135},{"facultad":"FACSA","sesiones":43,"tutorias":97},{"facultad":"FAEDCOH","sesiones":43,"tutorias":169}]},"VI.4_deportes_gimnasio":{"evidencia_url":"https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK","total_atletas":81,"varones":42,"damas":39,"disciplinas":{"basquetbol":{"varones":16,"damas":15,"total":31},"voleibol":{"varones":15,"damas":14,"total":29},"futsal_futbol":{"varones":11,"damas":10,"total":21}},"gimnasio":{"usuarios_unicos_2026_1":95,"total_accesos":605,"distribucion_facultad":{"FAING":32,"FAEDCOH":27,"FACEM":18,"FACSA":14,"FAU":3,"FADE":1}}},"VI.6_seguridad_vigilancia":{"evidencia_url":"https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ","cobertura_horas_hombre":"100%","tiempo_respuesta":"3 a 4 minutos","incidentes_criticos":0,"locales_cubiertos":5,"satisfaccion_usuario":"96%"}}};
+
+let _serviciosActiveTab = 'salud'; // 'salud', 'social', 'psicopedagogia', 'deportes', 'seguridad'
+
+function drawServiciosComplementariosDashboard(container) {
+  if (!container) return;
+
+  const render = () => {
+    const comp = SERVICIOS_COMPLEMENTARIOS_DATA.componentes;
+
+    container.innerHTML = `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
+        
+        <!-- Header Principal de Servicios Complementarios -->
+        <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🛎️</span>
+              <h2 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #38bdf8; letter-spacing: -0.01em;">
+                Servicios Educacionales Complementarios Básicos (CBC VI)
+              </h2>
+            </div>
+            <p style="margin: 0.35rem 0 0 0; font-size: 0.88rem; color: var(--text-300);">
+              Monitoreo y seguimiento semestral de salud, bienestar social, tutoría, deportes, cultura y seguridad institucional - UPT
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <a href="CBC_VI_Servicios_Complementarios_UPT.xlsx" download="CBC_VI_Servicios_Complementarios_UPT.xlsx" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.45rem 0.9rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: #0284c7; border: none; color: #fff; font-weight: 700; text-decoration: none; cursor: pointer;">
+              <i data-lucide="file-spreadsheet" style="width: 15px; height: 15px;"></i>
+              <span>Descargar Excel Oficial</span>
+            </a>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🟢 Semestre 2026-I</span>
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 6px;">🏛️ 8 Componentes SUNEDU</span>
+          </div>
+        </div>
+
+        <!-- KPI Cards Grid (5 Tarjetas Clave) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem;">
+          
+          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px; border-left: 4px solid #38bdf8;">
+            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Atenciones de Salud</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: #38bdf8; margin: 0.2rem 0;">6,080</div>
+            <div style="font-size: 0.75rem; color: #34d399; font-weight: 600;">+17.44% vs 2025-II (5,177)</div>
+          </div>
+
+          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px; border-left: 4px solid #34d399;">
+            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Seguro Universitario</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: #34d399; margin: 0.2rem 0;">7,131</div>
+            <div style="font-size: 0.75rem; color: var(--text-300);">100% de estudiantes protegidos</div>
+          </div>
+
+          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px; border-left: 4px solid #a855f7;">
+            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Becas Pregrado</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: #a855f7; margin: 0.2rem 0;">117 Becas</div>
+            <div style="font-size: 0.75rem; color: var(--text-300);">FACSA (28) y FAING (26) lideran</div>
+          </div>
+
+          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px; border-left: 4px solid #f59e0b;">
+            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Tutoría y Psicopedagogía</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: #f59e0b; margin: 0.2rem 0;">1,374</div>
+            <div style="font-size: 0.75rem; color: var(--text-300);">Atenciones tutoriales + 404 sesiones</div>
+          </div>
+
+          <div class="cbc-kpi-card" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 1.1rem; border-radius: 10px; border-left: 4px solid #ec4899;">
+            <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase; font-weight: 700;">Seguridad y Vigilancia</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: #ec4899; margin: 0.2rem 0;">100%</div>
+            <div style="font-size: 0.75rem; color: #34d399; font-weight: 600;">0 incidentes críticos (5 locales)</div>
+          </div>
+
+        </div>
+
+        <!-- Selector de Componentes / Pestañas de Servicios -->
+        <div style="display: flex; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; overflow-x: auto;">
+          <button class="btn btn-secondary serv-tab-btn" data-servtab="salud" style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem; padding: 0.5rem 1rem; border-radius: 8px; ${_serviciosActiveTab === 'salud' ? 'background: #0284c7; border-color: #0284c7; color: #fff;' : 'background: rgba(30,41,59,0.6); color: var(--text-300);'}; cursor: pointer;">
+            🩺 <span>VI.1 Salud (Policlínico y Tópicos)</span>
+          </button>
+          <button class="btn btn-secondary serv-tab-btn" data-servtab="social" style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem; padding: 0.5rem 1rem; border-radius: 8px; ${_serviciosActiveTab === 'social' ? 'background: #0284c7; border-color: #0284c7; color: #fff;' : 'background: rgba(30,41,59,0.6); color: var(--text-300);'}; cursor: pointer;">
+            🤝 <span>VI.2 Servicio Social, Seguros y Becas</span>
+          </button>
+          <button class="btn btn-secondary serv-tab-btn" data-servtab="psicopedagogia" style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem; padding: 0.5rem 1rem; border-radius: 8px; ${_serviciosActiveTab === 'psicopedagogia' ? 'background: #0284c7; border-color: #0284c7; color: #fff;' : 'background: rgba(30,41,59,0.6); color: var(--text-300);'}; cursor: pointer;">
+            🧠 <span>VI.3 Psicopedagogía y Tutoría</span>
+          </button>
+          <button class="btn btn-secondary serv-tab-btn" data-servtab="deportes" style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem; padding: 0.5rem 1rem; border-radius: 8px; ${_serviciosActiveTab === 'deportes' ? 'background: #0284c7; border-color: #0284c7; color: #fff;' : 'background: rgba(30,41,59,0.6); color: var(--text-300);'}; cursor: pointer;">
+            ⚽ <span>VI.4 Deportes y Gimnasio</span>
+          </button>
+          <button class="btn btn-secondary serv-tab-btn" data-servtab="seguridad" style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem; padding: 0.5rem 1rem; border-radius: 8px; ${_serviciosActiveTab === 'seguridad' ? 'background: #0284c7; border-color: #0284c7; color: #fff;' : 'background: rgba(30,41,59,0.6); color: var(--text-300);'}; cursor: pointer;">
+            🛡️ <span>VI.6 Seguridad y Vigilancia</span>
+          </button>
+        </div>
+
+        <!-- Contenedor del Detalle de la Pestaña Seleccionada -->
+        <div id="servicios-subview-content">
+          ${
+            _serviciosActiveTab === 'salud' ? renderSubViewSalud(comp['VI.1_salud']) :
+            _serviciosActiveTab === 'social' ? renderSubViewSocial(comp['VI.2_servicio_social']) :
+            _serviciosActiveTab === 'psicopedagogia' ? renderSubViewPsicopedagogia(comp['VI.3_psicopedagogia']) :
+            _serviciosActiveTab === 'deportes' ? renderSubViewDeportes(comp['VI.4_deportes_gimnasio']) :
+            renderSubViewSeguridad(comp['VI.6_seguridad_vigilancia'])
+          }
+        </div>
+
+      </div>
+    `;
+
+    if (window.lucide) window.lucide.createIcons();
+
+    container.querySelectorAll('.serv-tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        _serviciosActiveTab = btn.getAttribute('data-servtab');
+        render();
+      };
+    });
+  };
+
+  function renderSubViewSalud(saludData) {
+    const topicos = saludData.atenciones_topicos.detalle_topicos;
+    const carreras = saludData.atenciones_por_carrera;
+
+    return `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Enlace a Evidencia y Resumen -->
+        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.2); padding: 1rem 1.25rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <div style="font-weight: 700; color: #38bdf8;">Medio de Verificación Oficial SUNEDU (MV1 - Formato 10 y Reporte de Atenciones)</div>
+            <div style="font-size: 0.82rem; color: var(--text-300); margin-top: 2px;">Informe N°00095-2026-UPT-BU-APS - Policlínico UPT y Tópicos de Salud</div>
+          </div>
+          <a href="${saludData.evidencia_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; text-decoration: none;">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+            <span>Abrir Evidencia en SharePoint</span>
+          </a>
+        </div>
+
+        <!-- Tabla 8: Tópicos Institucionales -->
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tabla 8: Total de Atenciones por Tópico Institucional (2025-II vs 2026-I)
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead style="background: #1e293b; color: #38bdf8;">
+                <tr>
+                  <th style="padding: 0.7rem; text-align: left;">Tópico</th>
+                  <th style="padding: 0.7rem; text-align: left;">Cobertura / Sede</th>
+                  <th style="padding: 0.7rem; text-align: right;">Atenciones 2025-II</th>
+                  <th style="padding: 0.7rem; text-align: right;">Atenciones 2026-I</th>
+                  <th style="padding: 0.7rem; text-align: center;">Variación</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${topicos.map(t => {
+                  const dif = t.atenciones_2026_1 - t.atenciones_2025_2;
+                  const difStr = dif > 0 ? `+${dif}` : `${dif}`;
+                  const isPol = t.topico.includes('Policlínico');
+                  return `
+                    <tr style="border-bottom: 1px solid #1e293b; ${isPol ? 'background: rgba(2,132,199,0.1); font-weight: 700;' : ''}">
+                      <td style="padding: 0.6rem; color: ${isPol ? '#38bdf8' : '#f8fafc'};">${t.topico}</td>
+                      <td style="padding: 0.6rem; color: var(--text-300);">${t.cobertura}</td>
+                      <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${t.atenciones_2025_2.toLocaleString()}</td>
+                      <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8;">${t.atenciones_2026_1.toLocaleString()}</td>
+                      <td style="padding: 0.6rem; text-align: center;">
+                        <span style="background: ${dif >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color: ${dif >= 0 ? '#34d399' : '#f87171'}; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">
+                          ${difStr}
+                        </span>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+                <tr style="background: #1e293b; font-weight: 800; border-top: 2px solid #334155;">
+                  <td style="padding: 0.7rem; color: #fff;">TOTAL INSTITUCIONAL</td>
+                  <td style="padding: 0.7rem; color: var(--text-400);">Red Universitaria UPT</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #fff;">5,177</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #38bdf8; font-size: 0.95rem;">6,080</td>
+                  <td style="padding: 0.7rem; text-align: center; color: #34d399;">+17.44%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tabla 9: Atenciones por Carrera Profesional -->
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tabla 9: Carreras Profesionales que hicieron uso del Policlínico UPT (6,058 Atenciones)
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <div style="max-height: 380px; overflow-y: auto;">
+              <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                <thead style="position: sticky; top: 0; background: #1e293b; color: #38bdf8;">
+                  <tr>
+                    <th style="padding: 0.65rem; width: 45px; text-align: center;">N°</th>
+                    <th style="padding: 0.65rem; width: 90px; text-align: center;">Facultad</th>
+                    <th style="padding: 0.65rem; text-align: left;">Carrera Profesional</th>
+                    <th style="padding: 0.65rem; text-align: right;">Total Atenciones</th>
+                    <th style="padding: 0.65rem; width: 140px; text-align: left;">% Participación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${carreras.map((c, i) => {
+                    const pct = ((c.atenciones / 6058) * 100).toFixed(1);
+                    return `
+                      <tr style="border-bottom: 1px solid #1e293b;">
+                        <td style="padding: 0.55rem; text-align: center; color: var(--text-400);">${i + 1}</td>
+                        <td style="padding: 0.55rem; text-align: center;">
+                          <span style="background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 1px 6px; border-radius: 3px; font-weight: 700; font-size: 0.72rem;">${c.facultad}</span>
+                        </td>
+                        <td style="padding: 0.55rem; font-weight: 600; color: #f8fafc;">${c.carrera}</td>
+                        <td style="padding: 0.55rem; text-align: right; font-weight: 800; color: #38bdf8;">${c.atenciones.toLocaleString()}</td>
+                        <td style="padding: 0.55rem;">
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="flex: 1; background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden;">
+                              <div style="width: ${pct}%; height: 100%; background: #0284c7;"></div>
+                            </div>
+                            <span style="font-size: 0.75rem; color: var(--text-300); width: 35px;">${pct}%</span>
+                          </div>
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function renderSubViewSocial(socialData) {
+    const facs = socialData.atenciones_por_facultad;
+    const becas = socialData.becas;
+
+    return `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.2); padding: 1rem 1.25rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <div style="font-weight: 700; color: #38bdf8;">Medio de Verificación Oficial SUNEDU (MV1 - Servicio Social, Seguro y Becas)</div>
+            <div style="font-size: 0.82rem; color: var(--text-300); margin-top: 2px;">Presupuesto ejecutado S/ 3,900.00 (Bienestar) y S/ 138,000.00 (RSU/Voluntariado)</div>
+          </div>
+          <a href="${socialData.evidencia_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; text-decoration: none;">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+            <span>Abrir Evidencia en SharePoint</span>
+          </a>
+        </div>
+
+        <!-- Tabla 10 y Seguro por Facultad -->
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tablas 10 y 12: Atenciones de Servicio Social y Cobertura de Seguro Universitario por Facultad
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead style="background: #1e293b; color: #38bdf8;">
+                <tr>
+                  <th style="padding: 0.7rem; text-align: left;">Facultad</th>
+                  <th style="padding: 0.7rem; text-align: right;">Atenciones Social 2025-II</th>
+                  <th style="padding: 0.7rem; text-align: right;">Atenciones Social 2026-I</th>
+                  <th style="padding: 0.7rem; text-align: center;">Variación</th>
+                  <th style="padding: 0.7rem; text-align: right;">Estudiantes con Seguro (100%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${facs.map(f => {
+                  const dif = f.atenciones_2026_1 - f.atenciones_2025_2;
+                  return `
+                    <tr style="border-bottom: 1px solid #1e293b;">
+                      <td style="padding: 0.6rem; font-weight: 700; color: #38bdf8;">${f.facultad}</td>
+                      <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${f.atenciones_2025_2}</td>
+                      <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #fff;">${f.atenciones_2026_1}</td>
+                      <td style="padding: 0.6rem; text-align: center;">
+                        <span style="background: ${dif >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color: ${dif >= 0 ? '#34d399' : '#f87171'}; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">
+                          ${dif >= 0 ? `+${dif}` : dif}
+                        </span>
+                      </td>
+                      <td style="padding: 0.6rem; text-align: right; font-weight: 700; color: #34d399;">${f.seguro_beneficiarios.toLocaleString()} alumnos</td>
+                    </tr>
+                  `;
+                }).join('')}
+                <tr style="background: #1e293b; font-weight: 800;">
+                  <td style="padding: 0.7rem; color: #fff;">TOTAL INSTITUCIONAL</td>
+                  <td style="padding: 0.7rem; text-align: right; color: var(--text-300);">264</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #38bdf8; font-size: 0.95rem;">307 (+16.3%)</td>
+                  <td style="padding: 0.7rem; text-align: center; color: #34d399;">+43</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #34d399; font-size: 0.95rem;">7,131 alumnos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Becas por Modalidad -->
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.25rem;">
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">
+            Tabla 13: Distribución de Becas de Pregrado Adjudicadas (Total 117 Becas en 2026-I)
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(30,41,59,0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase;">Orfandad (100%)</div>
+              <div style="font-size: 1.4rem; font-weight: 800; color: #38bdf8; margin: 2px 0;">37 Becarios</div>
+              <div style="font-size: 0.72rem; color: var(--text-300);">Ley N°23585</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase;">Mérito Académico</div>
+              <div style="font-size: 1.4rem; font-weight: 800; color: #34d399; margin: 2px 0;">36 Becarios</div>
+              <div style="font-size: 0.72rem; color: var(--text-300);">6 al 100% y 30 al 50%</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase;">Escasos Recursos (25%)</div>
+              <div style="font-size: 1.4rem; font-weight: 800; color: #a855f7; margin: 2px 0;">25 Becarios</div>
+              <div style="font-size: 0.72rem; color: var(--text-300);">Subvención socioeconómica</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase;">Descuento Hermanos (10%)</div>
+              <div style="font-size: 1.4rem; font-weight: 800; color: #f59e0b; margin: 2px 0;">17 Beneficiarios</div>
+              <div style="font-size: 0.72rem; color: var(--text-300);">Apoyo a familias UPT</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 0.75rem; color: var(--text-400); text-transform: uppercase;">Deportistas PRODAC</div>
+              <div style="font-size: 1.4rem; font-weight: 800; color: #ec4899; margin: 2px 0;">2 Becarios</div>
+              <div style="font-size: 0.72rem; color: var(--text-300);">1 al 100% y 1 al 50%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function renderSubViewPsicopedagogia(psicoData) {
+    const facs = psicoData.distribucion_facultades;
+
+    return `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.2); padding: 1rem 1.25rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <div style="font-weight: 700; color: #38bdf8;">Medio de Verificación Oficial SUNEDU (MV1 - Tutoría y Psicopedagogía)</div>
+            <div style="font-size: 0.82rem; color: var(--text-300); margin-top: 2px;">Reglamento de Tutoría (Res. N°127-2025-UPT-CU) - 4 Licenciados en Psicología y coordinadores en cada facultad</div>
+          </div>
+          <a href="${psicoData.evidencia_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; text-decoration: none;">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+            <span>Abrir Evidencia en SharePoint</span>
+          </a>
+        </div>
+
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tablas 14 y 15: Sesiones Psicoeducativas y Atenciones de Tutoría por Facultad (2026-I)
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead style="background: #1e293b; color: #38bdf8;">
+                <tr>
+                  <th style="padding: 0.7rem; text-align: left;">Facultad</th>
+                  <th style="padding: 0.7rem; text-align: right;">Sesiones Psicoeducativas</th>
+                  <th style="padding: 0.7rem; text-align: right;">Atenciones Tutoría Individual</th>
+                  <th style="padding: 0.7rem; width: 140px; text-align: left;">% Tutoría</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${facs.map(f => {
+                  const pct = ((f.tutorias / 1374) * 100).toFixed(1);
+                  return `
+                    <tr style="border-bottom: 1px solid #1e293b;">
+                      <td style="padding: 0.6rem; font-weight: 700; color: #38bdf8;">${f.facultad}</td>
+                      <td style="padding: 0.6rem; text-align: right; color: #f8fafc; font-weight: 600;">${f.sesiones}</td>
+                      <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8;">${f.tutorias}</td>
+                      <td style="padding: 0.6rem;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="flex: 1; background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div style="width: ${pct}%; height: 100%; background: #0284c7;"></div>
+                          </div>
+                          <span style="font-size: 0.75rem; color: var(--text-300); width: 35px;">${pct}%</span>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+                <tr style="background: #1e293b; font-weight: 800;">
+                  <td style="padding: 0.7rem; color: #fff;">TOTAL INSTITUCIONAL</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #34d399; font-size: 0.92rem;">404 Sesiones</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #38bdf8; font-size: 0.95rem;">1,374 Atenciones</td>
+                  <td style="padding: 0.7rem; color: var(--text-400);">100.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function renderSubViewDeportes(depData) {
+    const disc = depData.disciplinas;
+    const gimFacs = depData.gimnasio.distribucion_facultad;
+
+    return `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.2); padding: 1rem 1.25rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <div style="font-weight: 700; color: #38bdf8;">Medio de Verificación Oficial SUNEDU (MV1/MV2 - Deportes y Gimnasio)</div>
+            <div style="font-size: 0.82rem; color: var(--text-300); margin-top: 2px;">Reglamento Deportivo UPT (FEDUP), Fútbol/Futsal, Vóley, Básquet y Gimnasio SL01</div>
+          </div>
+          <a href="${depData.evidencia_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; text-decoration: none;">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+            <span>Abrir Evidencia en SharePoint</span>
+          </a>
+        </div>
+
+        <!-- Tabla 16: Disciplinas Deportivas -->
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tabla 16: Participación por Disciplina Deportiva y Género (81 Atletas Federados)
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead style="background: #1e293b; color: #38bdf8;">
+                <tr>
+                  <th style="padding: 0.7rem; text-align: left;">Disciplina Deportiva</th>
+                  <th style="padding: 0.7rem; text-align: right;">Varones</th>
+                  <th style="padding: 0.7rem; text-align: right;">Damas</th>
+                  <th style="padding: 0.7rem; text-align: right;">Total Atletas</th>
+                  <th style="padding: 0.7rem; text-align: center;">% Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">🏀 Básquetbol</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.basquetbol.varones}</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.basquetbol.damas}</td>
+                  <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8;">${disc.basquetbol.total}</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">38.27%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">🏐 Voleibol</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.voleibol.varones}</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.voleibol.damas}</td>
+                  <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8;">${disc.voleibol.total}</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">35.80%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">⚽ Futsal / Fútbol</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.futsal_futbol.varones}</td>
+                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${disc.futsal_futbol.damas}</td>
+                  <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8;">${disc.futsal_futbol.total}</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">25.93%</td>
+                </tr>
+                <tr style="background: #1e293b; font-weight: 800;">
+                  <td style="padding: 0.7rem; color: #fff;">TOTAL ATLETAS UPT</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #38bdf8;">42 (51.85%)</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #ec4899;">39 (48.15%)</td>
+                  <td style="padding: 0.7rem; text-align: right; color: #34d399; font-size: 0.95rem;">81</td>
+                  <td style="padding: 0.7rem; text-align: center; color: #fff;">100.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Gimnasio -->
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.25rem;">
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">
+            Tabla 20: Visitas y Usuarios Únicos al Gimnasio Institucional (605 Accesos / 95 Usuarios Únicos)
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem;">
+            ${Object.entries(gimFacs).map(([fac, cant]) => `
+              <div style="background: rgba(30,41,59,0.5); padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); text-align: center;">
+                <div style="font-size: 0.78rem; font-weight: 700; color: #38bdf8;">${fac}</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #fff; margin: 2px 0;">${cant}</div>
+                <div style="font-size: 0.7rem; color: var(--text-400);">usuarios únicos</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function renderSubViewSeguridad(segData) {
+    return `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.2); padding: 1rem 1.25rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <div style="font-weight: 700; color: #38bdf8;">Medio de Verificación Oficial SUNEDU (MV2 - Contrato Tercerizado SUCAMEC y Reporte Operativo)</div>
+            <div style="font-size: 0.82rem; color: var(--text-300); margin-top: 2px;">Vigilancia privada 24/7/365 en locales SL01, SL02, SL03, SL04 y SL05</div>
+          </div>
+          <a href="${segData.evidencia_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; text-decoration: none;">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+            <span>Abrir Evidencia en SharePoint</span>
+          </a>
+        </div>
+
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem;">
+            Tabla 21: Matriz de Indicadores de Desempeño del Servicio de Seguridad y Vigilancia (KPI / SLA)
+          </div>
+          <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+            <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead style="background: #1e293b; color: #38bdf8;">
+                <tr>
+                  <th style="padding: 0.7rem; text-align: left;">Indicador de Desempeño (KPI/SLA)</th>
+                  <th style="padding: 0.7rem; text-align: center;">Meta / Estándar</th>
+                  <th style="padding: 0.7rem; text-align: center;">Resultado Alcanzado</th>
+                  <th style="padding: 0.7rem; text-align: left;">Detalle y Alcance Operativo</th>
+                  <th style="padding: 0.7rem; text-align: center;">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">Cobertura de horas-hombre programadas</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">100.00%</td>
+                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #34d399;">100%</td>
+                  <td style="padding: 0.6rem; color: var(--text-300);">Cobertura total de turnos de vigilancia 24h los 365 días del año</td>
+                  <td style="padding: 0.6rem; text-align: center;"><span style="background: rgba(16,185,129,0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-weight: 700;">CUMPLE</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">Tiempo de respuesta a emergencias</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">&lt; 5 minutos</td>
+                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #38bdf8;">3 a 4 min</td>
+                  <td style="padding: 0.6rem; color: var(--text-300);">Atención rápida de incidentes menores, de salud y fallas de infraestructura</td>
+                  <td style="padding: 0.6rem; text-align: center;"><span style="background: rgba(16,185,129,0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-weight: 700;">CUMPLE</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">Tasa de incidentes críticos</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">0 incidentes</td>
+                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #34d399;">0 incidentes</td>
+                  <td style="padding: 0.6rem; color: var(--text-300);">Cero siniestros o faltas graves registradas durante el período evaluado 2026-I</td>
+                  <td style="padding: 0.6rem; text-align: center;"><span style="background: rgba(16,185,129,0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-weight: 700;">CUMPLE</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">Satisfacción de la comunidad</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">≥ 98%</td>
+                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #f59e0b;">96%</td>
+                  <td style="padding: 0.6rem; color: var(--text-300);">Evaluación de percepción sobre el personal de seguridad en puertas y pabellones</td>
+                  <td style="padding: 0.6rem; text-align: center;"><span style="background: rgba(245,158,11,0.15); color: #f59e0b; padding: 2px 8px; border-radius: 4px; font-weight: 700;">SATISFACTORIO</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">Cobertura por locales institucionales</td>
+                  <td style="padding: 0.6rem; text-align: center; color: var(--text-300);">100% locales</td>
+                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #34d399;">100% (5)</td>
+                  <td style="padding: 0.6rem; color: var(--text-300);">Cobertura integral en los 05 locales licenciados UPT (SL01 a SL05)</td>
+                  <td style="padding: 0.6rem; text-align: center;"><span style="background: rgba(16,185,129,0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-weight: 700;">CUMPLE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  render();
+}
+
+
 const drawEstadisticas = () => {
     const statsContent = container.querySelector("#cbc-tab-estadisticas-content");
     if (!statsContent) return;
