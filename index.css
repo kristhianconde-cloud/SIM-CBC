@@ -1951,62 +1951,92 @@ select.input-control {
    THEMES - UPT & DARK
    ========================================================================== */
 
-/* Tema UPT - Colores institucionales de la Universidad Privada de Tacna en Modo Claro */
+/* Tema UPT - Sistema de Diseño Institucional Oficial UPT */
 [data-theme="upt"] {
-  --bg-dark-900: #ffffff;      /* Sidebar blanco limpio */
-  --bg-dark-800: #f3f4f6;      /* Fondo de la app (gris claro de la foto) */
-  --bg-dark-700: #ffffff;      /* Tarjetas y contenedores (cuadros blancos de la foto) */
-  --bg-dark-600: #f1f5f9;      /* Fondos secundarios, hovers suaves y burbujas de bot */
-  --accent: #9d803c;           /* Dorado/ocre institucional (de los botones de la foto) */
-  --accent-light: #b89d52;     /* Dorado claro para hovers */
-  --accent-glow: rgba(157, 128, 60, 0.12);
-  --border-color: #e5e7eb;     /* Bordes gris claro */
-  --border-hover: #cbd5e1;
-  --text-100: #0f172a;         /* Títulos y textos oscuros principales (slate-900) */
-  --text-200: #334155;         /* Textos de cuerpo slate-700 */
-  --text-300: #64748b;         /* Textos secundarios slate-500 */
-  --text-400: #94a3b8;         /* Textos deshabilitados slate-400 */
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-headline: 'Outfit', 'Inter', system-ui, sans-serif;
+
+  /* Paleta Oficial extraída del Design System */
+  --color-upt-primary: #1E3F5D;      /* Deep Navy Blue */
+  --color-upt-primary-light: #2c5982;
+  --color-upt-primary-dark: #142b40;
+  --color-upt-secondary: #9C7D0F;    /* Rich Golden Ochre */
+  --color-upt-secondary-light: #b59218;
+  --color-upt-secondary-dark: #7a610b;
+  --color-upt-tertiary: #523805;     /* Warm Bronze Brown */
+  --color-upt-neutral: #76777A;      /* Medium Slate Gray */
+  --color-upt-neutral-light: #f4f6f8;
+  --color-upt-neutral-border: #dbe0e6;
+
+  /* Mapeo a tokens globales de la aplicación */
+  --bg-dark-900: #ffffff;            /* Sidebar blanco institucional */
+  --bg-dark-800: #f4f6f8;            /* Fondo principal de la aplicación (gris claro neutro) */
+  --bg-dark-700: #ffffff;            /* Tarjetas, paneles y contenedores */
+  --bg-dark-600: #edf1f5;            /* Fondos secundarios, hovers y controles */
+
+  --accent: #1E3F5D;                 /* Primary: Botones principales y llamadas a la acción */
+  --accent-light: #2c5982;           /* Primary Light para hover */
+  --accent-glow: rgba(30, 63, 93, 0.15);
+
+  --accent-secondary: #9C7D0F;       /* Secondary: Medallas, badges, alertas y acentos dorados */
+  --accent-tertiary: #523805;        /* Tertiary: Detalles en bronce */
+
+  --border-color: #dbe0e6;           /* Bordes suaves estructurados */
+  --border-hover: #b0b8c2;
+
+  --text-100: #142b40;               /* Títulos principales (azul marino oscuro) */
+  --text-200: #1E3F5D;               /* Texto principal / cuerpo */
+  --text-300: #76777A;               /* Texto secundario (Neutral) */
+  --text-400: #9aa0a6;               /* Textos deshabilitados o labels tenues */
+}
+
+/* Tipografía de Encabezados con Outfit en el Tema UPT */
+[data-theme="upt"] h1,
+[data-theme="upt"] h2,
+[data-theme="upt"] h3,
+[data-theme="upt"] h4,
+[data-theme="upt"] .welcome-system-title,
+[data-theme="upt"] .sidebar-title,
+[data-theme="upt"] .cbc-kpi-code {
+  font-family: var(--font-headline) !important;
+  color: var(--text-100) !important;
+  letter-spacing: -0.015em;
 }
 
 /* Modificaciones específicas para el header y componentes en el tema UPT */
 [data-theme="upt"] .main-header {
-  background-color: rgba(255, 255, 255, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.92) !important;
   border-bottom: 1px solid var(--border-color) !important;
 }
 
 [data-theme="upt"] .sidebar-footer {
-  background-color: #f8fafc !important;
+  background-color: var(--bg-dark-600) !important;
   border-top: 1px solid var(--border-color) !important;
 }
 
 /* Ajustes de contraste para inputs y textos en el tema UPT */
 [data-theme="upt"] body {
   color: var(--text-200) !important;
+  background-color: var(--bg-dark-800) !important;
 }
 
 [data-theme="upt"] strong,
-[data-theme="upt"] h1,
-[data-theme="upt"] h2,
-[data-theme="upt"] h3,
-[data-theme="upt"] h4,
-[data-theme="upt"] h5,
-[data-theme="upt"] h6,
 [data-theme="upt"] .card strong,
 [data-theme="upt"] .card h4,
 [data-theme="upt"] .db-status-badge strong,
-[data-theme="upt"] .welcome-system-title,
 [data-theme="upt"] #chat-messages-box strong {
   color: var(--text-100) !important;
 }
 
 /* Botón de limpiar chat y otros botones secundarios */
 [data-theme="upt"] .btn-secondary {
-  background: var(--bg-dark-600) !important;
-  color: var(--text-200) !important;
+  background: #ffffff !important;
+  color: var(--color-upt-primary) !important;
   border: 1px solid var(--border-color) !important;
 }
 [data-theme="upt"] .btn-secondary:hover {
-  background: var(--border-color) !important;
+  background: var(--bg-dark-600) !important;
+  border-color: var(--color-upt-primary) !important;
   color: var(--text-100) !important;
 }
 
@@ -2027,22 +2057,28 @@ select.input-control {
 [data-theme="upt"] input:focus,
 [data-theme="upt"] textarea:focus,
 [data-theme="upt"] .form-input:focus {
-  border-color: var(--accent) !important;
+  border-color: var(--color-upt-primary) !important;
   box-shadow: 0 0 0 3px var(--accent-glow) !important;
 }
 
-/* Mantener el texto blanco en el botón primary de enviar chat y botones activos */
+/* Botón Primary institucional (#1E3F5D) */
 [data-theme="upt"] .btn-primary,
-[data-theme="upt"] .btn-primary *,
-[data-theme="upt"] .view-ren-btn.active,
-[data-theme="upt"] .sub-tab-btn.active {
-  background-color: var(--accent) !important;
+[data-theme="upt"] .btn-primary * {
+  background-color: var(--color-upt-primary) !important;
   color: #ffffff !important;
-  border-color: var(--accent) !important;
+  border-color: var(--color-upt-primary) !important;
 }
 [data-theme="upt"] .btn-primary:hover {
-  background-color: var(--accent-light) !important;
-  border-color: var(--accent-light) !important;
+  background-color: var(--color-upt-primary-light) !important;
+  border-color: var(--color-upt-primary-light) !important;
+}
+
+/* Botones activos y subpestañas destacadas */
+[data-theme="upt"] .sub-tab-btn.active,
+[data-theme="upt"] .view-ren-btn.active {
+  background-color: var(--color-upt-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--color-upt-primary) !important;
 }
 
 /* Corregir el color de los items del menú de temas */
@@ -2055,10 +2091,10 @@ select.input-control {
   color: var(--text-100) !important;
 }
 
-/* Corregir el color del texto y bordes del dropzone de Excel */
+/* Dropzone de Excel con acento secundario dorado (#9C7D0F) */
 [data-theme="upt"] #cbc-excel-dropzone {
-  background: #f8fafc !important;
-  border-color: var(--accent) !important;
+  background: #ffffff !important;
+  border-color: var(--color-upt-secondary) !important;
 }
 [data-theme="upt"] #cbc-excel-dropzone h4,
 [data-theme="upt"] #cbc-excel-dropzone p,
@@ -2066,7 +2102,7 @@ select.input-control {
   color: var(--text-200) !important;
 }
 
-/* Ajustes de contraste para la tabla del listado de docentes */
+/* Ajustes de contraste para la tabla del listado de docentes y matrices */
 [data-theme="upt"] table tr th {
   background-color: var(--bg-dark-600) !important;
   color: var(--text-100) !important;
@@ -2077,7 +2113,7 @@ select.input-control {
   border-bottom: 1px solid var(--border-color) !important;
 }
 [data-theme="upt"] table tr:hover td {
-  background-color: var(--bg-dark-600) !important;
+  background-color: rgba(30, 63, 93, 0.04) !important;
 }
 
 /* Iconos de Lucide */
@@ -2085,41 +2121,48 @@ select.input-control {
   stroke: currentColor;
 }
 [data-theme="upt"] .sidebar-logo svg {
-  color: var(--accent) !important;
+  color: var(--color-upt-secondary) !important;
 }
 [data-theme="upt"] .nav-item:hover svg,
 [data-theme="upt"] .nav-item.active svg {
-  color: var(--accent) !important;
+  color: var(--color-upt-primary) !important;
+}
+[data-theme="upt"] .nav-item.active {
+  background: rgba(30, 63, 93, 0.08) !important;
+  border-left: 3px solid var(--color-upt-primary) !important;
+  color: var(--color-upt-primary) !important;
+  font-weight: 700;
 }
 
 /* Correcciones para tarjetas CBC (Matriz de Cumplimiento) en el tema UPT */
 [data-theme="upt"] .cbc-kpi-card {
   background: var(--bg-dark-700) !important;
   border-color: var(--border-color) !important;
-  box-shadow: var(--shadow-sm) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 [data-theme="upt"] .cbc-kpi-card:hover {
-  border-color: var(--accent-light) !important;
-  box-shadow: 0 8px 16px -4px var(--accent-glow) !important;
+  border-color: var(--color-upt-secondary) !important;
+  box-shadow: 0 8px 16px -4px rgba(156, 125, 15, 0.15) !important;
 }
 [data-theme="upt"] .cbc-kpi-card.active {
-  border-color: var(--accent) !important;
-  background: linear-gradient(135deg, var(--accent-glow) 0%, #ffffff 100%) !important;
-  box-shadow: 0 0 12px -2px var(--accent-glow) !important;
+  border-color: var(--color-upt-primary) !important;
+  background: linear-gradient(135deg, rgba(30, 63, 93, 0.05) 0%, #ffffff 100%) !important;
+  box-shadow: 0 0 12px -2px rgba(30, 63, 93, 0.15) !important;
 }
 [data-theme="upt"] .cbc-kpi-title {
-  color: var(--text-200) !important;
+  color: var(--text-300) !important;
 }
 [data-theme="upt"] .cbc-kpi-code {
-  color: var(--text-100) !important;
+  color: var(--color-upt-primary) !important;
 }
 [data-theme="upt"] .cbc-kpi-ratio {
   color: var(--text-200) !important;
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(30, 63, 93, 0.06) !important;
 }
 [data-theme="upt"] .cbc-kpi-bar-bg {
-  background-color: rgba(0, 0, 0, 0.08) !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
 }
+
 
 /* Tema Dark - Modo negro premium con acento azul para legibilidad */
 [data-theme="dark"] {
