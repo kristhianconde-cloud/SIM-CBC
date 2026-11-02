@@ -5806,64 +5806,227 @@ function drawServiciosComplementariosDashboard(container) {
       { id: "KPI-16", comp: "VI.8", serv: "Acervo Bibliográfico", ind: "Títulos y volúmenes codificados en sistema", um: "Ejemplares", s25_1: "42,100", s25_2: "43,500", s26_1: "44,800", meta: "Actualizado", estado: "CUMPLE", drive: "https://uptpe-my.sharepoint.com/:x:/g/personal/licencia_institucional_upt_pe/IQB2E5hgut6qQ7E36X4OAox-Acye465tPMZpYcA4nWfpCS0?e=gEwbog" }
     ];
 
+    const getCompStyle = (comp) => {
+      switch(comp) {
+        case 'VI.1': return 'background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);';
+        case 'VI.2': return 'background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);';
+        case 'VI.3': return 'background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);';
+        case 'VI.4': return 'background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);';
+        case 'VI.5': return 'background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3);';
+        case 'VI.6': return 'background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3);';
+        case 'VI.7': return 'background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);';
+        default: return 'background: rgba(156, 125, 15, 0.2); color: #facc15; border: 1px solid rgba(156, 125, 15, 0.4);';
+      }
+    };
+
     return `
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%;">
         
-        <!-- Banner Informativo -->
-        <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(56,189,248,0.25); padding: 1.1rem 1.4rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <div style="font-weight: 800; font-size: 1.05rem; color: #38bdf8;">Matriz de Cumplimiento Institucional - Condición Básica de Calidad VI</div>
-            <div style="font-size: 0.84rem; color: var(--text-300); margin-top: 2px;">
-              Los 16 indicadores clave de desempeño registran 100% de cumplimiento con las metas semestrales y marco SUNEDU
+        <!-- 1. FILA DE 5 TARJETAS MACRO KPI (Cockpit Ejecutivo Stitch - Acentos Laterales) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem;">
+          
+          <!-- Card 1: Atenciones de Salud (Cyan #38BDF8) -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #38bdf8;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 0.35rem;">
+              <span style="font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">Atenciones de Salud</span>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="heart-pulse" style="width: 17px; height: 17px;"></i>
+              </div>
+            </div>
+            <div style="padding-left: 0.35rem; margin: 0.75rem 0;">
+              <div style="font-size: 1.9rem; font-weight: 800; color: #ffffff; font-family: Outfit, sans-serif; line-height: 1.1;">6,080</div>
+              <div style="font-size: 0.75rem; color: #38bdf8; font-weight: 700; margin-top: 4px;">+17.4% vs 2025-II (5,177)</div>
+            </div>
+            <div style="padding-left: 0.35rem; padding-top: 0.55rem; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #38bdf8;"></span>
+              <span>Policlínico UPT & Tópicos</span>
             </div>
           </div>
-          <span style="background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.4); font-weight: 800; font-size: 0.85rem; padding: 0.45rem 1rem; border-radius: 8px;">
-            16 / 16 Indicadores Cumplidos (100%)
-          </span>
+
+          <!-- Card 2: Seguro Universitario (Esmeralda #10B981) -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #10b981;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 0.35rem;">
+              <span style="font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">Seguro Universitario</span>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #34d399; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="shield-check" style="width: 17px; height: 17px;"></i>
+              </div>
+            </div>
+            <div style="padding-left: 0.35rem; margin: 0.75rem 0;">
+              <div style="font-size: 1.9rem; font-weight: 800; color: #ffffff; font-family: Outfit, sans-serif; line-height: 1.1;">7,131</div>
+              <div style="font-size: 0.75rem; color: #34d399; font-weight: 700; margin-top: 4px;">100% de matrícula protegida</div>
+            </div>
+            <div style="padding-left: 0.35rem; padding-top: 0.55rem; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+              <span>Póliza integral contra accidentes</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Becas Adjudicadas (Ocre Dorado UPT #9C7D0F) -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #9c7d0f;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 0.35rem;">
+              <span style="font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">Becas de Pregrado</span>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(156, 125, 15, 0.2); color: #facc15; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="award" style="width: 17px; height: 17px;"></i>
+              </div>
+            </div>
+            <div style="padding-left: 0.35rem; margin: 0.75rem 0;">
+              <div style="font-size: 1.9rem; font-weight: 800; color: #ffffff; font-family: Outfit, sans-serif; line-height: 1.1;">117</div>
+              <div style="font-size: 0.75rem; color: #facc15; font-weight: 700; margin-top: 4px;">+10 becas adjudicadas</div>
+            </div>
+            <div style="padding-left: 0.35rem; padding-top: 0.55rem; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #9c7d0f;"></span>
+              <span>Socioeconómicas y excelencia</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Tutoría y Psicopedagogía (Púrpura #A855F7) -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #a855f7;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 0.35rem;">
+              <span style="font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">Tutoría y Psicopedagogía</span>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(168, 85, 247, 0.15); color: #c084fc; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="users" style="width: 17px; height: 17px;"></i>
+              </div>
+            </div>
+            <div style="padding-left: 0.35rem; margin: 0.75rem 0;">
+              <div style="font-size: 1.9rem; font-weight: 800; color: #ffffff; font-family: Outfit, sans-serif; line-height: 1.1;">1,778</div>
+              <div style="font-size: 0.75rem; color: #c084fc; font-weight: 700; margin-top: 4px;">1,374 tutorías + 404 psicoed.</div>
+            </div>
+            <div style="padding-left: 0.35rem; padding-top: 0.55rem; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #a855f7;"></span>
+              <span>Acompañamiento integral UPT</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Seguridad Institucional (Azul UPT #0284C7) -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #0284c7;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 0.35rem;">
+              <span style="font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">Seguridad Institucional</span>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(2, 132, 199, 0.2); color: #38bdf8; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="shield" style="width: 17px; height: 17px;"></i>
+              </div>
+            </div>
+            <div style="padding-left: 0.35rem; margin: 0.75rem 0;">
+              <div style="font-size: 1.9rem; font-weight: 800; color: #ffffff; font-family: Outfit, sans-serif; line-height: 1.1;">100%</div>
+              <div style="font-size: 0.75rem; color: #38bdf8; font-weight: 700; margin-top: 4px;">Cobertura 24/7 permanente</div>
+            </div>
+            <div style="padding-left: 0.35rem; padding-top: 0.55rem; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #0284c7;"></span>
+              <span>0 incidentes críticos en 5 locales</span>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Tabla Matriz de Indicadores Clave -->
-        <div class="cbc-matrix-container" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow-x: auto;">
-          <table class="cbc-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 900px;">
-            <thead style="background: #1e293b; color: #38bdf8;">
-              <tr>
-                <th style="padding: 0.7rem; text-align: center; width: 65px;">ID</th>
-                <th style="padding: 0.7rem; text-align: center; width: 60px;">CBC</th>
-                <th style="padding: 0.7rem; text-align: left; width: 140px;">Servicio</th>
-                <th style="padding: 0.7rem; text-align: left;">Indicador Clave de Desempeño</th>
-                <th style="padding: 0.7rem; text-align: center; width: 95px;">U. Medida</th>
-                <th style="padding: 0.7rem; text-align: right; width: 85px;">2025-II</th>
-                <th style="padding: 0.7rem; text-align: right; width: 110px; color: #fff;">2026-I (Actual)</th>
-                <th style="padding: 0.7rem; text-align: center; width: 100px;">Meta Semestral</th>
-                <th style="padding: 0.7rem; text-align: center; width: 95px;">Estado</th>
-                <th style="padding: 0.7rem; text-align: center; width: 90px;">Evidencia</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${kpis.map((k, idx) => `
-                <tr style="border-bottom: 1px solid #1e293b; background: ${idx % 2 === 0 ? 'rgba(30,41,59,0.3)' : 'transparent'};">
-                  <td style="padding: 0.6rem; text-align: center; font-weight: 700; color: #94a3b8;">${k.id}</td>
-                  <td style="padding: 0.6rem; text-align: center; font-weight: 800; color: #38bdf8;">${k.comp}</td>
-                  <td style="padding: 0.6rem; font-weight: 700; color: #f8fafc;">${k.serv}</td>
-                  <td style="padding: 0.6rem; color: var(--text-200);">${k.ind}</td>
-                  <td style="padding: 0.6rem; text-align: center; color: var(--text-400);">${k.um}</td>
-                  <td style="padding: 0.6rem; text-align: right; color: var(--text-300);">${k.s25_2}</td>
-                  <td style="padding: 0.6rem; text-align: right; font-weight: 800; color: #38bdf8; font-size: 0.9rem;">${k.s26_1}</td>
-                  <td style="padding: 0.6rem; text-align: center; font-weight: 600; color: var(--text-300);">${k.meta}</td>
-                  <td style="padding: 0.6rem; text-align: center;">
-                    <span style="background: rgba(16,185,129,0.15); color: #34d399; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">
-                      ${k.estado}
-                    </span>
-                  </td>
-                  <td style="padding: 0.6rem; text-align: center;">
-                    <a href="${k.drive}" target="_blank" rel="noopener noreferrer" style="color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 3px;">
-                      Drive <i data-lucide="external-link" style="width: 11px; height: 11px;"></i>
-                    </a>
-                  </td>
+        <!-- 2. BANNER INFORMATIVO DE CUMPLIMIENTO CON CONTADORES RÁPIDOS -->
+        <div style="background: #1e293b; border: 1px solid #334155; border-left: 4px solid #0284c7; padding: 1.1rem 1.4rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.2);">
+          <div>
+            <div style="font-weight: 800; font-size: 1.05rem; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="clipboard-check" style="width: 20px; height: 20px; color: #38bdf8;"></i>
+              <span>Matriz de Cumplimiento Institucional - Condición Básica de Calidad VI</span>
+            </div>
+            <div style="font-size: 0.83rem; color: #94a3b8; margin-top: 3px;">
+              Evaluación integral de medios de verificación para renovación de licenciamiento y control de calidad SUNEDU.
+            </div>
+          </div>
+          <!-- Contadores Rápidos de Telemetría -->
+          <div style="display: flex; align-items: center; gap: 0.65rem; background: #0f172a; border: 1px solid rgba(51, 65, 85, 0.7); padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.8rem;">
+            <span style="color: #94a3b8;">Total: <strong style="color: #ffffff;">16</strong></span>
+            <span style="color: #475569;">|</span>
+            <span style="color: #34d399; font-weight: 700;">Conformes: 16 (100%)</span>
+            <span style="color: #475569;">|</span>
+            <span style="color: #94a3b8;">Observados: <strong style="color: #ffffff;">0</strong></span>
+            <span style="color: #475569;">|</span>
+            <span style="color: #facc15; font-weight: 700;">Corte: 2026-I</span>
+          </div>
+        </div>
+
+        <!-- 3. TABLA MATRIZ DE ALTA DENSIDAD (16 Indicadores Oficiales CBC VI) -->
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 950px; text-align: left;">
+              <thead style="background: #0f172a; border-bottom: 2px solid #334155; color: #38bdf8;">
+                <tr style="text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em;">
+                  <th style="padding: 0.85rem 0.75rem; text-align: center; width: 65px;">ID</th>
+                  <th style="padding: 0.85rem 0.75rem; width: 85px; text-align: center;">CBC</th>
+                  <th style="padding: 0.85rem 0.75rem; width: 150px;">Servicio</th>
+                  <th style="padding: 0.85rem 0.75rem;">Indicador Clave de Desempeño (KPI)</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: center; width: 95px;">Unidad</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: right; width: 85px;">2025-II</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: right; width: 110px; color: #ffffff;">2026-I (Actual)</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: center; width: 100px;">Meta Semestral</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: center; width: 95px;">Estado</th>
+                  <th style="padding: 0.85rem 0.75rem; text-align: center; width: 95px;">Evidencia</th>
                 </tr>
-              `).join('')}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                ${kpis.map((k, idx) => `
+                  <tr style="border-bottom: 1px solid rgba(51, 65, 85, 0.45); background: ${idx % 2 === 0 ? 'rgba(15, 23, 42, 0.45)' : 'transparent'}; transition: background 0.2s;">
+                    <td style="padding: 0.65rem 0.75rem; text-align: center; font-weight: 700; color: #38bdf8; font-family: monospace;">${k.id}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: center;">
+                      <span style="display: inline-block; padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 0.72rem; ${getCompStyle(k.comp)}">
+                        ${k.comp}
+                      </span>
+                    </td>
+                    <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: #f8fafc;">${k.serv}</td>
+                    <td style="padding: 0.65rem 0.75rem; color: #cbd5e1;">${k.ind}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: center; color: #94a3b8; font-size: 0.78rem;">${k.um}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: right; color: #94a3b8; font-family: monospace; font-weight: 600;">${k.s25_2}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: right; font-weight: 800; color: #38bdf8; font-family: monospace; font-size: 0.92rem;">${k.s26_1}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: center; font-weight: 600; color: #cbd5e1; font-size: 0.78rem;">${k.meta}</td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: center;">
+                      <span style="display: inline-flex; align-items: center; gap: 4px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 700; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">
+                        <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i>
+                        <span>${k.estado}</span>
+                      </span>
+                    </td>
+                    <td style="padding: 0.65rem 0.75rem; text-align: center;">
+                      <a href="${k.drive}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background: rgba(2, 132, 199, 0.15); border: 1px solid rgba(2, 132, 199, 0.35); color: #38bdf8; padding: 3px 8px; border-radius: 4px; font-size: 0.74rem; font-weight: 700; text-decoration: none; transition: all 0.2s;">
+                        <span>Drive</span>
+                        <i data-lucide="external-link" style="width: 11px; height: 11px;"></i>
+                      </a>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Quick Telemetry Footer -->
+          <div style="padding: 0.75rem 1.25rem; background: #0f172a; border-top: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; font-size: 0.78rem; color: #94a3b8;">
+            <span>Visualizando 16 de 16 indicadores registrados para licenciamiento institucional CBC VI</span>
+            <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: #34d399;">
+              <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span>
+              <span>100% de cumplimiento reglamentario verificado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. PIE DE PÁGINA EJECUTIVO CON INFORMACIÓN DE VALIDACIÓN INSTITUCIONAL -->
+        <div style="background: #1e293b; border: 1px solid #334155; padding: 1rem 1.4rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: #1e3f5d; border: 1px solid rgba(156, 125, 15, 0.4); display: flex; align-items: center; justify-content: center; color: #9c7d0f;">
+              <i data-lucide="shield-check" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.88rem; color: #ffffff;">Secretaría General & Dirección de Aseguramiento de la Calidad UPT</div>
+              <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Última auditoría interna: Mayo 2026 | Sistema de Información SUNEDU v4.2</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.6rem; align-items: center;">
+            <a href="${GOOGLE_SHEET_SERVICIOS_URL}" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.85rem; border-radius: 6px; background: #0f172a; border: 1px solid #334155; color: #94a3b8; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
+              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
+              <span>Ver Matriz en la Nube</span>
+            </a>
+            <a href="CBC_VI_Servicios_Complementarios_UPT.xlsx" download style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #9c7d0f; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
+              <i data-lucide="download" style="width: 13px; height: 13px;"></i>
+              <span>Descargar Dictamen CBC VI</span>
+            </a>
+          </div>
         </div>
 
       </div>
