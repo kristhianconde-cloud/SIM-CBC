@@ -5720,14 +5720,6 @@ function drawServiciosComplementariosDashboard(container) {
             </p>
           </div>
           <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
-            <a href="${GOOGLE_SHEET_SERVICIOS_URL}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 0.95rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 7px; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); color: #34d399; font-weight: 700; text-decoration: none; cursor: pointer;">
-              <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
-              <span>Abrir en Google Sheets</span>
-            </a>
-            <a href="CBC_VI_Servicios_Complementarios_UPT.xlsx" download="CBC_VI_Servicios_Complementarios_UPT.xlsx" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.5rem 0.95rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 7px; background: #0284c7; border: none; color: #fff; font-weight: 700; text-decoration: none; cursor: pointer;">
-              <i data-lucide="download" style="width: 15px; height: 15px;"></i>
-              <span>Descargar Excel Oficial</span>
-            </a>
             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.78rem; padding: 0.45rem 0.8rem; border-radius: 6px;">🟢 Semestre 2026-I</span>
           </div>
         </div>
@@ -6049,16 +6041,7 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Última auditoría interna: Mayo 2026 | Sistema de Información SUNEDU v4.2</div>
             </div>
           </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="${GOOGLE_SHEET_SERVICIOS_URL}" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.85rem; border-radius: 6px; background: #0f172a; border: 1px solid #334155; color: #94a3b8; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Matriz en la Nube</span>
-            </a>
-            <a href="CBC_VI_Servicios_Complementarios_UPT.xlsx" download style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #9c7d0f; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="download" style="width: 13px; height: 13px;"></i>
-              <span>Descargar Dictamen CBC VI</span>
-            </a>
-          </div>
+
         </div>
 
       </div>
@@ -6313,12 +6296,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.1 | Sede SL01 Campus Capanique</div>
             </div>
           </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
-          </div>
         </div>
 
       </div>
@@ -6557,12 +6534,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-weight: 700; font-size: 0.88rem; color: #ffffff;">Servicio Social & Oficina de Becas - Bienestar Universitario UPT</div>
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.2 | Resoluciones y Pólizas Oficiales</div>
             </div>
-          </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
           </div>
         </div>
 
@@ -6868,12 +6839,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.3 | Resoluciones y Padrón Nominal Oficial</div>
             </div>
           </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
-          </div>
         </div>
 
       </div>
@@ -7144,12 +7109,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.4 | Sede SL01 & Loza Deportiva SL02</div>
             </div>
           </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
-          </div>
         </div>
 
       </div>
@@ -7342,12 +7301,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.5 | Teatro y Salones Culturales Campus Capanique</div>
             </div>
           </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
-          </div>
         </div>
 
       </div>
@@ -7532,12 +7485,6 @@ function drawServiciosComplementariosDashboard(container) {
               <div style="font-weight: 700; font-size: 0.88rem; color: #ffffff;">Oficina de Seguridad & Mantenimiento - Dirección General de Administración UPT</div>
               <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Expediente de Licenciamiento CBC VI.6 | Central de Monitoreo CCTV 24/7</div>
             </div>
-          </div>
-          <div style="display: flex; gap: 0.6rem; align-items: center;">
-            <a href="https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ" target="_blank" rel="noopener noreferrer" style="padding: 0.45rem 0.95rem; border-radius: 6px; background: #0284c7; border: none; color: #ffffff; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-              <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-              <span>Ver Evidencia Oficial SharePoint</span>
-            </a>
           </div>
         </div>
 
