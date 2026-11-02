@@ -6006,6 +6006,38 @@ function drawServiciosComplementariosDashboard(container) {
           </div>
         </div>
 
+        <!-- 3.5. GRÁFICO 3D DE BARRAS VOLUMÉTRICAS: COBERTURA Y ACTIVIDAD INSTITUCIONAL -->
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="bar-chart-3" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+                <span>Gráfico 3D: Volumen y Cobertura de Indicadores Clave (Semestre 2026-I)</span>
+              </div>
+              <p style="margin: 3px 0 0 0; font-size: 0.78rem; color: #94a3b8;">
+                Proyección isométrica tridimensional con relieve de luz y sombras para los servicios complementarios
+              </p>
+            </div>
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px;">
+              ⚡ Renderizado Isométrico 3D
+            </span>
+          </div>
+          <div style="overflow-x: auto; padding: 0.5rem 0;">
+            ${generateHorizontal3DBarChartSVG([
+              { label: "Atenciones Salud", fullLabel: "Salud (Policlínico & Tópicos)", value: 6080, color: "#38bdf8" },
+              { label: "Tutorías Univ.", fullLabel: "Tutoría Individual (Tabla 15)", value: 1374, color: "#c084fc" },
+              { label: "Consejería/Eval.", fullLabel: "Consejería Psicológica & Eval.", value: 775, color: "#34d399" },
+              { label: "Accesos Gimnasio", fullLabel: "Accesos al Gimnasio UPT", value: 605, color: "#fbbf24" },
+              { label: "Sesiones Psicoed.", fullLabel: "Sesiones Psicoed. (Tabla 14)", value: 404, color: "#f472b6" },
+              { label: "Orientación Social", fullLabel: "Atenciones de Servicio Social", value: 307, color: "#38bdf8" },
+              { label: "Becas Pregrado", fullLabel: "Becas Pregrado Adjudicadas", value: 117, color: "#facc15" },
+              { label: "Elencos Arte", fullLabel: "Integrantes Elencos Culturales", value: 103, color: "#ec4899" },
+              { label: "Usuarios Gimnasio", fullLabel: "Usuarios Únicos de Gimnasio", value: 95, color: "#0284c7" },
+              { label: "Atletas Selec.", fullLabel: "Atletas Federados (Tabla 16)", value: 81, color: "#10b981" }
+            ], 920, 36)}
+          </div>
+        </div>
+
         <!-- 4. PIE DE PÁGINA EJECUTIVO CON INFORMACIÓN DE VALIDACIÓN INSTITUCIONAL -->
         <div style="background: #1e293b; border: 1px solid #334155; padding: 1rem 1.4rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
           <div style="display: flex; align-items: center; gap: 12px;">
@@ -6155,6 +6187,36 @@ function drawServiciosComplementariosDashboard(container) {
             </div>
           </div>
 
+        </div>
+
+        <!-- 1.5. GRÁFICO 3D: TOP CARRERAS CON MAYOR DEMANDA EN SALUD -->
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="bar-chart-3" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+                <span>Gráfico 3D: Top Carreras Profesionales con Mayor Demanda Médica (Policlínico UPT)</span>
+              </div>
+              <p style="margin: 3px 0 0 0; font-size: 0.78rem; color: #94a3b8;">
+                Visualización tridimensional por orden de atención médica y odontológica (Semestre 2026-I)
+              </p>
+            </div>
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px;">
+              ⚡ Barras en 3D
+            </span>
+          </div>
+          <div style="overflow-x: auto; padding: 0.5rem 0;">
+            ${generateHorizontal3DBarChartSVG(
+              carreras.slice(0, 8).map(c => ({
+                label: c.carrera.length > 26 ? c.carrera.substring(0, 24) + '...' : c.carrera,
+                fullLabel: `${c.carrera} (${c.fac})`,
+                value: c.atenciones,
+                color: c.fac === 'FACSA' ? '#38bdf8' : c.fac === 'FADE' ? '#c084fc' : c.fac === 'FAEDCOH' ? '#f472b6' : c.fac === 'FAU' ? '#fbbf24' : '#34d399'
+              })),
+              920,
+              36
+            )}
+          </div>
         </div>
 
         <!-- 2. BANNER INFORMATIVO MV1 CON TELEMETRÍA -->
@@ -6378,6 +6440,52 @@ function drawServiciosComplementariosDashboard(container) {
           </div>
         </div>
 
+        <!-- 2.5. GRÁFICO 3D: MODALIDADES DE BECA Y DISTRIBUCIÓN POR FACULTAD -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1rem;">
+          
+          <!-- Gráfico 3D 1: Modalidades de Beca -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="award" style="width: 17px; height: 17px; color: #a855f7;"></i>
+                <span>Gráfico 3D: Becas por Modalidad</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #a855f7; font-weight: 700; background: rgba(168,85,247,0.15); padding: 2px 8px; border-radius: 4px;">117 Becas</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "Orfandad", value: 37, color: "#38bdf8" },
+                { label: "Mérito", value: 36, color: "#34d399" },
+                { label: "Escasos R.", value: 25, color: "#c084fc" },
+                { label: "Hermanos", value: 17, color: "#fbbf24" },
+                { label: "PRODAC", value: 2, color: "#f472b6" }
+              ], 440, 220)}
+            </div>
+          </div>
+
+          <!-- Gráfico 3D 2: Becas por Facultad -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="building-2" style="width: 17px; height: 17px; color: #38bdf8;"></i>
+                <span>Gráfico 3D: Becas por Facultad</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #38bdf8; font-weight: 700; background: rgba(56,189,248,0.15); padding: 2px 8px; border-radius: 4px;">6 Facultades</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "FACSA", value: 28, color: "#38bdf8" },
+                { label: "FAING", value: 26, color: "#34d399" },
+                { label: "FACEM", value: 20, color: "#0284c7" },
+                { label: "FAEDCOH", value: 18, color: "#f472b6" },
+                { label: "FADE", value: 17, color: "#c084fc" },
+                { label: "FAU", value: 8, color: "#fbbf24" }
+              ], 440, 220)}
+            </div>
+          </div>
+
+        </div>
+
         <!-- 3. TABLA 13: DESGLOSE DE BECAS POR FACULTAD Y TIPO DE BECA -->
         <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
           <div style="padding: 1rem 1.25rem; background: #0f172a; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
@@ -6584,6 +6692,53 @@ function drawServiciosComplementariosDashboard(container) {
             <span style="color: #475569;">|</span>
             <span style="color: #facc15; font-weight: 700;">Semestre: 2026-I</span>
           </div>
+        </div>
+
+        <!-- 2.5. GRÁFICO 3D DUAL: ACTIVIDADES Y MODALIDADES DE TUTORÍA -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1rem;">
+          
+          <!-- Gráfico 3D 1: Sesiones Tabla 14 -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="book-open" style="width: 17px; height: 17px; color: #38bdf8;"></i>
+                <span>Gráfico 3D: Sesiones Psicoeducativas por Facultad (Tabla 14)</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #38bdf8; font-weight: 700; background: rgba(56,189,248,0.15); padding: 2px 8px; border-radius: 4px;">404 Sesiones</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "FACEM", value: 160, color: "#38bdf8" },
+                { label: "FAING", value: 78, color: "#34d399" },
+                { label: "FAU", value: 57, color: "#fbbf24" },
+                { label: "FACSA", value: 43, color: "#0284c7" },
+                { label: "FAEDCOH", value: 43, color: "#f472b6" },
+                { label: "FADE", value: 23, color: "#c084fc" }
+              ], 440, 220)}
+            </div>
+          </div>
+
+          <!-- Gráfico 3D 2: Modalidades de Tutoría Tabla 15 -->
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="users" style="width: 17px; height: 17px; color: #c084fc;"></i>
+                <span>Gráfico 3D: Tutorías por Modalidad Oficial (Tabla 15)</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #c084fc; font-weight: 700; background: rgba(168,85,247,0.15); padding: 2px 8px; border-radius: 4px;">1,374 Tutorías</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "AG", value: 817, color: "#38bdf8" },
+                { label: "A3y4", value: 284, color: "#c084fc" },
+                { label: "AB-18", value: 156, color: "#34d399" },
+                { label: "AME", value: 48, color: "#fbbf24" },
+                { label: "ATM", value: 38, color: "#f472b6" },
+                { label: "AD", value: 31, color: "#0284c7" }
+              ], 440, 220)}
+            </div>
+          </div>
+
         </div>
 
         <!-- 3. CUADRO 1: TABLA 14 (SESIONES PSICOEDUCATIVAS) -->
@@ -6846,6 +7001,48 @@ function drawServiciosComplementariosDashboard(container) {
           </div>
         </div>
 
+        <!-- 2.5. GRÁFICOS 3D DEPORTES Y GIMNASIO -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1rem;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="award" style="width: 17px; height: 17px; color: #fbbf24;"></i>
+                <span>Gráfico 3D: Atletas Seleccionados (Tabla 16)</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #fbbf24; font-weight: 700; background: rgba(245,158,11,0.15); padding: 2px 8px; border-radius: 4px;">81 Atletas</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "Básquetbol", value: 31, color: "#fbbf24" },
+                { label: "Voleibol", value: 29, color: "#38bdf8" },
+                { label: "Futsal / Fútbol", value: 21, color: "#34d399" }
+              ], 440, 220)}
+            </div>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 7px;">
+                <i data-lucide="users" style="width: 17px; height: 17px; color: #38bdf8;"></i>
+                <span>Gráfico 3D: Usuarios Gimnasio por Facultad</span>
+              </div>
+              <span style="font-size: 0.72rem; color: #38bdf8; font-weight: 700; background: rgba(56,189,248,0.15); padding: 2px 8px; border-radius: 4px;">95 Usuarios</span>
+            </div>
+            <div style="overflow-x: auto;">
+              ${generate3DBarChartSVG([
+                { label: "FAING", value: 32, color: "#34d399" },
+                { label: "FAEDCOH", value: 27, color: "#f472b6" },
+                { label: "FACEM", value: 18, color: "#0284c7" },
+                { label: "FACSA", value: 14, color: "#38bdf8" },
+                { label: "FAU", value: 3, color: "#fbbf24" },
+                { label: "FADE", value: 1, color: "#c084fc" }
+              ], 440, 220)}
+            </div>
+          </div>
+
+        </div>
+
         <!-- 3. CUADRO 1: TABLA 16 (SELECCIONES DEPORTIVAS) -->
         <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
           <div style="padding: 1rem 1.25rem; background: #0f172a; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
@@ -7052,6 +7249,33 @@ function drawServiciosComplementariosDashboard(container) {
             <span style="color: #34d399; font-weight: 700;">Cumplimiento: 100%</span>
             <span style="color: #475569;">|</span>
             <span style="color: #38bdf8; font-weight: 700;">Semestre: 2026-I</span>
+          </div>
+        </div>
+
+        <!-- 2.5. GRÁFICO 3D: INTEGRANTES POR ELENCO ARTÍSTICO -->
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #f472b6;"></i>
+                <span>Gráfico 3D: Integrantes por Elenco Artístico Oficial (103 Artistas)</span>
+              </div>
+              <p style="margin: 3px 0 0 0; font-size: 0.78rem; color: #94a3b8;">
+                Distribución tridimensional de los 5 elencos artísticos estables de la UPT
+              </p>
+            </div>
+            <span style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); font-weight: 700; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px;">
+              ⚡ Barras en 3D
+            </span>
+          </div>
+          <div style="overflow-x: auto; padding: 0.5rem 0;">
+            ${generate3DBarChartSVG([
+              { label: "Ballet", value: 28, color: "#f472b6" },
+              { label: "Coro", value: 22, color: "#38bdf8" },
+              { label: "Banda", value: 20, color: "#fbbf24" },
+              { label: "Tuna", value: 18, color: "#c084fc" },
+              { label: "Teatro", value: 15, color: "#34d399" }
+            ], 650, 230)}
           </div>
         </div>
 
