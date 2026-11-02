@@ -1,315 +1,4383 @@
 {
+  "url": "https://docs.google.com/spreadsheets/d/11goMi8Y1hmjT_12_8QcofaE7bEaUjQfzUxlHrZ4F8iE/edit?usp=sharing",
   "semestre": "2026-I",
   "fecha_actualizacion": "2026-10-30",
-  "componentes": {
-    "VI.1_salud": {
-      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
-      "atenciones_topicos": {
-        "2025-II": 5177,
-        "2026-I": 6080,
-        "variacion_pct": "+17.44%",
-        "detalle_topicos": [
-          {
-            "topico": "FAEDCOH",
-            "cobertura": "FAEDCOH – Capanique I",
-            "atenciones_2025_2": 0,
-            "atenciones_2026_1": 0
-          },
-          {
-            "topico": "FAING",
-            "cobertura": "FAING - Mecánica de suelos",
-            "atenciones_2025_2": 0,
-            "atenciones_2026_1": 0
-          },
-          {
-            "topico": "FACEM",
-            "cobertura": "FACEM – Capanique III",
-            "atenciones_2025_2": 0,
-            "atenciones_2026_1": 0
-          },
-          {
-            "topico": "Clínica Docente Odontológica",
-            "cobertura": "Clínica Docente Odontológica",
-            "atenciones_2025_2": 0,
-            "atenciones_2026_1": 7
-          },
-          {
-            "topico": "ESPG",
-            "cobertura": "Escuela de Posgrado",
-            "atenciones_2025_2": 14,
-            "atenciones_2026_1": 15
-          },
-          {
-            "topico": "Policlínico UPT",
-            "cobertura": "FAING, FADE, FAU, FAEDCOH, FACEM, FACSA – Capanique II",
-            "atenciones_2025_2": 5163,
-            "atenciones_2026_1": 6058
-          }
+  "sheets": {
+    "RESUMEN_EJECUTIVO": [
+      {
+        "row": 1,
+        "values": [
+          "UNIVERSIDAD PRIVADA DE TACNA - CONDICIÓN BÁSICA DE CALIDAD VI (SERVICIOS EDUCACIONALES COMPLEMENTARIOS)"
         ]
       },
-      "atenciones_por_carrera": [
-        {
-          "carrera": "Medicina Humana",
-          "facultad": "FACSA",
-          "atenciones": 1022
-        },
-        {
-          "carrera": "Derecho",
-          "facultad": "FADE",
-          "atenciones": 1021
-        },
-        {
-          "carrera": "Psicología",
-          "facultad": "FAEDCOH",
-          "atenciones": 752
-        },
-        {
-          "carrera": "Arquitectura",
-          "facultad": "FAU",
-          "atenciones": 740
-        },
-        {
-          "carrera": "Ingeniería Civil",
-          "facultad": "FAING",
-          "atenciones": 354
-        },
-        {
-          "carrera": "Terapia Física y Rehabilitación",
-          "facultad": "FACSA",
-          "atenciones": 279
-        },
-        {
-          "carrera": "Administración de Negocios Internacionales",
-          "facultad": "FACEM",
-          "atenciones": 222
-        },
-        {
-          "carrera": "Ingeniería de Sistemas",
-          "facultad": "FAING",
-          "atenciones": 197
-        },
-        {
-          "carrera": "Odontología",
-          "facultad": "FACSA",
-          "atenciones": 179
-        },
-        {
-          "carrera": "Ingeniería Comercial",
-          "facultad": "FACEM",
-          "atenciones": 169
-        },
-        {
-          "carrera": "Ciencias Contables y Financieras",
-          "facultad": "FACEM",
-          "atenciones": 167
-        },
-        {
-          "carrera": "Ciencias de la Comunicación",
-          "facultad": "FAEDCOH",
-          "atenciones": 153
-        },
-        {
-          "carrera": "Laboratorio Clínico y Anatomía Patológica",
-          "facultad": "FACSA",
-          "atenciones": 124
-        },
-        {
-          "carrera": "Administración Turístico – Hotelera",
-          "facultad": "FACEM",
-          "atenciones": 123
-        },
-        {
-          "carrera": "Ingeniería Industrial",
-          "facultad": "FAING",
-          "atenciones": 119
-        },
-        {
-          "carrera": "Ingeniería Ambiental",
-          "facultad": "FAING",
-          "atenciones": 116
-        },
-        {
-          "carrera": "Educación Inicial",
-          "facultad": "FAEDCOH",
-          "atenciones": 110
-        },
-        {
-          "carrera": "Economía",
-          "facultad": "FACEM",
-          "atenciones": 64
-        },
-        {
-          "carrera": "Educación Física y Deportes",
-          "facultad": "FAEDCOH",
-          "atenciones": 57
-        },
-        {
-          "carrera": "Ingeniería Electrónica",
-          "facultad": "FAING",
-          "atenciones": 40
-        },
-        {
-          "carrera": "Administración de Empresas",
-          "facultad": "FACEM",
-          "atenciones": 24
-        },
-        {
-          "carrera": "Educación Primaria",
-          "facultad": "FAEDCOH",
-          "atenciones": 17
-        },
-        {
-          "carrera": "Ingeniería Agroindustrial",
-          "facultad": "FAING",
-          "atenciones": 9
-        }
-      ]
-    },
-    "VI.2_servicio_social": {
-      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
-      "atenciones_totales": 307,
-      "seguro_universitario_beneficiarios": 7131,
-      "atenciones_por_facultad": [
-        {
-          "facultad": "FAEDCOH",
-          "atenciones_2025_2": 39,
-          "atenciones_2026_1": 40,
-          "seguro_beneficiarios": 1060
-        },
-        {
-          "facultad": "FACEM",
-          "atenciones_2025_2": 47,
-          "atenciones_2026_1": 64,
-          "seguro_beneficiarios": 1358
-        },
-        {
-          "facultad": "FAING",
-          "atenciones_2025_2": 44,
-          "atenciones_2026_1": 66,
-          "seguro_beneficiarios": 1647
-        },
-        {
-          "facultad": "FACSA",
-          "atenciones_2025_2": 51,
-          "atenciones_2026_1": 58,
-          "seguro_beneficiarios": 987
-        },
-        {
-          "facultad": "FADE",
-          "atenciones_2025_2": 51,
-          "atenciones_2026_1": 61,
-          "seguro_beneficiarios": 1524
-        },
-        {
-          "facultad": "FAU",
-          "atenciones_2025_2": 32,
-          "atenciones_2026_1": 18,
-          "seguro_beneficiarios": 555
-        }
-      ],
-      "becas": {
-        "total_2025_2": 107,
-        "total_2026_1": 117,
-        "distribucion_facultad_2026_1": {
-          "FACSA": 28,
-          "FAING": 26,
-          "FACEM": 20,
-          "FAEDCOH": 18,
-          "FADE": 17,
-          "FAU": 8
-        },
-        "modalidades_2026_1": {
-          "orfandad_100": 37,
-          "merito_academico": 36,
-          "escasos_recursos_25": 25,
-          "descuento_hermanos_10": 17,
-          "prodac": 2
-        }
+      {
+        "row": 2,
+        "values": [
+          "Evidencia Oficial Drive/SharePoint: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/"
+        ]
       },
-      "ficha_ingresantes": 417,
-      "estudiantes_discapacidad_conadis": 19
-    },
-    "VI.3_psicopedagogia": {
-      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK",
-      "sesiones_totales": 404,
-      "tutorias_totales": 1374,
-      "consejeria_psicologica": 377,
-      "evaluacion_ingresantes": 398,
-      "distribucion_facultades": [
-        {
-          "facultad": "FACEM",
-          "sesiones": 160,
-          "tutorias": 337
-        },
-        {
-          "facultad": "FADE",
-          "sesiones": 23,
-          "tutorias": 456
-        },
-        {
-          "facultad": "FAING",
-          "sesiones": 78,
-          "tutorias": 180
-        },
-        {
-          "facultad": "FAU",
-          "sesiones": 57,
-          "tutorias": 135
-        },
-        {
-          "facultad": "FACSA",
-          "sesiones": 43,
-          "tutorias": 97
-        },
-        {
-          "facultad": "FAEDCOH",
-          "sesiones": 43,
-          "tutorias": 169
-        }
-      ]
-    },
-    "VI.4_deportes_gimnasio": {
-      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
-      "total_atletas": 81,
-      "varones": 42,
-      "damas": 39,
-      "disciplinas": {
-        "basquetbol": {
-          "varones": 16,
-          "damas": 15,
-          "total": 31
-        },
-        "voleibol": {
-          "varones": 15,
-          "damas": 14,
-          "total": 29
-        },
-        "futsal_futbol": {
-          "varones": 11,
-          "damas": 10,
-          "total": 21
-        }
+      {
+        "row": 4,
+        "values": [
+          "ID",
+          "Componente CBC VI",
+          "Servicio Institucional",
+          "Indicador Clave de Desempeño",
+          "Unidad de Medida",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Meta Semestral",
+          "Estado 2026-I",
+          "Enlace Evidencia Oficial Drive/Sharepoint"
+        ]
       },
-      "gimnasio": {
-        "usuarios_unicos_2026_1": 95,
-        "total_accesos": 605,
-        "distribucion_facultad": {
-          "FAING": 32,
-          "FAEDCOH": 27,
-          "FACEM": 18,
-          "FACSA": 14,
-          "FAU": 3,
-          "FADE": 1
-        }
+      {
+        "row": 5,
+        "values": [
+          "KPI-01",
+          "VI.1",
+          "Servicios de Salud",
+          "Total de atenciones en salud (Policlínico y Tópicos)",
+          "Atenciones",
+          4850,
+          5177,
+          6080,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 5,000",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "KPI-02",
+          "VI.2",
+          "Servicio Social",
+          "Orientación y consejería social individual",
+          "Atenciones",
+          240,
+          264,
+          307,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 250",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "KPI-03",
+          "VI.2",
+          "Servicio Social",
+          "Estudiantes con Seguro Universitario contra Accidentes",
+          "Estudiantes",
+          6950,
+          7080,
+          7131,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100% matrícula",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "KPI-04",
+          "VI.2",
+          "Servicio Social",
+          "Ficha socioeconómica aplicada a ingresantes",
+          "Ingresantes",
+          380,
+          405,
+          417,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100% ingresantes",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "KPI-05",
+          "VI.2",
+          "Servicio Social",
+          "Padrón activo estudiantes con discapacidad (CONADIS)",
+          "Estudiantes",
+          16,
+          18,
+          19,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Ajustes 100%",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "KPI-06",
+          "VI.2",
+          "Servicio Social",
+          "Becas de pregrado adjudicadas (Mérito, Orfandad, etc.)",
+          "Becas",
+          102,
+          107,
+          117,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 100",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "KPI-07",
+          "VI.2",
+          "RSU Institucional",
+          "Presupuesto ejecutable en RSU y Voluntariado",
+          "Soles (S/)",
+          125000,
+          130000,
+          138000,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100% ejecución",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "KPI-08",
+          "VI.3",
+          "Psicopedagogía",
+          "Sesiones psicoeducativas en 06 facultades",
+          "Sesiones",
+          610,
+          652,
+          404,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 400",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "KPI-09",
+          "VI.3",
+          "Psicopedagogía",
+          "Atenciones de tutoría individual universitaria",
+          "Tutorías",
+          1210,
+          1295,
+          1374,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 1,200",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "KPI-10",
+          "VI.3",
+          "Psicopedagogía",
+          "Consejería psicológica y evaluación de ingresantes",
+          "Atenciones",
+          710,
+          745,
+          775,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 700",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          "KPI-11",
+          "VI.4",
+          "Servicios Deportivos",
+          "Estudiantes atletas en básquet, vóley y futsal",
+          "Deportistas",
+          75,
+          78,
+          81,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 70",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK"
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "KPI-12",
+          "VI.4",
+          "Servicios Deportivos",
+          "Uso de gimnasio universitario (usuarios únicos)",
+          "Usuarios",
+          150,
+          164,
+          95,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "≥ 90",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf"
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "KPI-13",
+          "VI.5",
+          "Promoción Cultural",
+          "Elencos artísticos estables (5 disciplinas)",
+          "Elencos",
+          5,
+          5,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "5 elencos",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4"
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          "KPI-14",
+          "VI.6",
+          "Seguridad y Vigilancia",
+          "Cobertura de seguridad física 24/7 en locales",
+          "% Horas",
+          100,
+          100,
+          100,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100%",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          "KPI-15",
+          "VI.7",
+          "Medio Ambiente",
+          "Cumplimiento del Plan Ambiental Institucional",
+          "% Actividades",
+          95,
+          98,
+          100,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100%",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCguZDZIm8jR7vqksDMaDmnASgm4eRmEIyt3aJn2jDBq7I?e=w7JM1E"
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          "KPI-16",
+          "VI.8",
+          "Acervo Bibliográfico",
+          "Títulos y volúmenes codificados en sistema",
+          "Ejemplares",
+          42100,
+          43500,
+          44800,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Actualizado",
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:x:/g/personal/licencia_institucional_upt_pe/IQB2E5hgut6qQ7E36X4OAox-Acye465tPMZpYcA4nWfpCS0?e=gEwbog"
+        ]
       }
-    },
-    "VI.6_seguridad_vigilancia": {
-      "evidencia_url": "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ",
-      "cobertura_horas_hombre": "100%",
-      "tiempo_respuesta": "3 a 4 minutos",
-      "incidentes_criticos": 0,
-      "locales_cubiertos": 5,
-      "satisfaccion_usuario": "96%"
-    }
+    ],
+    "VI_1_SALUD": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.1: SERVICIOS DE SALUD - MATRIZ INSTITUCIONAL MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          "Evidencia Oficial Drive/SharePoint: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "ID",
+          "Facultad",
+          "Carrera Profesional / Unidad",
+          "Punto de Atención Principal",
+          "Concepto de Métrica",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Enlace Evidencia Oficial",
+          "Observaciones"
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "SAL-01",
+          "FACSA",
+          "Medicina Humana",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          820,
+          890,
+          1022,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Carrera con mayor afluencia médica"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "SAL-02",
+          "FADE",
+          "Derecho",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          810,
+          885,
+          1021,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Atención continua"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "SAL-03",
+          "FAEDCOH",
+          "Psicología",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          610,
+          660,
+          752,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Alta demanda de triaje y tópico"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "SAL-04",
+          "FAU",
+          "Arquitectura",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          590,
+          645,
+          740,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Servicios ambulatorios"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "SAL-05",
+          "FAING",
+          "Ingeniería Civil",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          280,
+          310,
+          354,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Controles preventivos"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "SAL-06",
+          "FACSA",
+          "Terapia Física y Rehabilitación",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          220,
+          245,
+          279,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Atención general"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "SAL-07",
+          "FACEM",
+          "Administración de Negocios Internacionales",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          180,
+          195,
+          222,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas generales"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "SAL-08",
+          "FAING",
+          "Ingeniería de Sistemas",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          160,
+          175,
+          197,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas generales"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "SAL-09",
+          "FACSA",
+          "Odontología",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          140,
+          158,
+          179,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "SAL-10",
+          "FACEM",
+          "Ingeniería Comercial",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          130,
+          150,
+          169,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          "SAL-11",
+          "FACEM",
+          "Ciencias Contables y Financieras",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          135,
+          148,
+          167,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "SAL-12",
+          "FAEDCOH",
+          "Ciencias de la Comunicación",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          120,
+          135,
+          153,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "SAL-13",
+          "FACSA",
+          "Laboratorio Clínico y Anatomía Patológica",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          100,
+          110,
+          124,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          "SAL-14",
+          "FACEM",
+          "Administración Turístico – Hotelera",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          95,
+          108,
+          123,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          "SAL-15",
+          "FAING",
+          "Ingeniería Industrial",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          90,
+          105,
+          119,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          "SAL-16",
+          "FAING",
+          "Ingeniería Ambiental",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          90,
+          102,
+          116,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          "SAL-17",
+          "FAEDCOH",
+          "Educación Inicial",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          85,
+          98,
+          110,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          "SAL-18",
+          "FACEM",
+          "Economía",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          50,
+          58,
+          64,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          "SAL-19",
+          "FAEDCOH",
+          "Educación Física y Deportes",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          45,
+          50,
+          57,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Controles de medicina deportiva"
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          "SAL-20",
+          "FAING",
+          "Ingeniería Electrónica",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          30,
+          35,
+          40,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          "SAL-21",
+          "FACEM",
+          "Administración de Empresas",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          20,
+          22,
+          24,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 26,
+        "values": [
+          "SAL-22",
+          "FAEDCOH",
+          "Educación Primaria",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          12,
+          15,
+          17,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 27,
+        "values": [
+          "SAL-23",
+          "FAING",
+          "Ingeniería Agroindustrial",
+          "Policlínico Central UPT",
+          "Atenciones de Salud",
+          8,
+          8,
+          9,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Consultas médicas generales"
+        ]
+      },
+      {
+        "row": 28,
+        "values": [
+          "SAL-24",
+          "ESPG",
+          "Escuela de Posgrado",
+          "Tópico Posgrado / Central",
+          "Atenciones Médicas Posgrado",
+          10,
+          14,
+          15,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Estudiantes de maestría y doctorado"
+        ]
+      },
+      {
+        "row": 29,
+        "values": [
+          "SAL-25",
+          "FACSA",
+          "Clínica Docente Odontológica",
+          "Tópico Clínica Odontológica",
+          "Atenciones Específicas Odontológicas",
+          0,
+          0,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBZzuMjX5bcTKoNjVOCLr7AV1qKwQ7wk-iHkBHoEmXfBk?e=VnsC4n",
+          "Apertura de servicio en clínica docente"
+        ]
+      },
+      {
+        "row": 30,
+        "values": [
+          null,
+          "TOTAL GENERAL",
+          null,
+          null,
+          null,
+          4830,
+          5321,
+          6080,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "VI_2_SERVICIO_SOCIAL": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.2: SERVICIO SOCIAL, BIENESTAR Y BECAS DE PREGRADO - MATRIZ MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 3,
+        "values": [
+          "CUADRO 1: ATENCIONES DE SERVICIO SOCIAL Y BIENESTAR POR CARRERA PROFESIONAL"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "Evidencia Oficial Servicio Social: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "ID",
+          "Facultad",
+          "Carrera Profesional / Programa",
+          "Sub-Componente",
+          "Indicador / Métrica",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Enlace Evidencia Oficial",
+          "Observaciones"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "SOC-01",
+          "FAEDCOH",
+          "Psicología",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          20,
+          24,
+          25,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Evaluación de casos sociales"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "SOC-02",
+          "FAEDCOH",
+          "Ciencias de la Comunicación",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          3,
+          4,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "SOC-03",
+          "FAEDCOH",
+          "Educación Primaria",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          1,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "SOC-04",
+          "FAEDCOH",
+          "Educación Inicial",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          6,
+          8,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "SOC-05",
+          "FAEDCOH",
+          "Educación Física y Deportes",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "SOC-06",
+          "FAING",
+          "Ingeniería Civil",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          25,
+          28,
+          32,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mayor demanda FAING"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "SOC-07",
+          "FAING",
+          "Ingeniería Industrial",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          12,
+          15,
+          17,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "SOC-08",
+          "FAING",
+          "Ingeniería Electrónica",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          2,
+          3,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "SOC-09",
+          "FAING",
+          "Ingeniería Ambiental",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          "SOC-10",
+          "FAING",
+          "Ingeniería Agroindustrial",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "SOC-11",
+          "FAING",
+          "Ingeniería de Sistemas",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          10,
+          12,
+          13,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "SOC-12",
+          "FACEM",
+          "Ingeniería Comercial",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          18,
+          20,
+          23,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          "SOC-13",
+          "FACEM",
+          "Administración Turístico – Hotelera",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          8,
+          9,
+          10,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          "SOC-14",
+          "FACEM",
+          "Administración de Negocios Internacionales",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          12,
+          14,
+          16,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          "SOC-15",
+          "FACEM",
+          "Ciencias Contables y Financieras",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          10,
+          11,
+          13,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          "SOC-16",
+          "FACEM",
+          "Administración de Empresas",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          "SOC-17",
+          "FACEM",
+          "Economía",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          1,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          "SOC-18",
+          "FACSA",
+          "Odontología",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          10,
+          12,
+          13,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          "SOC-19",
+          "FACSA",
+          "Medicina Humana",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          24,
+          28,
+          31,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Soporte social continuo"
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          "SOC-20",
+          "FACSA",
+          "Laboratorio Clínico y Anatomía Patológica",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          8,
+          9,
+          10,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 26,
+        "values": [
+          "SOC-21",
+          "FACSA",
+          "Terapia Física y Rehabilitación",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          3,
+          3,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 27,
+        "values": [
+          "SOC-22",
+          "FADE",
+          "Derecho",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          48,
+          51,
+          61,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mayor número de atenciones"
+        ]
+      },
+      {
+        "row": 28,
+        "values": [
+          "SOC-23",
+          "FAU",
+          "Arquitectura",
+          "Consejería Social",
+          "Atenciones de Asistencia y Consejería",
+          28,
+          32,
+          18,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 29,
+        "values": [
+          "SOC-24",
+          "INSTITUCIONAL UPT",
+          "Comunidad Estudiantil",
+          "Seguro Universitario",
+          "Estudiantes protegidos con Seguro contra Accidentes",
+          6950,
+          7080,
+          7131,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Cobertura 100% estudiantes matriculados"
+        ]
+      },
+      {
+        "row": 30,
+        "values": [
+          "SOC-25",
+          "INSTITUCIONAL UPT",
+          "Ingresantes UPT",
+          "Ficha Socioeconómica",
+          "Diagnóstico socioeconómico integral aplicado",
+          380,
+          405,
+          417,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "FADE:93, FAING:91, FACEM:73, FAEDCOH:66, FACSA:63, FAU:31"
+        ]
+      },
+      {
+        "row": 31,
+        "values": [
+          "SOC-26",
+          "INSTITUCIONAL UPT",
+          "Estudiantes con Discapacidad",
+          "Inclusión CONADIS",
+          "Padrón activo estudiantes con discapacidad (Ley 29973)",
+          16,
+          18,
+          19,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Ajustes razonables, carnets y seguimiento"
+        ]
+      },
+      {
+        "row": 32,
+        "values": [
+          "SOC-27",
+          "INSTITUCIONAL UPT",
+          "Bienestar Universitario",
+          "Presupuesto Ejecutado",
+          "Presupuesto de Asistencia Social Ejecutado (S/)",
+          3500,
+          3700,
+          3900,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Ejecución presupuestal acreditada PTA"
+        ]
+      },
+      {
+        "row": 33,
+        "values": [
+          null,
+          "TOTAL ATENCIONES CONSEJERÍA SOCIAL",
+          null,
+          null,
+          0,
+          251,
+          289,
+          307,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "row": 36,
+        "values": [
+          "CUADRO 2: CUADRO DE BECAS DE PREGRADO POR FACULTAD Y POR TIPO DE BECA (TABLA 13 DEL INFORME)"
+        ]
+      },
+      {
+        "row": 37,
+        "values": [
+          "Evidencia Oficial Becas: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci (Amparado en Ley N°23585, Res. N°004-2020-UPT-CU y Estatuto UPT)"
+        ]
+      },
+      {
+        "row": 38,
+        "values": [
+          "ID",
+          "Facultad Beneficiaria",
+          "Tipo / Modalidad de Beca",
+          "Beneficio Económico (%)",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Variación 26-I vs 25-II",
+          "Enlace Evidencia Oficial",
+          "Observaciones Oficiales"
+        ]
+      },
+      {
+        "row": 39,
+        "values": [
+          "BEC-01",
+          "FAEDCOH",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 40,
+        "values": [
+          "BEC-02",
+          "FAEDCOH",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          4,
+          4,
+          6,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Crecimiento de beneficiarios"
+        ]
+      },
+      {
+        "row": 41,
+        "values": [
+          "BEC-03",
+          "FAEDCOH",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          3,
+          3,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Fallecimiento de tutor legal"
+        ]
+      },
+      {
+        "row": 42,
+        "values": [
+          "BEC-04",
+          "FAEDCOH",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          2,
+          2,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Evaluación socioeconómica"
+        ]
+      },
+      {
+        "row": 43,
+        "values": [
+          "BEC-05",
+          "FAEDCOH",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Hermanos simultáneos en UPT"
+        ]
+      },
+      {
+        "row": 44,
+        "values": [
+          "BEC-06",
+          "FAEDCOH",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "100% PRODAC en 2026-I"
+        ]
+      },
+      {
+        "row": 45,
+        "values": [
+          "BEC-07",
+          "FAEDCOH (Subtotal)",
+          "SUBTOTAL BECAS FAEDCOH",
+          "Total Beneficios Facultad",
+          13,
+          13,
+          18,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+5 (+38.46%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Aumento global de 13 a 18 becas"
+        ]
+      },
+      {
+        "row": 46,
+        "values": [
+          "BEC-08",
+          "FACEM",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 47,
+        "values": [
+          "BEC-09",
+          "FACEM",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          5,
+          6,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Excelente desempeño"
+        ]
+      },
+      {
+        "row": 48,
+        "values": [
+          "BEC-10",
+          "FACEM",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          4,
+          5,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Soporte social"
+        ]
+      },
+      {
+        "row": 49,
+        "values": [
+          "BEC-11",
+          "FACEM",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 50,
+        "values": [
+          "BEC-12",
+          "FACEM",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 51,
+        "values": [
+          "BEC-13",
+          "FACEM",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Sin postulantes PRODAC"
+        ]
+      },
+      {
+        "row": 52,
+        "values": [
+          "BEC-14",
+          "FACEM (Subtotal)",
+          "SUBTOTAL BECAS FACEM",
+          "Total Beneficios Facultad",
+          13,
+          15,
+          20,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+5 (+33.33%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Aumento global de 15 a 20 becas"
+        ]
+      },
+      {
+        "row": 53,
+        "values": [
+          "BEC-15",
+          "FAING",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 54,
+        "values": [
+          "BEC-16",
+          "FAING",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          7,
+          7,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mantiene 7 becas"
+        ]
+      },
+      {
+        "row": 55,
+        "values": [
+          "BEC-17",
+          "FAING",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          5,
+          5,
+          6,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 56,
+        "values": [
+          "BEC-18",
+          "FAING",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          9,
+          10,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Facultad con mayor número de ER"
+        ]
+      },
+      {
+        "row": 57,
+        "values": [
+          "BEC-19",
+          "FAING",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          4,
+          4,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 58,
+        "values": [
+          "BEC-20",
+          "FAING",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 59,
+        "values": [
+          "BEC-21",
+          "FAING (Subtotal)",
+          "SUBTOTAL BECAS FAING",
+          "Total Beneficios Facultad",
+          26,
+          27,
+          26,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-1 (-3.70%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Segunda facultad con más becas"
+        ]
+      },
+      {
+        "row": 60,
+        "values": [
+          "BEC-22",
+          "FACSA",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 61,
+        "values": [
+          "BEC-23",
+          "FACSA",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          5,
+          5,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mantiene 5 becarios"
+        ]
+      },
+      {
+        "row": 62,
+        "values": [
+          "BEC-24",
+          "FACSA",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          10,
+          11,
+          11,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mayor número de becas orfandad"
+        ]
+      },
+      {
+        "row": 63,
+        "values": [
+          "BEC-25",
+          "FACSA",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          3,
+          4,
+          6,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+2",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Incremento por evaluación"
+        ]
+      },
+      {
+        "row": 64,
+        "values": [
+          "BEC-26",
+          "FACSA",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          3,
+          3,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 65,
+        "values": [
+          "BEC-27",
+          "FACSA",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "50% PRODAC"
+        ]
+      },
+      {
+        "row": 66,
+        "values": [
+          "BEC-28",
+          "FACSA (Subtotal)",
+          "SUBTOTAL BECAS FACSA",
+          "Total Beneficios Facultad",
+          23,
+          25,
+          28,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+3 (+12.00%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Facultad líder con 28 becas"
+        ]
+      },
+      {
+        "row": 67,
+        "values": [
+          "BEC-29",
+          "FADE",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 68,
+        "values": [
+          "BEC-30",
+          "FADE",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 69,
+        "values": [
+          "BEC-31",
+          "FADE",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          7,
+          8,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 70,
+        "values": [
+          "BEC-32",
+          "FADE",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          3,
+          4,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 71,
+        "values": [
+          "BEC-33",
+          "FADE",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 72,
+        "values": [
+          "BEC-34",
+          "FADE",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 73,
+        "values": [
+          "BEC-35",
+          "FADE (Subtotal)",
+          "SUBTOTAL BECAS FADE",
+          "Total Beneficios Facultad",
+          14,
+          16,
+          17,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1 (+6.25%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Aumento a 17 becarios"
+        ]
+      },
+      {
+        "row": 74,
+        "values": [
+          "BEC-36",
+          "FAU",
+          "Mérito Académico (MA 100%)",
+          "Exoneración 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Primer puesto facultad"
+        ]
+      },
+      {
+        "row": 75,
+        "values": [
+          "BEC-37",
+          "FAU",
+          "Mérito Académico (MA 50%)",
+          "Exoneración 50% Pensión",
+          3,
+          3,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 76,
+        "values": [
+          "BEC-38",
+          "FAU",
+          "Beca por Orfandad (OR 100%)",
+          "Cobertura 100% Pensión",
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 77,
+        "values": [
+          "BEC-39",
+          "FAU",
+          "Escasos Recursos (ER 25%)",
+          "Subvención 25% Pensión",
+          3,
+          4,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-3",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Disminución de postulaciones"
+        ]
+      },
+      {
+        "row": 78,
+        "values": [
+          "BEC-40",
+          "FAU",
+          "Por Hermanos (PH 10%)",
+          "Descuento 10% Pensión",
+          2,
+          2,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+1",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 79,
+        "values": [
+          "BEC-41",
+          "FAU",
+          "Deportiva PRODAC",
+          "Beca Deportiva de Alta Comp.",
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci"
+        ]
+      },
+      {
+        "row": 80,
+        "values": [
+          "BEC-42",
+          "FAU (Subtotal)",
+          "SUBTOTAL BECAS FAU",
+          "Total Beneficios Facultad",
+          10,
+          11,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-3 (-27.27%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Reducción a 8 becarios"
+        ]
+      },
+      {
+        "row": 81,
+        "values": [
+          "BEC-43",
+          "INSTITUCIONAL UPT",
+          "Mérito Académico (MA 100%)",
+          "Total Institucional MA 100%",
+          6,
+          6,
+          6,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "1 por cada facultad"
+        ]
+      },
+      {
+        "row": 82,
+        "values": [
+          "BEC-44",
+          "INSTITUCIONAL UPT",
+          "Mérito Académico (MA 50%)",
+          "Total Institucional MA 50%",
+          26,
+          27,
+          30,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+3",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Incremento significativo"
+        ]
+      },
+      {
+        "row": 83,
+        "values": [
+          "BEC-45",
+          "INSTITUCIONAL UPT",
+          "Beca por Orfandad (OR 100%)",
+          "Total Institucional OR 100%",
+          30,
+          33,
+          37,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+4",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mayor cobertura social"
+        ]
+      },
+      {
+        "row": 84,
+        "values": [
+          "BEC-46",
+          "INSTITUCIONAL UPT",
+          "Escasos Recursos (ER 25%)",
+          "Total Institucional ER 25%",
+          22,
+          25,
+          25,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Mantiene 25 subvenciones"
+        ]
+      },
+      {
+        "row": 85,
+        "values": [
+          "BEC-47",
+          "INSTITUCIONAL UPT",
+          "Por Hermanos (PH 10%)",
+          "Total Institucional PH 10%",
+          14,
+          14,
+          17,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+3",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Incremento familiar"
+        ]
+      },
+      {
+        "row": 86,
+        "values": [
+          "BEC-48",
+          "INSTITUCIONAL UPT",
+          "Deportiva PRODAC (100% y 50%)",
+          "Total Institucional PRODAC",
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "1 al 100% y 1 al 50%"
+        ]
+      },
+      {
+        "row": 87,
+        "values": [
+          "BEC-49",
+          "INSTITUCIONAL UPT",
+          "TOTAL GENERAL BECAS UPT",
+          "Total Becas Adjudicadas",
+          100,
+          107,
+          117,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+10 (+9.35%)",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBW1E4BBSvIRIjK_sWS0lRfAesa_FwjqbNoVnvM4XrTwmI?e=jejlci",
+          "Incremento de 107 a 117 becas (+9.35%)"
+        ]
+      }
+    ],
+    "VI_3_PSICOPEDAGOGIA": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.3: SERVICIOS PSICOPEDAGÓGICOS Y TUTORÍA UNIVERSITARIA - MATRIZ INSTITUCIONAL"
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          "Evidencia Oficial SharePoint: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK (Reglamento de Tutoría Res. N°127-2025-UPT-CU)"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "Tabla 14."
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "Cuadro resumen de actividades psicopedagógicas"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "FACULTAD",
+          "SESIONES 2025-I",
+          "SESIONES 2025-II",
+          "SESIONES 2026-I (Actual)",
+          "SESIONES 2026-II",
+          "SESIONES 2027-I",
+          "SESIONES 2027-II",
+          "SESIONES 2028-I",
+          "SESIONES 2028-II",
+          "Variación 26-I vs 25-II",
+          "Observaciones Oficiales"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "FACEM",
+          210,
+          234,
+          160,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-74 (-31.62%)",
+          "Facultad con mayor volumen de sesiones (39.60% del total UPT)"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "FADE",
+          120,
+          133,
+          23,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-110 (-82.71%)",
+          "Focalización prioritaria en atenciones de tutoría individual"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "FAING",
+          58,
+          66,
+          78,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "+12 (+18.18%)",
+          "Única facultad que registra incremento semestral (+18.2%)"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "FAU",
+          55,
+          63,
+          57,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-6 (-9.52%)",
+          "Talleres de desarrollo académico y personal"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "FACSA",
+          42,
+          49,
+          43,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-6 (-12.24%)",
+          "Sesiones grupales en carreras de ciencias biomédicas"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "FAEDCOH",
+          95,
+          107,
+          43,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "-64 (-59.81%)",
+          "Talleres psicoformativos y vocacionales"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "TOTAL",
+          580,
+          652,
+          404,
+          0,
+          0,
+          0,
+          0,
+          0,
+          "-248 (-38.04%)",
+          "Sumatoria oficial consolidada Tabla 14"
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "Tabla 15."
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "Cuadro de tipo de atenciones de tutoría por facultad (Semestre 2026-I Actual)"
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          "FACULTAD",
+          "AG",
+          "A3y4",
+          "AB-18",
+          "AME",
+          "AD",
+          "ATM",
+          "Total"
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          "FACEM",
+          183,
+          60,
+          42,
+          33,
+          7,
+          12,
+          337
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          "FADE",
+          377,
+          58,
+          16,
+          0,
+          5,
+          0,
+          456
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          "FAING",
+          52,
+          77,
+          30,
+          7,
+          0,
+          14,
+          180
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          "FAU",
+          71,
+          34,
+          18,
+          0,
+          0,
+          12,
+          135
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          "FACSA",
+          17,
+          25,
+          44,
+          0,
+          11,
+          0,
+          97
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          "FAEDCOH",
+          117,
+          30,
+          6,
+          8,
+          8,
+          0,
+          169
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          "TOTAL",
+          817,
+          284,
+          156,
+          48,
+          31,
+          38,
+          1374
+        ]
+      },
+      {
+        "row": 27,
+        "values": [
+          "Leyenda"
+        ]
+      },
+      {
+        "row": 28,
+        "values": [
+          "AG: Atenciones generales"
+        ]
+      },
+      {
+        "row": 29,
+        "values": [
+          "A3y4: Atenciones 3era y 4ta matrícula"
+        ]
+      },
+      {
+        "row": 30,
+        "values": [
+          "AB-18: Atenciones Beca – 18"
+        ]
+      },
+      {
+        "row": 31,
+        "values": [
+          "AME: Atenciones a movilidad estudiantil"
+        ]
+      },
+      {
+        "row": 32,
+        "values": [
+          "AD: Atenciones a discapacidad"
+        ]
+      },
+      {
+        "row": 33,
+        "values": [
+          "ATM: Atenciones a trastorno mental"
+        ]
+      },
+      {
+        "row": 35,
+        "values": [
+          "Tabla 15 (Semestre Posterior: 2026-II Proyectado / Por Registrar)"
+        ]
+      },
+      {
+        "row": 36,
+        "values": [
+          "Matriz idéntica a Tabla 15 habilitada para el registro semestral posterior de atenciones de tutoría por facultad"
+        ]
+      },
+      {
+        "row": 37,
+        "values": [
+          "FACULTAD",
+          "AG",
+          "A3y4",
+          "AB-18",
+          "AME",
+          "AD",
+          "ATM",
+          "Total"
+        ]
+      },
+      {
+        "row": 38,
+        "values": [
+          "FACEM",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 39,
+        "values": [
+          "FADE",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 40,
+        "values": [
+          "FAING",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 41,
+        "values": [
+          "FAU",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 42,
+        "values": [
+          "FACSA",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 43,
+        "values": [
+          "FAEDCOH",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ]
+      },
+      {
+        "row": 44,
+        "values": [
+          "TOTAL",
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "row": 47,
+        "values": [
+          "CUADRO CONSOLIDADO: TOTALES DE ATENCIONES DE TUTORÍA POR FACULTAD - HISTÓRICO MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 48,
+        "values": [
+          "Vinculación automática por fórmulas al Total de la Tabla 15 de cada semestre respectivo"
+        ]
+      },
+      {
+        "row": 49,
+        "values": [
+          "FACULTAD",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Total Acumulado UPT",
+          "Enlace Evidencia Oficial"
+        ]
+      },
+      {
+        "row": 50,
+        "values": [
+          "FACEM",
+          285,
+          307,
+          337,
+          0,
+          null,
+          null,
+          null,
+          null,
+          929,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 51,
+        "values": [
+          "FADE",
+          384,
+          420,
+          456,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1260,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 52,
+        "values": [
+          "FAING",
+          150,
+          164,
+          180,
+          0,
+          null,
+          null,
+          null,
+          null,
+          494,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 53,
+        "values": [
+          "FAU",
+          110,
+          121,
+          135,
+          0,
+          null,
+          null,
+          null,
+          null,
+          366,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 54,
+        "values": [
+          "FACSA",
+          81,
+          87,
+          97,
+          0,
+          null,
+          null,
+          null,
+          null,
+          265,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 55,
+        "values": [
+          "FAEDCOH",
+          140,
+          155,
+          169,
+          0,
+          null,
+          null,
+          null,
+          null,
+          464,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBq5jXd6SmDQ45tLOGPSpgoAa2KTQaZlJvqrKH_hi1JOL4?e=MVpvZK"
+        ]
+      },
+      {
+        "row": 56,
+        "values": [
+          "TOTAL GENERAL TUTORÍAS UPT",
+          1150,
+          1254,
+          1374,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3778
+        ]
+      },
+      {
+        "row": 59,
+        "values": [
+          "CUADRO COMPLEMENTARIO: EVALUACIÓN PSICOLÓGICA Y CONSEJERÍA INDIVIDUAL"
+        ]
+      },
+      {
+        "row": 60,
+        "values": [
+          "ACTIVIDAD PSICOLÓGICA",
+          "POBLACIÓN OBJETIVO",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "OBSERVACIONES"
+        ]
+      },
+      {
+        "row": 61,
+        "values": [
+          "Consejería Psicológica Individual",
+          "Comunidad Universitaria UPT",
+          340,
+          360,
+          377,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "377 atenciones individuales en 2026-I"
+        ]
+      },
+      {
+        "row": 62,
+        "values": [
+          "Evaluación Psicológica de Ingresantes",
+          "Ingresantes (05 Facultades evaluadas)",
+          370,
+          385,
+          398,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "398 ingresantes evaluados en FACEM, FADE, FAING, FAU y FAEDCOH"
+        ]
+      }
+    ],
+    "VI_4_DEPORTES_GIMNASIO": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.4: SERVICIOS DEPORTIVOS Y GIMNASIO INSTITUCIONAL - MATRIZ MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 3,
+        "values": [
+          "CUADRO 1: DEPORTES TRADICIONALES - SELECCIONES UNIVERSITARIAS Y PARTICIPACIÓN POR FACULTAD"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "Evidencia Oficial Deportes: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK"
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "ID",
+          "Disciplina Deportiva / Facultad",
+          "Rama / Género",
+          "Concepto de Métrica",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Meta / Referencia",
+          "Enlace Evidencia Oficial",
+          "Observaciones"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "DEP-01",
+          "Básquetbol",
+          "Varones",
+          "Estudiantes Atletas Seleccionados",
+          15,
+          15,
+          16,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Entrenamientos continuos FEDUP"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "DEP-02",
+          "Básquetbol",
+          "Damas",
+          "Estudiantes Atletas Seleccionados",
+          14,
+          14,
+          15,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Participación torneos interuniversitarios"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "DEP-03",
+          "Voleibol",
+          "Varones",
+          "Estudiantes Atletas Seleccionados",
+          14,
+          14,
+          15,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Entrenador institucional y subvenciones"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "DEP-04",
+          "Voleibol",
+          "Damas",
+          "Estudiantes Atletas Seleccionados",
+          14,
+          14,
+          14,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Representación oficial de Tacna"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "DEP-05",
+          "Futsal / Fútbol",
+          "Varones",
+          "Estudiantes Atletas Seleccionados",
+          11,
+          11,
+          11,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Prácticas en losas institucionales"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "DEP-06",
+          "Futsal / Fútbol",
+          "Damas",
+          "Estudiantes Atletas Seleccionados",
+          10,
+          10,
+          10,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Selección UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Futsal femenino en crecimiento"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "DEP-07",
+          "FACSA (Ciencias de la Salud)",
+          "Mixto (5V / 6D)",
+          "Deportistas Participantes por Facultad",
+          10,
+          11,
+          11,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "13.58% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Participación equilibrada"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "DEP-08",
+          "FACEM (Ciencias Empresariales)",
+          "Mixto (10V / 9D)",
+          "Deportistas Participantes por Facultad",
+          18,
+          18,
+          19,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "23.46% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Lidera con FAING en deportistas"
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "DEP-09",
+          "FAING (Facultad de Ingeniería)",
+          "Mixto (15V / 4D)",
+          "Deportistas Participantes por Facultad",
+          18,
+          18,
+          19,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "23.46% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Mayor concentración masculina"
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          "DEP-10",
+          "FAU (Arquitectura y Urbanismo)",
+          "Mixto (0V / 2D)",
+          "Deportistas Participantes por Facultad",
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "2.47% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Oportunidad de fortalecimiento"
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "DEP-11",
+          "FADE (Derecho y Cs. Políticas)",
+          "Mixto (6V / 10D)",
+          "Deportistas Participantes por Facultad",
+          15,
+          15,
+          16,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "19.75% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Mayor presencia femenina"
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "DEP-12",
+          "FAEDCOH (Educ., Com. y Hum.)",
+          "Mixto (6V / 8D)",
+          "Deportistas Participantes por Facultad",
+          13,
+          14,
+          14,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "17.28% UPT",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgDMsxXdXgi9TrLZsIo5_tMRAQev97xEGYJoUO_Nwf5-rZI?e=96PTvK",
+          "Participación diversificada"
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          null,
+          "TOTAL DEPORTISTAS SELECCIONADOS",
+          null,
+          null,
+          78,
+          78,
+          81,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          "CUADRO 2: GIMNASIO UNIVERSITARIO - USUARIOS ÚNICOS, GÉNERO Y ACCESOS INSTITUCIONALES"
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          "Evidencia Oficial Gimnasio: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf (Tablas 19 y 20 del Informe)"
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          "ID",
+          "Facultad / Unidad Institucional",
+          "Segmento / Género",
+          "Indicador Clave de Gimnasio",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Participación (%)",
+          "Enlace Evidencia Oficial",
+          "Observaciones Oficiales del Informe"
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          "GIM-01",
+          "FACSA",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          8,
+          10,
+          12,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "12.63%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos masculinos"
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          "GIM-02",
+          "FACSA",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          25,
+          28,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "2.11%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos femeninos"
+        ]
+      },
+      {
+        "row": 26,
+        "values": [
+          "GIM-03",
+          "FACSA (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FACSA",
+          33,
+          38,
+          14,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "14.74%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Descenso de 38 a 14 usuarios (-63.16%)"
+        ]
+      },
+      {
+        "row": 27,
+        "values": [
+          "GIM-04",
+          "FAING",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          4,
+          5,
+          29,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "30.53%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Crecimiento significativo de afluencia"
+        ]
+      },
+      {
+        "row": 28,
+        "values": [
+          "GIM-05",
+          "FAING",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          26,
+          30,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "3.16%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos femeninos"
+        ]
+      },
+      {
+        "row": 29,
+        "values": [
+          "GIM-06",
+          "FAING (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FAING",
+          30,
+          35,
+          32,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "33.68%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Facultad líder en uso del gimnasio institucional"
+        ]
+      },
+      {
+        "row": 30,
+        "values": [
+          "GIM-07",
+          "FACEM",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          10,
+          12,
+          12,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "12.63%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos masculinos"
+        ]
+      },
+      {
+        "row": 31,
+        "values": [
+          "GIM-08",
+          "FACEM",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          18,
+          19,
+          6,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "6.32%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos femeninos"
+        ]
+      },
+      {
+        "row": 32,
+        "values": [
+          "GIM-09",
+          "FACEM (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FACEM",
+          28,
+          31,
+          18,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "18.95%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Tercer lugar en afluencia (18 usuarios)"
+        ]
+      },
+      {
+        "row": 33,
+        "values": [
+          "GIM-10",
+          "FADE",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          12,
+          14,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "1.05%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos masculinos"
+        ]
+      },
+      {
+        "row": 34,
+        "values": [
+          "GIM-11",
+          "FADE",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          10,
+          12,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "0.00%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Sin usuarias femeninas en 2026-I"
+        ]
+      },
+      {
+        "row": 35,
+        "values": [
+          "GIM-12",
+          "FADE (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FADE",
+          22,
+          26,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "1.05%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Reducción significativa de 26 a 1 usuario"
+        ]
+      },
+      {
+        "row": 36,
+        "values": [
+          "GIM-13",
+          "FAEDCOH",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          14,
+          16,
+          18,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "18.95%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos masculinos"
+        ]
+      },
+      {
+        "row": 37,
+        "values": [
+          "GIM-14",
+          "FAEDCOH",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          3,
+          3,
+          9,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "9.47%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Crecimiento femenino triplicado"
+        ]
+      },
+      {
+        "row": 38,
+        "values": [
+          "GIM-15",
+          "FAEDCOH (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FAEDCOH",
+          17,
+          19,
+          27,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "28.42%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Segundo lugar en visitas al gimnasio"
+        ]
+      },
+      {
+        "row": 39,
+        "values": [
+          "GIM-16",
+          "FAU",
+          "Masculino (M)",
+          "Usuarios Únicos del Gimnasio",
+          8,
+          9,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "1.05%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos masculinos"
+        ]
+      },
+      {
+        "row": 40,
+        "values": [
+          "GIM-17",
+          "FAU",
+          "Femenino (F)",
+          "Usuarios Únicos del Gimnasio",
+          5,
+          6,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "2.11%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Usuarios únicos femeninos"
+        ]
+      },
+      {
+        "row": 41,
+        "values": [
+          "GIM-18",
+          "FAU (Subtotal)",
+          "Total Facultad",
+          "TOTAL USUARIOS ÚNICOS FAU",
+          13,
+          15,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "3.16%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Descenso a 3 usuarios únicos"
+        ]
+      },
+      {
+        "row": 42,
+        "values": [
+          "GIM-19",
+          "INSTITUCIONAL UPT",
+          "Género Masculino",
+          "Usuarios Únicos Consolidados (M)",
+          60,
+          66,
+          73,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "76.84%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Predominancia masculina en usuarios"
+        ]
+      },
+      {
+        "row": 43,
+        "values": [
+          "GIM-20",
+          "INSTITUCIONAL UPT",
+          "Género Femenino",
+          "Usuarios Únicos Consolidados (F)",
+          90,
+          98,
+          22,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "23.16%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Aproximadamente una quinta parte del total"
+        ]
+      },
+      {
+        "row": 44,
+        "values": [
+          "GIM-21",
+          "INSTITUCIONAL UPT",
+          "TOTAL USUARIOS ÚNICOS",
+          "TOTAL USUARIOS ÚNICOS INSTITUCIONAL",
+          150,
+          164,
+          95,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100.00%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Reducción de 164 a 95 usuarios (-42.1%)"
+        ]
+      },
+      {
+        "row": 45,
+        "values": [
+          "GIM-22",
+          "INSTITUCIONAL UPT",
+          "Género Masculino",
+          "Total Accesos / Visitas Registradas (M)",
+          420,
+          460,
+          476,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "78.68%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Accesos de usuarios masculinos"
+        ]
+      },
+      {
+        "row": 46,
+        "values": [
+          "GIM-23",
+          "INSTITUCIONAL UPT",
+          "Género Femenino",
+          "Total Accesos / Visitas Registradas (F)",
+          160,
+          160,
+          129,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "21.32%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Accesos de usuarias femeninas"
+        ]
+      },
+      {
+        "row": 47,
+        "values": [
+          "GIM-24",
+          "INSTITUCIONAL UPT",
+          "TOTAL ACCESOS GLOBALES",
+          "TOTAL DE ACCESOS Y VISITAS AL GIMNASIO",
+          580,
+          620,
+          605,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "100.00%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "605 accesos generados por 95 usuarios únicos"
+        ]
+      },
+      {
+        "row": 48,
+        "values": [
+          "GIM-25",
+          "INSTITUCIONAL UPT",
+          "Cobertura Estudiantil",
+          "Tasa Cobertura sobre Matrícula Institucional",
+          "2.10%",
+          "2.25%",
+          "1.30%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "Meta: ≥ 2.5%",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "95 usuarios sobre 7,289 matriculados"
+        ]
+      },
+      {
+        "row": 49,
+        "values": [
+          "GIM-26",
+          "INSTITUCIONAL UPT",
+          "Modalidades de Ingreso",
+          "Clasificación de Accesos (I, DEPOR, Día, Mes, Clase)",
+          "Activo",
+          "Activo",
+          "Activo",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "5 Modalidades",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgBBmaYEToeBQ7RvsytoqS1zAbWzVWYaEGJsY6WshboKISU?e=XUBdQf",
+          "Intercambio, Deportista, Pago Día, Pago Mes, Clase"
+        ]
+      }
+    ],
+    "VI_5_CULTURA_ARTE": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.5: PROMOCIÓN CULTURAL Y ELENCOS ARTÍSTICOS - MATRIZ INSTITUCIONAL MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          "Evidencia Oficial Drive/SharePoint: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "ID",
+          "Elenco / Agrupación Artística",
+          "Disciplina Cultural",
+          "Población Participante",
+          "Concepto de Métrica",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Enlace Evidencia Oficial",
+          "Observaciones"
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "CUL-01",
+          "Ballet Folclórico UPT",
+          "Danzas Típicas y Folclore",
+          "Estudiantes de Pregrado",
+          "Integrantes Activos del Elenco",
+          28,
+          30,
+          32,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Presentaciones institucionales y regionales"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "CUL-02",
+          "Teatro Universitario UPT",
+          "Artes Escénicas",
+          "Estudiantes de Pregrado",
+          "Integrantes Activos del Elenco",
+          15,
+          16,
+          18,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Temporada teatral anual"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "CUL-03",
+          "Coro Polifónico UPT",
+          "Canto y Música Coral",
+          "Estudiantes y Egresados",
+          "Integrantes Activos del Elenco",
+          22,
+          24,
+          25,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Ceremonias oficiales de graduación y efemérides"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "CUL-04",
+          "Tuna Universitaria UPT",
+          "Música Tradicional Universitaria",
+          "Estudiantes de Pregrado",
+          "Integrantes Activos del Elenco",
+          18,
+          19,
+          20,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Participación en festivales nacionales de tunas"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "CUL-05",
+          "Banda de Música Institucional",
+          "Música Instrumental",
+          "Estudiantes de Pregrado",
+          "Integrantes Activos del Elenco",
+          20,
+          22,
+          22,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Actividades protocolares y cívicas"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "CUL-06",
+          "Talleres Culturales Formativos",
+          "Fotografía, Pintura, Música",
+          "Comunidad Universitaria",
+          "Estudiantes Inscritos en Talleres",
+          110,
+          125,
+          130,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Talleres extracurriculares de bienestar"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "CUL-07",
+          "Eventos y Galas Culturales",
+          "Difusión Cultural",
+          "Comunidad Tacneña y UPT",
+          "Eventos Artísticos Realizados",
+          8,
+          10,
+          12,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgCokaHNzYkITK1zJP5c4KGgAQu4cSkNTl6GGD8e6LhwfqE?e=5InZz4",
+          "Impacto social y extensión cultural"
+        ]
+      }
+    ],
+    "VI_6_SEGURIDAD_VIGILANCIA": [
+      {
+        "row": 1,
+        "values": [
+          "COMPONENTE VI.6: SERVICIOS DE SEGURIDAD Y VIGILANCIA INSTITUCIONAL - MATRIZ MULTISEMESTRAL"
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          "Evidencia Oficial Drive/SharePoint: https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "ID",
+          "Local Institucional / Campus",
+          "Indicador de Estándar / SLA",
+          "Unidad de Medida",
+          "Meta / Estándar",
+          "2025-I",
+          "2025-II",
+          "2026-I (Actual)",
+          "2026-II",
+          "2027-I",
+          "2027-II",
+          "2028-I",
+          "2028-II",
+          "Estado 2026-I",
+          "Enlace Evidencia Oficial"
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "SEG-01",
+          "SL01 - Campus Capanique",
+          "Cobertura de turnos y puestos 24/7",
+          "% Horas Programadas",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "SEG-02",
+          "SL01 - Campus Capanique",
+          "Tiempo promedio de respuesta ante emergencias",
+          "Minutos",
+          "< 5 min",
+          "3.5 min",
+          "3.4 min",
+          "3.2 min",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "SEG-03",
+          "SL02 - Sede San Jerónimo",
+          "Cobertura de turnos y puestos 24/7",
+          "% Horas Programadas",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "SEG-04",
+          "SL03 - Pocollay (Campos)",
+          "Cobertura de vigilancia perimetral",
+          "% Horas Programadas",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "SEG-05",
+          "SL04 - Miculla (Centro Exp.)",
+          "Cobertura de seguridad física de activos",
+          "% Horas Programadas",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "SEG-06",
+          "SL05 - Centro Tacna (Local)",
+          "Control de acceso e identidad institucional",
+          "% Inspección",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "SEG-07",
+          "Institucional UPT (Global)",
+          "Tasa de incidentes graves o delitos",
+          "Número de casos",
+          "0 incidentes",
+          "0",
+          "0",
+          "0",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "SEG-08",
+          "Institucional UPT (Global)",
+          "Accidentes laborales incapacitantes en servicio",
+          "Número de siniestros",
+          "0 accidentes",
+          "0",
+          "0",
+          "0",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "SEG-09",
+          "Institucional UPT (Global)",
+          "Satisfacción del usuario con el servicio de vigilancia",
+          "% Aprobación",
+          "≥ 90.00%",
+          "94.50%",
+          "95.20%",
+          "96.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "SEG-10",
+          "Institucional UPT (Global)",
+          "Personal capacitado en control de fuego y primeros auxilios",
+          "% Personal",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          "100.00%",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CUMPLE",
+          "https://uptpe-my.sharepoint.com/:f:/g/personal/licencia_institucional_upt_pe/IgB3ZcrWiOSoSpXTEg8e1G4ATnzHatIMjG4KGqYVUfj3O0?e=dHTEcZ"
+        ]
+      }
+    ]
   }
 }
