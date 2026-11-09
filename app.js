@@ -10,7 +10,7 @@ import { logoutFromFirebase } from "./services/firebase-auth.js?v=20261011.1";
 
 // Páginas cargadas dinámicamente
 import { renderDashboardPage } from "./pages/dashboard.js?v=20260925.ULTIMA";
-import { renderMallaPage } from "./pages/malla.js?v=20261109.HORAS_MEDICINA";
+import { renderMallaPage } from "./pages/malla.js?v=20261109.MODALIDAD_SUNEDU_C1";
 import { renderPlanPage } from "./pages/plan.js?v=20261102.DECLARACIONES_SUNEDU";
 import { renderEvidenciasPage } from "./pages/evidencias.js?v=20261102.SERVICIOS_COMPLEMENTARIOS_3D";
 
