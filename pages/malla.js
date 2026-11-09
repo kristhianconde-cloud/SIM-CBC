@@ -201,8 +201,50 @@ export async function renderMallaPage(container, userRole = "admin") {
       estudioGeneral: getGroupStats(c => c.tipoEstudio === "General"),
       estudioEspecifico: getGroupStats(c => c.tipoEstudio === "Específico"),
       estudioEspecialidad: getGroupStats(c => c.tipoEstudio === "De especialidad"),
-      modalidadPresencial: getGroupStats(c => (c.modalidad || "Presencial") === "Presencial"),
-      modalidadVirtual: getGroupStats(c => c.modalidad === "Virtual"),
+      modalidadPresencial: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTP || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPP || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return {
+          count: "-",
+          ht,
+          hp,
+          totalH,
+          pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0,
+          credT,
+          credP,
+          credTotal,
+          pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0,
+          cursos: cursos.filter(c => (c.horasTP || 0) + (c.horasPP || 0) > 0)
+        };
+      })(),
+      modalidadVirtual: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTV || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPV || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return {
+          count: "-",
+          ht,
+          hp,
+          totalH,
+          pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0,
+          credT,
+          credP,
+          credTotal,
+          pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0,
+          cursos: cursos.filter(c => (c.horasTV || 0) + (c.horasPV || 0) > 0)
+        };
+      })(),
       tipoObligatorio: getGroupStats(c => c.tipoCurso === "obligatorio"),
       tipoElectivo: getGroupStats(c => c.tipoCurso === "electivo")
     };
@@ -660,8 +702,28 @@ export async function renderMallaPage(container, userRole = "admin") {
       g: getStats(c => c.tipoEstudio === "General"),
       es: getStats(c => c.tipoEstudio === "Específico"),
       sp: getStats(c => c.tipoEstudio === "De especialidad"),
-      pr: getStats(c => (c.modalidad || "Presencial") === "Presencial"),
-      vi: getStats(c => c.modalidad === "Virtual"),
+      pr: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTP || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPP || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return { count: "-", ht, hp, totalH, pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0, credT, credP, credTotal, pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0 };
+      })(),
+      vi: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTV || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPV || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return { count: "-", ht, hp, totalH, pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0, credT, credP, credTotal, pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0 };
+      })(),
       ob: getStats(c => c.tipoCurso === "obligatorio"),
       el: getStats(c => c.tipoCurso === "electivo")
     };
@@ -1006,8 +1068,28 @@ export async function renderMallaPage(container, userRole = "admin") {
       g: getStats(c => c.tipoEstudio === "General"),
       es: getStats(c => c.tipoEstudio === "Específico"),
       sp: getStats(c => c.tipoEstudio === "De especialidad"),
-      pr: getStats(c => (c.modalidad || "Presencial") === "Presencial"),
-      vi: getStats(c => c.modalidad === "Virtual"),
+      pr: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTP || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPP || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return { count: "-", ht, hp, totalH, pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0, credT, credP, credTotal, pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0 };
+      })(),
+      vi: (() => {
+        const htRaw = cursos.reduce((sum, c) => sum + (c.horasTV || 0), 0);
+        const hpRaw = cursos.reduce((sum, c) => sum + (c.horasPV || 0), 0);
+        const ht = htRaw * multWeeks;
+        const hp = hpRaw * multWeeks;
+        const totalH = ht + hp;
+        const credT = htRaw;
+        const credP = hpRaw * ratio;
+        const credTotal = credT + credP;
+        return { count: "-", ht, hp, totalH, pctH: totalHoras > 0 ? (totalH / totalHoras) * 100 : 0, credT, credP, credTotal, pctCred: totalCreditos > 0 ? (credTotal / totalCreditos) * 100 : 0 };
+      })(),
       ob: getStats(c => c.tipoCurso === "obligatorio"),
       el: getStats(c => c.tipoCurso === "electivo")
     };
