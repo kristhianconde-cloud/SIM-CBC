@@ -1585,11 +1585,11 @@ export async function renderMallaPage(container, userRole = "admin") {
               <div class="form-grid-2">
                 <div class="form-group">
                   <label for="c-horas-tp">Teóricas Presenciales (Horas TP)</label>
-                  <input type="number" id="c-horas-tp" class="input-control" min="0" max="20" required value="${curso ? (curso.horasTP || 0) : '2'}">
+                  <input type="number" id="c-horas-tp" class="input-control" min="0" max="1000" step="any" required value="${curso ? (curso.horasTP || 0) : '2'}">
                 </div>
                 <div class="form-group">
                   <label for="c-horas-tv">Teóricas Virtuales (Horas TV)</label>
-                  <input type="number" id="c-horas-tv" class="input-control" min="0" max="20" required value="${curso ? (curso.horasTV || 0) : '0'}">
+                  <input type="number" id="c-horas-tv" class="input-control" min="0" max="1000" step="any" required value="${curso ? (curso.horasTV || 0) : '0'}">
                 </div>
               </div>
 
@@ -1598,11 +1598,11 @@ export async function renderMallaPage(container, userRole = "admin") {
               <div class="form-grid-2">
                 <div class="form-group">
                   <label for="c-horas-pp">Prácticas Presenciales (Horas PP)</label>
-                  <input type="number" id="c-horas-pp" class="input-control" min="0" max="20" required value="${curso ? (curso.horasPP || 0) : '4'}">
+                  <input type="number" id="c-horas-pp" class="input-control" min="0" max="1000" step="any" required value="${curso ? (curso.horasPP || 0) : '4'}">
                 </div>
                 <div class="form-group">
                   <label for="c-horas-pv">Prácticas Virtuales (Horas PV)</label>
-                  <input type="number" id="c-horas-pv" class="input-control" min="0" max="20" required value="${curso ? (curso.horasPV || 0) : '0'}">
+                  <input type="number" id="c-horas-pv" class="input-control" min="0" max="1000" step="any" required value="${curso ? (curso.horasPV || 0) : '0'}">
                 </div>
               </div>
 
@@ -1692,10 +1692,10 @@ export async function renderMallaPage(container, userRole = "admin") {
       e.preventDefault();
       
       const tipoCursoValue = tipoCursoSelect.value;
-      const htp = parseInt(htpInput.value) || 0;
-      const htv = parseInt(htvInput.value) || 0;
-      const hpp = parseInt(hppInput.value) || 0;
-      const hpv = parseInt(hpvInput.value) || 0;
+      const htp = parseFloat(htpInput.value) || 0;
+      const htv = parseFloat(htvInput.value) || 0;
+      const hpp = parseFloat(hppInput.value) || 0;
+      const hpv = parseFloat(hpvInput.value) || 0;
 
       // Calcular crédito final
       let cred = (htp + htv) + (hpp + hpv) * (creditSettings.valorTeoricas / creditSettings.valorPracticas);
