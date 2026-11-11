@@ -1,7 +1,7 @@
 /* ==========================================================================
    SIGECA - PÁGINA MALLA CURRICULAR C1 (Gestor de Malla Curricular Rediseñado)
    ========================================================================== */
-import { db } from "../services/db.js?v=20260623.5";
+import { db } from "../services/db.js?v=20261111.ROBUST_SAVE_CURSO";
 import { onedrive } from "../services/onedrive.js?v=20260623.5";
 
 

@@ -2,7 +2,7 @@
    SIGECA - APLICACIÓN PRINCIPAL & ENRUTADOR (SPA Controller)
    ========================================================================== */
 import { initOneDriveModalListener } from "./components/onedrive-modal.js?v=20260925.ULTIMA";
-import { db } from "./services/db.js?v=20260925.ULTIMA";
+import { db } from "./services/db.js?v=20261111.ROBUST_SAVE_CURSO";
 import { renderWelcomePage } from "./pages/welcome.js?v=20260925.ULTIMA";
 import { renderSidebar } from "./components/sidebar.js?v=20260925.ULTIMA";
 import { renderHeader } from "./components/header.js?v=20260925.ULTIMA";
@@ -10,7 +10,7 @@ import { logoutFromFirebase } from "./services/firebase-auth.js?v=20261011.1";
 
 // Páginas cargadas dinámicamente
 import { renderDashboardPage } from "./pages/dashboard.js?v=20260925.ULTIMA";
-import { renderMallaPage } from "./pages/malla.js?v=20261109.MODALIDAD_SUNEDU_C1";
+import { renderMallaPage } from "./pages/malla.js?v=20261111.ROBUST_SAVE_CURSO";
 import { renderPlanPage } from "./pages/plan.js?v=20261102.DECLARACIONES_SUNEDU";
 import { renderEvidenciasPage } from "./pages/evidencias.js?v=20261102.SERVICIOS_COMPLEMENTARIOS_3D";
 
@@ -272,8 +272,7 @@ class AppController {
           console.warn("[SIM-CBC] Error en logoutFromFirebase:", e);
         }
         localStorage.removeItem("sigeca_current_user");
-        localStorage.removeItem("sigeca_cursos");
-        localStorage.removeItem("sigeca_credit_settings");
+        // Preservar sigeca_cursos y sigeca_credit_settings para no perder el avance del usuario
         this.currentUser = null;
         this.renderLogin();
       };

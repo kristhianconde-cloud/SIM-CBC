@@ -641,15 +641,25 @@ class DatabaseService {
   }
 
   async saveCurso(curso) {
-    const todos = JSON.parse(localStorage.getItem("sigeca_cursos"));
+    let todos = [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem("sigeca_cursos"));
+      if (Array.isArray(parsed)) {
+        todos = parsed;
+      }
+    } catch (e) {
+      todos = [];
+    }
     if (!curso.modalidad) {
       curso.modalidad = ((curso.horasTV || 0) + (curso.horasPV || 0) > 0) ? "Virtual" : "Presencial";
     }
     if (curso.id) {
       // Editar existente
-      const index = todos.findIndex(c => c.id === curso.id);
+      const index = todos.findIndex(c => c && c.id === curso.id);
       if (index !== -1) {
         todos[index] = { ...todos[index], ...curso };
+      } else {
+        todos.push(curso);
       }
     } else {
       // Crear nuevo
@@ -662,8 +672,16 @@ class DatabaseService {
   }
 
   async deleteCurso(cursoId) {
-    const todos = JSON.parse(localStorage.getItem("sigeca_cursos"));
-    const filtrados = todos.filter(c => c.id !== cursoId);
+    let todos = [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem("sigeca_cursos"));
+      if (Array.isArray(parsed)) {
+        todos = parsed;
+      }
+    } catch (e) {
+      todos = [];
+    }
+    const filtrados = todos.filter(c => c && c.id !== cursoId);
     localStorage.setItem("sigeca_cursos", JSON.stringify(filtrados));
     return true;
   }
