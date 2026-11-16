@@ -5259,17 +5259,17 @@ function drawGraduadosDashboard(container) {
 
               <!-- Selector de Métricas Temporales -->
               <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-                <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; margin-right: 4px; text-transform: uppercase;">Métrica:</span>
-                <button class="btn-metrica" data-met="tc" style="background: ${selMet === 'tc' ? '#06b6d4' : 'rgba(30,41,59,0.6)'}; color: ${selMet === 'tc' ? '#0f172a' : '#cbd5e1'}}; border: 1px solid ${selMet === 'tc' ? '#06b6d4' : 'rgba(255,255,255,0.1)'}; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #ffffff; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.05em;">MÉTRICA:</span>
+                <button class="btn-metrica" data-met="tc" style="background: ${selMet === 'tc' ? 'linear-gradient(135deg, #0284c7, #06b6d4)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'tc' ? '#38bdf8' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'tc' ? '0 0 14px rgba(6,182,212,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   ⏱️ Tiempo Carrera
                 </button>
-                <button class="btn-metrica" data-met="eb" style="background: ${selMet === 'eb' ? '#10b981' : 'rgba(30,41,59,0.6)'}; color: ${selMet === 'eb' ? '#0f172a' : '#cbd5e1'}}; border: 1px solid ${selMet === 'eb' ? '#10b981' : 'rgba(255,255,255,0.1)'}; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                <button class="btn-metrica" data-met="eb" style="background: ${selMet === 'eb' ? 'linear-gradient(135deg, #059669, #10b981)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'eb' ? '#34d399' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'eb' ? '0 0 14px rgba(168,85,247,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   🎓 Egreso a Bachiller
                 </button>
-                <button class="btn-metrica" data-met="bt" style="background: ${selMet === 'bt' ? '#d8b4fe' : 'rgba(30,41,59,0.6)'}; color: ${selMet === 'bt' ? '#0f172a' : '#cbd5e1'}}; border: 1px solid ${selMet === 'bt' ? '#d8b4fe' : 'rgba(255,255,255,0.1)'}; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                <button class="btn-metrica" data-met="bt" style="background: ${selMet === 'bt' ? 'linear-gradient(135deg, #7c3aed, #a855f7)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'bt' ? '#c084fc' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'bt' ? '0 0 14px rgba(168,85,247,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   📜 Bachiller a Título
                 </button>
-                <button class="btn-metrica" data-met="et" style="background: ${selMet === 'et' ? '#f59e0b' : 'rgba(30,41,59,0.6)'}; color: ${selMet === 'et' ? '#0f172a' : '#cbd5e1'}}; border: 1px solid ${selMet === 'et' ? '#f59e0b' : 'rgba(255,255,255,0.1)'}; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                <button class="btn-metrica" data-met="et" style="background: ${selMet === 'et' ? 'linear-gradient(135deg, #d97706, #f59e0b)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'et' ? '#fbbf24' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'et' ? '0 0 14px rgba(245,158,11,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   🚀 Egreso a Título
                 </button>
               </div>
