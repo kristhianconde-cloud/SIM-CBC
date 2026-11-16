@@ -4909,13 +4909,13 @@ const downloadGraduadosWordReport = () => {
 // Generador de Gráfico 3D SVG para hasta 4 elementos comparativos
 function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.') {
   const width = 760;
-  const height = 310;
-  const top = 42;
-  const right = 35;
-  const bottom = 65;
-  const left = 60;
-  const dx = 14;
-  const dy = 10;
+  const height = 320;
+  const top = 48;
+  const right = 40;
+  const bottom = 70;
+  const left = 65;
+  const dx = 16;
+  const dy = 12;
 
   const drawWidth = width - left - right - dx;
   const drawHeight = height - top - bottom - dy;
@@ -4930,70 +4930,122 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
     const val = (niceMax / ticks) * i;
     const y = height - bottom - (val / niceMax) * drawHeight;
     gridHtml += `
-      <line x1="${left}" y1="${y}" x2="${left + drawWidth + dx}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
-      <text x="${left - 12}" y="${y + 4}" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="end">${val.toFixed(1)} ${unit}</text>
+      <line x1="${left}" y1="${y}" x2="${left + drawWidth + dx}" y2="${y}" stroke="rgba(255,255,255,0.07)" stroke-dasharray="4,4" />
+      <text x="${left - 14}" y="${y + 4}" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="end">${val.toFixed(1)} ${unit}</text>
     `;
   }
 
+  // Base 3D isometric grid (pedestal)
+  const y_floor = height - bottom;
+  const floorGridHtml = `
+    <!-- Pedestal Isométrico Base -->
+    <polygon points="${left - 10},${y_floor} ${left + dx},${y_floor - dy} ${left + drawWidth + dx + 15},${y_floor - dy} ${left + drawWidth + 15},${y_floor}" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1" />
+  `;
+
   const count = Math.max(items.length, 1);
-  const barWidth = Math.min(85, Math.floor(drawWidth / (count * 1.8)));
+  const barWidth = Math.min(82, Math.floor(drawWidth / (count * 1.75)));
   const totalBarsWidth = count * barWidth;
   const remainingSpace = drawWidth - totalBarsWidth;
   const barSpacing = Math.floor(remainingSpace / (count + 1));
 
   let barsHtml = '';
+  let defsHtml = '';
+
   items.forEach((item, idx) => {
     const x = left + barSpacing + idx * (barWidth + barSpacing);
-    const y_bottom = height - bottom;
     const val = item.value || 0;
-    const h = (val / niceMax) * drawHeight;
-    const y_top = y_bottom - h;
+    const h = Math.max((val / niceMax) * drawHeight, 6);
+    const y_top = y_floor - h;
     const col = item.color || '#38bdf8';
+    const gradId = `grad_bar_${idx}`;
+    const shineId = `shine_bar_${idx}`;
+    const shadowId = `shadow_bar_${idx}`;
 
-    const pFront = `M ${x} ${y_top} L ${x + barWidth} ${y_top} L ${x + barWidth} ${y_bottom} L ${x} ${y_bottom} Z`;
+    defsHtml += `
+      <linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${col}" stop-opacity="0.95" />
+        <stop offset="60%" stop-color="${col}" stop-opacity="0.80" />
+        <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+      </linearGradient>
+      <linearGradient id="${shineId}" x1="0" y1="0" x2="0.8" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+        <stop offset="35%" stop-color="#ffffff" stop-opacity="0.15" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+      <radialGradient id="${shadowId}" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="${col}" stop-opacity="0.45" />
+        <stop offset="60%" stop-color="#000000" stop-opacity="0.6" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+      </radialGradient>
+    `;
+
+    const pFront = `M ${x} ${y_top} L ${x + barWidth} ${y_top} L ${x + barWidth} ${y_floor} L ${x} ${y_floor} Z`;
     const pTop = `M ${x} ${y_top} L ${x + dx} ${y_top - dy} L ${x + barWidth + dx} ${y_top - dy} L ${x + barWidth} ${y_top} Z`;
-    const pSide = `M ${x + barWidth} ${y_top} L ${x + barWidth + dx} ${y_top - dy} L ${x + barWidth + dx} ${y_bottom - dy} L ${x + barWidth} ${y_bottom} Z`;
+    const pSide = `M ${x + barWidth} ${y_top} L ${x + barWidth + dx} ${y_top - dy} L ${x + barWidth + dx} ${y_floor - dy} L ${x + barWidth} ${y_floor} Z`;
 
     const badgeX = x + barWidth / 2 + dx / 2;
-    const badgeY = y_top - dy - 10;
+    const badgeY = y_top - dy - 12;
 
     barsHtml += `
-      <g class="bar-group-3d" style="cursor: pointer;">
-        <!-- Base de sombra -->
-        <ellipse cx="${x + barWidth / 2 + dx / 2}" cy="${y_bottom}" rx="${barWidth * 0.55}" ry="6" fill="rgba(0,0,0,0.4)" />
+      <g class="bar-group-3d" data-idx="${idx}">
+        <!-- Sombra en el suelo -->
+        <ellipse cx="${x + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.65}" ry="8" fill="url(#${shadowId})" />
         
-        <!-- Cara Frontal -->
-        <path d="${pFront}" fill="${col}" fill-opacity="0.9" />
-        
-        <!-- Cara Lateral 3D -->
-        <path d="${pSide}" fill="${col}" filter="brightness(0.75)" />
-        
-        <!-- Cara Superior 3D -->
-        <path d="${pTop}" fill="${col}" filter="brightness(1.2)" />
-        
-        <!-- Badge de Valor -->
-        <g transform="translate(${badgeX}, ${badgeY})">
-          <rect x="-38" y="-22" width="76" height="24" rx="12" fill="#0f172a" stroke="${col}" stroke-width="2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.5))" />
-          <text x="0" y="-6" fill="#f8fafc" font-size="12" font-weight="800" text-anchor="middle">${val.toFixed(2)} ${unit}</text>
+        <!-- Cara Frontal con efecto vidrio/cristal -->
+        <path d="${pFront}" fill="url(#${gradId})" />
+        <path d="${pFront}" fill="url(#${shineId})" />
+        <line x1="${x}" y1="${y_top}" x2="${x}" y2="${y_floor}" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" />
+
+        <!-- Cara Lateral 3D sombreada -->
+        <path d="${pSide}" fill="${col}" filter="brightness(0.68)" />
+        <line x1="${x + barWidth + dx}" y1="${y_top - dy}" x2="${x + barWidth + dx}" y2="${y_floor - dy}" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+        <!-- Cara Superior 3D brillante biselada -->
+        <path d="${pTop}" fill="${col}" filter="brightness(1.35)" />
+        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="rgba(255,255,255,0.25)" />
+
+        <!-- Badge Flotante 3D con Valor y Glow -->
+        <g class="badge-3d" transform="translate(${badgeX}, ${badgeY})">
+          <rect x="-42" y="-23" width="84" height="25" rx="12" fill="#090d16" stroke="${col}" stroke-width="2" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.6))" />
+          <text x="0" y="-7" fill="#ffffff" font-size="12.5" font-weight="900" text-anchor="middle" letter-spacing="0.02em">${val.toFixed(2)} ${unit}</text>
         </g>
         
-        <!-- Etiqueta inferior -->
-        <text x="${x + barWidth / 2 + dx / 2}" y="${y_bottom + 22}" fill="#f1f5f9" font-size="12" font-weight="700" text-anchor="middle">${item.shortLabel}</text>
-        <text x="${x + barWidth / 2 + dx / 2}" y="${y_bottom + 38}" fill="#38bdf8" font-size="10.5" font-weight="600" text-anchor="middle">${item.subLabel}</text>
+        <!-- Etiquetas inferiores -->
+        <text x="${x + barWidth / 2 + dx / 2}" y="${y_floor + 24}" fill="#ffffff" font-size="12.5" font-weight="800" text-anchor="middle">${item.shortLabel}</text>
+        <text x="${x + barWidth / 2 + dx / 2}" y="${y_floor + 42}" fill="${col}" font-size="11" font-weight="700" text-anchor="middle">${item.subLabel}</text>
       </g>
     `;
   });
 
   return `
-    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-height: 330px; overflow: visible;">
+    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-height: 340px; overflow: visible;">
       <defs>
         <linearGradient id="bgGrad3D" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.8" />
-          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.4" />
+          <stop offset="0%" stop-color="#0a0f1d" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#141e33" stop-opacity="0.7" />
         </linearGradient>
+        ${defsHtml}
       </defs>
-      <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGrad3D)" stroke="rgba(255,255,255,0.06)" />
+      <style>
+        .bar-group-3d {
+          transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
+          transform-origin: bottom center;
+        }
+        .bar-group-3d:hover {
+          transform: translateY(-8px) scale(1.02);
+          filter: drop-shadow(0 14px 24px rgba(56, 189, 248, 0.5));
+        }
+        .bar-group-3d:hover .badge-3d {
+          transform: scale(1.1);
+          filter: drop-shadow(0 0 12px #38bdf8);
+        }
+        .bar-group-3d .badge-3d {
+          transition: transform 0.25s ease, filter 0.25s ease;
+        }
+      </style>
+      <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGrad3D)" stroke="rgba(255,255,255,0.08)" />
       ${gridHtml}
+      ${floorGridHtml}
       ${barsHtml}
     </svg>
   `;
@@ -5002,13 +5054,13 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
 // Generador de Gráfico 3D SVG de Evolución Histórica Anual (2016 - 2026)
 function generate3DEvolutionChartSVG(yearsData) {
   const width = 860;
-  const height = 330;
-  const top = 40;
-  const right = 30;
-  const bottom = 65;
-  const left = 60;
-  const dx = 10;
-  const dy = 8;
+  const height = 340;
+  const top = 42;
+  const right = 35;
+  const bottom = 70;
+  const left = 65;
+  const dx = 12;
+  const dy = 9;
 
   const drawWidth = width - left - right - dx;
   const drawHeight = height - top - bottom - dy;
@@ -5024,40 +5076,45 @@ function generate3DEvolutionChartSVG(yearsData) {
     const y = height - bottom - (val / niceMax) * drawHeight;
     gridHtml += `
       <line x1="${left}" y1="${y}" x2="${left + drawWidth + dx}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
-      <text x="${left - 12}" y="${y + 4}" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="end">${val.toLocaleString()}</text>
+      <text x="${left - 12}" y="${y + 4}" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="end">${val.toLocaleString()}</text>
     `;
   }
 
+  const y_floor = height - bottom;
+  const floorGridHtml = `
+    <!-- Pedestal Isométrico Base Evolución -->
+    <polygon points="${left - 10},${y_floor} ${left + dx},${y_floor - dy} ${left + drawWidth + dx + 12},${y_floor - dy} ${left + drawWidth + 12},${y_floor}" fill="rgba(15, 23, 42, 0.8)" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" />
+  `;
+
   const groupWidth = drawWidth / years.length;
-  const barWidth = Math.floor(groupWidth * 0.36);
-  const y_bottom = height - bottom;
+  const barWidth = Math.floor(groupWidth * 0.38);
 
   let barsHtml = '';
   years.forEach((y, idx) => {
     const d = yearsData[y];
     const groupX = left + idx * groupWidth;
 
-    // Barra 1: Bachilleres (Azul)
-    const x1 = groupX + 4;
-    const h1 = (d.bach / niceMax) * drawHeight;
-    const y1 = y_bottom - h1;
+    // Barra 1: Bachilleres (Azul Cyan Neon)
+    const x1 = groupX + 3;
+    const h1 = Math.max((d.bach / niceMax) * drawHeight, 4);
+    const y1 = y_floor - h1;
     const col1 = '#0284c7';
 
-    // Barra 2: Titulados (Verde Esmeralda)
+    // Barra 2: Titulados (Verde Esmeralda Neon)
     const x2 = x1 + barWidth + 3;
-    const h2 = (d.tit / niceMax) * drawHeight;
-    const y2 = y_bottom - h2;
+    const h2 = Math.max((d.tit / niceMax) * drawHeight, 4);
+    const y2 = y_floor - h2;
     const col2 = '#10b981';
 
     // Paths Barra 1
-    const pFront1 = `M ${x1} ${y1} L ${x1 + barWidth} ${y1} L ${x1 + barWidth} ${y_bottom} L ${x1} ${y_bottom} Z`;
+    const pFront1 = `M ${x1} ${y1} L ${x1 + barWidth} ${y1} L ${x1 + barWidth} ${y_floor} L ${x1} ${y_floor} Z`;
     const pTop1 = `M ${x1} ${y1} L ${x1 + dx} ${y1 - dy} L ${x1 + barWidth + dx} ${y1 - dy} L ${x1 + barWidth} ${y1} Z`;
-    const pSide1 = `M ${x1 + barWidth} ${y1} L ${x1 + barWidth + dx} ${y1 - dy} L ${x1 + barWidth + dx} ${y_bottom - dy} L ${x1 + barWidth} ${y_bottom} Z`;
+    const pSide1 = `M ${x1 + barWidth} ${y1} L ${x1 + barWidth + dx} ${y1 - dy} L ${x1 + barWidth + dx} ${y_floor - dy} L ${x1 + barWidth} ${y_floor} Z`;
 
     // Paths Barra 2
-    const pFront2 = `M ${x2} ${y2} L ${x2 + barWidth} ${y2} L ${x2 + barWidth} ${y_bottom} L ${x2} ${y_bottom} Z`;
+    const pFront2 = `M ${x2} ${y2} L ${x2 + barWidth} ${y2} L ${x2 + barWidth} ${y_floor} L ${x2} ${y_floor} Z`;
     const pTop2 = `M ${x2} ${y2} L ${x2 + dx} ${y2 - dy} L ${x2 + barWidth + dx} ${y2 - dy} L ${x2 + barWidth} ${y2} Z`;
-    const pSide2 = `M ${x2 + barWidth} ${y2} L ${x2 + barWidth + dx} ${y2 - dy} L ${x2 + barWidth + dx} ${y_bottom - dy} L ${x2 + barWidth} ${y_bottom} Z`;
+    const pSide2 = `M ${x2 + barWidth} ${y2} L ${x2 + barWidth + dx} ${y2 - dy} L ${x2 + barWidth + dx} ${y_floor - dy} L ${x2 + barWidth} ${y_floor} Z`;
 
     const isPandemia = y === '2020';
 
@@ -5065,25 +5122,31 @@ function generate3DEvolutionChartSVG(yearsData) {
       <g class="evo-year-group" style="cursor: pointer;">
         <!-- Resaltado de Pandemia -->
         ${isPandemia ? `
-          <rect x="${groupX}" y="${top}" width="${groupWidth}" height="${drawHeight + dy}" fill="rgba(239, 68, 68, 0.08)" rx="4" />
-          <text x="${groupX + groupWidth / 2}" y="${top + 14}" fill="#ef4444" font-size="9" font-weight="700" text-anchor="middle">PANDEMIA</text>
+          <rect x="${groupX}" y="${top}" width="${groupWidth}" height="${drawHeight + dy}" fill="rgba(239, 68, 68, 0.12)" rx="6" stroke="rgba(239, 68, 68, 0.3)" stroke-dasharray="2,2" />
+          <text x="${groupX + groupWidth / 2}" y="${top + 16}" fill="#f87171" font-size="9.5" font-weight="800" text-anchor="middle">PANDEMIA</text>
         ` : ''}
 
+        <!-- Sombras de suelo -->
+        <ellipse cx="${x1 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.6}" ry="5" fill="rgba(2, 132, 199, 0.4)" />
+        <ellipse cx="${x2 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.6}" ry="5" fill="rgba(16, 185, 129, 0.4)" />
+
         <!-- Barra 1 (Bachilleres) -->
-        <path d="${pFront1}" fill="${col1}" fill-opacity="0.85" />
-        <path d="${pSide1}" fill="${col1}" filter="brightness(0.75)" />
-        <path d="${pTop1}" fill="${col1}" filter="brightness(1.2)" />
-        <text x="${x1 + barWidth / 2 + dx / 2}" y="${y1 - dy - 4}" fill="#7dd3fc" font-size="9.5" font-weight="700" text-anchor="middle">${d.bach}</text>
+        <path d="${pFront1}" fill="${col1}" fill-opacity="0.9" />
+        <line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y_floor}" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+        <path d="${pSide1}" fill="${col1}" filter="brightness(0.72)" />
+        <path d="${pTop1}" fill="${col1}" filter="brightness(1.35)" />
+        <text x="${x1 + barWidth / 2 + dx / 2}" y="${y1 - dy - 5}" fill="#ffffff" font-size="10.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.8))">${d.bach}</text>
 
         <!-- Barra 2 (Titulados) -->
-        <path d="${pFront2}" fill="${col2}" fill-opacity="0.85" />
-        <path d="${pSide2}" fill="${col2}" filter="brightness(0.75)" />
-        <path d="${pTop2}" fill="${col2}" filter="brightness(1.2)" />
-        <text x="${x2 + barWidth / 2 + dx / 2}" y="${y2 - dy - 4}" fill="#6ee7b7" font-size="9.5" font-weight="700" text-anchor="middle">${d.tit}</text>
+        <path d="${pFront2}" fill="${col2}" fill-opacity="0.9" />
+        <line x1="${x2}" y1="${y2}" x2="${x2}" y2="${y_floor}" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+        <path d="${pSide2}" fill="${col2}" filter="brightness(0.72)" />
+        <path d="${pTop2}" fill="${col2}" filter="brightness(1.35)" />
+        <text x="${x2 + barWidth / 2 + dx / 2}" y="${y2 - dy - 5}" fill="#ffffff" font-size="10.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.8))">${d.tit}</text>
 
         <!-- Año en Eje X -->
-        <text x="${groupX + groupWidth / 2}" y="${y_bottom + 22}" fill="${isPandemia ? '#ef4444' : '#f1f5f9'}" font-size="12" font-weight="700" text-anchor="middle">${y}</text>
-        <text x="${groupX + groupWidth / 2}" y="${y_bottom + 36}" fill="#94a3b8" font-size="10" font-weight="600" text-anchor="middle">${d.tasa_tit}% tit.</text>
+        <text x="${groupX + groupWidth / 2}" y="${y_floor + 24}" fill="${isPandemia ? '#ef4444' : '#ffffff'}" font-size="12.5" font-weight="800" text-anchor="middle">${y}</text>
+        <text x="${groupX + groupWidth / 2}" y="${y_floor + 40}" fill="#38bdf8" font-size="10.5" font-weight="700" text-anchor="middle">${d.tasa_tit}% tit.</text>
       </g>
     `;
   });
@@ -5092,12 +5155,23 @@ function generate3DEvolutionChartSVG(yearsData) {
     <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-height: 360px; overflow: visible;">
       <defs>
         <linearGradient id="bgGradEvo" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.9" />
-          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.6" />
+          <stop offset="0%" stop-color="#0a0f1d" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#141e33" stop-opacity="0.75" />
         </linearGradient>
       </defs>
-      <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGradEvo)" stroke="rgba(255,255,255,0.06)" />
+      <style>
+        .evo-year-group {
+          transition: transform 0.25s ease, filter 0.25s ease;
+          transform-origin: bottom center;
+        }
+        .evo-year-group:hover {
+          transform: translateY(-6px);
+          filter: drop-shadow(0 10px 18px rgba(16, 185, 129, 0.45));
+        }
+      </style>
+      <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGradEvo)" stroke="rgba(255,255,255,0.08)" />
       ${gridHtml}
+      ${floorGridHtml}
       ${barsHtml}
     </svg>
   `;
@@ -5259,7 +5333,7 @@ function drawGraduadosDashboard(container) {
                 <button class="btn-metrica" data-met="tc" style="background: ${selMet === 'tc' ? 'linear-gradient(135deg, #0284c7, #06b6d4)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'tc' ? '#38bdf8' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'tc' ? '0 0 14px rgba(6,182,212,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   ⏱️ Tiempo Carrera
                 </button>
-                <button class="btn-metrica" data-met="eb" style="background: ${selMet === 'eb' ? 'linear-gradient(135deg, #059669, #10b981)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'eb' ? '#34d399' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'eb' ? '0 0 14px rgba(168,85,247,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                <button class="btn-metrica" data-met="eb" style="background: ${selMet === 'eb' ? 'linear-gradient(135deg, #059669, #10b981)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'eb' ? '#34d399' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'eb' ? '0 0 14px rgba(16,185,129,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                   🎓 Egreso a Bachiller
                 </button>
                 <button class="btn-metrica" data-met="bt" style="background: ${selMet === 'bt' ? 'linear-gradient(135deg, #7c3aed, #a855f7)' : 'rgba(30,41,59,0.85)'}; color: #ffffff !important; border: 1px solid ${selMet === 'bt' ? '#c084fc' : 'rgba(255,255,255,0.22)'}; padding: 0.45rem 0.85rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: ${selMet === 'bt' ? '0 0 14px rgba(168,85,247,0.45)' : 'none'}; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
