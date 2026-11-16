@@ -5208,10 +5208,6 @@ function drawGraduadosDashboard(container) {
               <i data-lucide="file-down" style="width: 16px; height: 16px;"></i>
               Exportar Reporte Word
             </button>
-            <a href="${d.sheet_url}" target="_blank" class="btn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; padding: 0.55rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.2s;">
-              <i data-lucide="table" style="width: 16px; height: 16px;"></i>
-              Abrir Matriz Oficial en Drive
-            </a>
           </div>
         </div>
 
