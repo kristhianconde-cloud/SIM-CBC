@@ -4798,119 +4798,41 @@ const downloadGraduadosWordReport = () => {
   URL.revokeObjectURL(downloadUrl);
 };
 
-// Generador de Gráfico 3D Dinámico SVG Perfeccionado
-function generate3DMetricChartSVG(data, width = 760, height = 300, benchmark = null, unit = 'a.') {
-  const top = 40;
-  const right = 35;
-  const bottom = 65;
-  const left = 55;
-  const dx = 12; // Profundidad 3D X
-  const dy = 9;  // Profundidad 3D Y
-  
-  const drawWidth = width - left - right - dx;
-  const drawHeight = height - top - bottom - dy;
-  
-  const values = data.map(d => d.value).filter(v => typeof v === 'number');
-  const maxVal = Math.max(...values, benchmark || 1, 1);
-  const niceMax = Math.ceil(maxVal * 1.2) || 10;
-  
-  let gridHtml = '';
-  const ticks = 4;
-  for (let i = 0; i <= ticks; i++) {
-    const val = (niceMax / ticks) * i;
-    const y = height - bottom - (val / niceMax) * drawHeight;
-    gridHtml += `
-      <line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
-      <text x="${left - 10}" y="${y + 4}" fill="#94a3b8" font-size="10" font-weight="600" text-anchor="end">${val.toFixed(1)} ${unit}</text>
-    `;
-  }
+// Variables de control de vistas del Dashboard de Graduados
+let _gradFilters = {
+  viewMode: 'comparativa', // 'comparativa' | 'evolucion' | 'tabla'
+  compMode: 'facultades',  // 'facultades' | 'carreras' (igual que en Egresados)
+  facultad: 'todas',
+  carrera: 'todas',
+  metrica: 'tc' // 'tc' | 'eb' | 'bt' | 'et'
+};
 
-  // Línea de Benchmark (Promedio UPT) si existe
-  let benchmarkHtml = '';
-  if (benchmark && benchmark > 0) {
-    const y_bench = height - bottom - (benchmark / niceMax) * drawHeight;
-    benchmarkHtml = `
-      <g>
-        <line x1="${left}" y1="${y_bench}" x2="${width - right + dx}" y2="${y_bench}" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="2" opacity="0.85" />
-        <rect x="${width - right - 130}" y="${y_bench - 18}" width="135" height="18" rx="4" fill="rgba(2,132,199,0.9)" />
-        <text x="${width - right - 62}" y="${y_bench - 5}" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Promedio UPT: ${benchmark.toFixed(2)}${unit}</text>
-      </g>
-    `;
-  }
-  
-  const barCount = Math.max(data.length, 1);
-  const barSpacing = Math.max(12, (drawWidth - (barCount * 42)) / (barCount + 1));
-  const barWidth = Math.min(52, Math.max((drawWidth - (barSpacing * (barCount + 1))) / barCount, 26));
-  
-  let barsHtml = '';
-  data.forEach((d, idx) => {
-    const x = left + barSpacing + idx * (barWidth + barSpacing);
-    const y_bottom = height - bottom;
-    
-    if (d.value === 0 || d.value === null || typeof d.value !== 'number') {
-      barsHtml += `
-        <g class="bar-3d-group" data-label="${d.label}">
-          <polygon points="${x},${y_bottom} ${x + dx},${y_bottom - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(255,255,255,0.06)" />
-          <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#94a3b8" font-size="9" text-anchor="middle" font-weight="600">${d.shortLabel || d.label}</text>
-          <text x="${x + barWidth/2}" y="${y_bottom + 32}" fill="#64748b" font-size="8" text-anchor="middle">S/D</text>
-        </g>
-      `;
-      return;
-    }
-    
-    const h = (d.value / niceMax) * drawHeight;
-    const y_top = y_bottom - h;
-    const col = d.color || '#38bdf8';
-    
-    barsHtml += `
-      <g class="bar-3d-group" style="transition: transform 0.25s ease, filter 0.25s ease; cursor: pointer;">
-        <!-- Sombra base -->
-        <polygon points="${x},${y_bottom} ${x + dx + 3},${y_bottom - dy + 2} ${x + barWidth + dx + 3},${y_bottom - dy + 2} ${x + barWidth},${y_bottom}" fill="rgba(0,0,0,0.4)" />
-        
-        <!-- Cara Superior (Top 3D) -->
-        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="${col}" opacity="0.95" />
-        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="rgba(255, 255, 255, 0.4)" />
-        
-        <!-- Cara Lateral Derecha (Right 3D) -->
-        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="${col}" opacity="0.82" />
-        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(0, 0, 0, 0.35)" />
-        
-        <!-- Cara Frontal (Front 3D) -->
-        <polygon points="${x},${y_top} ${x + barWidth},${y_top} ${x + barWidth},${y_bottom} ${x},${y_bottom}" fill="${col}" opacity="0.98" />
-        <line x1="${x + 2}" y1="${y_top}" x2="${x + 2}" y2="${y_bottom}" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-        
-        <!-- Etiqueta Flotante de Valor -->
-        <rect x="${x + barWidth/2 - 22}" y="${y_top - dy - 22}" width="44" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="${col}" stroke-width="1" />
-        <text x="${x + barWidth/2}" y="${y_top - dy - 9}" fill="#f8fafc" font-size="10" font-weight="800" text-anchor="middle">${d.value.toFixed(2)}${unit}</text>
-        
-        <!-- Etiqueta Eje X -->
-        <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">${d.shortLabel || d.label}</text>
-        <text x="${x + barWidth/2}" y="${y_bottom + 32}" fill="#94a3b8" font-size="8" text-anchor="middle">${d.subLabel || ''}</text>
-      </g>
-    `;
-  });
-  
-  return `
-    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; min-width: ${width}px; height: auto; display: block; overflow: visible;">
-      <!-- Base 3D del plano -->
-      <polygon points="${left},${height - bottom} ${left + dx},${height - bottom - dy} ${width - right + dx},${height - bottom - dy} ${width - right},${height - bottom}" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(255,255,255,0.1)" />
-      
-      <!-- Grilla -->
-      ${gridHtml}
-      
-      <!-- Benchmark -->
-      ${benchmarkHtml}
-      
-      <!-- Barras 3D -->
-      ${barsHtml}
-    </svg>
-  `;
-}
+const FACULTADES_RESUMEN_DATA = [
+  { facultad: "FACSA", nombre: "Ciencias de la Salud", n: 860, avg_tc: 7.68, avg_eb: 0.33, avg_bt: 0.79, avg_et: 1.01, color: "#10b981" },
+  { facultad: "FAING", nombre: "Ingeniería", n: 2291, avg_tc: 6.63, avg_eb: 0.99, avg_bt: 1.91, avg_et: 2.96, color: "#06b6d4" },
+  { facultad: "FACEM", nombre: "Ciencias Empresariales", n: 2986, avg_tc: 6.18, avg_eb: 1.74, avg_bt: 2.38, avg_et: 4.05, color: "#f59e0b" },
+  { facultad: "FAEDCOH", nombre: "Educación, Com. y Hum.", n: 976, avg_tc: 6.39, avg_eb: 0.99, avg_bt: 2.01, avg_et: 3.15, color: "#8b5cf6" },
+  { facultad: "FADE", nombre: "Derecho y Cs. Políticas", n: 1475, avg_tc: 7.04, avg_eb: 0.70, avg_bt: 2.56, avg_et: 3.41, color: "#ec4899" },
+  { facultad: "FAU", nombre: "Arquitectura y Urbanismo", n: 770, avg_tc: 6.33, avg_eb: 1.36, avg_bt: 2.35, avg_et: 3.64, color: "#f97316" }
+];
 
-// Helpers de nombres cortos y colores oficiales UPT
+const EVOLUCION_INSTITUCIONAL_DATA = [
+  { year: "2016", bachilleres: 625, titulados: 562, avg_tc: 5.76, avg_et: 1.47 },
+  { year: "2017", bachilleres: 553, titulados: 345, avg_tc: 5.85, avg_et: 2.37 },
+  { year: "2018", bachilleres: 584, titulados: 368, avg_tc: 6.18, avg_et: 2.70 },
+  { year: "2019", bachilleres: 771, titulados: 475, avg_tc: 6.48, avg_et: 2.81 },
+  { year: "2020", bachilleres: 439, titulados: 221, avg_tc: 6.31, avg_et: 2.60 },
+  { year: "2021", bachilleres: 868, titulados: 483, avg_tc: 6.40, avg_et: 3.03 },
+  { year: "2022", bachilleres: 871, titulados: 469, avg_tc: 6.61, avg_et: 3.51 },
+  { year: "2023", bachilleres: 974, titulados: 589, avg_tc: 7.04, avg_et: 3.41 },
+  { year: "2024", bachilleres: 1090, titulados: 512, avg_tc: 6.83, avg_et: 3.46 },
+  { year: "2025", bachilleres: 947, titulados: 602, avg_tc: 6.41, avg_et: 3.43 },
+  { year: "2026", bachilleres: 742, titulados: 537, avg_tc: 6.53, avg_et: 3.74 }
+];
+
 const getShortCareerName = (name) => {
   if (!name) return '';
-  if (name.includes('Medicina')) return 'Medicina';
+  if (name.includes('Medicina')) return 'Medicina Hum.';
   if (name.includes('Odontología') || name.includes('Odontologia')) return 'Odontología';
   if (name.includes('Laboratorio')) return 'Lab. Clínico';
   if (name.includes('Terapia')) return 'Terapia Física';
@@ -4943,33 +4865,187 @@ const getFacultadColor = (fac) => {
     case 'FAING': return '#06b6d4';   // Cyan
     case 'FACSA': return '#10b981';   // Emerald
     case 'FACEM': return '#f59e0b';   // Amber
-    case 'FADE': return '#ec4899';    // Pink / Magenta
+    case 'FADE': return '#ec4899';    // Magenta
     case 'FAEDCOH': return '#8b5cf6'; // Violet
     case 'FAU': return '#f97316';     // Orange
-    default: return '#6366f1';        // Indigo
+    default: return '#6366f1';
   }
 };
 
-let _gradFilters = {
-  viewMode: 'comparativa', // 'comparativa' | 'evolucion' | 'tabla'
-  facultad: 'todas',
-  carrera: 'todas',
-  metrica: 'tc' // 'tc' (tiempo carrera) | 'eb' (egreso a bach) | 'bt' (bach a titulo) | 'et' (egreso a titulo)
+const downloadGraduadosWordReport = () => {
+  const d = GRADUADOS_DATA;
+  const selFac = _gradFilters.facultad;
+  const selCar = _gradFilters.carrera;
+  
+  let list = d.estudiantes || [];
+  if (selFac !== 'todas') list = list.filter(x => x.facultad === selFac);
+  if (selCar !== 'todas') list = list.filter(x => x.carrera === selCar);
+
+  const tc_list = list.map(x => x.tc).filter(x => typeof x === 'number');
+  const eb_list = list.map(x => x.eb).filter(x => typeof x === 'number');
+  const bt_list = list.map(x => x.bt).filter(x => typeof x === 'number');
+  const et_list = list.map(x => x.et).filter(x => typeof x === 'number');
+
+  const avg = (arr) => arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(2) : '-';
+
+  const docHTML = `
+  <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+  <head>
+    <meta charset="utf-8">
+    <title>Reporte de Trayectoria y Tiempos de Graduados - UPT</title>
+    <style>
+      body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; color: #1e293b; line-height: 1.4; }
+      h1 { color: #0284c7; font-size: 18pt; margin-bottom: 4px; text-transform: uppercase; }
+      h2 { color: #0f172a; font-size: 14pt; border-bottom: 2px solid #0284c7; padding-bottom: 4px; margin-top: 18px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 10pt; }
+      th { background-color: #0f172a; color: #ffffff; padding: 8px 10px; border: 1px solid #334155; text-align: left; }
+      td { padding: 6px 10px; border: 1px solid #cbd5e1; }
+      .footer-note { font-size: 9pt; color: #64748b; margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>Universidad Privada de Tacna</h1>
+    <p><strong>Oficina de Gestión de la Calidad - Sistema SIM-CBC</strong></p>
+    <h2>Informe Ejecutivo: Trazabilidad y Tiempos de Graduación (CBC)</h2>
+    <p><strong>Muestra analizada:</strong> ${list.length.toLocaleString()} expedientes de graduados únicos (2016-2026)</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Ámbito</th>
+          <th>Muestra</th>
+          <th>Tiempo Carrera</th>
+          <th>Egreso a Bachiller</th>
+          <th>Bachiller a Título</th>
+          <th>Egreso a Título</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Selección Actual</strong></td>
+          <td>${list.length}</td>
+          <td>${avg(tc_list)} años</td>
+          <td>${avg(eb_list)} años</td>
+          <td>${avg(bt_list)} años</td>
+          <td>${avg(et_list)} años</td>
+        </tr>
+        <tr>
+          <td><strong>Promedio UPT</strong></td>
+          <td>${d.institucional.total_estudiantes}</td>
+          <td>${d.institucional.tiempo_carrera_prom} años</td>
+          <td>${d.institucional.egreso_a_bachiller_prom} años</td>
+          <td>${d.institucional.bachiller_a_titulo_prom} años</td>
+          <td>${d.institucional.egreso_a_titulo_prom} años</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="footer-note">Generado automáticamente por el Sistema Integral de Información y Monitoreo de Condiciones Básicas de Calidad (SIM-CBC / SIGECA - UPT).</p>
+  </body>
+  </html>
+  `;
+
+  const blob = new Blob(['\ufeff' + docHTML], { type: 'application/msword;charset=utf-8' });
+  const downloadUrl = URL.createObjectURL(blob);
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.href = downloadUrl;
+  downloadAnchor.download = 'Reporte_Tiempos_Graduacion_UPT.doc';
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  document.body.removeChild(downloadAnchor);
+  URL.revokeObjectURL(downloadUrl);
 };
 
-const EVOLUCION_INSTITUCIONAL_DATA = [
-  { year: "2016", bachilleres: 625, titulados: 562, avg_tc: 5.76, avg_et: 1.47 },
-  { year: "2017", bachilleres: 553, titulados: 345, avg_tc: 5.85, avg_et: 2.37 },
-  { year: "2018", bachilleres: 584, titulados: 368, avg_tc: 6.18, avg_et: 2.70 },
-  { year: "2019", bachilleres: 771, titulados: 475, avg_tc: 6.48, avg_et: 2.81 },
-  { year: "2020", bachilleres: 439, titulados: 221, avg_tc: 6.31, avg_et: 2.60 },
-  { year: "2021", bachilleres: 868, titulados: 483, avg_tc: 6.40, avg_et: 3.03 },
-  { year: "2022", bachilleres: 871, titulados: 469, avg_tc: 6.61, avg_et: 3.51 },
-  { year: "2023", bachilleres: 974, titulados: 589, avg_tc: 7.04, avg_et: 3.41 },
-  { year: "2024", bachilleres: 1090, titulados: 512, avg_tc: 6.83, avg_et: 3.46 },
-  { year: "2025", bachilleres: 947, titulados: 602, avg_tc: 6.41, avg_et: 3.43 },
-  { year: "2026", bachilleres: 742, titulados: 537, avg_tc: 6.53, avg_et: 3.74 }
-];
+// Generador de Gráfico 3D Dinámico SVG
+function generate3DMetricChartSVG(data, width = 760, height = 300, unit = 'a.') {
+  const top = 38;
+  const right = 30;
+  const bottom = 65;
+  const left = 55;
+  const dx = 12; // Profundidad 3D X
+  const dy = 9;  // Profundidad 3D Y
+  
+  const drawWidth = width - left - right - dx;
+  const drawHeight = height - top - bottom - dy;
+  
+  const values = data.map(d => d.value).filter(v => typeof v === 'number');
+  const maxVal = Math.max(...values, 1);
+  const niceMax = Math.ceil(maxVal * 1.22) || 10;
+  
+  let gridHtml = '';
+  const ticks = 4;
+  for (let i = 0; i <= ticks; i++) {
+    const val = (niceMax / ticks) * i;
+    const y = height - bottom - (val / niceMax) * drawHeight;
+    gridHtml += `
+      <line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
+      <text x="${left - 10}" y="${y + 4}" fill="#94a3b8" font-size="10" font-weight="600" text-anchor="end">${val.toFixed(1)} ${unit}</text>
+    `;
+  }
+
+  const barCount = Math.max(data.length, 1);
+  const barSpacing = Math.max(14, (drawWidth - (barCount * 44)) / (barCount + 1));
+  const barWidth = Math.min(54, Math.max((drawWidth - (barSpacing * (barCount + 1))) / barCount, 26));
+  
+  let barsHtml = '';
+  data.forEach((d, idx) => {
+    const x = left + barSpacing + idx * (barWidth + barSpacing);
+    const y_bottom = height - bottom;
+    
+    if (d.value === 0 || d.value === null || typeof d.value !== 'number') {
+      barsHtml += `
+        <g class="bar-3d-group" data-label="${d.label}">
+          <polygon points="${x},${y_bottom} ${x + dx},${y_bottom - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(255,255,255,0.06)" />
+          <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#94a3b8" font-size="9" text-anchor="middle" font-weight="600">${d.shortLabel || d.label}</text>
+          <text x="${x + barWidth/2}" y="${y_bottom + 32}" fill="#64748b" font-size="8" text-anchor="middle">S/D</text>
+        </g>
+      `;
+      return;
+    }
+    
+    const h = (d.value / niceMax) * drawHeight;
+    const y_top = y_bottom - h;
+    const col = d.color || '#38bdf8';
+    
+    barsHtml += `
+      <g class="bar-3d-group" style="transition: transform 0.25s ease, filter 0.25s ease; cursor: pointer;">
+        <!-- Sombra base proyectada -->
+        <polygon points="${x},${y_bottom} ${x + dx + 3},${y_bottom - dy + 2} ${x + barWidth + dx + 3},${y_bottom - dy + 2} ${x + barWidth},${y_bottom}" fill="rgba(0,0,0,0.4)" />
+        
+        <!-- Cara Superior (Top 3D) con brillo -->
+        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="${col}" opacity="0.95" />
+        <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="rgba(255, 255, 255, 0.4)" />
+        
+        <!-- Cara Lateral Derecha (Right 3D) -->
+        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="${col}" opacity="0.82" />
+        <polygon points="${x + barWidth},${y_top} ${x + barWidth + dx},${y_top - dy} ${x + barWidth + dx},${y_bottom - dy} ${x + barWidth},${y_bottom}" fill="rgba(0, 0, 0, 0.35)" />
+        
+        <!-- Cara Frontal (Front 3D) -->
+        <polygon points="${x},${y_top} ${x + barWidth},${y_top} ${x + barWidth},${y_bottom} ${x},${y_bottom}" fill="${col}" opacity="0.98" />
+        <line x1="${x + 2}" y1="${y_top}" x2="${x + 2}" y2="${y_bottom}" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+        
+        <!-- Etiqueta Flotante de Valor -->
+        <rect x="${x + barWidth/2 - 23}" y="${y_top - dy - 22}" width="46" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="${col}" stroke-width="1" />
+        <text x="${x + barWidth/2}" y="${y_top - dy - 9}" fill="#f8fafc" font-size="10" font-weight="800" text-anchor="middle">${d.value.toFixed(2)}${unit}</text>
+        
+        <!-- Etiqueta Eje X -->
+        <text x="${x + barWidth/2}" y="${y_bottom + 18}" fill="#e2e8f0" font-size="9.5" text-anchor="middle" font-weight="700">${d.shortLabel || d.label}</text>
+        <text x="${x + barWidth/2}" y="${y_bottom + 32}" fill="#94a3b8" font-size="8" text-anchor="middle">${d.subLabel || ''}</text>
+      </g>
+    `;
+  });
+  
+  return `
+    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; min-width: ${width}px; height: auto; display: block; overflow: visible;">
+      <!-- Base 3D del plano -->
+      <polygon points="${left},${height - bottom} ${left + dx},${height - bottom - dy} ${width - right + dx},${height - bottom - dy} ${width - right},${height - bottom}" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(255,255,255,0.1)" />
+      
+      <!-- Grilla -->
+      ${gridHtml}
+      
+      <!-- Barras 3D -->
+      ${barsHtml}
+    </svg>
+  `;
+}
 
 function drawGraduadosDashboard(container) {
   if (!container) return;
@@ -4980,7 +5056,8 @@ function drawGraduadosDashboard(container) {
     const selFac = _gradFilters.facultad;
     const selCar = _gradFilters.carrera;
     const selMet = _gradFilters.metrica;
-    const viewMode = _gradFilters.viewMode;
+    const compMode = _gradFilters.compMode; // 'facultades' o 'carreras'
+    const viewMode = _gradFilters.viewMode; // 'comparativa' | 'evolucion' | 'tabla'
 
     // Desglose por carreras
     const carrerasMap = {};
@@ -5007,7 +5084,7 @@ function drawGraduadosDashboard(container) {
       n_et: c.et.length
     }));
 
-    // Métricas activas según selección de carrera
+    // Métricas activas según filtros
     let filteredList = d.estudiantes || [];
     if (selFac !== 'todas') filteredList = filteredList.filter(x => x.facultad === selFac);
     if (selCar !== 'todas') filteredList = filteredList.filter(x => x.carrera === selCar);
@@ -5023,35 +5100,39 @@ function drawGraduadosDashboard(container) {
     const curr_bt = avgVal(bt_arr, inst.bachiller_a_titulo_prom);
     const curr_et = avgVal(et_arr, inst.egreso_a_titulo_prom);
 
-    // Preparar carreras para la comparativa 3D filtrada
-    let comparativaCarreras = carrerasData;
-    if (selFac !== 'todas') {
-      comparativaCarreras = comparativaCarreras.filter(c => c.facultad === selFac);
-    }
-    // Ordenar descendente por la métrica seleccionada
-    comparativaCarreras.sort((a, b) => {
-      const valA = selMet === 'tc' ? a.avg_tc : selMet === 'eb' ? a.avg_eb : selMet === 'bt' ? a.avg_bt : a.avg_et;
-      const valB = selMet === 'tc' ? b.avg_tc : selMet === 'eb' ? b.avg_eb : selMet === 'bt' ? b.avg_bt : b.avg_et;
-      return valB - valA;
-    });
-
     const metricaConfig = {
-      tc: { label: 'Tiempo de Carrera (Ingreso a Egreso)', bench: inst.tiempo_carrera_prom, color: '#06b6d4' },
-      eb: { label: 'Tiempo Egreso a Grado Bachiller', bench: inst.egreso_a_bachiller_prom, color: '#10b981' },
-      bt: { label: 'Tiempo Bachiller a Título Profesional', bench: inst.bachiller_a_titulo_prom, color: '#d8b4fe' },
-      et: { label: 'Tiempo Total Egreso a Título', bench: inst.egreso_a_titulo_prom, color: '#f59e0b' }
+      tc: { label: 'Tiempo de Carrera (Ingreso a Egreso)', short: 'Tiempo Carrera', bench: inst.tiempo_carrera_prom, color: '#06b6d4' },
+      eb: { label: 'Tiempo Egreso a Grado Bachiller', short: 'Egreso a Bach.', bench: inst.egreso_a_bachiller_prom, color: '#10b981' },
+      bt: { label: 'Tiempo Bachiller a Título Profesional', short: 'Bach. a Título', bench: inst.bachiller_a_titulo_prom, color: '#d8b4fe' },
+      et: { label: 'Tiempo Total Egreso a Título', short: 'Egreso a Título', bench: inst.egreso_a_titulo_prom, color: '#f59e0b' }
     }[selMet];
 
-    // Data de barras para la comparativa de carreras
-    const chart3DComparison = [
-      {
-        label: 'PROMEDIO UPT',
-        shortLabel: 'UPT (Prom)',
-        subLabel: `N=${inst.total_estudiantes}`,
-        value: metricaConfig.bench,
-        color: '#38bdf8'
-      },
-      ...comparativaCarreras.map(c => {
+    // Preparar Data para la Comparativa
+    let chartDataComparativa = [];
+    let chartWidth = 760;
+
+    if (compMode === 'facultades') {
+      // Comparativa pura ENTRE FACULTADES (las 6 facultades UPT)
+      chartDataComparativa = FACULTADES_RESUMEN_DATA.map(f => {
+        const val = selMet === 'tc' ? f.avg_tc : selMet === 'eb' ? f.avg_eb : selMet === 'bt' ? f.avg_bt : f.avg_et;
+        return {
+          label: f.nombre,
+          shortLabel: f.facultad,
+          subLabel: `N=${f.n}`,
+          value: val,
+          color: f.color
+        };
+      });
+      // Ordenar descendente
+      chartDataComparativa.sort((a, b) => b.value - a.value);
+      chartWidth = 720;
+    } else {
+      // Comparativa pura ENTRE CARRERAS
+      let listCarreras = carrerasData;
+      if (selFac !== 'todas') {
+        listCarreras = listCarreras.filter(c => c.facultad === selFac);
+      }
+      chartDataComparativa = listCarreras.map(c => {
         const val = selMet === 'tc' ? c.avg_tc : selMet === 'eb' ? c.avg_eb : selMet === 'bt' ? c.avg_bt : c.avg_et;
         return {
           label: c.carrera,
@@ -5060,28 +5141,18 @@ function drawGraduadosDashboard(container) {
           value: val,
           color: getFacultadColor(c.facultad)
         };
-      })
-    ];
+      });
+      chartDataComparativa.sort((a, b) => b.value - a.value);
+      chartWidth = Math.max(760, chartDataComparativa.length * 68 + 70);
+    }
 
-    // Ancho dinámico para que no se choque ningún texto
-    const chartWidth = Math.max(760, chart3DComparison.length * 72 + 80);
-
-    // Data de evolución histórica anual para el gráfico de graduados
+    // Data de evolución histórica anual
     const chart3DEvolucionGraduados = EVOLUCION_INSTITUCIONAL_DATA.map(item => ({
       label: `Año ${item.year}`,
       shortLabel: item.year,
       subLabel: `${item.titulados} tit.`,
       value: item.titulados,
       color: item.year === '2020' ? '#ef4444' : item.year >= '2024' ? '#10b981' : '#38bdf8'
-    }));
-
-    // Data de evolución histórica de tiempos
-    const chart3DEvolucionTiempos = EVOLUCION_INSTITUCIONAL_DATA.map(item => ({
-      label: `Año ${item.year}`,
-      shortLabel: item.year,
-      subLabel: `${item.avg_tc.toFixed(2)}a`,
-      value: item.avg_tc,
-      color: '#06b6d4'
     }));
 
     container.innerHTML = `
@@ -5116,7 +5187,7 @@ function drawGraduadosDashboard(container) {
           </div>
         </div>
 
-        <!-- 3D KPI Cards Showcase (Las 4 Etapas Fundamentales de Calidad) -->
+        <!-- 3D KPI Cards Showcase (Las 4 Etapas) -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
           
           <div style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 1.1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.25);">
@@ -5128,7 +5199,7 @@ function drawGraduadosDashboard(container) {
               ${curr_tc.toFixed(2)} <span style="font-size: 0.95rem; font-weight: 600; color: #94a3b8;">años</span>
             </div>
             <p style="margin: 0.4rem 0 0 0; font-size: 0.75rem; color: #94a3b8;">
-              Promedio UPT: <strong style="color: #67e8f9;">${inst.tiempo_carrera_prom} a.</strong>
+              Promedio Institucional: <strong style="color: #67e8f9;">${inst.tiempo_carrera_prom} a.</strong>
             </p>
           </div>
 
@@ -5141,7 +5212,7 @@ function drawGraduadosDashboard(container) {
               ${curr_eb.toFixed(2)} <span style="font-size: 0.95rem; font-weight: 600; color: #94a3b8;">años</span>
             </div>
             <p style="margin: 0.4rem 0 0 0; font-size: 0.75rem; color: #94a3b8;">
-              Promedio UPT: <strong style="color: #6ee7b7;">${inst.egreso_a_bachiller_prom} a.</strong>
+              Promedio Institucional: <strong style="color: #6ee7b7;">${inst.egreso_a_bachiller_prom} a.</strong>
             </p>
           </div>
 
@@ -5154,7 +5225,7 @@ function drawGraduadosDashboard(container) {
               ${curr_bt.toFixed(2)} <span style="font-size: 0.95rem; font-weight: 600; color: #94a3b8;">años</span>
             </div>
             <p style="margin: 0.4rem 0 0 0; font-size: 0.75rem; color: #94a3b8;">
-              Promedio UPT: <strong style="color: #d8b4fe;">${inst.bachiller_a_titulo_prom} a.</strong>
+              Promedio Institucional: <strong style="color: #d8b4fe;">${inst.bachiller_a_titulo_prom} a.</strong>
             </p>
           </div>
 
@@ -5167,104 +5238,154 @@ function drawGraduadosDashboard(container) {
               ${curr_et.toFixed(2)} <span style="font-size: 0.95rem; font-weight: 600; color: #94a3b8;">años</span>
             </div>
             <p style="margin: 0.4rem 0 0 0; font-size: 0.75rem; color: #94a3b8;">
-              Promedio UPT: <strong style="color: #fcd34d;">${inst.egreso_a_titulo_prom} a.</strong>
+              Promedio Institucional: <strong style="color: #fcd34d;">${inst.egreso_a_titulo_prom} a.</strong>
             </p>
           </div>
 
         </div>
 
-        <!-- SELECTOR DE VISTAS (Tabs Principales de Navegación) -->
+        <!-- SELECTOR DE VISTAS (Navegación Dinámica) -->
         <div style="display: flex; gap: 0.5rem; border-bottom: 2px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; flex-wrap: wrap;">
           <button class="btn btn-tab-grad ${viewMode === 'comparativa' ? 'btn-primary' : 'btn-secondary'}" data-view="comparativa" style="font-weight: 700; border-radius: 8px; font-size: 0.88rem; padding: 0.55rem 1.2rem; cursor: pointer;">
-            📊 Comparativa 3D por Carreras y Facultades
+            📊 Cuadro Comparativo Dinámico
           </button>
           <button class="btn btn-tab-grad ${viewMode === 'evolucion' ? 'btn-primary' : 'btn-secondary'}" data-view="evolucion" style="font-weight: 700; border-radius: 8px; font-size: 0.88rem; padding: 0.55rem 1.2rem; cursor: pointer;">
             📈 Evolución Histórica Institucional (2016 - 2026)
           </button>
           <button class="btn btn-tab-grad ${viewMode === 'tabla' ? 'btn-primary' : 'btn-secondary'}" data-view="tabla" style="font-weight: 700; border-radius: 8px; font-size: 0.88rem; padding: 0.55rem 1.2rem; cursor: pointer;">
-            📋 Matriz Consolidada de Programas
+            📋 Matriz de Programas
           </button>
         </div>
 
-        <!-- CONTENIDO VISTA 1: COMPARATIVA DE CARRERAS -->
+        <!-- VISTA 1: CUADRO COMPARATIVO DINÁMICO (Estilo Egresados) -->
         ${viewMode === 'comparativa' ? `
           <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 1.2rem;">
             
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-              <div>
-                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
-                  <span>🏛️</span> Comparativa por Programas vs Promedio UPT
-                </h3>
-                <p style="margin: 0.25rem 0 0 0; font-size: 0.82rem; color: #94a3b8;">
-                  Compara los tiempos promedio de cada carrera frente al estándar institucional. Puedes filtrar por facultad o métrica.
-                </p>
+            <!-- Barra de Controles: Modo Comparativo + Selector de Métrica -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 1rem;">
+              
+              <!-- Toggle Modo: Facultades vs Carreras -->
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: #94a3b8; margin-right: 4px;">Comparar por:</span>
+                <div style="display: flex; gap: 6px; background: rgba(30, 41, 59, 0.6); padding: 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                  <button class="btn-grad-comp-mode ${compMode === 'facultades' ? 'active' : ''}" data-mode="facultades" style="font-size: 0.82rem; font-weight: 700; padding: 5px 12px; border-radius: 6px; border: none; cursor: pointer; ${compMode === 'facultades' ? 'background: var(--accent, #0284c7); color: #fff;' : 'background: transparent; color: #94a3b8;'}">
+                    🏛️ Entre Facultades
+                  </button>
+                  <button class="btn-grad-comp-mode ${compMode === 'carreras' ? 'active' : ''}" data-mode="carreras" style="font-size: 0.82rem; font-weight: 700; padding: 5px 12px; border-radius: 6px; border: none; cursor: pointer; ${compMode === 'carreras' ? 'background: var(--accent, #0284c7); color: #fff;' : 'background: transparent; color: #94a3b8;'}">
+                    🎓 Entre Carreras
+                  </button>
+                </div>
               </div>
 
-              <!-- Selector de Métrica a Comparar -->
-              <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(30, 41, 59, 0.6); padding: 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
-                <button class="btn-metrica ${selMet === 'tc' ? 'active' : ''}" data-met="tc" style="font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'tc' ? 'background: #06b6d4; color: #fff;' : 'background: transparent; color: #94a3b8;'}">
+              <!-- Selector de Métrica Analizada -->
+              <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.82rem; font-weight: 700; color: #94a3b8;">Métrica:</span>
+                <button class="btn-metrica ${selMet === 'tc' ? 'active' : ''}" data-met="tc" style="font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'tc' ? 'background: #06b6d4; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #94a3b8;'}">
                   ⏱️ Tiempo Carrera
                 </button>
-                <button class="btn-metrica ${selMet === 'eb' ? 'active' : ''}" data-met="eb" style="font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'eb' ? 'background: #10b981; color: #fff;' : 'background: transparent; color: #94a3b8;'}">
+                <button class="btn-metrica ${selMet === 'eb' ? 'active' : ''}" data-met="eb" style="font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'eb' ? 'background: #10b981; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #94a3b8;'}">
                   🎓 Egreso a Bachiller
                 </button>
-                <button class="btn-metrica ${selMet === 'bt' ? 'active' : ''}" data-met="bt" style="font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'bt' ? 'background: #d8b4fe; color: #1e1b4b;' : 'background: transparent; color: #94a3b8;'}">
+                <button class="btn-metrica ${selMet === 'bt' ? 'active' : ''}" data-met="bt" style="font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'bt' ? 'background: #d8b4fe; color: #1e1b4b;' : 'background: rgba(30,41,59,0.5); color: #94a3b8;'}">
                   📜 Bachiller a Título
                 </button>
-                <button class="btn-metrica ${selMet === 'et' ? 'active' : ''}" data-met="et" style="font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'et' ? 'background: #f59e0b; color: #fff;' : 'background: transparent; color: #94a3b8;'}">
-                  🚀 Egreso a Título
+                <button class="btn-metrica ${selMet === 'et' ? 'active' : ''}" data-met="et" style="font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; ${selMet === 'et' ? 'background: #f59e0b; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #94a3b8;'}">
+                  🚀 Egreso a Título Total
                 </button>
               </div>
+
             </div>
 
-            <!-- Filtros de Facultad (Pills) -->
-            <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #94a3b8; margin-right: 4px;">Facultad:</span>
-              <button class="btn-fac-filter ${selFac === 'todas' ? 'active' : ''}" data-fac="todas" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; ${selFac === 'todas' ? 'background: #38bdf8; color: #0f172a;' : 'background: rgba(30,41,59,0.5); color: #cbd5e1;'}">
-                Todas (${comparativaCarreras.length} carreras)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FACSA' ? 'active' : ''}" data-fac="FACSA" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(16,185,129,0.3); cursor: pointer; ${selFac === 'FACSA' ? 'background: #10b981; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #6ee7b7;'}">
-                🏥 FACSA (Salud)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FAING' ? 'active' : ''}" data-fac="FAING" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(6,182,212,0.3); cursor: pointer; ${selFac === 'FAING' ? 'background: #06b6d4; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #67e8f9;'}">
-                ⚙️ FAING (Ingeniería)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FACEM' ? 'active' : ''}" data-fac="FACEM" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(245,158,11,0.3); cursor: pointer; ${selFac === 'FACEM' ? 'background: #f59e0b; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #fcd34d;'}">
-                💼 FACEM (Empresariales)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FADE' ? 'active' : ''}" data-fac="FADE" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(236,72,153,0.3); cursor: pointer; ${selFac === 'FADE' ? 'background: #ec4899; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #f472b6;'}">
-                ⚖️ FADE (Derecho)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FAEDCOH' ? 'active' : ''}" data-fac="FAEDCOH" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(139,92,246,0.3); cursor: pointer; ${selFac === 'FAEDCOH' ? 'background: #8b5cf6; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #c4b5fd;'}">
-                🎓 FAEDCOH (Educación y Com.)
-              </button>
-              <button class="btn-fac-filter ${selFac === 'FAU' ? 'active' : ''}" data-fac="FAU" style="padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(249,115,22,0.3); cursor: pointer; ${selFac === 'FAU' ? 'background: #f97316; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #fdba74;'}">
-                📐 FAU (Arquitectura)
-              </button>
-            </div>
-
-            <!-- Gráfico 3D con Scroll Horizontal Dinámico -->
-            <div style="background: rgba(2, 6, 23, 0.75); border-radius: 12px; padding: 1.2rem 0.8rem; border: 1px solid rgba(255,255,255,0.06); overflow-x: auto;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding: 0 10px;">
-                <span style="font-size: 0.82rem; font-weight: 700; color: #38bdf8;">
-                  Métrica analizada: <strong>${metricaConfig.label}</strong>
-                </span>
-                <span style="font-size: 0.74rem; color: #94a3b8;">
-                  💡 Desplaza horizontalmente para ver todos los programas
-                </span>
+            <!-- Si está en modo Carreras: Filtro de Facultad -->
+            ${compMode === 'carreras' ? `
+              <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #94a3b8; margin-right: 4px;">Filtrar Carreras por Facultad:</span>
+                <button class="btn-fac-filter ${selFac === 'todas' ? 'active' : ''}" data-fac="todas" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; ${selFac === 'todas' ? 'background: #38bdf8; color: #0f172a;' : 'background: rgba(30,41,59,0.5); color: #cbd5e1;'}">
+                  Todas las Carreras
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FACSA' ? 'active' : ''}" data-fac="FACSA" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(16,185,129,0.3); cursor: pointer; ${selFac === 'FACSA' ? 'background: #10b981; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #6ee7b7;'}">
+                  🏥 FACSA
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FAING' ? 'active' : ''}" data-fac="FAING" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(6,182,212,0.3); cursor: pointer; ${selFac === 'FAING' ? 'background: #06b6d4; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #67e8f9;'}">
+                  ⚙️ FAING
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FACEM' ? 'active' : ''}" data-fac="FACEM" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(245,158,11,0.3); cursor: pointer; ${selFac === 'FACEM' ? 'background: #f59e0b; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #fcd34d;'}">
+                  💼 FACEM
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FADE' ? 'active' : ''}" data-fac="FADE" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(236,72,153,0.3); cursor: pointer; ${selFac === 'FADE' ? 'background: #ec4899; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #f472b6;'}">
+                  ⚖️ FADE
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FAEDCOH' ? 'active' : ''}" data-fac="FAEDCOH" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(139,92,246,0.3); cursor: pointer; ${selFac === 'FAEDCOH' ? 'background: #8b5cf6; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #c4b5fd;'}">
+                  🎓 FAEDCOH
+                </button>
+                <button class="btn-fac-filter ${selFac === 'FAU' ? 'active' : ''}" data-fac="FAU" style="padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(249,115,22,0.3); cursor: pointer; ${selFac === 'FAU' ? 'background: #f97316; color: #fff;' : 'background: rgba(30,41,59,0.5); color: #fdba74;'}">
+                  📐 FAU
+                </button>
               </div>
-              ${generate3DMetricChartSVG(chart3DComparison, chartWidth, 270, metricaConfig.bench, 'a.')}
+            ` : ''}
+
+            <!-- Encabezado del Gráfico -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.2rem;">
+              <div>
+                <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #f8fafc;">
+                  ${compMode === 'facultades' ? '🏛️ Comparativa entre Facultades' : '🎓 Comparativa entre Carreras'} &mdash; <span style="color: ${metricaConfig.color};">${metricaConfig.label}</span>
+                </h3>
+                <p style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: #94a3b8;">
+                  ${compMode === 'facultades' ? 'Comparación directa de los 6 cuerpos académicos de la UPT' : 'Tiempos promedio por programa profesional'}
+                </p>
+              </div>
+              <span style="font-size: 0.74rem; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-weight: 700;">
+                ${chartDataComparativa.length} elementos comparados
+              </span>
             </div>
 
-            <!-- Resumen interpretativo -->
-            <div style="background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; border-left: 3px solid #38bdf8;">
-              📌 <strong>Lectura Institucional:</strong> El promedio institucional general de la UPT para <em>${metricaConfig.label}</em> es de <strong style="color: #38bdf8;">${metricaConfig.bench} años</strong>. Las barras están ordenadas de mayor a menor tiempo para facilitar la detección de cuellos de botella y planes de mejora continua según los estándares de acreditación CBC.
+            <!-- Gráfico 3D -->
+            <div style="background: rgba(2, 6, 23, 0.75); border-radius: 12px; padding: 1.2rem 0.8rem; border: 1px solid rgba(255,255,255,0.06); overflow-x: auto;">
+              ${generate3DMetricChartSVG(chartDataComparativa, chartWidth, 270, 'a.')}
             </div>
+
+            <!-- Tabla Resumen del Modo Activo -->
+            ${compMode === 'facultades' ? `
+              <div style="background: rgba(30, 41, 59, 0.4); border-radius: 10px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06);">
+                <div style="font-size: 0.88rem; font-weight: 800; color: #f8fafc; margin-bottom: 0.6rem;">
+                  Resumen Comparativo de las 6 Facultades UPT (Las 4 Métricas de Calidad)
+                </div>
+                <div style="overflow-x: auto;">
+                  <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                    <thead>
+                      <tr style="background: #0f172a; border-bottom: 2px solid rgba(56, 189, 248, 0.3); text-align: left; color: #94a3b8;">
+                        <th style="padding: 8px 10px;">Facultad</th>
+                        <th style="padding: 8px 10px; text-align: center;">Muestra (N)</th>
+                        <th style="padding: 8px 10px; text-align: right; color: #67e8f9;">Tiempo Carrera</th>
+                        <th style="padding: 8px 10px; text-align: right; color: #6ee7b7;">Egreso a Bachiller</th>
+                        <th style="padding: 8px 10px; text-align: right; color: #d8b4fe;">Bachiller a Título</th>
+                        <th style="padding: 8px 10px; text-align: right; color: #fcd34d;">Egreso a Título</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${FACULTADES_RESUMEN_DATA.map(f => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                          <td style="padding: 9px 10px; font-weight: 700; color: #f8fafc;">
+                            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: ${f.color}; margin-right: 6px;"></span>
+                            ${f.facultad} &mdash; ${f.nombre}
+                          </td>
+                          <td style="padding: 9px 10px; text-align: center; color: #cbd5e1;">${f.n.toLocaleString()}</td>
+                          <td style="padding: 9px 10px; text-align: right; font-weight: 700; color: #67e8f9;">${f.avg_tc.toFixed(2)} a.</td>
+                          <td style="padding: 9px 10px; text-align: right; font-weight: 700; color: #6ee7b7;">${f.avg_eb.toFixed(2)} a.</td>
+                          <td style="padding: 9px 10px; text-align: right; font-weight: 700; color: #d8b4fe;">${f.avg_bt.toFixed(2)} a.</td>
+                          <td style="padding: 9px 10px; text-align: right; font-weight: 700; color: #fcd34d;">${f.avg_et.toFixed(2)} a.</td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ` : ''}
 
           </div>
         ` : ''}
 
-        <!-- CONTENIDO VISTA 2: EVOLUCIÓN HISTÓRICA 2016-2026 -->
+        <!-- VISTA 2: EVOLUCIÓN HISTÓRICA INSTITUCIONAL UPT (2016 - 2026) -->
         ${viewMode === 'evolucion' ? `
           <div style="display: flex; flex-direction: column; gap: 1.5rem;">
             
@@ -5272,22 +5393,22 @@ function drawGraduadosDashboard(container) {
               <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(56,189,248,0.25); border-radius: 12px; padding: 1.1rem;">
                 <span style="font-size: 0.76rem; font-weight: 700; color: #38bdf8;">TOTAL TITULADOS DÉCADA</span>
                 <div style="font-size: 1.8rem; font-weight: 900; color: #f8fafc; margin-top: 4px;">5,168</div>
-                <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">Emitidos en UPT (2016 - 2026)</p>
+                <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">Titulados UPT (2016 - 2026)</p>
               </div>
               <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(16,185,129,0.25); border-radius: 12px; padding: 1.1rem;">
-                <span style="font-size: 0.76rem; font-weight: 700; color: #34d399;">TOTAL BACHILLERES</span>
+                <span style="font-size: 0.76rem; font-weight: 700; color: #34d399;">TOTAL BACHILLERES DÉCADA</span>
                 <div style="font-size: 1.8rem; font-weight: 900; color: #f8fafc; margin-top: 4px;">8,473</div>
                 <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">Grados académicos emitidos</p>
               </div>
               <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(245,158,11,0.25); border-radius: 12px; padding: 1.1rem;">
-                <span style="font-size: 0.76rem; font-weight: 700; color: #fbbf24;">AÑO CON MAYOR PRODUCCIÓN</span>
+                <span style="font-size: 0.76rem; font-weight: 700; color: #fbbf24;">AÑO CON MAYOR GRADUACIÓN</span>
                 <div style="font-size: 1.8rem; font-weight: 900; color: #f8fafc; margin-top: 4px;">2024</div>
                 <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">1,090 bachilleres y 512 títulos</p>
               </div>
               <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(139,92,246,0.25); border-radius: 12px; padding: 1.1rem;">
                 <span style="font-size: 0.76rem; font-weight: 700; color: #c084fc;">EFICACIA DE TITULACIÓN</span>
                 <div style="font-size: 1.8rem; font-weight: 900; color: #f8fafc; margin-top: 4px;">61.0%</div>
-                <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">Tasa de conversión Bachiller &rarr; Título</p>
+                <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8;">Conversión Bachiller &rarr; Título</p>
               </div>
             </div>
 
@@ -5296,23 +5417,23 @@ function drawGraduadosDashboard(container) {
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                 <div>
                   <h3 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #f8fafc;">
-                    📈 Evolución Anual de Profesionales Titulados (2016 - 2026)
+                    📈 Evolución Anual Institucional de Titulados (2016 - 2026)
                   </h3>
                   <p style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #94a3b8;">
-                    Volumen anual de egresados que concluyeron exitosamente su proceso de titulación
+                    Histórico consolidado de egresados que concluyeron exitosamente su titulación en la UPT
                   </p>
                 </div>
                 <span style="font-size: 0.75rem; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 3px 8px; border-radius: 6px; font-weight: 700;">SUNEDU CBC</span>
               </div>
               <div style="background: rgba(2, 6, 23, 0.75); border-radius: 12px; padding: 1rem 0.5rem; overflow-x: auto;">
-                ${generate3DMetricChartSVG(chart3DEvolucionGraduados, 820, 260, null, ' tit.')}
+                ${generate3DMetricChartSVG(chart3DEvolucionGraduados, 820, 260, ' tit.')}
               </div>
             </div>
 
-            <!-- Tabla Detallada Año a Año -->
+            <!-- Tabla Detallada Histórica Año a Año -->
             <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.3rem;">
               <h3 style="margin: 0 0 0.9rem 0; font-size: 1.02rem; font-weight: 800; color: #f8fafc;">
-                📊 Tabla Consolidada de Evolución Histórica Anual
+                📊 Tabla Consolidada de Evolución Histórica Anual UPT
               </h3>
               <div style="overflow-x: auto;">
                 <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
@@ -5350,7 +5471,7 @@ function drawGraduadosDashboard(container) {
           </div>
         ` : ''}
 
-        <!-- CONTENIDO VISTA 3: TABLA CONSOLIDADA POR PROGRAMA -->
+        <!-- VISTA 3: MATRIZ DE PROGRAMAS -->
         ${viewMode === 'tabla' ? `
           <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.8rem;">
@@ -5417,10 +5538,18 @@ function drawGraduadosDashboard(container) {
     const btnExport = container.querySelector('#btn-export-grad-word');
     if (btnExport) btnExport.onclick = () => downloadGraduadosWordReport();
 
-    // Tabs de vista
+    // Tabs de vista principal
     container.querySelectorAll('.btn-tab-grad').forEach(btn => {
       btn.onclick = () => {
         _gradFilters.viewMode = btn.getAttribute('data-view');
+        render();
+      };
+    });
+
+    // Toggle modo comparativo: Facultades vs Carreras
+    container.querySelectorAll('.btn-grad-comp-mode').forEach(btn => {
+      btn.onclick = () => {
+        _gradFilters.compMode = btn.getAttribute('data-mode');
         render();
       };
     });
@@ -5433,7 +5562,7 @@ function drawGraduadosDashboard(container) {
       };
     });
 
-    // Filtros de facultad
+    // Filtros de facultad (para modo carreras)
     container.querySelectorAll('.btn-fac-filter').forEach(btn => {
       btn.onclick = () => {
         _gradFilters.facultad = btn.getAttribute('data-fac');
