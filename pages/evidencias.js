@@ -5057,22 +5057,23 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
 }
 
 // Generador de Gráfico 3D SVG de Evolución Histórica Anual (2016 - 2026)
+// Generador de Gráfico 3D SVG de Evolución Histórica Anual (Alargado y Ultra-Dinámico)
 function generate3DEvolutionChartSVG(yearsData) {
-  const width = 860;
-  const height = 340;
-  const top = 42;
-  const right = 35;
-  const bottom = 70;
-  const left = 65;
-  const dx = 12;
-  const dy = 9;
+  const width = 1180;
+  const height = 370;
+  const top = 46;
+  const right = 40;
+  const bottom = 76;
+  const left = 70;
+  const dx = 14;
+  const dy = 10;
 
   const drawWidth = width - left - right - dx;
   const drawHeight = height - top - bottom - dy;
 
   const years = Object.keys(yearsData).sort();
   const maxVal = Math.max(...years.map(y => Math.max(yearsData[y].bach, yearsData[y].tit)), 100);
-  const niceMax = Math.ceil(maxVal * 1.2) || 1200;
+  const niceMax = Math.ceil(maxVal * 1.18) || 1200;
 
   const ticks = 4;
   let gridHtml = '';
@@ -5080,43 +5081,44 @@ function generate3DEvolutionChartSVG(yearsData) {
     const val = Math.round((niceMax / ticks) * i);
     const y = height - bottom - (val / niceMax) * drawHeight;
     gridHtml += `
-      <line x1="${left}" y1="${y}" x2="${left + drawWidth + dx}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3,3" />
-      <text x="${left - 12}" y="${y + 4}" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="end">${val.toLocaleString()}</text>
+      <line x1="${left}" y1="${y}" x2="${left + drawWidth + dx}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4,4" />
+      <text x="${left - 14}" y="${y + 4}" fill="#94a3b8" font-size="11.5" font-weight="700" text-anchor="end">${val.toLocaleString()}</text>
     `;
   }
 
   const y_floor = height - bottom;
   const floorGridHtml = `
-    <!-- Pedestal Isométrico Base Evolución -->
-    <polygon points="${left - 10},${y_floor} ${left + dx},${y_floor - dy} ${left + drawWidth + dx + 12},${y_floor - dy} ${left + drawWidth + 12},${y_floor}" fill="rgba(15, 23, 42, 0.8)" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" />
+    <!-- Pedestal Isométrico Base Evolución Panorámica -->
+    <polygon points="${left - 14},${y_floor} ${left + dx},${y_floor - dy} ${left + drawWidth + dx + 16},${y_floor - dy} ${left + drawWidth + 16},${y_floor}" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2" />
+    <line x1="${left}" y1="${y_floor}" x2="${left + drawWidth}" y2="${y_floor}" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" />
   `;
 
   const groupWidth = drawWidth / years.length;
-  const barWidth = Math.floor(groupWidth * 0.38);
+  const barWidth = Math.floor(groupWidth * 0.40);
+  const barGap = 6;
 
   let barsHtml = '';
   years.forEach((y, idx) => {
     const d = yearsData[y];
     const groupX = left + idx * groupWidth;
+    const animDelay = (idx * 0.045).toFixed(3);
 
-    // Barra 1: Bachilleres (Azul Cyan Neon)
-    const x1 = groupX + 3;
-    const h1 = Math.max((d.bach / niceMax) * drawHeight, 4);
+    // Barra 1: Bachilleres (Azul Cyan Neon Luminoso)
+    const x1 = groupX + Math.floor((groupWidth - (barWidth * 2 + barGap)) / 2);
+    const h1 = Math.max((d.bach / niceMax) * drawHeight, 6);
     const y1 = y_floor - h1;
-    const col1 = '#0284c7';
 
-    // Barra 2: Titulados (Verde Esmeralda Neon)
-    const x2 = x1 + barWidth + 3;
-    const h2 = Math.max((d.tit / niceMax) * drawHeight, 4);
+    // Barra 2: Titulados (Verde Esmeralda Neon Luminoso)
+    const x2 = x1 + barWidth + barGap;
+    const h2 = Math.max((d.tit / niceMax) * drawHeight, 6);
     const y2 = y_floor - h2;
-    const col2 = '#10b981';
 
-    // Paths Barra 1
+    // Paths 3D Barra 1
     const pFront1 = `M ${x1} ${y1} L ${x1 + barWidth} ${y1} L ${x1 + barWidth} ${y_floor} L ${x1} ${y_floor} Z`;
     const pTop1 = `M ${x1} ${y1} L ${x1 + dx} ${y1 - dy} L ${x1 + barWidth + dx} ${y1 - dy} L ${x1 + barWidth} ${y1} Z`;
     const pSide1 = `M ${x1 + barWidth} ${y1} L ${x1 + barWidth + dx} ${y1 - dy} L ${x1 + barWidth + dx} ${y_floor - dy} L ${x1 + barWidth} ${y_floor} Z`;
 
-    // Paths Barra 2
+    // Paths 3D Barra 2
     const pFront2 = `M ${x2} ${y2} L ${x2 + barWidth} ${y2} L ${x2 + barWidth} ${y_floor} L ${x2} ${y_floor} Z`;
     const pTop2 = `M ${x2} ${y2} L ${x2 + dx} ${y2 - dy} L ${x2 + barWidth + dx} ${y2 - dy} L ${x2 + barWidth} ${y2} Z`;
     const pSide2 = `M ${x2 + barWidth} ${y2} L ${x2 + barWidth + dx} ${y2 - dy} L ${x2 + barWidth + dx} ${y_floor - dy} L ${x2 + barWidth} ${y_floor} Z`;
@@ -5127,60 +5129,136 @@ function generate3DEvolutionChartSVG(yearsData) {
       <g class="evo-year-group" style="cursor: pointer;">
         <!-- Resaltado de Pandemia -->
         ${isPandemia ? `
-          <rect x="${groupX}" y="${top}" width="${groupWidth}" height="${drawHeight + dy}" fill="rgba(239, 68, 68, 0.12)" rx="6" stroke="rgba(239, 68, 68, 0.3)" stroke-dasharray="2,2" />
-          <text x="${groupX + groupWidth / 2}" y="${top + 16}" fill="#f87171" font-size="9.5" font-weight="800" text-anchor="middle">PANDEMIA</text>
+          <rect x="${groupX + 4}" y="${top - 10}" width="${groupWidth - 8}" height="${drawHeight + dy + 10}" fill="rgba(239, 68, 68, 0.14)" rx="8" stroke="rgba(239, 68, 68, 0.35)" stroke-dasharray="3,3" />
+          <rect x="${groupX + groupWidth / 2 - 38}" y="${top - 8}" width="76" height="18" rx="4" fill="rgba(220, 38, 38, 0.85)" />
+          <text x="${groupX + groupWidth / 2}" y="${top + 5}" fill="#ffffff" font-size="9.5" font-weight="900" text-anchor="middle" letter-spacing="0.05em">PANDEMIA</text>
         ` : ''}
 
-        <!-- Sombras de suelo -->
-        <ellipse cx="${x1 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.6}" ry="5" fill="rgba(2, 132, 199, 0.4)" />
-        <ellipse cx="${x2 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.6}" ry="5" fill="rgba(16, 185, 129, 0.4)" />
+        <!-- Pedestal / Sombra individual de suelo -->
+        <ellipse cx="${x1 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.7}" ry="6" fill="rgba(2, 132, 199, 0.45)" filter="blur(2px)" />
+        <ellipse cx="${x2 + barWidth / 2 + dx / 2}" cy="${y_floor}" rx="${barWidth * 0.7}" ry="6" fill="rgba(16, 185, 129, 0.45)" filter="blur(2px)" />
 
-        <!-- Barra 1 (Bachilleres) -->
-        <path d="${pFront1}" fill="${col1}" fill-opacity="0.9" />
-        <line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y_floor}" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-        <path d="${pSide1}" fill="${col1}" filter="brightness(0.72)" />
-        <path d="${pTop1}" fill="${col1}" filter="brightness(1.35)" />
-        <text x="${x1 + barWidth / 2 + dx / 2}" y="${y1 - dy - 5}" fill="#ffffff" font-size="10.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.8))">${d.bach}</text>
+        <!-- Barra 1 (Bachilleres) con animación -->
+        <g class="bar-rise-anim" style="animation-delay: ${animDelay}s; transform-origin: ${x1 + barWidth / 2}px ${y_floor}px;">
+          <!-- Cara Frontal -->
+          <path d="${pFront1}" fill="url(#gradBachFront)" />
+          <!-- Reflejo specular frontal -->
+          <line x1="${x1 + 1.5}" y1="${y1}" x2="${x1 + 1.5}" y2="${y_floor}" stroke="rgba(255,255,255,0.65)" stroke-width="1.2" />
+          <!-- Cara Lateral -->
+          <path d="${pSide1}" fill="url(#gradBachSide)" />
+          <!-- Cara Superior -->
+          <path d="${pTop1}" fill="url(#gradBachTop)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" />
+          <!-- Etiqueta de Valor -->
+          <text class="val-tag" x="${x1 + barWidth / 2 + dx / 2}" y="${y1 - dy - 6}" fill="#ffffff" font-size="11.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.9))">${d.bach}</text>
+        </g>
 
-        <!-- Barra 2 (Titulados) -->
-        <path d="${pFront2}" fill="${col2}" fill-opacity="0.9" />
-        <line x1="${x2}" y1="${y2}" x2="${x2}" y2="${y_floor}" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-        <path d="${pSide2}" fill="${col2}" filter="brightness(0.72)" />
-        <path d="${pTop2}" fill="${col2}" filter="brightness(1.35)" />
-        <text x="${x2 + barWidth / 2 + dx / 2}" y="${y2 - dy - 5}" fill="#ffffff" font-size="10.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.8))">${d.tit}</text>
+        <!-- Barra 2 (Titulados) con animación -->
+        <g class="bar-rise-anim" style="animation-delay: ${(parseFloat(animDelay) + 0.02).toFixed(3)}s; transform-origin: ${x2 + barWidth / 2}px ${y_floor}px;">
+          <!-- Cara Frontal -->
+          <path d="${pFront2}" fill="url(#gradTitFront)" />
+          <!-- Reflejo specular frontal -->
+          <line x1="${x2 + 1.5}" y1="${y2}" x2="${x2 + 1.5}" y2="${y_floor}" stroke="rgba(255,255,255,0.65)" stroke-width="1.2" />
+          <!-- Cara Lateral -->
+          <path d="${pSide2}" fill="url(#gradTitSide)" />
+          <!-- Cara Superior -->
+          <path d="${pTop2}" fill="url(#gradTitTop)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" />
+          <!-- Etiqueta de Valor -->
+          <text class="val-tag" x="${x2 + barWidth / 2 + dx / 2}" y="${y2 - dy - 6}" fill="#ffffff" font-size="11.5" font-weight="900" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.9))">${d.tit}</text>
+        </g>
 
         <!-- Año en Eje X -->
-        <text x="${groupX + groupWidth / 2}" y="${y_floor + 24}" fill="${isPandemia ? '#ef4444' : '#ffffff'}" font-size="12.5" font-weight="800" text-anchor="middle">${y}</text>
-        <text x="${groupX + groupWidth / 2}" y="${y_floor + 40}" fill="#38bdf8" font-size="10.5" font-weight="700" text-anchor="middle">${d.tasa_tit}% tit.</text>
+        <text class="year-label" x="${groupX + groupWidth / 2}" y="${y_floor + 25}" fill="${isPandemia ? '#ef4444' : '#f8fafc'}" font-size="13" font-weight="800" text-anchor="middle">${y}</text>
+        
+        <!-- Badge de Tasa de Titulación -->
+        <rect x="${groupX + groupWidth / 2 - 32}" y="${y_floor + 33}" width="64" height="18" rx="9" fill="rgba(2, 132, 199, 0.2)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
+        <text x="${groupX + groupWidth / 2}" y="${y_floor + 46}" fill="#38bdf8" font-size="10.5" font-weight="800" text-anchor="middle">${d.tasa_tit}% tit.</text>
       </g>
     `;
   });
 
   return `
-    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-height: 360px; overflow: visible;">
+    <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; max-height: 440px; overflow: visible; display: block;">
       <defs>
-        <linearGradient id="bgGradEvo" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0a0f1d" stop-opacity="0.95" />
-          <stop offset="100%" stop-color="#141e33" stop-opacity="0.75" />
+        <!-- Fondo Panorámico con Gradiente Profundo -->
+        <linearGradient id="bgGradEvoWide" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#090d16" stop-opacity="0.98" />
+          <stop offset="60%" stop-color="#0f172a" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#162238" stop-opacity="0.85" />
+        </linearGradient>
+
+        <!-- Gradientes Neón Bachilleres (Azul Cyan) -->
+        <linearGradient id="gradBachFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#38bdf8" />
+          <stop offset="45%" stop-color="#0284c7" />
+          <stop offset="100%" stop-color="#0369a1" />
+        </linearGradient>
+        <linearGradient id="gradBachTop" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#bae6fd" />
+          <stop offset="100%" stop-color="#7dd3fc" />
+        </linearGradient>
+        <linearGradient id="gradBachSide" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0369a1" />
+          <stop offset="100%" stop-color="#082f49" />
+        </linearGradient>
+
+        <!-- Gradientes Neón Titulados (Verde Esmeralda) -->
+        <linearGradient id="gradTitFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" />
+          <stop offset="45%" stop-color="#10b981" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+        <linearGradient id="gradTitTop" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#d1fae5" />
+          <stop offset="100%" stop-color="#6ee7b7" />
+        </linearGradient>
+        <linearGradient id="gradTitSide" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#059669" />
+          <stop offset="100%" stop-color="#064e3b" />
         </linearGradient>
       </defs>
       <style>
+        @keyframes rise3DBar {
+          0% {
+            opacity: 0.15;
+            transform: scaleY(0.06);
+          }
+          65% {
+            transform: scaleY(1.02);
+          }
+          100% {
+            opacity: 1;
+            transform: scaleY(1);
+          }
+        }
+        .bar-rise-anim {
+          animation: rise3DBar 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
         .evo-year-group {
-          transition: transform 0.25s ease, filter 0.25s ease;
+          transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
           transform-origin: bottom center;
         }
         .evo-year-group:hover {
-          transform: translateY(-6px);
-          filter: drop-shadow(0 10px 18px rgba(16, 185, 129, 0.45));
+          transform: translateY(-8px) scale(1.03);
+          filter: drop-shadow(0 14px 26px rgba(56, 189, 248, 0.5));
+        }
+        .evo-year-group:hover .val-tag {
+          font-size: 13.5px !important;
+          fill: #ffffff !important;
+          filter: drop-shadow(0 0 8px rgba(255,255,255,0.95)) drop-shadow(0 2px 4px #000);
+        }
+        .evo-year-group:hover .year-label {
+          fill: #38bdf8 !important;
+          font-size: 14px !important;
         }
       </style>
-      <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGradEvo)" stroke="rgba(255,255,255,0.08)" />
+      <rect x="0" y="0" width="${width}" height="${height}" rx="16" fill="url(#bgGradEvoWide)" stroke="rgba(255,255,255,0.08)" />
       ${gridHtml}
       ${floorGridHtml}
       ${barsHtml}
     </svg>
   `;
 }
+
 
 function drawGraduadosDashboard(container) {
   if (!container) return;
@@ -5432,7 +5510,7 @@ function drawGraduadosDashboard(container) {
             </div>
 
             <!-- Gráfico 3D SVG Espacioso para hasta 4 barras -->
-            <div style="width: 100%; display: flex; justify-content: center; background: rgba(15,23,42,0.4); border-radius: 12px; padding: 10px 0;">
+            <div style="width: 100%; display: flex; justify-content: center; background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); overflow-x: auto;">
               ${generate3DComparisonChartSVG(compItems, selMet, metricaConfig.short, 'a.')}
             </div>
 
@@ -5561,7 +5639,7 @@ function drawGraduadosDashboard(container) {
             </div>
 
             <!-- Gráfico 3D SVG de Evolución -->
-            <div style="width: 100%; display: flex; justify-content: center; background: rgba(15,23,42,0.4); border-radius: 12px; padding: 10px 0;">
+            <div style="width: 100%; display: flex; justify-content: center; background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); overflow-x: auto;">
               ${generate3DEvolutionChartSVG(evoData)}
             </div>
 
