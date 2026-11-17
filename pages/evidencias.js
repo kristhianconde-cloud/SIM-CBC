@@ -5751,19 +5751,19 @@ function drawGraduadosDashboard(container) {
                       </div>
                     </div>
 
-                    <!-- Métricas Secundarias -->
-                    <div style="display: flex; justify-content: space-around; width: 100%; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-                      <div>
-                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">TITULADOS</div>
-                        <div style="color: #6ee7b7; font-weight: 800;">${item.tit.toLocaleString()}</div>
+                    <!-- Métricas Secundarias (Ampliadas y Destacadas) -->
+                    <div style="display: flex; justify-content: space-around; width: 100%; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; margin-top: 4px; gap: 8px;">
+                      <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
+                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">TITULADOS</div>
+                        <div style="color: #6ee7b7; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.tit.toLocaleString()}</div>
                       </div>
-                      <div>
-                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">BACHILLERES</div>
-                        <div style="color: #93c5fd; font-weight: 800;">${item.bach.toLocaleString()}</div>
+                      <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
+                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">BACHILLERES</div>
+                        <div style="color: #93c5fd; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.bach.toLocaleString()}</div>
                       </div>
-                      <div>
-                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">T. A TÍTULO</div>
-                        <div style="color: #f59e0b; font-weight: 800;">${item.et ? item.et + 'a' : '-'}</div>
+                      <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
+                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">T. A TÍTULO</div>
+                        <div style="color: #fbbf24; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.et ? item.et + 'a' : '-'}</div>
                       </div>
                     </div>
 
