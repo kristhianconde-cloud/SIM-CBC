@@ -4691,7 +4691,7 @@ const GRADUADOS_DATA = {"institucional": {"total_estudiantes": 9331, "total_bach
 
 // Variables de control de vistas del Dashboard de Graduados
 let _gradFilters = {
-  viewMode: 'comparativa', // 'comparativa' | 'evolucion' | 'matriz'
+  viewMode: 'comparativa', // 'comparativa' | 'evolucion' | 'ranking' | 'matriz'
   compMode: 'carreras',    // 'facultades' | 'carreras'
   metrica: 'tc',           // 'tc' | 'eb' | 'bt' | 'et'
   selectedFacultades: ['FACEM', 'FAING', 'FADE', 'FACSA'], // Máximo 4
@@ -4699,7 +4699,11 @@ let _gradFilters = {
   carreraSearch: '',
   filterFacultadForCarreras: 'todas',
   evolucionEntidad: 'UPT', // 'UPT' o nombre de facultad o carrera
-  evolucionTipo: 'upt'     // 'upt' | 'facultad' | 'carrera'
+  evolucionTipo: 'upt',     // 'upt' | 'facultad' | 'carrera'
+  // Configuración de Ranking Anual
+  rankingTarget: 'carreras', // 'carreras' (Top 10) | 'facultades' (6)
+  rankingYear: '2026',       // 'consolidado' | '2026' | '2025' | ... | '2016'
+  rankingMetric: 'tasa'      // 'tasa' | 'titulados' | 'celeridad' | 'tc'
 };
 
 const getFacultadColor = (fac) => {
@@ -5297,6 +5301,10 @@ function drawGraduadosDashboard(container) {
               <i data-lucide="trending-up" style="width: 16px; height: 16px;"></i>
               Evolución Histórica (2016–2026)
             </button>
+            <button id="viewBtnRanking" style="background: ${viewMode === 'ranking' ? 'linear-gradient(135deg, #f59e0b, #d97706)' : 'rgba(30,41,59,0.7)'}; color: ${viewMode === 'ranking' ? '#fff' : '#94a3b8'}; border: 1px solid ${viewMode === 'ranking' ? '#fbbf24' : 'rgba(255,255,255,0.1)'}; padding: 0.55rem 1.1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: ${viewMode === 'ranking' ? '0 4px 14px rgba(245,158,11,0.35)' : 'none'};">
+              <i data-lucide="award" style="width: 16px; height: 16px;"></i>
+              Ranking Anual (Top 10)
+            </button>
             <button id="viewBtnMatriz" style="background: ${viewMode === 'matriz' ? 'linear-gradient(135deg, #0284c7, #0369a1)' : 'rgba(30,41,59,0.7)'}; color: ${viewMode === 'matriz' ? '#fff' : '#94a3b8'}; border: 1px solid ${viewMode === 'matriz' ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; padding: 0.55rem 1.1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: ${viewMode === 'matriz' ? '0 4px 14px rgba(2,132,199,0.35)' : 'none'};">
               <i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i>
               Matriz Completa de Carreras
@@ -5598,6 +5606,262 @@ function drawGraduadosDashboard(container) {
             </div>
 
           </div>
+        ` : viewMode === 'ranking' ? `
+          <!-- SECCIÓN RANKING ANUAL (TOP 10 CARRERAS Y FACULTADES) -->
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; display: flex; flex-direction: column; gap: 1.3rem;">
+            
+            <!-- Barra de Control del Ranking -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 1rem;">
+              <div>
+                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+                  <span style="color: #f59e0b;">🏆</span> Ranking Anual de Desempeño CBC
+                </h3>
+                <p style="margin: 4px 0 0; font-size: 0.84rem; color: #94a3b8;">
+                  Evaluación comparativa y podio institucional por año y periodo consolidado
+                </p>
+              </div>
+
+              <!-- Controles: Entidad, Año y Métrica -->
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                
+                <!-- Toggle Carreras vs Facultades -->
+                <div style="display: flex; background: rgba(30,41,59,0.8); padding: 4px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                  <button id="btnRankTargetCarreras" style="background: ${_gradFilters.rankingTarget === 'carreras' ? 'linear-gradient(135deg, #f59e0b, #d97706)' : 'transparent'}; color: ${_gradFilters.rankingTarget === 'carreras' ? '#fff' : '#94a3b8'}; border: none; padding: 0.4rem 0.9rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    🎓 Top 10 Carreras
+                  </button>
+                  <button id="btnRankTargetFacultades" style="background: ${_gradFilters.rankingTarget === 'facultades' ? 'linear-gradient(135deg, #0284c7, #0369a1)' : 'transparent'}; color: ${_gradFilters.rankingTarget === 'facultades' ? '#fff' : '#94a3b8'}; border: none; padding: 0.4rem 0.9rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    🏛️ Facultades (6)
+                  </button>
+                </div>
+
+                <!-- Selector de Año -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Año:</span>
+                  <select id="selectRankYear" style="background: #0f172a; color: #f59e0b; border: 1px solid rgba(245,158,11,0.5); border-radius: 8px; padding: 0.42rem 0.8rem; font-size: 0.84rem; font-weight: 800; cursor: pointer;">
+                    <option value="consolidado" ${_gradFilters.rankingYear === 'consolidado' ? 'selected' : ''}>⭐ Histórico Consolidado (2016–2026)</option>
+                    ${['2026','2025','2024','2023','2022','2021','2020','2019','2018','2017','2016'].map(y => `<option value="${y}" ${_gradFilters.rankingYear === y ? 'selected' : ''}>📅 Año ${y}</option>`).join('')}
+                  </select>
+                </div>
+
+                <!-- Selector de Criterio de Ordenación -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Criterio:</span>
+                  <select id="selectRankMetric" style="background: #0f172a; color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); border-radius: 8px; padding: 0.42rem 0.8rem; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
+                    <option value="tasa" ${_gradFilters.rankingMetric === 'tasa' ? 'selected' : ''}>🥇 Tasa de Titulación (%)</option>
+                    <option value="titulados" ${_gradFilters.rankingMetric === 'titulados' ? 'selected' : ''}>👥 Mayor Volumen de Titulados</option>
+                    <option value="celeridad" ${_gradFilters.rankingMetric === 'celeridad' ? 'selected' : ''}>⚡ Celeridad (Menor Tiempo a Título)</option>
+                    <option value="tc" ${_gradFilters.rankingMetric === 'tc' ? 'selected' : ''}>⏱️ Menor Tiempo de Carrera (TC)</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Podio Visual Top 3 -->
+            ${(() => {
+              const rTarget = _gradFilters.rankingTarget;
+              const rYear = _gradFilters.rankingYear;
+              const rMetric = _gradFilters.rankingMetric;
+
+              let list = [];
+              if (rTarget === 'carreras') {
+                Object.keys(d.carreras).forEach(cName => {
+                  const cd = d.carreras[cName];
+                  let bach = 0, tit = 0, tasa = 0, tc = null, et = null;
+                  if (rYear === 'consolidado') {
+                    bach = cd.bach; tit = cd.tit; tasa = cd.tasa_tit; tc = cd.tc; et = cd.et;
+                  } else {
+                    const yd = cd.years[rYear] || {};
+                    bach = yd.bach || 0; tit = yd.tit || 0; tasa = yd.tasa_tit || 0; tc = yd.tc || null; et = yd.et || null;
+                  }
+                  list.push({ nombre: cName, codigo: cd.codigo || '', facultad: cd.facultad, bach, tit, tasa, tc, et });
+                });
+              } else {
+                Object.keys(d.facultades).forEach(fName => {
+                  const fd = d.facultades[fName];
+                  let bach = 0, tit = 0, tasa = 0, tc = null, et = null;
+                  if (rYear === 'consolidado') {
+                    bach = fd.bach; tit = fd.tit; tasa = fd.tasa_tit; tc = fd.tc; et = fd.et;
+                  } else {
+                    const yd = fd.years[rYear] || {};
+                    bach = yd.bach || 0; tit = yd.tit || 0; tasa = yd.tasa_tit || 0; tc = yd.tc || null; et = yd.et || null;
+                  }
+                  list.push({ nombre: fName, codigo: '', facultad: fName, bach, tit, tasa, tc, et });
+                });
+              }
+
+              // Ordenación
+              if (rMetric === 'tasa') {
+                list.sort((a, b) => b.tasa - a.tasa || b.tit - a.tit);
+              } else if (rMetric === 'titulados') {
+                list.sort((a, b) => b.tit - a.tit || b.tasa - a.tasa);
+              } else if (rMetric === 'celeridad') {
+                list.sort((a, b) => {
+                  if (a.et === null && b.et === null) return 0;
+                  if (a.et === null) return 1;
+                  if (b.et === null) return -1;
+                  return a.et - b.et;
+                });
+              } else if (rMetric === 'tc') {
+                list.sort((a, b) => {
+                  if (a.tc === null && b.tc === null) return 0;
+                  if (a.tc === null) return 1;
+                  if (b.tc === null) return -1;
+                  return a.tc - b.tc;
+                });
+              }
+
+              // Para carreras limitamos estrictamente al Top 10
+              const finalItems = rTarget === 'carreras' ? list.slice(0, 10) : list;
+              const p1 = finalItems[0] || null;
+              const p2 = finalItems[1] || null;
+              const p3 = finalItems[2] || null;
+
+              const renderPodioCard = (item, pos, medal, glowColor, borderColor, height) => {
+                if (!item) return '';
+                const mainVal = rMetric === 'tasa' ? `${item.tasa}%` : rMetric === 'titulados' ? `${item.tit} tit.` : rMetric === 'celeridad' ? (item.et ? `${item.et}a` : '-') : (item.tc ? `${item.tc}a` : '-');
+                const mainLabel = rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Titulados del Periodo' : rMetric === 'celeridad' ? 'Tiempo Egreso a Título' : 'Tiempo de Carrera';
+                return `
+                  <div style="flex: 1; min-width: 260px; background: linear-gradient(145deg, rgba(30,41,59,0.85), rgba(15,23,42,0.95)); border: 2px solid ${borderColor}; border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 8px 24px ${glowColor}; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: ${glowColor}; opacity: 0.2; border-radius: 50%; filter: blur(14px);"></div>
+                    
+                    <div style="font-size: 2.2rem; line-height: 1; margin-bottom: 6px;">${medal}</div>
+                    <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: ${borderColor}; margin-bottom: 4px;">PUESTO #${pos}</div>
+                    
+                    <div style="font-size: 1.05rem; font-weight: 800; color: #f8fafc; margin-bottom: 4px; line-height: 1.3;">
+                      ${item.nombre}
+                    </div>
+                    
+                    ${rTarget === 'carreras' ? `
+                      <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 12px;">
+                        ${item.codigo ? `<span style="background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${item.codigo}</span>` : ''}
+                        <span style="background: ${getFacultadColor(item.facultad)}22; color: ${getFacultadColor(item.facultad)}; border: 1px solid ${getFacultadColor(item.facultad)}55; font-size: 0.72rem; padding: 2px 8px; border-radius: 12px; font-weight: 800;">
+                          ${item.facultad}
+                        </span>
+                      </div>
+                    ` : '<div style="margin-bottom: 10px;"></div>'}
+
+                    <!-- Indicador Central Destacado -->
+                    <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 0.6rem 1rem; width: 100%; margin-bottom: 12px;">
+                      <div style="font-size: 1.6rem; font-weight: 900; color: ${borderColor}; line-height: 1.1;">
+                        ${mainVal}
+                      </div>
+                      <div style="font-size: 0.72rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-top: 2px;">
+                        ${mainLabel}
+                      </div>
+                    </div>
+
+                    <!-- Métricas Secundarias -->
+                    <div style="display: flex; justify-content: space-around; width: 100%; font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                      <div>
+                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">TITULADOS</div>
+                        <div style="color: #6ee7b7; font-weight: 800;">${item.tit.toLocaleString()}</div>
+                      </div>
+                      <div>
+                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">BACHILLERES</div>
+                        <div style="color: #93c5fd; font-weight: 800;">${item.bach.toLocaleString()}</div>
+                      </div>
+                      <div>
+                        <div style="color: #64748b; font-size: 0.7rem; font-weight: 700;">T. A TÍTULO</div>
+                        <div style="color: #f59e0b; font-weight: 800;">${item.et ? item.et + 'a' : '-'}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                `;
+              };
+
+              return `
+                <!-- Podio Grid -->
+                <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: stretch; margin-bottom: 0.5rem;">
+                  ${renderPodioCard(p2, 2, '🥈', 'rgba(148,163,184,0.3)', '#cbd5e1')}
+                  ${renderPodioCard(p1, 1, '🥇', 'rgba(245,158,11,0.4)', '#fbbf24')}
+                  ${renderPodioCard(p3, 3, '🥉', 'rgba(217,119,6,0.3)', '#f97316')}
+                </div>
+
+                <!-- Tabla Completa de Posiciones -->
+                <div style="background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; margin-top: 0.5rem;">
+                  <div style="padding: 10px 14px; background: rgba(15,23,42,0.6); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; font-weight: 800; color: #f8fafc;">
+                      ${rTarget === 'carreras' ? 'Tabla de Clasificación Oficial: Top 10 Carreras Profesionales' : 'Tabla de Clasificación: 6 Facultades UPT'} (${rYear === 'consolidado' ? 'Consolidado 2016–2026' : 'Año ' + rYear})
+                    </span>
+                    <span style="font-size: 0.76rem; color: #64748b; font-weight: 600;">
+                      Ordenado por: ${rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : rMetric === 'celeridad' ? 'Celeridad a Título' : 'Tiempo de Carrera'}
+                    </span>
+                  </div>
+
+                  <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left;">
+                      <thead>
+                        <tr style="border-bottom: 2px solid rgba(255,255,255,0.08); color: #94a3b8; background: rgba(15,23,42,0.3);">
+                          <th style="padding: 10px 12px; text-align: center; width: 60px;">Puesto</th>
+                          <th style="padding: 10px 12px;">${rTarget === 'carreras' ? 'Carrera Profesional' : 'Facultad'}</th>
+                          ${rTarget === 'carreras' ? '<th style="padding: 10px 12px; text-align: center;">Facultad</th>' : ''}
+                          <th style="padding: 10px 12px; text-align: right; color: #93c5fd;">Bachilleres</th>
+                          <th style="padding: 10px 12px; text-align: right; color: #6ee7b7;">Titulados</th>
+                          <th style="padding: 10px 12px; text-align: center; width: 220px; color: #38bdf8;">Tasa de Titulación</th>
+                          <th style="padding: 10px 12px; text-align: right; color: #f59e0b;">T. a Título</th>
+                          <th style="padding: 10px 12px; text-align: right; color: #06b6d4;">T. Carrera</th>
+                          <th style="padding: 10px 12px; text-align: center;">Estatus CBC</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${finalItems.map((item, idx) => {
+                          const pos = idx + 1;
+                          const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : `#${pos}`;
+                          const barWidth = Math.min(100, item.tasa);
+                          const barColor = item.tasa >= 75 ? 'linear-gradient(90deg, #10b981, #059669)' : item.tasa >= 50 ? 'linear-gradient(90deg, #0284c7, #0369a1)' : 'linear-gradient(90deg, #f59e0b, #d97706)';
+                          const statusBg = item.tasa >= 75 ? 'rgba(16,185,129,0.15)' : item.tasa >= 50 ? 'rgba(2,132,199,0.15)' : 'rgba(245,158,11,0.15)';
+                          const statusColor = item.tasa >= 75 ? '#34d399' : item.tasa >= 50 ? '#38bdf8' : '#fbbf24';
+                          const statusBorder = item.tasa >= 75 ? 'rgba(16,185,129,0.4)' : item.tasa >= 50 ? 'rgba(2,132,199,0.4)' : 'rgba(245,158,11,0.4)';
+                          const statusText = item.tasa >= 75 ? 'Excelente' : item.tasa >= 50 ? 'Satisfactorio' : 'En Seguimiento';
+
+                          return `
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: ${pos <= 3 ? 'rgba(255,255,255,0.02)' : 'transparent'};">
+                              <td style="padding: 10px 12px; text-align: center; font-weight: 800; font-size: ${pos <= 3 ? '1.1rem' : '0.85rem'}; color: ${pos === 1 ? '#fbbf24' : pos === 2 ? '#cbd5e1' : pos === 3 ? '#f97316' : '#94a3b8'};">
+                                ${medal}
+                              </td>
+                              <td style="padding: 10px 12px; font-weight: 700; color: #f8fafc;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                  ${item.codigo ? `<span style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${item.codigo}</span>` : ''}
+                                  <span>${item.nombre}</span>
+                                </div>
+                              </td>
+                              ${rTarget === 'carreras' ? `
+                                <td style="padding: 10px 12px; text-align: center;">
+                                  <span style="background: ${getFacultadColor(item.facultad)}22; color: ${getFacultadColor(item.facultad)}; border: 1px solid ${getFacultadColor(item.facultad)}55; font-size: 0.72rem; padding: 2px 8px; border-radius: 12px; font-weight: 800;">
+                                    ${item.facultad}
+                                  </span>
+                                </td>
+                              ` : ''}
+                              <td style="padding: 10px 12px; text-align: right; color: #93c5fd; font-weight: 600;">${item.bach.toLocaleString()}</td>
+                              <td style="padding: 10px 12px; text-align: right; color: #6ee7b7; font-weight: 700;">${item.tit.toLocaleString()}</td>
+                              <td style="padding: 10px 12px; text-align: center;">
+                                <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
+                                  <div style="flex: 1; background: rgba(255,255,255,0.06); height: 7px; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: ${barWidth}%; height: 100%; background: ${barColor}; border-radius: 4px;"></div>
+                                  </div>
+                                  <span style="font-weight: 800; color: #38bdf8; min-width: 48px; text-align: right;">${item.tasa}%</span>
+                                </div>
+                              </td>
+                              <td style="padding: 10px 12px; text-align: right; color: #f59e0b; font-weight: 700;">${item.et ? item.et + 'a' : '-'}</td>
+                              <td style="padding: 10px 12px; text-align: right; color: #06b6d4;">${item.tc ? item.tc + 'a' : '-'}</td>
+                              <td style="padding: 10px 12px; text-align: center;">
+                                <span style="background: ${statusBg}; color: ${statusColor}; border: 1px solid ${statusBorder}; font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap;">
+                                  ${statusText}
+                                </span>
+                              </td>
+                            </tr>
+                          `;
+                        }).join('')}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              `;
+            })()}
+
+          </div>
         ` : `
           <!-- SECCIÓN MATRIZ COMPLETA DE TODAS LAS CARRERAS -->
           <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.4rem; display: flex; flex-direction: column; gap: 1.3rem;">
@@ -5680,6 +5944,9 @@ function drawGraduadosDashboard(container) {
     const btnVEvo = container.querySelector('#viewBtnEvolucion');
     if (btnVEvo) btnVEvo.onclick = () => { _gradFilters.viewMode = 'evolucion'; render(); };
 
+    const btnVRank = container.querySelector('#viewBtnRanking');
+    if (btnVRank) btnVRank.onclick = () => { _gradFilters.viewMode = 'ranking'; render(); };
+
     const btnVMat = container.querySelector('#viewBtnMatriz');
     if (btnVMat) btnVMat.onclick = () => { _gradFilters.viewMode = 'matriz'; render(); };
 
@@ -5752,6 +6019,29 @@ function drawGraduadosDashboard(container) {
     if (selectAddCarFac) {
       selectAddCarFac.onchange = (e) => {
         _gradFilters.filterFacultadForCarreras = e.target.value;
+        render();
+      };
+    }
+
+    // Listeners del Ranking Anual
+    const btnRTCar = container.querySelector('#btnRankTargetCarreras');
+    if (btnRTCar) btnRTCar.onclick = () => { _gradFilters.rankingTarget = 'carreras'; render(); };
+
+    const btnRTFac = container.querySelector('#btnRankTargetFacultades');
+    if (btnRTFac) btnRTFac.onclick = () => { _gradFilters.rankingTarget = 'facultades'; render(); };
+
+    const selectRY = container.querySelector('#selectRankYear');
+    if (selectRY) {
+      selectRY.onchange = (e) => {
+        _gradFilters.rankingYear = e.target.value;
+        render();
+      };
+    }
+
+    const selectRM = container.querySelector('#selectRankMetric');
+    if (selectRM) {
+      selectRM.onchange = (e) => {
+        _gradFilters.rankingMetric = e.target.value;
         render();
       };
     }
