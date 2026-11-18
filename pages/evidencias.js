@@ -5907,7 +5907,7 @@ function drawGraduadosDashboard(container) {
                         <div style="color: ${rMetric === 'general' ? '#38bdf8' : '#93c5fd'}; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${rMetric === 'general' ? item.tasa + '%' : item.bach.toLocaleString()}</div>
                       </div>
                       <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
-                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">T. A TÍTULO</div>
+                        <div style="color: #94a3b8; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; white-space: nowrap;">EGRESO A TÍTULO</div>
                         <div style="color: #fbbf24; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.et ? item.et + 'a' : '-'}</div>
                       </div>
                     </div>
@@ -5945,7 +5945,7 @@ function drawGraduadosDashboard(container) {
                           <th style="padding: 10px 12px; text-align: right; color: #93c5fd;">Bachilleres</th>
                           <th style="padding: 10px 12px; text-align: right; color: #6ee7b7;">Titulados</th>
                           <th style="padding: 10px 12px; text-align: center; width: 220px; color: #38bdf8;">Tasa de Titulación</th>
-                          <th style="padding: 10px 12px; text-align: right; color: #f59e0b;">T. a Título</th>
+                          <th style="padding: 10px 12px; text-align: right; color: #f59e0b; white-space: nowrap;">Egreso a Título</th>
                           <th style="padding: 10px 12px; text-align: center; color: #34d399; background: rgba(16,185,129,0.06);">🏆 Prom. General</th>
                           <th style="padding: 10px 12px; text-align: right; color: #06b6d4;">T. Carrera</th>
                           <th style="padding: 10px 12px; text-align: center;">Estatus CBC</th>
