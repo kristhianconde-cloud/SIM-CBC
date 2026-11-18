@@ -4991,7 +4991,8 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
     const pSide = `M ${x + barWidth} ${y_top} L ${x + barWidth + dx} ${y_top - dy} L ${x + barWidth + dx} ${y_floor - dy} L ${x + barWidth} ${y_floor} Z`;
 
     const badgeX = x + barWidth / 2 + dx / 2;
-    const badgeY = y_top - dy - 12;
+    // Ubicación cercana justo sobre la cara superior 3D (a solo 4px)
+    const badgeY = y_top - dy - 4;
 
     barsHtml += `
       <g class="bar-group-3d" data-idx="${idx}">
@@ -5011,10 +5012,10 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
         <path d="${pTop}" fill="${col}" filter="brightness(1.35)" />
         <polygon points="${x},${y_top} ${x + dx},${y_top - dy} ${x + barWidth + dx},${y_top - dy} ${x + barWidth},${y_top}" fill="rgba(255,255,255,0.25)" />
 
-        <!-- Badge Flotante 3D con Valor y Glow -->
+        <!-- Badge Flotante 3D con Valor y Glow (anclado y cercano a la barra) -->
         <g class="badge-3d" transform="translate(${badgeX}, ${badgeY})">
-          <rect x="-42" y="-23" width="84" height="25" rx="12" fill="#090d16" stroke="${col}" stroke-width="2" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.6))" />
-          <text x="0" y="-7" fill="#ffffff" font-size="12.5" font-weight="900" text-anchor="middle" letter-spacing="0.02em">${val.toFixed(2)} ${unit}</text>
+          <rect x="-38" y="-22" width="76" height="22" rx="6" fill="#090d16" stroke="${col}" stroke-width="2" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.85))" />
+          <text x="0" y="-7" fill="#ffffff" font-size="12" font-weight="900" text-anchor="middle" letter-spacing="0.02em">${val.toFixed(2)} ${unit}</text>
         </g>
         
         <!-- Etiquetas inferiores -->
@@ -5035,19 +5036,19 @@ function generate3DComparisonChartSVG(items, metricKey, metricLabel, unit = 'a.'
       </defs>
       <style>
         .bar-group-3d {
-          transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
-          transform-origin: bottom center;
+          transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.24s ease;
+          cursor: pointer;
         }
         .bar-group-3d:hover {
-          transform: translateY(-8px) scale(1.02);
-          filter: drop-shadow(0 14px 24px rgba(56, 189, 248, 0.5));
+          transform: translateY(-6px);
+          filter: drop-shadow(0 10px 20px rgba(56, 189, 248, 0.45));
         }
-        .bar-group-3d:hover .badge-3d {
-          transform: scale(1.1);
-          filter: drop-shadow(0 0 12px #38bdf8);
+        .bar-group-3d .badge-3d rect {
+          transition: stroke-width 0.2s ease, filter 0.2s ease;
         }
-        .bar-group-3d .badge-3d {
-          transition: transform 0.25s ease, filter 0.25s ease;
+        .bar-group-3d:hover .badge-3d rect {
+          stroke-width: 2.8;
+          filter: drop-shadow(0 0 10px #38bdf8) drop-shadow(0 4px 10px rgba(0,0,0,0.95));
         }
       </style>
       <rect x="0" y="0" width="${width}" height="${height}" rx="14" fill="url(#bgGrad3D)" stroke="rgba(255,255,255,0.08)" />
