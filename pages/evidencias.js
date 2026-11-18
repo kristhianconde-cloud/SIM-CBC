@@ -5705,7 +5705,7 @@ function drawGraduadosDashboard(container) {
                 <!-- Toggle Carreras vs Facultades -->
                 <div style="display: flex; background: rgba(30,41,59,0.8); padding: 4px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
                   <button id="btnRankTargetCarreras" style="background: ${_gradFilters.rankingTarget === 'carreras' ? 'linear-gradient(135deg, #f59e0b, #d97706)' : 'transparent'}; color: ${_gradFilters.rankingTarget === 'carreras' ? '#fff' : '#94a3b8'}; border: none; padding: 0.4rem 0.9rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                    🎓 Top 10 Carreras
+                    🎓 Carreras Profesionales (22)
                   </button>
                   <button id="btnRankTargetFacultades" style="background: ${_gradFilters.rankingTarget === 'facultades' ? 'linear-gradient(135deg, #0284c7, #0369a1)' : 'transparent'}; color: ${_gradFilters.rankingTarget === 'facultades' ? '#fff' : '#94a3b8'}; border: none; padding: 0.4rem 0.9rem; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
                     🏛️ Facultades (6)
@@ -5790,7 +5790,7 @@ function drawGraduadosDashboard(container) {
               }
 
               // Para carreras limitamos estrictamente al Top 10
-              const finalItems = rTarget === 'carreras' ? list.slice(0, 10) : list;
+              const finalItems = list; // Mostramos las 22 carreras con el Top 10 resaltado
               const p1 = finalItems[0] || null;
               const p2 = finalItems[1] || null;
               const p3 = finalItems[2] || null;
@@ -5861,7 +5861,7 @@ function drawGraduadosDashboard(container) {
                 <div style="background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; margin-top: 0.5rem;">
                   <div style="padding: 10px 14px; background: rgba(15,23,42,0.6); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 0.85rem; font-weight: 800; color: #f8fafc;">
-                      ${rTarget === 'carreras' ? 'Tabla de Clasificación Oficial: Top 10 Carreras Profesionales' : 'Tabla de Clasificación: 6 Facultades UPT'} (${rYear === 'consolidado' ? 'Consolidado 2016–2026' : 'Año ' + rYear})
+                      ${rTarget === 'carreras' ? 'Tabla de Clasificación General: 22 Carreras Profesionales (Top 10 Destacado)' : 'Tabla de Clasificación: 6 Facultades UPT'} (${rYear === 'consolidado' ? 'Consolidado 2016–2026' : 'Año ' + rYear})
                     </span>
                     <span style="font-size: 0.76rem; color: #64748b; font-weight: 600;">
                       Ordenado por: ${rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : rMetric === 'celeridad' ? 'Celeridad a Título' : 'Tiempo de Carrera'}
@@ -5886,7 +5886,8 @@ function drawGraduadosDashboard(container) {
                       <tbody>
                         ${finalItems.map((item, idx) => {
                           const pos = idx + 1;
-                          const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : `#${pos}`;
+                          const isTop10 = rTarget === 'carreras' && pos <= 10;
+                          const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : null;
                           const barWidth = Math.min(100, item.tasa);
                           const barColor = item.tasa >= 75 ? 'linear-gradient(90deg, #10b981, #059669)' : item.tasa >= 50 ? 'linear-gradient(90deg, #0284c7, #0369a1)' : 'linear-gradient(90deg, #f59e0b, #d97706)';
                           const statusBg = item.tasa >= 75 ? 'rgba(16,185,129,0.15)' : item.tasa >= 50 ? 'rgba(2,132,199,0.15)' : 'rgba(245,158,11,0.15)';
@@ -5894,15 +5895,34 @@ function drawGraduadosDashboard(container) {
                           const statusBorder = item.tasa >= 75 ? 'rgba(16,185,129,0.4)' : item.tasa >= 50 ? 'rgba(2,132,199,0.4)' : 'rgba(245,158,11,0.4)';
                           const statusText = item.tasa >= 75 ? 'Excelente' : item.tasa >= 50 ? 'Satisfactorio' : 'En Seguimiento';
 
-                          return `
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: ${pos <= 3 ? 'rgba(255,255,255,0.02)' : 'transparent'};">
-                              <td style="padding: 10px 12px; text-align: center; font-weight: 800; font-size: ${pos <= 3 ? '1.1rem' : '0.85rem'}; color: ${pos === 1 ? '#fbbf24' : pos === 2 ? '#cbd5e1' : pos === 3 ? '#f97316' : '#94a3b8'};">
-                                ${medal}
+                          // Resaltado visual para Top 10
+                          const rowBg = pos <= 3 ? 'rgba(245, 158, 11, 0.045)' : isTop10 ? 'rgba(56, 189, 248, 0.035)' : 'transparent';
+                          const dividerHtml = (rTarget === 'carreras' && pos === 11) ? `
+                            <tr style="background: rgba(15,23,42,0.85);">
+                              <td colspan="9" style="padding: 7px 14px; font-size: 0.74rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; border-top: 2px solid rgba(56,189,248,0.35); border-bottom: 1px solid rgba(255,255,255,0.06);">
+                                ── FIN DE LA ZONA TOP 10 INSTITUCIONAL ──
                               </td>
-                              <td style="padding: 10px 12px; font-weight: 700; color: #f8fafc;">
+                            </tr>
+                          ` : '';
+
+                          return dividerHtml + `
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: ${rowBg}; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='${rowBg}'">
+                              <td style="padding: 10px 12px; text-align: center; font-weight: 800;">
+                                ${medal ? `<span style="font-size: 1.25rem;">${medal}</span>` : isTop10 ? `
+                                  <span style="background: rgba(56,189,248,0.18); color: #38bdf8; border: 1px solid rgba(56,189,248,0.45); border-radius: 6px; padding: 2px 7px; font-weight: 800; font-size: 0.78rem;">#${pos}</span>
+                                ` : `
+                                  <span style="color: #64748b; font-weight: 700; font-size: 0.8rem;">#${pos}</span>
+                                `}
+                              </td>
+                              <td style="padding: 10px 12px; font-weight: 700; color: ${isTop10 ? '#f8fafc' : '#cbd5e1'};">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                   ${item.codigo ? `<span style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${item.codigo}</span>` : ''}
                                   <span>${item.nombre}</span>
+                                  ${pos <= 3 ? `
+                                    <span style="background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); font-size: 0.68rem; padding: 1px 6px; border-radius: 4px; font-weight: 800; letter-spacing: 0.04em;">PODIO</span>
+                                  ` : isTop10 ? `
+                                    <span style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); font-size: 0.68rem; padding: 1px 6px; border-radius: 4px; font-weight: 800; letter-spacing: 0.04em;">TOP 10</span>
+                                  ` : ''}
                                 </div>
                               </td>
                               ${rTarget === 'carreras' ? `
