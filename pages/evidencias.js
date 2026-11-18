@@ -6642,6 +6642,176 @@ function drawLaboratoriosDashboard(container) {
         </div>
     `;
 
+    if (window.lucide) {
+      window.lucide.createIcons({ root: container });
+    }
+
+    const btnExportLabsWord = container.querySelector('#btn-export-labs-word');
+    if (btnExportLabsWord) {
+      btnExportLabsWord.onclick = () => {
+        const facRowsHtml = Object.keys(facCounts).map(fac => {
+          const count = facCounts[fac];
+          const pct = ((count / totalAmbientes) * 100).toFixed(1);
+          return `
+            <tr>
+              <td style="font-weight: bold;">${fac}</td>
+              <td style="text-align: center; font-weight: bold;">${count}</td>
+              <td style="text-align: right; color: #0284c7; font-weight: bold;">${pct}%</td>
+            </tr>
+          `;
+        }).join('');
+
+        const labsRowsHtml = filtered.map(item => `
+          <tr>
+            <td style="text-align: center;">${item.id}</td>
+            <td style="font-family: monospace; font-weight: bold; color: #0369a1;">${item.codigo || '-'}</td>
+            <td style="font-weight: bold;">${item.nombre}</td>
+            <td style="text-align: center;">${item.tipo}</td>
+            <td>${item.ubicacion || '-'}</td>
+            <td style="text-align: center; font-weight: bold;">${item.facultad}</td>
+            <td>${(item.carreras || []).join(', ')}</td>
+            <td style="text-align: center; font-weight: bold;">${item.total}</td>
+            <td>${item.obs || '-'}</td>
+          </tr>
+        `).join('');
+
+        const adicRowsHtml = (AMBIENTES_ADICIONALES_DATA || []).map(item => `
+          <tr>
+            <td style="text-align: center;">${item.id}</td>
+            <td style="text-align: center; font-weight: bold;">${item.tipo}</td>
+            <td style="font-weight: bold;">${item.nombre}</td>
+            <td>${item.ubicacion || '-'}</td>
+            <td style="text-align: center; font-weight: bold;">${item.facultad}</td>
+            <td>${(item.carreras || []).join(', ')}</td>
+            <td style="text-align: center; font-weight: bold;">${item.total}</td>
+            <td>${item.obs || '-'}</td>
+          </tr>
+        `).join('');
+
+        const filterDesc = [
+          _labFilters.facultad !== 'todas' ? `Facultad: ${_labFilters.facultad}` : 'Todas las Facultades',
+          _labFilters.carrera !== 'todas' ? `Carrera: ${_labFilters.carrera}` : 'Todas las Carreras',
+          _labFilters.tipo !== 'todos' ? `Tipo: ${_labFilters.tipo}` : 'Todos los Tipos'
+        ].join(' | ');
+
+        const docHTML = `
+          <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+          <head>
+            <meta charset="utf-8">
+            <title>Matriz de Talleres y Laboratorios Especializados (CBC III.7) - UPT</title>
+            <style>
+              @page { size: A4 landscape; margin: 15mm; }
+              body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 10pt; line-height: 1.35; color: #1e293b; }
+              h1 { font-size: 16pt; color: #0f172a; border-bottom: 2px solid #0284c7; padding-bottom: 6px; margin-bottom: 8px; }
+              h2 { font-size: 12pt; color: #0369a1; margin-top: 16px; margin-bottom: 8px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+              .kpi-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+              .kpi-table td { padding: 8px; border: 1px solid #cbd5e1; background: #f8fafc; text-align: center; }
+              .kpi-val { font-size: 14pt; font-weight: bold; color: #0284c7; }
+              .kpi-lbl { font-size: 8pt; color: #64748b; text-transform: uppercase; font-weight: bold; }
+              .data-table { width: 100%; border-collapse: collapse; margin-top: 6px; margin-bottom: 14px; font-size: 8.5pt; }
+              .data-table th { background: #0284c7; color: white; padding: 5px 6px; border: 1px solid #0284c7; text-align: left; font-size: 8.5pt; }
+              .data-table td { padding: 4px 6px; border: 1px solid #cbd5e1; vertical-align: middle; }
+              .data-table tr:nth-child(even) { background: #f1f5f9; }
+              .footer-note { font-size: 8pt; color: #64748b; font-style: italic; margin-top: 16px; }
+            </style>
+          </head>
+          <body>
+            <h1>Reporte Institucional: Matriz de Talleres y Laboratorios Especializados (CBC III.7)</h1>
+            <p><strong>Universidad Privada de Tacna (UPT)</strong> — Oficina de Gestión de la Calidad (SIM-CBC)<br/>
+            <em>Filtros aplicados: ${filterDesc} | Mostrando ${filtered.length} de ${totalAmbientes} ambientes académicos</em></p>
+
+            <h2>1. Resumen Ejecutivo de Infraestructura Física y Equipamiento</h2>
+            <table class="kpi-table">
+              <tr>
+                <td>
+                  <div class="kpi-val">${totalAmbientes}</div>
+                  <div class="kpi-lbl">Total de Ambientes (${totalLabs} Labs / ${totalTalleres} Talleres)</div>
+                </td>
+                <td>
+                  <div class="kpi-val">FAING (${facCounts['FAING'] || 39})</div>
+                  <div class="kpi-lbl">Facultad con Mayor Infraestructura (45.9%)</div>
+                </td>
+                <td>
+                  <div class="kpi-val">ARQUITECTURA (18)</div>
+                  <div class="kpi-lbl">Carrera con Más Ambientes</div>
+                </td>
+                <td>
+                  <div class="kpi-val">CBC III.7</div>
+                  <div class="kpi-lbl">Componente SUNEDU</div>
+                </td>
+              </tr>
+            </table>
+
+            <h2>2. Distribución de Ambientes por Facultad</h2>
+            <table class="data-table" style="width: 55%;">
+              <thead>
+                <tr>
+                  <th>Facultad</th>
+                  <th style="text-align: center;">N° de Ambientes</th>
+                  <th style="text-align: right;">Participación (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${facRowsHtml}
+              </tbody>
+            </table>
+
+            <h2>3. Padrón Oficial de Talleres y Laboratorios Especializados (${filtered.length} registros)</h2>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="text-align: center; width: 35px;">N°</th>
+                  <th style="width: 75px;">Código</th>
+                  <th style="width: 180px;">Denominación del Ambiente</th>
+                  <th style="text-align: center; width: 85px;">Tipo</th>
+                  <th style="width: 180px;">Ubicación Física (Pabellón / Piso / Aula)</th>
+                  <th style="text-align: center; width: 65px;">Facultad</th>
+                  <th>Carreras que Utilizan el Ambiente</th>
+                  <th style="text-align: center; width: 45px;">Total</th>
+                  <th style="width: 90px;">Observación</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${labsRowsHtml}
+              </tbody>
+            </table>
+
+            <h2>4. Ambientes Académicos Adicionales (Internos y Externos — ${(AMBIENTES_ADICIONALES_DATA || []).length} registros)</h2>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="text-align: center; width: 35px;">N°</th>
+                  <th style="text-align: center; width: 85px;">Tipo</th>
+                  <th style="width: 190px;">Denominación del Ambiente</th>
+                  <th style="width: 190px;">Ubicación Física</th>
+                  <th style="text-align: center; width: 65px;">Facultad</th>
+                  <th>Carreras que Utilizan el Ambiente</th>
+                  <th style="text-align: center; width: 45px;">Total</th>
+                  <th style="width: 90px;">Observación</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${adicRowsHtml}
+              </tbody>
+            </table>
+
+            <p class="footer-note">Generado automáticamente por el Sistema Integral de Monitoreo de Condiciones Básicas de Calidad (SIM-CBC / SIGECA - UPT).</p>
+          </body>
+          </html>
+        `;
+
+        const blob = new Blob(['\ufeff' + docHTML], { type: 'application/msword;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Reporte_Talleres_y_Laboratorios_CBC_III_7_UPT.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+    }
+
     const searchInp = container.querySelector('#lab-search-input');
     const tipoSel = container.querySelector('#lab-filter-tipo');
     const facSel = container.querySelector('#lab-filter-facultad');
