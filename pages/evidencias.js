@@ -6043,7 +6043,7 @@ function drawGraduadosDashboard(container) {
                   Matriz Completa de Carreras Profesionales UPT (2016–2026)
                 </h3>
                 <p style="margin: 4px 0 0; font-size: 0.84rem; color: #94a3b8;">
-                  Detalle consolidado de los 26 programas profesionales con todas sus métricas de duración y titulación
+                  Detalle consolidado de los 22 programas profesionales oficiales con descarga individual de Matriz Excel protegida (sin fórmulas editables)
                 </p>
               </div>
 
@@ -6066,6 +6066,7 @@ function drawGraduadosDashboard(container) {
                     <th style="padding: 10px 12px; text-align: right; color: #10b981;">Egreso a Bach.</th>
                     <th style="padding: 10px 12px; text-align: right; color: #d8b4fe;">Bach. a Título</th>
                     <th style="padding: 10px 12px; text-align: right; color: #f59e0b; font-weight: bold;">Egreso a Título</th>
+                    <th style="padding: 10px 12px; text-align: center; color: #34d399; background: rgba(16,185,129,0.06);">Matriz por Carrera</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -6074,9 +6075,15 @@ function drawGraduadosDashboard(container) {
                     .map(carName => {
                       const c = d.carreras[carName];
                       const col = getFacultadColor(c.facultad);
+                      const cod = c.codigo || '';
                       return `
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">
-                          <td style="padding: 10px 12px; font-weight: 700; color: #f8fafc;">${carName}</td>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+                          <td style="padding: 10px 12px; font-weight: 700; color: #f8fafc;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                              ${cod ? `<span style="background: rgba(255,255,255,0.07); color: #94a3b8; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${cod}</span>` : ''}
+                              <span>${carName}</span>
+                            </div>
+                          </td>
                           <td style="padding: 10px 12px;">
                             <span style="background: ${col}22; color: ${col}; border: 1px solid ${col}44; padding: 2px 7px; border-radius: 4px; font-size: 0.76rem; font-weight: 800;">
                               ${c.facultad}
@@ -6090,6 +6097,11 @@ function drawGraduadosDashboard(container) {
                           <td style="padding: 10px 12px; text-align: right; color: #10b981; font-weight: 600;">${c.eb ? c.eb + 'a' : '-'}</td>
                           <td style="padding: 10px 12px; text-align: right; color: #d8b4fe; font-weight: 600;">${c.bt ? c.bt + 'a' : '-'}</td>
                           <td style="padding: 10px 12px; text-align: right; color: #f59e0b; font-weight: 800;">${c.et ? c.et + 'a' : '-'}</td>
+                          <td style="padding: 8px 12px; text-align: center; background: rgba(16,185,129,0.03);">
+                            <a href="matrices_carreras/Matriz_Trazabilidad_${cod}.xlsx" download="Matriz_Trazabilidad_${cod}_${carName.replace(/[^a-zA-Z0-9]/g, '_')}_2016_2026.xlsx" title="Descargar Matriz Excel exclusiva de ${carName} (${c.total} registros, protegida y sin fórmulas visibles)" style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; text-decoration: none; padding: 5px 11px; border-radius: 7px; font-size: 0.76rem; font-weight: 800; border: 1px solid rgba(52, 211, 153, 0.45); box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25); transition: all 0.15s ease; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.45)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 8px rgba(16, 185, 129, 0.25)';">
+                              📥 Descargar Excel
+                            </a>
+                          </td>
                         </tr>
                       `;
                     }).join('')}
