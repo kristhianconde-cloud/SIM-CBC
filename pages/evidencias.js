@@ -4703,7 +4703,9 @@ let _gradFilters = {
   // Configuración de Ranking Anual
   rankingTarget: 'carreras', // 'carreras' (Top 10) | 'facultades' (6)
   rankingYear: '2026',       // 'consolidado' | '2026' | '2025' | ... | '2016'
-  rankingMetric: 'tasa'      // 'tasa' | 'titulados' | 'celeridad' | 'tc'
+  rankingMetric: 'tasa',
+  // Filtro de periodo para Comparativa 3D
+  comparativaYear: 'todos' // 'todos' (Consolidado 2016-2026) | '2026' | '2025' | ... | '2016'      // 'tasa' | 'titulados' | 'celeridad' | 'tc'
 };
 
 const getFacultadColor = (fac) => {
@@ -5277,36 +5279,63 @@ function drawGraduadosDashboard(container) {
       et: { label: 'Tiempo Total de Egreso a Título Profesional', short: 'Egreso a Título', bench: inst.et, color: '#f59e0b', desc: 'Trayectoria integral desde que el estudiante culmina sus estudios hasta convertirse en titulado colegiable.' }
     }[selMet];
 
-    // Datos para vista comparativa
+    // Datos para vista comparativa (Todos los Años por defecto o Año Específico)
+    const cYear = _gradFilters.comparativaYear || 'todos';
+    const isAllYears = cYear === 'todos';
     let compItems = [];
+
     if (compMode === 'facultades') {
       const facCodes = _gradFilters.selectedFacultades;
       compItems = facCodes.map(code => {
         const facObj = d.facultades[code] || {};
-        const val = selMet === 'tc' ? facObj.tc : selMet === 'eb' ? facObj.eb : selMet === 'bt' ? facObj.bt : facObj.et;
+        let val = 0;
+        let nTotal = facObj.total || 0;
+        let dataObj = facObj;
+
+        if (isAllYears) {
+          val = selMet === 'tc' ? facObj.tc : selMet === 'eb' ? facObj.eb : selMet === 'bt' ? facObj.bt : facObj.et;
+        } else {
+          const yd = (facObj.years && facObj.years[cYear]) || {};
+          val = selMet === 'tc' ? yd.tc : selMet === 'eb' ? yd.eb : selMet === 'bt' ? yd.bt : yd.et;
+          nTotal = (yd.bach || 0) + (yd.tit || 0);
+          dataObj = { ...facObj, ...yd, total: nTotal };
+        }
+
         return {
           code: code,
           nombre: code,
           shortLabel: code,
-          subLabel: `N=${(facObj.total || 0).toLocaleString()}`,
+          subLabel: isAllYears ? `N=${nTotal.toLocaleString()} (Todos los años)` : `N=${nTotal.toLocaleString()} (Año ${cYear})`,
           value: val || 0,
           color: getFacultadColor(code),
-          data: facObj
+          data: dataObj
         };
       });
     } else {
       const carNames = _gradFilters.selectedCarreras;
       compItems = carNames.map(name => {
         const carObj = d.carreras[name] || {};
-        const val = selMet === 'tc' ? carObj.tc : selMet === 'eb' ? carObj.eb : selMet === 'bt' ? carObj.bt : carObj.et;
+        let val = 0;
+        let nTotal = carObj.total || 0;
+        let dataObj = carObj;
+
+        if (isAllYears) {
+          val = selMet === 'tc' ? carObj.tc : selMet === 'eb' ? carObj.eb : selMet === 'bt' ? carObj.bt : carObj.et;
+        } else {
+          const yd = (carObj.years && carObj.years[cYear]) || {};
+          val = selMet === 'tc' ? yd.tc : selMet === 'eb' ? yd.eb : selMet === 'bt' ? yd.bt : yd.et;
+          nTotal = (yd.bach || 0) + (yd.tit || 0);
+          dataObj = { ...carObj, ...yd, total: nTotal };
+        }
+
         return {
           code: name,
           nombre: name,
           shortLabel: getShortCareerName(name),
-          subLabel: `N=${(carObj.total || 0).toLocaleString()} (${carObj.facultad || ''})`,
+          subLabel: isAllYears ? `N=${nTotal.toLocaleString()} (${carObj.facultad || ''})` : `N=${nTotal.toLocaleString()} (${cYear})`,
           value: val || 0,
           color: getFacultadColor(carObj.facultad),
-          data: carObj
+          data: dataObj
         };
       });
     }
@@ -5354,7 +5383,7 @@ function drawGraduadosDashboard(container) {
                 </h2>
                 <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 3px; display: flex; align-items: center; gap: 8px;">
                   <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-                  <span>10,652 estudiantes únicos depurados | 8,473 Bachilleres | 5,168 Titulados (61.0% de Titulación)</span>
+                  <span>9,331 graduados en 22 carreras oficiales UPT | 8,440 Bachilleres | 5,136 Titulados (60.9% de Titulación)</span>
                 </div>
               </div>
             </div>
@@ -5402,6 +5431,15 @@ function drawGraduadosDashboard(container) {
             <!-- Barra de control: Selección de Modo Comparativo y Métricas -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 1rem;">
               
+              <!-- Selector de Período de Comparación (Todos los años vs Año individual) -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">PERÍODO:</span>
+                <select id="selectCompYear" style="background: #0f172a; color: #38bdf8; border: 1px solid rgba(56,189,248,0.5); border-radius: 8px; padding: 0.44rem 0.85rem; font-size: 0.84rem; font-weight: 800; cursor: pointer; box-shadow: 0 0 10px rgba(56,189,248,0.2);">
+                  <option value="todos" ${_gradFilters.comparativaYear === 'todos' ? 'selected' : ''}>⭐ Todos los Años (Consolidado 2016–2026)</option>
+                  ${['2026','2025','2024','2023','2022','2021','2020','2019','2018','2017','2016'].map(y => `<option value="${y}" ${_gradFilters.comparativaYear === y ? 'selected' : ''}>📅 Solo Año ${y}</option>`).join('')}
+                </select>
+              </div>
+
               <!-- Switch de Entidad: Facultades vs Carreras -->
               <div style="display: flex; align-items: center; gap: 8px; background: rgba(30,41,59,0.8); padding: 4px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
                 <button id="btnCompFacultades" style="background: ${compMode === 'facultades' ? '#0284c7' : 'transparent'}; color: ${compMode === 'facultades' ? '#fff' : '#94a3b8'}; border: none; padding: 0.45rem 0.9rem; border-radius: 7px; font-size: 0.84rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
@@ -5496,6 +5534,14 @@ function drawGraduadosDashboard(container) {
             <!-- Título y Descripción de la Métrica Activa -->
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
               <div>
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;">
+                  <span style="background: ${_gradFilters.comparativaYear === 'todos' ? 'rgba(56,189,248,0.18)' : 'rgba(245,158,11,0.18)'}; color: ${_gradFilters.comparativaYear === 'todos' ? '#38bdf8' : '#fbbf24'}; border: 1px solid ${_gradFilters.comparativaYear === 'todos' ? 'rgba(56,189,248,0.45)' : 'rgba(245,158,11,0.45)'}; font-size: 0.76rem; font-weight: 800; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.04em;">
+                    ${_gradFilters.comparativaYear === 'todos' ? '⭐ PERÍODO: CONSOLIDADO HISTÓRICO DE TODOS LOS AÑOS (2016–2026)' : '📅 PERÍODO: AÑO ESPECÍFICO ' + _gradFilters.comparativaYear}
+                  </span>
+                  <span style="color: #64748b; font-size: 0.78rem; font-weight: 700;">
+                    ${_gradFilters.comparativaYear === 'todos' ? '(Abarca los 9,331 egresados oficiales de pregrado)' : ''}
+                  </span>
+                </div>
                 <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
                   <span style="color: ${metricaConfig.color};">●</span>
                   ${metricaConfig.label}
@@ -6109,6 +6155,15 @@ function drawGraduadosDashboard(container) {
     if (selectAddCarFac) {
       selectAddCarFac.onchange = (e) => {
         _gradFilters.filterFacultadForCarreras = e.target.value;
+        render();
+      };
+    }
+
+    // Listener para Selector de Período en Comparativa 3D
+    const selectCY = container.querySelector('#selectCompYear');
+    if (selectCY) {
+      selectCY.onchange = (e) => {
+        _gradFilters.comparativaYear = e.target.value;
         render();
       };
     }
