@@ -5728,7 +5728,6 @@ function drawGraduadosDashboard(container) {
                     <option value="tasa" ${_gradFilters.rankingMetric === 'tasa' ? 'selected' : ''}>🥇 Tasa de Titulación (%)</option>
                     <option value="titulados" ${_gradFilters.rankingMetric === 'titulados' ? 'selected' : ''}>👥 Mayor Volumen de Titulados</option>
                     <option value="celeridad" ${_gradFilters.rankingMetric === 'celeridad' ? 'selected' : ''}>⚡ Celeridad (Menor Tiempo a Título)</option>
-                    <option value="tc" ${_gradFilters.rankingMetric === 'tc' ? 'selected' : ''}>⏱️ Menor Tiempo de Carrera (TC)</option>
                   </select>
                 </div>
 
@@ -5780,14 +5779,7 @@ function drawGraduadosDashboard(container) {
                   if (b.et === null) return -1;
                   return a.et - b.et;
                 });
-              } else if (rMetric === 'tc') {
-                list.sort((a, b) => {
-                  if (a.tc === null && b.tc === null) return 0;
-                  if (a.tc === null) return 1;
-                  if (b.tc === null) return -1;
-                  return a.tc - b.tc;
-                });
-              }
+
 
               // Para carreras limitamos estrictamente al Top 10
               const finalItems = list; // Mostramos las 22 carreras con el Top 10 resaltado
@@ -5797,8 +5789,8 @@ function drawGraduadosDashboard(container) {
 
               const renderPodioCard = (item, pos, medal, glowColor, borderColor, height) => {
                 if (!item) return '';
-                const mainVal = rMetric === 'tasa' ? `${item.tasa}%` : rMetric === 'titulados' ? `${item.tit} tit.` : rMetric === 'celeridad' ? (item.et ? `${item.et}a` : '-') : (item.tc ? `${item.tc}a` : '-');
-                const mainLabel = rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Titulados del Periodo' : rMetric === 'celeridad' ? 'Tiempo Egreso a Título' : 'Tiempo de Carrera';
+                const mainVal = rMetric === 'tasa' ? `${item.tasa}%` : rMetric === 'titulados' ? `${item.tit} tit.` : (item.et ? `${item.et}a` : '-');
+                const mainLabel = rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Titulados del Periodo' : 'Tiempo Egreso a Título';
                 return `
                   <div style="flex: 1; min-width: 260px; background: linear-gradient(145deg, rgba(30,41,59,0.85), rgba(15,23,42,0.95)); border: 2px solid ${borderColor}; border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 8px 24px ${glowColor}; position: relative; overflow: hidden;">
                     <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: ${glowColor}; opacity: 0.2; border-radius: 50%; filter: blur(14px);"></div>
@@ -5864,7 +5856,7 @@ function drawGraduadosDashboard(container) {
                       ${rTarget === 'carreras' ? 'Tabla de Clasificación General: 22 Carreras Profesionales (Top 10 Destacado)' : 'Tabla de Clasificación: 6 Facultades UPT'} (${rYear === 'consolidado' ? 'Consolidado 2016–2026' : 'Año ' + rYear})
                     </span>
                     <span style="font-size: 0.76rem; color: #64748b; font-weight: 600;">
-                      Ordenado por: ${rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : rMetric === 'celeridad' ? 'Celeridad a Título' : 'Tiempo de Carrera'}
+                      Ordenado por: ${rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : 'Celeridad a Título'}
                     </span>
                   </div>
 
