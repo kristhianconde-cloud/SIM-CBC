@@ -4703,7 +4703,7 @@ let _gradFilters = {
   // Configuración de Ranking Anual
   rankingTarget: 'carreras', // 'carreras' (Top 10) | 'facultades' (6)
   rankingYear: '2026',       // 'consolidado' | '2026' | '2025' | ... | '2016'
-  rankingMetric: 'tasa',
+  rankingMetric: 'general',
   // Filtro de periodo para Comparativa 3D
   comparativaYear: 'todos' // 'todos' (Consolidado 2016-2026) | '2026' | '2025' | ... | '2016'      // 'tasa' | 'titulados' | 'celeridad' | 'tc'
 };
@@ -5768,14 +5768,20 @@ function drawGraduadosDashboard(container) {
                   </select>
                 </div>
 
-                <!-- Selector de Criterio de Ordenación -->
-                <div style="display: flex; align-items: center; gap: 6px;">
+                <!-- Selector de Criterio de Ordenación + Pestaña General al costado -->
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Criterio:</span>
-                  <select id="selectRankMetric" style="background: #0f172a; color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); border-radius: 8px; padding: 0.42rem 0.8rem; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
+                  <select id="selectRankMetric" style="background: #0f172a; color: ${_gradFilters.rankingMetric === 'general' ? '#94a3b8' : '#38bdf8'}; border: 1px solid ${_gradFilters.rankingMetric === 'general' ? 'rgba(148,163,184,0.35)' : 'rgba(56,189,248,0.5)'}; border-radius: 8px; padding: 0.42rem 0.8rem; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
                     <option value="tasa" ${_gradFilters.rankingMetric === 'tasa' ? 'selected' : ''}>🥇 Tasa de Titulación (%)</option>
                     <option value="titulados" ${_gradFilters.rankingMetric === 'titulados' ? 'selected' : ''}>👥 Mayor Volumen de Titulados</option>
                     <option value="celeridad" ${_gradFilters.rankingMetric === 'celeridad' ? 'selected' : ''}>⚡ Celeridad (Menor Tiempo a Título)</option>
+                    <option value="general" ${_gradFilters.rankingMetric === 'general' ? 'selected' : ''}>🏆 General (Promedio 3 Criterios)</option>
                   </select>
+
+                  <!-- Pestaña General (Promedio de los 3 Criterios) al costado -->
+                  <button id="btnRankMetricGeneral" title="Clasificación General: Promedio normalizado de los 3 criterios (Tasa + Volumen + Celeridad)" style="background: ${_gradFilters.rankingMetric === 'general' ? 'linear-gradient(135deg, #10b981, #059669)' : 'rgba(16, 185, 129, 0.12)'}; color: ${_gradFilters.rankingMetric === 'general' ? '#ffffff' : '#34d399'}; border: 1.5px solid ${_gradFilters.rankingMetric === 'general' ? '#34d399' : 'rgba(16, 185, 129, 0.4)'}; padding: 0.42rem 0.95rem; border-radius: 8px; font-size: 0.83rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: ${_gradFilters.rankingMetric === 'general' ? '0 0 14px rgba(16, 185, 129, 0.4)' : 'none'}; transition: all 0.2s ease;">
+                    🏆 General (Promedio 3 Criterios)
+                  </button>
                 </div>
 
               </div>
@@ -5814,8 +5820,30 @@ function drawGraduadosDashboard(container) {
                 });
               }
 
+              // Cálculo del Índice General (Promedio 0–100 pts de los 3 Criterios: Tasa, Volumen y Celeridad)
+              const maxTasa = Math.max(...list.map(x => x.tasa || 0), 1);
+              const maxTit = Math.max(...list.map(x => x.tit || 0), 1);
+              const validEts = list.map(x => x.et).filter(v => v !== null && v > 0);
+              const minEt = validEts.length > 0 ? Math.min(...validEts) : 1;
+              const maxEt = validEts.length > 0 ? Math.max(...validEts) : 1;
+
+              list.forEach(item => {
+                const sTasa = maxTasa > 0 ? ((item.tasa || 0) / maxTasa) * 100 : 0;
+                const sTit = maxTit > 0 ? ((item.tit || 0) / maxTit) * 100 : 0;
+                let sCel = 0;
+                if (item.et !== null && item.et > 0) {
+                  sCel = maxEt > minEt ? ((maxEt - item.et) / (maxEt - minEt)) * 100 : 100;
+                }
+                item.sTasa = Number(sTasa.toFixed(1));
+                item.sTit = Number(sTit.toFixed(1));
+                item.sCel = Number(sCel.toFixed(1));
+                item.scoreGeneral = Number(((sTasa + sTit + sCel) / 3).toFixed(1));
+              });
+
               // Ordenación
-              if (rMetric === 'tasa') {
+              if (rMetric === 'general') {
+                list.sort((a, b) => b.scoreGeneral - a.scoreGeneral || b.tasa - a.tasa || b.tit - a.tit);
+              } else if (rMetric === 'tasa') {
                 list.sort((a, b) => b.tasa - a.tasa || b.tit - a.tit);
               } else if (rMetric === 'titulados') {
                 list.sort((a, b) => b.tit - a.tit || b.tasa - a.tasa);
@@ -5836,8 +5864,8 @@ function drawGraduadosDashboard(container) {
 
               const renderPodioCard = (item, pos, medal, glowColor, borderColor, height) => {
                 if (!item) return '';
-                const mainVal = rMetric === 'tasa' ? `${item.tasa}%` : rMetric === 'titulados' ? `${item.tit} tit.` : (item.et ? `${item.et}a` : '-');
-                const mainLabel = rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Titulados del Periodo' : 'Tiempo Egreso a Título';
+                const mainVal = rMetric === 'general' ? `${item.scoreGeneral.toFixed(1)} pts` : rMetric === 'tasa' ? `${item.tasa}%` : rMetric === 'titulados' ? `${item.tit} tit.` : (item.et ? `${item.et}a` : '-');
+                const mainLabel = rMetric === 'general' ? 'Promedio General (3 Criterios)' : rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Titulados del Periodo' : 'Tiempo Egreso a Título';
                 return `
                   <div style="flex: 1; min-width: 260px; background: linear-gradient(145deg, rgba(30,41,59,0.85), rgba(15,23,42,0.95)); border: 2px solid ${borderColor}; border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 8px 24px ${glowColor}; position: relative; overflow: hidden;">
                     <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: ${glowColor}; opacity: 0.2; border-radius: 50%; filter: blur(14px);"></div>
@@ -5875,8 +5903,8 @@ function drawGraduadosDashboard(container) {
                         <div style="color: #6ee7b7; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.tit.toLocaleString()}</div>
                       </div>
                       <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
-                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">BACHILLERES</div>
-                        <div style="color: #93c5fd; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${item.bach.toLocaleString()}</div>
+                        <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">${rMetric === 'general' ? 'TASA TIT.' : 'BACHILLERES'}</div>
+                        <div style="color: ${rMetric === 'general' ? '#38bdf8' : '#93c5fd'}; font-size: 1.18rem; font-weight: 900; margin-top: 3px; line-height: 1.1;">${rMetric === 'general' ? item.tasa + '%' : item.bach.toLocaleString()}</div>
                       </div>
                       <div style="flex: 1; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 4px; text-align: center;">
                         <div style="color: #94a3b8; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">T. A TÍTULO</div>
@@ -5903,7 +5931,7 @@ function drawGraduadosDashboard(container) {
                       ${rTarget === 'carreras' ? 'Tabla de Clasificación General: 22 Carreras Profesionales (Top 10 Destacado)' : 'Tabla de Clasificación: 6 Facultades UPT'} (${rYear === 'consolidado' ? 'Consolidado 2016–2026' : 'Año ' + rYear})
                     </span>
                     <span style="font-size: 0.76rem; color: #64748b; font-weight: 600;">
-                      Ordenado por: ${rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : 'Celeridad a Título'}
+                      Ordenado por: ${rMetric === 'general' ? '🏆 General (Promedio de los 3 Criterios)' : rMetric === 'tasa' ? 'Tasa de Titulación' : rMetric === 'titulados' ? 'Volumen de Titulados' : 'Celeridad a Título'}
                     </span>
                   </div>
 
@@ -5918,6 +5946,7 @@ function drawGraduadosDashboard(container) {
                           <th style="padding: 10px 12px; text-align: right; color: #6ee7b7;">Titulados</th>
                           <th style="padding: 10px 12px; text-align: center; width: 220px; color: #38bdf8;">Tasa de Titulación</th>
                           <th style="padding: 10px 12px; text-align: right; color: #f59e0b;">T. a Título</th>
+                          <th style="padding: 10px 12px; text-align: center; color: #34d399; background: rgba(16,185,129,0.06);">🏆 Prom. General</th>
                           <th style="padding: 10px 12px; text-align: right; color: #06b6d4;">T. Carrera</th>
                           <th style="padding: 10px 12px; text-align: center;">Estatus CBC</th>
                         </tr>
@@ -5938,7 +5967,7 @@ function drawGraduadosDashboard(container) {
                           const rowBg = pos <= 3 ? 'rgba(245, 158, 11, 0.045)' : isTop10 ? 'rgba(56, 189, 248, 0.035)' : 'transparent';
                           const dividerHtml = (rTarget === 'carreras' && pos === 11) ? `
                             <tr style="background: rgba(15,23,42,0.85);">
-                              <td colspan="9" style="padding: 7px 14px; font-size: 0.74rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; border-top: 2px solid rgba(56,189,248,0.35); border-bottom: 1px solid rgba(255,255,255,0.06);">
+                              <td colspan="10" style="padding: 7px 14px; font-size: 0.74rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; border-top: 2px solid rgba(56,189,248,0.35); border-bottom: 1px solid rgba(255,255,255,0.06);">
                                 ── FIN DE LA ZONA TOP 10 INSTITUCIONAL ──
                               </td>
                             </tr>
@@ -5982,6 +6011,11 @@ function drawGraduadosDashboard(container) {
                                 </div>
                               </td>
                               <td style="padding: 10px 12px; text-align: right; color: #f59e0b; font-weight: 700;">${item.et ? item.et + 'a' : '-'}</td>
+                              <td style="padding: 10px 12px; text-align: center; background: rgba(16,185,129,0.04);">
+                                <span style="background: ${rMetric === 'general' ? 'rgba(16,185,129,0.22)' : 'rgba(255,255,255,0.06)'}; color: ${rMetric === 'general' ? '#34d399' : '#cbd5e1'}; border: 1px solid ${rMetric === 'general' ? 'rgba(16,185,129,0.45)' : 'rgba(255,255,255,0.1)'}; padding: 2px 8px; border-radius: 6px; font-weight: 800; font-size: 0.8rem;" title="Tasa: ${item.sTasa} pts | Volumen: ${item.sTit} pts | Celeridad: ${item.sCel} pts">
+                                  ${item.scoreGeneral.toFixed(1)} pts
+                                </span>
+                              </td>
                               <td style="padding: 10px 12px; text-align: right; color: #06b6d4;">${item.tc ? item.tc + 'a' : '-'}</td>
                               <td style="padding: 10px 12px; text-align: center;">
                                 <span style="background: ${statusBg}; color: ${statusColor}; border: 1px solid ${statusBorder}; font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap;">
@@ -6188,6 +6222,14 @@ function drawGraduadosDashboard(container) {
     if (selectRM) {
       selectRM.onchange = (e) => {
         _gradFilters.rankingMetric = e.target.value;
+        render();
+      };
+    }
+
+    const btnRMGen = container.querySelector('#btnRankMetricGeneral');
+    if (btnRMGen) {
+      btnRMGen.onclick = () => {
+        _gradFilters.rankingMetric = 'general';
         render();
       };
     }
