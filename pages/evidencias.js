@@ -5826,7 +5826,7 @@ function drawGraduadosDashboard(container) {
                   if (b.et === null) return -1;
                   return a.et - b.et;
                 });
-
+              }
 
               // Para carreras limitamos estrictamente al Top 10
               const finalItems = list; // Mostramos las 22 carreras con el Top 10 resaltado
