@@ -12,7 +12,7 @@ import { logoutFromFirebase } from "./services/firebase-auth.js?v=20261011.1";
 import { renderDashboardPage } from "./pages/dashboard.js?v=20260925.ULTIMA";
 import { renderMallaPage } from "./pages/malla.js?v=20261112.DECLARACIONES_SUNEDU";
 import { renderPlanPage } from "./pages/plan.js?v=20261112.DECLARACIONES_SUNEDU";
-import { renderEvidenciasPage } from "./pages/evidencias.js?v=20261118.RANKING_CLEAN_CRITERIA";
+import { renderEvidenciasPage } from "./pages/evidencias.js?v=20261118.COMPARATIVA_PERIOD_FILTER";
 
 import { renderEncuestasPage } from "./pages/encuestas.js?v=20260925.ULTIMA";
 import { renderPromptsPage } from "./pages/prompts.js?v=20260925.ULTIMA";
